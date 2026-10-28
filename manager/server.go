@@ -30,10 +30,11 @@ type actionRequest struct {
 	OfflinePath string  `json:"offline_path"`
 }
 type localServer struct {
-	manager *Manager
-	token   string
-	host    string
-	server  *http.Server
+	manager   *Manager
+	token     string
+	host      string
+	server    *http.Server
+	noBrowser bool
 }
 
 func token() string {
@@ -176,7 +177,7 @@ func (s *localServer) action(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if a.Action == "launcher-apply" {
-			if e := s.manager.launchStagedUpdater(); e != nil {
+			if e := s.manager.launchStagedUpdater(s.noBrowser); e != nil {
 				s.manager.mu.Lock()
 				s.manager.job.Busy = false
 				s.manager.mu.Unlock()
@@ -254,24 +255,33 @@ func (s *localServer) action(w http.ResponseWriter, r *http.Request) {
 	}
 	jsonResponse(w, 202, map[string]string{"status": "started"})
 }
-func serve(m *Manager, open bool, requestedPort int) error {
+func printLauncherURL(w io.Writer, privateURL, recoveryPath string, fileOnly bool) {
+	if fileOnly {
+		fmt.Fprintln(w, "Private local URL is in:", recoveryPath)
+		return
+	}
+	fmt.Fprintln(w, "Open this private local URL:")
+	fmt.Fprintln(w, privateURL)
+}
+
+func serve(m *Manager, open bool, requestedPort int, privateURLFileOnly bool) error {
 	l, e := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", requestedPort))
 	if e != nil {
 		return e
 	}
 	defer l.Close()
-	s := &localServer{manager: m, token: token(), host: l.Addr().String()}
+	s := &localServer{manager: m, token: token(), host: l.Addr().String(), noBrowser: !open}
 	s.server = &http.Server{Handler: http.HandlerFunc(s.handler), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 30 * time.Second, IdleTimeout: 60 * time.Second, MaxHeaderBytes: 16384}
 	u := "http://" + s.host + "/#" + s.token
 	fmt.Println("MOO2-SGC Launcher", Version)
-	fmt.Println("Open this private local URL:")
-	fmt.Println(u)
-	fmt.Println("Use Exit launcher in the UI. Closing the browser tab does not stop the manager.")
 	// Private local recovery URL; never included in diagnostics or a distribution.
-	if e = atomicWrite(filepath.Join(m.Data, "open-launcher.txt"), []byte(u+"\n")); e != nil {
+	recoveryPath := filepath.Join(m.Data, "open-launcher.txt")
+	if e = atomicWrite(recoveryPath, []byte(u+"\n")); e != nil {
 		return e
 	}
-	defer os.Remove(filepath.Join(m.Data, "open-launcher.txt"))
+	defer os.Remove(recoveryPath)
+	printLauncherURL(os.Stdout, u, recoveryPath, privateURLFileOnly)
+	fmt.Println("Use Exit launcher in the UI. Closing the browser tab does not stop the manager.")
 	if open {
 		if e = openBrowser(u); e != nil {
 			fmt.Println("Browser could not be opened automatically:", e)

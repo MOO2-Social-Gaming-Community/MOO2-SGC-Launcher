@@ -144,7 +144,7 @@ func TestUnknownWorkspaceSourceKindRejected(t *testing.T) {
 			t.Fatal("unknown source accepted")
 		}
 	}
-	if e := verifyBaseIdentity(Manifest{SourceBase: BaseHash}, t.TempDir()); e != nil {
-		t.Fatal("historical source rejected", e)
+	if e := verifyBaseIdentity(Manifest{SourceBase: BaseHash}, t.TempDir()); e == nil {
+		t.Fatal("historical archive provenance accepted without installed files")
 	}
 }

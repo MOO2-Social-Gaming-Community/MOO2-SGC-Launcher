@@ -9,7 +9,7 @@ import (
 // This default refuses all network updates until a maintainer provisions trust.
 var Encoded string
 
-const Version = "0.4.7"
+const Version = "0.4.8"
 
 func Trust() (distribution.Trust, error) {
 	t := distribution.Trust{Schema: 1, Feed: "moo2-sgc", Channel: "stable", Keys: map[string]string{}, Endpoints: []distribution.Endpoint{}, AllowedHosts: []string{}}

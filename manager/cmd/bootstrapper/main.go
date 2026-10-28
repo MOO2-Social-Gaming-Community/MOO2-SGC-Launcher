@@ -269,6 +269,12 @@ func run() error {
 	if *noBrowser {
 		args = append(args, "--no-browser")
 	}
+	if *command == "apply-staged" {
+		// The updater captures our inherited stdout/stderr in update-handoff.log.
+		// Keep ordinary diagnostics, but leave the session credential only in the
+		// launcher's private recovery file (and browser, unless --no-browser).
+		args = append(args, "--private-url-file-only")
+	}
 	cmd := exec.Command(entry, args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

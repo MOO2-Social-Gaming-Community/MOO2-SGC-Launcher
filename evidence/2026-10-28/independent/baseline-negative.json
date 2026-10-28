@@ -1,0 +1,20 @@
+{
+  "result": "FAIL",
+  "exception_type": "AssertionError",
+  "failed_assertion": "headless handoff log private URL expectation",
+  "passed_count": 12,
+  "checks": [
+    "setup command 0 succeeds",
+    "headless recovery marker mode 0600",
+    "headless initial private URL expectation",
+    "headless initial bare token expectation",
+    "headless initial private URL pattern expectation",
+    "headless initial launcher identity diagnostics preserved",
+    "headless initial launcher exit guidance preserved",
+    "headless initial setup diagnostics preserved",
+    "headless initial opener count",
+    "headless stage succeeded",
+    "headless initial process clean exit",
+    "headless restart opener count"
+  ]
+}

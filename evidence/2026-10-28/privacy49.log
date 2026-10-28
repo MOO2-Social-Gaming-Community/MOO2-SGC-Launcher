@@ -1,0 +1,50 @@
+PASS headless initial API usable
+PASS headless initial opener count
+PASS headless ordinary launch still prints private recovery URL
+PASS headless initial private marker permission
+PASS headless invalid pending refused
+PASS headless original manager remains usable
+PASS headless failed apply leaves active pointer intact
+PASS headless stage valid signed package
+PASS headless initial manager/setup clean exit
+PASS headless restarted API usable
+PASS headless new manager owns lock
+PASS headless restart opener count
+PASS headless handoff log remains private
+PASS headless restarted private marker permission
+PASS headless handoff log excludes session URLs and tokens
+PASS headless handoff retains Setup and launcher diagnostics
+PASS headless handoff explains recovery file location
+PASS headless bootstrap log retains apply-staged success
+PASS headless synthetic userdata preserved
+PASS headless same-package apply is not migration
+PASS headless all child processes stopped
+PASS headless locks and private marker removed
+PASS headless signed installed generation verifies after exit
+PASS headless retained application logs exclude both sessions after exit
+PASS normal initial API usable
+PASS normal initial opener count
+PASS normal ordinary launch still prints private recovery URL
+PASS normal initial private marker permission
+PASS normal invalid pending refused
+PASS normal original manager remains usable
+PASS normal failed apply leaves active pointer intact
+PASS normal stage valid signed package
+PASS normal initial manager/setup clean exit
+PASS normal restarted API usable
+PASS normal new manager owns lock
+PASS normal restart opener count
+PASS normal handoff log remains private
+PASS normal restarted private marker permission
+PASS normal handoff log excludes session URLs and tokens
+PASS normal handoff retains Setup and launcher diagnostics
+PASS normal handoff explains recovery file location
+PASS normal bootstrap log retains apply-staged success
+PASS normal synthetic userdata preserved
+PASS normal same-package apply is not migration
+PASS normal all child processes stopped
+PASS normal locks and private marker removed
+PASS normal signed installed generation verifies after exit
+PASS normal retained application logs exclude both sessions after exit
+PASS recorder stored no URLs or tokens
+TOTAL 49 COUNTS {"headless": {"initial": 0, "restart": 0}, "normal": {"initial": 1, "restart": 1}}

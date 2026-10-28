@@ -1,0 +1,13 @@
+=== RUN   TestAddedEditableConfigurationChangesFingerprint
+    integrity_regression_test.go:26: new editable CFG omitted from compatibility fingerprint
+    integrity_regression_test.go:29: changed editable CFG omitted from compatibility fingerprint
+--- FAIL: TestAddedEditableConfigurationChangesFingerprint (2.87s)
+=== RUN   TestMissingSelectedConfigurationCannotHideInManifest
+    integrity_regression_test.go:41: missing selected-mod config accepted after local receipt edit
+--- FAIL: TestMissingSelectedConfigurationCannotHideInManifest (1.21s)
+=== RUN   TestPatchCodeCannotBeBlessedByLocalManifest
+    integrity_regression_test.go:55: modified patch code accepted after local receipt edit
+--- FAIL: TestPatchCodeCannotBeBlessedByLocalManifest (1.32s)
+FAIL
+exit status 1
+FAIL	moo2manager	5.400s

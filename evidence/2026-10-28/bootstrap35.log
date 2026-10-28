@@ -1,0 +1,36 @@
+PASS real Linux setup version
+PASS embedded key is explicitly development-only
+PASS signed offline launcher install succeeds
+PASS setup health-check executed actual compiled launcher
+PASS metadata high-water revision persisted
+PASS installed signed file index verifies
+PASS repeated setup reuses intact generation
+PASS repair creates new generation retaining rollback
+PASS explicit rollback reactivates verified prior launcher
+PASS repair and rollback preserve synthetic user-data bytes
+PASS installed executable corruption refused
+PASS repair restores executable from signed bytes
+PASS repaired generation verifies independently
+PASS rollback refuses corrupted previous generation
+PASS failed rollback preserves active generation
+PASS corruption recovery preserves synthetic user-data bytes
+PASS tampered metadata signature refused
+PASS tampered release leaves active launcher unchanged
+PASS tampered package refused on fresh install
+PASS tampered package never activates a launcher
+PASS bootstrap hands off to real local launcher API
+PASS launcher uses stable user-data directory
+PASS production feed explicitly unconfigured
+PASS PRSL remains optional and unavailable
+PASS bootstrap refuses update while launcher owns lock
+PASS launcher verifies offline release metadata
+PASS launcher stages signed next-start update
+PASS setup and launcher exit cleanly together
+PASS both installer and manager locks released
+PASS same-package staged apply reuses intact generation
+PASS staged apply replaces corrupted generation after shutdown
+PASS staged replacement verifies independently
+PASS applying launcher update preserves every user-data file
+PASS staged replacement preserves synthetic user-data bytes
+PASS no invented live release feed attempted
+TOTAL 35

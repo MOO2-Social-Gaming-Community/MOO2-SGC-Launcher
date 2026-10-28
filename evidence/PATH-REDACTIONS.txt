@@ -1,0 +1,1 @@
+Absolute cloud workspace and home roots are replaced by $WORKSPACE and $HOME in packaged evidence only. Test outcomes, counts and file hashes are unchanged. Private game/runtime files and save bytes are excluded.

@@ -64,6 +64,8 @@ type Manager struct {
 	running        *exec.Cmd
 	runningProfile string
 	runningKind    string
+	runtimeDone    chan struct{}
+	runtimeError   error
 	uiMu           sync.Mutex
 	lastExit       string
 }
@@ -408,15 +410,40 @@ func verifyDir(dir string) (VerifyResult, error) {
 	if e != nil {
 		return v, e
 	}
+	if mf.Resolution.Fingerprint != resolution.Fingerprint {
+		return v, errors.New("stored selection fingerprint differs from prepared profile")
+	}
 	if mf.Profile.Engine == "1.50.26" && mf.SourcePatch != PatchHash {
 		return v, errors.New("unrecognized patch fingerprint")
 	}
 	game := filepath.Join(dir, "game")
+	if mf.Schema >= 3 {
+		want, _ := resources.ReadFile("assets/harness/ORIONCD.INI")
+		got, err := os.ReadFile(filepath.Join(game, "ORIONCD.INI"))
+		if err != nil || string(got) != string(want) {
+			return v, errors.New("generated ORIONCD.INI differs from harness contract")
+		}
+	}
 	if e = verifyBaseIdentity(mf, game); e != nil {
 		return v, e
 	}
+	if mf.Profile.Engine == "1.50.26" {
+		if e = verifyPatchIdentity(mf, game, resolution); e != nil {
+			return v, e
+		}
+	}
+	allowed := compiledWorkspaceFiles(mf)
 	seen := map[string]bool{}
+	cfgSet := map[string]bool{}
+	extraFiles := map[string]string{}
+	actualFiles := map[string]string{}
 	for n, rec := range mf.Files {
+		if isRuntimeOutput(n) {
+			continue
+		}
+		if strings.EqualFold(filepath.Ext(n), ".cfg") {
+			cfgSet[n] = true
+		}
 		rel, e := safeRel(n)
 		if e != nil {
 			return v, e
@@ -443,6 +470,23 @@ func verifyDir(dir string) (VerifyResult, error) {
 		seen[n] = true
 	}
 	e = walkRegular(game, func(n, f string) error {
+		actualFiles[strings.ToUpper(n)] = f
+		if isRuntimeOutput(n) {
+			return nil
+		}
+		if !allowed[n] && !isUserFile(n) {
+			if protectedContent(n) {
+				v.Bad = append(v.Bad, n+" (outside compiled file inventory)")
+			}
+			h, e := hashFile(f)
+			if e != nil {
+				return e
+			}
+			extraFiles[n] = h
+		}
+		if strings.EqualFold(filepath.Ext(n), ".cfg") {
+			cfgSet[n] = true
+		}
 		if seen[n] {
 			return nil
 		}
@@ -458,6 +502,11 @@ func verifyDir(dir string) (VerifyResult, error) {
 	})
 	if e != nil {
 		return v, e
+	}
+	if mf.Profile.Engine == "1.50.26" {
+		if e = validateConfigDependencies(actualFiles); e != nil {
+			return v, e
+		}
 	}
 	exe, want := "ORION2.EXE", BaseEngineHash
 	if mf.Profile.Engine == "1.2" {
@@ -485,10 +534,8 @@ func verifyDir(dir string) (VerifyResult, error) {
 	h := sha256.New()
 	h.Write([]byte(resolution.Fingerprint))
 	cfgNames := []string{}
-	for n := range mf.Files {
-		if strings.EqualFold(filepath.Ext(n), ".cfg") {
-			cfgNames = append(cfgNames, n)
-		}
+	for n := range cfgSet {
+		cfgNames = append(cfgNames, n)
 	}
 	sort.Strings(cfgNames)
 	for _, n := range cfgNames {
@@ -517,6 +564,17 @@ func verifyDir(dir string) (VerifyResult, error) {
 		h.Write([]byte(strings.ToUpper(n)))
 		h.Write([]byte{0})
 		h.Write([]byte(mf.Files[n].SHA256))
+		h.Write([]byte{0})
+	}
+	extraNames := []string{}
+	for n := range extraFiles {
+		extraNames = append(extraNames, n)
+	}
+	sort.Strings(extraNames)
+	for _, n := range extraNames {
+		h.Write([]byte("extra:" + strings.ToUpper(n)))
+		h.Write([]byte{0})
+		h.Write([]byte(extraFiles[n]))
 		h.Write([]byte{0})
 	}
 	v.Fingerprint = hex.EncodeToString(h.Sum(nil))

@@ -1,23 +1,19 @@
-# Master of Orion II Social Gaming Community — Launcher & Installer
+# MOO2-SGC launcher — 0.4.8 source review
 
-**Version 0.4.7. In development and trusted-user testing; not a general multiplayer release.**
+**28 October 2026. Complete, unreleased source. Not an installer or gameplay certification.**
 
-A small signed bootstrapper installs the environment manager. The manager imports an owned game without changing the original Steam/GOG/CD source, preserves an independent **1.40b23 baseline**, prepares the optional **1.50.26** fan-patch profile, manages supported rulesets and configures DOSBox for local, LAN or public-IPX play.
+Start with [START-HERE](START-HERE.md) for native build/run instructions, then the [current test report](docs/TEST-REPORT.md). This review combines the earlier integrity/settings/runtime fixes, stronger offline bootstrap acceptance, headless update handoff, and the newly reviewed update-log privacy correction.
 
-## 0.4.7 focus
+## Current improvements
 
-The launcher remembers the selected profile across restarts and changing local-browser ports. Historical engines no longer show a misleading 1.50 Core label. The network summary shows the exact selected game executable and transport command. **Check Dopefish connection (no game)** opens a separate CONNECT/STATUS diagnostic, with no mounted game and no fabricated success indicator. Existing kernel, signature, minimum-version and repair safeguards remain in place.
+- Authenticate prepared patch/base content against compiled identities and account for custom configuration dependencies.
+- Preserve ordinary personal settings during repair and report process start/exit failures accurately.
+- Keep duplicate-profile selection consistent during asynchronous actions.
+- Preserve `--no-browser` across staged update handoff.
+- With the fixed updater helper, omit the restarted launcher's private session URL from `update-handoff.log` while retaining ordinary diagnostics and the private local recovery marker.
 
-Portable Windows root: **C:\Games\MOO2-SGC**. See [START-HERE](START-HERE.md), [network and profile details](docs/NETWORK-AND-PROFILES-0.4.7.md), and [test report](docs/TEST-REPORT.md).
+**Important transition limit:** the first update executed by an older helper can still use its old logging behavior. This source does not sanitize historical logs or certify an old-version migration. See the test report before making upgrade claims.
 
-## Repository/publishing
+The independent 1.40b23 baseline and optional 1.50.26 Community profile remain separate. PRSL, new Chat and SGC Online remain unavailable. There are no new gameplay presets, no game/runtime/save payloads, no private keys, and no release binaries here.
 
-Extract the complete repository package directly into the GitHub Desktop clone, preserve `.git`, commit and push the default branch. The **Publish prepared release** workflow verifies and publishes the already-signed `release/0.4.7` assets. Do not edit signed packages or metadata. GitHub is primary software hosting; optional R2 failover is not provisioned in this release. Website availability is not a software requirement.
-
-The prepared offline portable integration kit can be tested before publication. The standalone setup's online installation needs the published Release, not merely committed source. [GitHub upload guide](GITHUB-UPLOAD.md).
-
-## Boundaries
-
-No commercial MOO2 files, DOSBox runtime, RKERNEL binary, or private signing key belongs in this repository/public release. Import your licensed files locally. PRSL and the new Chat extension are independent, unavailable future components; the future SGC matchmaking/relay service remains disabled. Selecting a profile does not rewrite the baseline or activate a patch automatically.
-
-Windows and Mac builds are compiled, not locally executed by the build environment. The connection checker must be observed on your machine; it is not proof that Dopefish is reachable until its DOSBox status actually reports a connection. Native code signing/notarization is distinct from the implemented package signatures and is not supplied.
+Use the current source fingerprint for build inputs and the candidate manifest for this documented copy. Older reports are explicitly dated; the October 16 real-emulator and Classic multiplayer evidence is not a new test of this October 28 source. Windows/macOS are compiled only, and browser acceptance remains unestablished.

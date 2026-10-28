@@ -365,7 +365,8 @@ func verifyBaseIdentity(mf Manifest, game string) error {
 		return verifyEditionManifest(mf, game)
 	}
 	if mf.SourceBaseKind == "" && mf.SourceBase == BaseHash {
-		return nil
+		// Legacy ZIP provenance is not a substitute for installed-file identity.
+		return verifyPinnedBase(game, mf.Files, baseIndex().Files)
 	}
 	if mf.SourceBaseKind != "fingerprinted-dos-131" || !regexp.MustCompile(`^[a-f0-9]{64}$`).MatchString(mf.SourceBase) {
 		return errors.New("unrecognized source fingerprint")

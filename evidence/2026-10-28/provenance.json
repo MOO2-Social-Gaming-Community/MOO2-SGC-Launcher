@@ -1,0 +1,47 @@
+{
+  "baseline_source": "<review-workspace>/moo2_headless_handoff/work",
+  "final_source": "<review-workspace>/moo2_review_20261028/privacy_work",
+  "baseline_immutable_all_file_hashes_match": true,
+  "changed_paths": [
+    "manager/cmd/bootstrapper/main.go",
+    "manager/main.go",
+    "manager/server.go",
+    "manager/startup_privacy_test.go",
+    "tests/headless_handoff.py"
+  ],
+  "removed_generated_caches_only": [
+    "packaging/__pycache__/publish_prebuilt.cpython-312.pyc",
+    "packaging/__pycache__/source_fingerprint.cpython-312.pyc",
+    "tests/__pycache__/bootstrap_integration.cpython-312.pyc",
+    "tests/__pycache__/test_publish_prebuilt.cpython-312.pyc"
+  ],
+  "patch_sha256": "df84e95595e397d537c431128bdf9b22ed280bf77067574053df0a1b391de7c4",
+  "baseline_hashes": {
+    "manager/cmd/bootstrapper/main.go": "9a50ebc98a44e5d06c6ee69d34518c6af209d2b2f99c9d4c25b4fd5915e2981d",
+    "manager/main.go": "f1bdb0452a716d89200e8738ed3f73ca42435fd7fe2a85574f37585a4b576b74",
+    "manager/server.go": "23a629de28d79b193973f19712b5ca74bc383dd1e7f4160f6e2a37b2dbcb3c22",
+    "manager/startup_privacy_test.go": null,
+    "tests/headless_handoff.py": "2f0928ed2eef67a92cf15b2db4b3a0d22873c46a32ef83c3506dcc1c8df09e0b"
+  },
+  "final_hashes": {
+    "manager/cmd/bootstrapper/main.go": "6562e6b4b0717de72985256b023e09e14c7ad656eded2ef0d44389cc7969ab7a",
+    "manager/main.go": "45e1f88e451a3aa68743e067c8056dd6fca9e3ade22aff946ea249f5a8ba9ef2",
+    "manager/server.go": "7f53c535017b7dc7dfdd4a0c99ae1df09c7ce2f91f1b1c9285b58b48c4e270fa",
+    "manager/startup_privacy_test.go": "3c28e77ea2b53400ee22570a2cc00d85ef935901efe167e1516d975c6eb2be49",
+    "tests/headless_handoff.py": "588eed37030a4714ff2231a2580e49e0f7e629df124a8774d34c351f6ab78ec6"
+  },
+  "packaged_source_index_matches": {
+    "launcher-0.4.8-darwin-amd64.zip": 105,
+    "launcher-0.4.8-linux-amd64.zip": 105,
+    "launcher-0.4.8-darwin-arm64.zip": 105,
+    "launcher-0.4.8-windows-amd64.zip": 105
+  },
+  "signed_source_file_count": 105,
+  "linux_launcher_sha256": "cc5a6e4836437eb4aecde2bf47e3a356615a4f50e7879efd03182754c24dc4f7",
+  "linux_setup_sha256": "6ebdc2e6027e51910de630cd519ac206cd95a55782b2ef603b9fe99ae2dc14af",
+  "secret_pattern_scan": {
+    "findings": [],
+    "covers": "source/new evidence/reviewer evidence; runtime captures deleted with fixture roots"
+  },
+  "disposable_signing_directory_removed": true
+}

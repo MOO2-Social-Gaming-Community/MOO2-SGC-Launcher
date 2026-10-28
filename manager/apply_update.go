@@ -12,7 +12,7 @@ import (
 
 // The updater executable is itself inside the signed installed-file index.
 // It waits for this launcher to exit and release its lock before changing files.
-func (m *Manager) launchStagedUpdater() error {
+func (m *Manager) launchStagedUpdater(noBrowser bool) error {
 	trust, e := buildconfig.Trust()
 	if e != nil {
 		return e
@@ -46,7 +46,12 @@ func (m *Manager) launchStagedUpdater() error {
 		return e
 	}
 	defer log.Close()
-	cmd := exec.Command(filepath.Join(filepath.Dir(entry), name), "--install-root", root, "--command", "apply-staged", "--wait-lock", "30")
+	args := []string{"--install-root", root, "--command", "apply-staged", "--wait-lock", "30"}
+	// Preserve this server's browser policy through the helper and restarted launcher.
+	if noBrowser {
+		args = append(args, "--no-browser")
+	}
+	cmd := exec.Command(filepath.Join(filepath.Dir(entry), name), args...)
 	cmd.Stdout = log
 	cmd.Stderr = log
 	if e = cmd.Start(); e != nil {

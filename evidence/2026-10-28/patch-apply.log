@@ -1,0 +1,5 @@
+patching file manager/cmd/bootstrapper/main.go
+patching file manager/main.go
+patching file manager/server.go
+patching file manager/startup_privacy_test.go
+patching file tests/headless_handoff.py

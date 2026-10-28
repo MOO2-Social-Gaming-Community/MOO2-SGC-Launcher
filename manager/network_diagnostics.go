@@ -127,11 +127,14 @@ func (m *Manager) checkDopefish() (any, error) {
 		return nil, errors.New("close the game or previous network check first")
 	}
 	if e = cmd.Start(); e != nil {
+		_ = recordProcessStartFailure(filepath.Join(m.Data, "logs", "last-network-check.json"), record, e)
 		m.mu.Unlock()
 		logfile.Close()
 		return nil, fmt.Errorf("DOSBox diagnostic failed to start: %w", e)
 	}
 	m.running = cmd
+	m.runtimeDone = make(chan struct{})
+	m.runtimeError = nil
 	m.runningProfile = "Dopefish connection check"
 	m.runningKind = "network-check"
 	m.lastExit = ""
@@ -139,14 +142,20 @@ func (m *Manager) checkDopefish() (any, error) {
 	go func() {
 		e := cmd.Wait()
 		logfile.Close()
+		recordError := recordProcessExit(filepath.Join(m.Data, "logs", "last-network-check.json"), record, e)
 		m.mu.Lock()
 		defer m.mu.Unlock()
+		m.runtimeError = e
+		defer close(m.runtimeDone)
 		m.running = nil
 		m.runningProfile = ""
 		m.runningKind = ""
 		m.lastExit = "Network diagnostic closed. Read the captured DOSBox CONNECT/STATUS result; exit code is not proof of connection."
 		if e != nil {
 			m.lastExit = "Network diagnostic process failed: " + e.Error() + ". Inspect " + logPath
+		}
+		if recordError != nil {
+			m.lastExit += "; could not save process result: " + recordError.Error()
 		}
 	}()
 	return record, nil

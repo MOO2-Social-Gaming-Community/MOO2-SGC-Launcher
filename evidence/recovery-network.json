@@ -1,0 +1,106 @@
+{
+  "version": "0.4.8",
+  "count": 24,
+  "checks": [
+    {
+      "test": "fresh selection remains baseline",
+      "result": "PASS"
+    },
+    {
+      "test": "selection remembered without saving game settings",
+      "result": "PASS"
+    },
+    {
+      "test": "selection preserves runtime preferences",
+      "result": "PASS"
+    },
+    {
+      "test": "preference selection does not build an environment",
+      "result": "PASS"
+    },
+    {
+      "test": "selection survives real launcher restart/new local port",
+      "result": "PASS"
+    },
+    {
+      "test": "restart preserves all original profile files",
+      "result": "PASS"
+    },
+    {
+      "test": "runtime selection does not reset remembered profile",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic process identified separately from game",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic runs without owned source or prepared game",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic uses dedicated directory outside game",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic uses independent pinned config arguments",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic connects and checks actual shell status commands",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic neither mounts nor runs game",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic remains open for manual observation",
+      "result": "PASS"
+    },
+    {
+      "test": "no connectivity success fabricated",
+      "result": "PASS"
+    },
+    {
+      "test": "second diagnostic cannot compete for session",
+      "result": "PASS"
+    },
+    {
+      "test": "launcher remains locked while diagnostic is open",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic releases process gate",
+      "result": "PASS"
+    },
+    {
+      "test": "exit is not reported as connection success",
+      "result": "PASS"
+    },
+    {
+      "test": "host process log proves test-double scope",
+      "result": "PASS"
+    },
+    {
+      "test": "export includes independent diagnostic record",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic preserved source/profile selection",
+      "result": "PASS"
+    },
+    {
+      "test": "CLI diagnostic waits for process and returns without starting game",
+      "result": "PASS"
+    },
+    {
+      "test": "CLI diagnostic releases data and app locks",
+      "result": "PASS"
+    }
+  ],
+  "actual_manager": true,
+  "process_test_double": true,
+  "live_connection_tested": false,
+  "game_executed": false
+}

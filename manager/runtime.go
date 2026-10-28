@@ -374,7 +374,11 @@ func (m *Manager) launch(p Profile) (any, error) {
 	if e = readWorkspaceManifest(dir, &mf); e != nil {
 		return nil, e
 	}
-	if r.Fingerprint != mf.Resolution.Fingerprint {
+	preparedResolution, e := resolve(mf.Profile)
+	if e != nil {
+		return nil, e
+	}
+	if r.Fingerprint != preparedResolution.Fingerprint {
 		return nil, errors.New("selected engine/mods differ from the prepared environment; Prepare first")
 	}
 	candidates := m.runtimeCandidates()
@@ -437,11 +441,14 @@ func (m *Manager) launch(p Profile) (any, error) {
 		return nil, errors.New("a game is already running")
 	}
 	if e = cmd.Start(); e != nil {
+		_ = recordProcessStartFailure(filepath.Join(m.Data, "logs", "last-launch.json"), launchRecord, e)
 		m.mu.Unlock()
 		logfile.Close()
 		return nil, fmt.Errorf("DOSBox failed to start: %w", e)
 	}
 	m.running = cmd
+	m.runtimeDone = make(chan struct{})
+	m.runtimeError = nil
 	m.runningProfile = p.ID
 	m.runningKind = "game"
 	m.lastExit = ""
@@ -449,14 +456,20 @@ func (m *Manager) launch(p Profile) (any, error) {
 	go func() {
 		e := cmd.Wait()
 		logfile.Close()
+		recordError := recordProcessExit(filepath.Join(m.Data, "logs", "last-launch.json"), launchRecord, e)
 		m.mu.Lock()
 		defer m.mu.Unlock()
+		m.runtimeError = e
+		defer close(m.runtimeDone)
 		m.running = nil
 		m.runningProfile = ""
 		m.runningKind = ""
 		m.lastExit = "DOSBox exited normally. Game success must be confirmed in-game."
 		if e != nil {
 			m.lastExit = "DOSBox exit: " + e.Error() + ". Inspect " + logpath
+		}
+		if recordError != nil {
+			m.lastExit += "; could not save process result: " + recordError.Error()
 		}
 	}()
 	return map[string]any{"pid": cmd.Process.Pid, "log": logpath, "arguments": args, "game_path": game, "configuration": cfg, "fingerprint": v.Fingerprint, "launcher_version": Version, "kernel": kernel, "working_directory": game, "network_service": effectiveNetworkService(p), "status": "DOSBox process started; game and IPX connection are not yet verified", "instructions": "In MOO2 choose Multiplayer / Network, then Start New Game or Join Game. Match engine and mod fingerprints on both machines."}, nil

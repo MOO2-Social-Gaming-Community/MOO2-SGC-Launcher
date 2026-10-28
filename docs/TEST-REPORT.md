@@ -1,48 +1,67 @@
-# MOO2-SGC 0.4.7 — test report
+# Launcher 0.4.8 — current verification
 
-## Scope
+**28 October 2026. Unreleased source review; not a finished installer, native-desktop certification or gameplay release.**
 
-This is an internal build/packaging cycle from the supplied 0.4.6 repository and Dopefish diagnostic kit. It does not claim that the user's Comm Failure has been resolved or that the third-party IPX service is currently reachable. No remote GitHub/account writes were made.
+## What changed today
 
-## Implemented and exercised
+The updater previously retained the restarted launcher's private local session URL in `logs/update-handoff.log`. The fixed helper now asks the manager to keep that URL in its private recovery marker rather than standard output. Ordinary progress/error diagnostics and headless/default browser policy are retained. Initial/direct launches still print the local URL normally.
 
-The selected profile persists in the installation's own userdata and survives application restart/new localhost ports without rewriting game data. The baseline selector no longer shows a false 1.50 Core selection. Network preview and generated game config share the same command generator. The Dopefish diagnostic runs as an independent, explicit, locked DOSBox process with no game mounts. It records request details without treating process success as network success.
+This is a local credential-retention and accidental-sharing issue, not evidence of an unauthenticated remote exploit. The API remains loopback-only with Host/Origin checks and session-token authentication.
 
-The previous-version console line now clearly states it is NOT the launch target. The existing minimum-version floor, pinned-release fallback, signed validation, canonical RKERNEL preflight, source import, baseline preservation and optional Community profile remain in place.
+**Important limitation:** the first update initiated by an **older installed helper** still runs that old helper and can retain its old logging behavior. The correction is proven for the fixed generation's helper and direct invocation of the new Setup's staged-apply command. Older token-bearing logs are not scrubbed, and no existing installation was upgraded or cleaned. Do not describe this as old-to-new migration acceptance.
 
-## Results for the final signed binaries/source
+The earlier October 26 fix also remains: `--no-browser` survives staged self-update. The package includes complete current source; it does not require applying old patches.
 
-| Area | Passed | Scope |
+## Current-source results
+
+These counts overlap. In particular, the 49-check privacy fixture includes the original 31 lifecycle checks; **do not sum the rows into a total**.
+
+| Check | Result | What it establishes |
 |---|---:|---|
-| Go race suite | 118 top-level / 222 with subtests | Source tests; network/selection/API/integrity/distribution |
-| go vet / JavaScript syntax | Passed | Static/tool checks |
-| Publishing safeguards | 10 | Local unit tests, no GitHub write |
-| Network diagnostic and preference API/CLI | 24 | Real Linux manager; labelled DOSBox process double |
-| Browser UI | 34 | Actual manager API via explicit offline browser-transport bridge |
-| Full owned-file portable/Steam/CD lineage | 50 | Actual source files and generated workspaces; no game execution |
-| Old 0.4.2 kernel-missing workspace to current | 36 | Actual old/new Linux managers; driver hashes, repair and synthetic save bytes |
-| Stale signed 0.4.2 feed fallback | 15 | Actual setup binaries, local HTTPS server |
-| Interrupted download, signatures and restart | 15 | Local HTTPS proxy fixture, no live GitHub |
-| Native signed installer/launcher | 11 | Actual Linux execution |
-| Portable setup and 0.4.6 -> 0.4.7 upgrade | 20 | Actual Linux installer/launcher and existing signing identity |
-| GitHub Desktop-style checkout | 10 | Local Git core.autocrlf=true, source and signature bytes preserved |
-| Explicit local ZIP preparation | 9 | Actual canonical ZIP; source unchanged |
+| Go race suite | **243 passes; 11 private-fixture skips; 0 failures** | Tests/subtests across five tested packages; buildconfig has no tests. Not the older all-private-fixture run. |
+| Offline bootstrap integration | **35 passed** | Real compiled Linux setup/manager and local API: install, verify, repair, rollback, tamper refusal, locks, same-package staged reconstruction, synthetic userdata preservation. |
+| Headless handoff | **31 passed** | Opener requests: headless initial/restart **0/0**, normal **1/1**. Invocation-count-only Linux process double; no real browser. |
+| Privacy-extended handoff | **49 passed** | Above lifecycle plus private-marker/ordinary-console behavior and URL/token exclusion from handoff diagnostics. Baseline fails the named regression as expected. |
+| Independent extended review | **143 passed** | Direct/manual staged startup, missing/broken/echoing openers, recovery-marker failure, log-open failure, credential behavior and cleanup. Same-package Linux development scope. |
+| Vet; JavaScript syntax; Node/VM UI regressions | **Passed** | Static/source and deterministic event-flow tests, not rendered-browser acceptance. |
+| Publishing safeguards | **10 passed** | Mocked services only; nothing published. |
+| Four launcher/setup pairs | **Compiled** | Linux amd64 executed; Windows amd64 and macOS amd64/arm64 compiled only. Disposable offline development trust. |
 
-See `evidence/QA-SUMMARY.json` and the matching JSON/log files. Suites overlap; their totals are not counts of unique game scenarios.
+The tested packages contain the same **105 build-input fingerprints** as this source. Documentation and review metadata have subsequently been refreshed, so their full-tree hashes differ from the tested package's source index. `SOURCE-FINGERPRINT.json` hashes build inputs; `CANDIDATE-MANIFEST.json` identifies this documented source copy. Neither is a production signature.
 
-## Explicit limitations
+Evidence: `../evidence/2026-10-28/summary.json`, `privacy49.json`, `headless31.json`, `bootstrap-integration.json`, independent runtime evidence, and test logs. The Linux development launcher used for integration has SHA-256 `cc5a6e4836437eb4aecde2bf47e3a356615a4f50e7879efd03182754c24dc4f7`; its binary is not included here.
 
-- Windows/macOS binaries compiled; not executed in this environment. No Windows Authenticode signature or Mac notarization supplied.
-- No actual DOSBox or MOO2 engine executed. Test-double process logs are explicitly labelled. Save preservation verifies bytes, not game loadability.
-- Browser direct loopback navigation was refused by the environment (`ERR_BLOCKED_BY_ADMINISTRATOR`). UI assertions used an explicit bridge to the actual HTTP API. They are not native Windows-browser acceptance.
-- No live Dopefish DNS/UDP connection or multiplayer session verified. The user's screenshot of CONNECT/STATUS is the next transport evidence.
-- Local HTTPS fixtures do not prove GitHub publication or live downloads. Run the publication workflow after pushing.
-- First all-platform build attempt hit the tool time limit. The final build completed successfully; acceptance suites used those final signed binaries.
+The documented native Linux build/run recipe was additionally checked from a fresh disposable copy of this documented source: build/version, empty-root authenticated API readiness, graceful Quit, and marker/lock cleanup passed. This is a source-build/local-API smoke, not browser or gameplay acceptance. See `../evidence/2026-10-28/native-docs-smoke.json`.
 
-## Signed delivery
+## Browser attempt: blocked, not passed
 
-Manifest release **0.4.7**, revision **47**, existing `moo2-sgc-release-1` public identity; validity ends **2027-01-05T03:02:24Z**. No private key appears in the repository or portable kit. Installed verified applications retain offline operation; future downloads need valid signed metadata. The source-fingerprint check links packages to these build inputs, not to a claim of game certification.
+A separate 28 October attempt used the **October 26** development build. Fresh setup and authenticated local API readiness passed, but the real cloud browser could not reach the private listener from its separate execution context (`ERR_CONNECTION_REFUSED`). No page rendered, so profile/settings/error/refresh/Exit UI assertions did not run. No UI defect was established. See `../evidence/browser-attempt-2026-10-28/BROWSER-ACCEPTANCE-2026-10-28.md`.
 
-## Next Windows acceptance
+This does not certify the current source's browser UI and does not justify disabling authentication or binding the server publicly.
 
-Exit old launcher/game; extract the portable kit at `C:\Games\MOO2-SGC`; run START-MOO2-SGC.cmd. Select Community — standard / 1.50.26, save Create or Join plus Dopefish. Reopen to confirm remembered profile, then run the separate connection check. Read CONNECT/STATUS, type EXIT, prepare/verify Community and launch. The baseline and owned Steam/GOG source remain separate. Keep the first error, last-network-check.json, last-launch.json and relevant screen capture.
+## Historical evidence, kept separate
+
+- **16 October source:** 257 Go test/subtest passes with all supplied private fixtures; 50 portable/owned-file and 24 diagnostic checks using labelled runtime process doubles. These are not reruns on today's source.
+- **16 October actual launcher/runtime:** final Linux source of that date launched real DOSBox Staging 0.83.0 to the 1.50.26 title screen; personal settings/fingerprint integrity held. This was title-screen startup, not a played match.
+- **Separate Classic baseline:** real Classic DOSBox 0.74-3 two-client local-IPX turns/save/fresh-process reload were observed. That was not driven by today's launcher, not Staging multiplayer and not PRSL.
+- **21/26 October:** stronger 35-check bootstrap acceptance and the 31-check headless correction preceded today's privacy work.
+
+Full earlier launcher detail is in `TEST-REPORT-2026-10-16-HISTORICAL.md`. The top-level artifact index points to optional runtime/research evidence.
+
+## Reproduction and prerequisites
+
+Use `../START-HERE.md` for native source build and source tests. Use `DEVELOPMENT-ACCEPTANCE.md` for the Linux-only development package fixture. For the 49-check privacy version, add `--check-log-privacy` to the headless fixture command.
+
+Go 1.23+, Python 3.11+, Node.js, writable temporary directories and local-loopback/child-process capability are needed for their respective checks. Race tests require a supported native host and C toolchain. The recorded current build used Go 1.27.3 on Linux amd64 with module network access disabled.
+
+The following private-fixture variables are intentionally optional; relevant tests skip rather than pass if inputs are absent:
+
+- `MOO2_COMMUNITY_FIXTURE`: prepared Community generation containing `manifest.json` and `game/`.
+- `MOO2_HARNESS_FIXTURE`: the supplied Windows runtime directory for read/verify tests.
+- `MOO2_TEST_ASSETS`: private test directory with the recognized supplied Steam archive and official 1.31 patch fixture. Exact historical fixture aliases are documented in the October 16 report.
+
+The eleven skips are listed by name in the current summary. They cover real baseline/official content, private runtime, selected configuration/inventory and custom/generated-file cases. Missing private inputs do not invalidate the tests that ran, but they limit the claim. Never upload owned archives, runtime data, saves or credentials to a public repository.
+
+## Still unestablished
+
+Native Windows/macOS behavior; rendered browser UI; old-version migration; real-save loadability on today's build; Staging multiplayer; public relay reliability; longer matches; production signing/installation; playable PRSL or custom strategic/Tournament mods. Development package signatures validate only the disposable test trust used here. No Authenticode, notarization, production feed, publication or deployment is included.

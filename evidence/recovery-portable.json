@@ -1,0 +1,288 @@
+{
+  "version": "0.4.8",
+  "platform": "linux-amd64",
+  "checks": [
+    {
+      "test": "portable layout and baseline default reported",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "canonical root archive automatically recognized as manual b23",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "root game is actual directory, not link",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "only b23 baseline lineage is used",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "b23 is canonical executable",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "official 1.31 retained separately",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "manual patch output retained and matches active engine",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "known kernel transformed to exact LAN-fixed hash",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "original archive byte-for-byte untouched",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "existing harness save retained",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "unregistered original directory fully backed up",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "exact supplied harness DIG.INI",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "exact supplied harness MDI.INI",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "exact supplied harness ORIONCD.INI",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "baseline configuration is exact handoff config",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "no 1.31 or community download required for baseline",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "preparation does not start process",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "full baseline verifies",
+      "result": "PASS",
+      "detail": {
+        "checked": 413,
+        "fingerprint": "48593d42842adbf460f34e58dc4b13f067a3498fcd4010f315559441281a22a5"
+      }
+    },
+    {
+      "test": "import excludes archived saves, wrappers and unselected assets",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "same-engine repair retains save and custom audio",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "prepared baseline snapshots visible for rollback",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "rollback copies previous generation, does not merge later saves",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "rollback retains snapshot rather than moving it away",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "kernel corruption blocks launch",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "repair restores kernel and preserves save",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "unexpected game-local emulator config refused",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "real launcher builds exact direct-program argv",
+      "result": "PASS",
+      "detail": [
+        "--noprimaryconf",
+        "--conf",
+        "/tmp/sgc-portable-7y500kyl/Games/MOO2-SGC/config/moo2.conf",
+        "/tmp/sgc-portable-7y500kyl/Games/MOO2-SGC/game/ORION2.EXE"
+      ]
+    },
+    {
+      "test": "test-double scope and game working directory captured",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "launcher process lifecycle completes without stale lock",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "fullscreen is optional launch override",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "community game has own generation outside baseline",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "community exact 1.50 executable",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "community carries exact LAN-fixed RKERNEL",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "dopefish relay config connects instead of starting local server",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "optional patch does not change baseline files",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "optional community profile does not inherit baseline save",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "root baseline cannot be silently switched to another engine",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "Steam matching engine does not imply identical data fingerprint",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "historical CD lineage retained: 1.2",
+      "result": "PASS",
+      "detail": {
+        "checked": 401
+      }
+    },
+    {
+      "test": "historical CD lineage retained: 1.31",
+      "result": "PASS",
+      "detail": {
+        "checked": 409
+      }
+    },
+    {
+      "test": "historical CD lineage retained: 1.40b23",
+      "result": "PASS",
+      "detail": {
+        "checked": 410
+      }
+    },
+    {
+      "test": "historical chain normalizes kernel: 1.40b23",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "historical CD lineage retained: 1.50.26",
+      "result": "PASS",
+      "detail": {
+        "checked": 538
+      }
+    },
+    {
+      "test": "historical chain normalizes kernel: 1.50.26",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "PRSL and chat remain unavailable",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "deactivation retains actual game and saves",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "deactivated root can be reconstructed without losing save",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "supplied fixture archives unchanged",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "application and user-data locks released",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "test": "CLI defaults to portable baseline",
+      "result": "PASS",
+      "detail": null
+    }
+  ],
+  "count": 50,
+  "fingerprints": {
+    "manual_baseline": "48593d42842adbf460f34e58dc4b13f067a3498fcd4010f315559441281a22a5",
+    "steam_baseline": "a88836c635166216c932476d8c84414806075e7d071b7812a07a1125d119cf05"
+  },
+  "source_hashes": {
+    "Master of Orion 2 - v1_40b23(3).zip": "50a8985601bc8f73af0486536c3413978bdf260d5d3363b5175ca809d22a2cbb",
+    "MOO2-1.50.26.zip": "0ac9151e9cf752ec34b6db998d8b390f48e492d8443e8f1658112b93c7f6a921",
+    "Master of Orion 2 - steam - v1_40b23.zip": "1a946338e703852ff834875cc205f24d5439161fde53ffeb5ffff87f6b21649c",
+    "Master of Orion 2 - v1_2(2).zip": "49131aa79dbcb7b1350a87af1c9ffb611e9c321c58706c8e073f269c14781f92",
+    "MOO2-1.31.en.zip": "908d6b7b37ad580039c5d108bab2c64b28f51ba735485287d284d5f5242b98e5"
+  },
+  "real_owned_files": true,
+  "game_executed": false,
+  "windows_executed": false,
+  "process_test": "explicit test double; not DOSBox"
+}

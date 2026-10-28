@@ -1,0 +1,6 @@
+=== RUN   TestGeneratedGameOutputsDoNotBlockRelaunch
+    integrity_regression_test.go:176: runtime outputs changed compatibility or blocked verification {true 540 [] [NEW150.SET SAVE10.GAM] fdd4676fa4ad6dd839ae56b3b196c83e11f5000b365147ebe58ef663cb20ce1c } <nil>
+--- FAIL: TestGeneratedGameOutputsDoNotBlockRelaunch (1.85s)
+FAIL
+FAIL	moo2manager	1.858s
+FAIL

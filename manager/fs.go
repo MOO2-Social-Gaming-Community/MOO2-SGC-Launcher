@@ -189,7 +189,7 @@ func extractZip(archive, dest, prefix string, stripOldSaves bool) error {
 	return nil
 }
 func isPersonalSeed(n string) bool {
-	return !strings.Contains(n, "/") && (strings.HasSuffix(n, ".gam") || strings.HasSuffix(n, ".rac") || n == "hof.m2" || n == "mox.set")
+	return !strings.Contains(n, "/") && (strings.HasSuffix(n, ".gam") || strings.HasSuffix(n, ".rac") || n == "hof.m2" || n == "mox.set" || n == "150.set" || n == "new150.set")
 }
 func isUserFile(n string) bool {
 	n = strings.ToLower(filepath.ToSlash(n))

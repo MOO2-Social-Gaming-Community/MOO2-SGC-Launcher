@@ -1,0 +1,10 @@
+{
+  "scope": "Fresh copy of final documented source; native Linux build and no-browser local API/quit smoke only",
+  "browser_executed": false,
+  "game_executed": false,
+  "documented_build_and_version": "PASS",
+  "native_review_binary_sha256": "ca5daf8f1d5b096cad95fd570f82ba334087348517e03c719612d6b399ead546",
+  "fresh_empty_root_authenticated_api": "PASS",
+  "quit_and_private_marker_lock_cleanup": "PASS",
+  "temporary_copy_deleted": true
+}

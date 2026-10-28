@@ -1,0 +1,646 @@
+{
+  "schema": 1,
+  "edition": "MOO2-1.50.26",
+  "files": [
+    {
+      "name": "150/ENABLE.CFG",
+      "size": 418,
+      "sha256": "11a0d37aaf26ec24dc942441030eabc11bf5a2132fa794597f9b81cfbe70d8aa"
+    },
+    {
+      "name": "150/USER.CFG",
+      "size": 2198,
+      "sha256": "d9fb1fd68b88e3926be9d45b433355a288a4a662a65595b52be275711fda966e"
+    },
+    {
+      "name": "150/build/BUILD.CFG",
+      "size": 1155,
+      "sha256": "8829629afc880b0f6991d6d3cea884e3a948ba12fcba0f1bbae06a76f6db078f"
+    },
+    {
+      "name": "150/build/BUILD0.CFG",
+      "size": 332,
+      "sha256": "e1a7d6c001e3ab761172005998d85abe71b1cf2c1b94ec3d353c2465168b742e"
+    },
+    {
+      "name": "150/build/BUILD1.CFG",
+      "size": 343,
+      "sha256": "0e4225e3bc6b673f46e11ae521810f4f50a90e94687a4f1ac3e442b1c097dd87"
+    },
+    {
+      "name": "150/build/BUILD2.CFG",
+      "size": 343,
+      "sha256": "a2255a6f2ac3787895c4c57bd9976a35e6219f1be95ba7379e1d477fce6a916c"
+    },
+    {
+      "name": "150/build/BUILD3.CFG",
+      "size": 343,
+      "sha256": "30308e7ccf01a37cff8d9706bcd707e8734b378b34deadc1e08a109f2ddd33f4"
+    },
+    {
+      "name": "150/build/BUILD4.CFG",
+      "size": 343,
+      "sha256": "897d0d086a1687ced047a6b95fb253a8f1a229013e51e2e22bc929ef449da0a4"
+    },
+    {
+      "name": "150/build/BUILD5.CFG",
+      "size": 343,
+      "sha256": "c37c0b655b2f04428c1e9ceee81f0c447d1be00031a1c71689a7adfdae50c313"
+    },
+    {
+      "name": "150/build/BUILD6.CFG",
+      "size": 343,
+      "sha256": "46aecb526af8b9a4c75ba3fd186adfc8cb9d4a23e26ebffd24f2d59aea1bb203"
+    },
+    {
+      "name": "150/build/BUILD7.CFG",
+      "size": 351,
+      "sha256": "abd6ab3c850814129ae6a6db029071a73efe1026c4a5090e7d70731ed0603c44"
+    },
+    {
+      "name": "150/build/BUILD8.CFG",
+      "size": 339,
+      "sha256": "7251548b99db53bdc0bc1c1e75bcd9579f7886a5b2d1f0263190050922d6bd1a"
+    },
+    {
+      "name": "150/build/BUILD9.CFG",
+      "size": 334,
+      "sha256": "ad039eff4104a2ccc17a697f2b60997091e8e8252df44423dd562b3520cedc2e"
+    },
+    {
+      "name": "150/docs/MANUAL_150.PDF",
+      "size": 6072534,
+      "sha256": "040ab9aee540907b55fb5b23b2a05b701d6becbc1bfd47a8d284ef3f1a32e55c"
+    },
+    {
+      "name": "150/docs/MANUAL_150.xls",
+      "size": 355328,
+      "sha256": "b58073b94d43a40a5b761fa17038428d6d353a3a2b5ee6a6ceee7ebf54355052"
+    },
+    {
+      "name": "150/docs/PARAMETERS.CFG",
+      "size": 131651,
+      "sha256": "1638115a77a795ac55f821821889b9ac202f9196d8cc3c191e42708204c674a0"
+    },
+    {
+      "name": "150/docs/color_scheme_wormholes.png",
+      "size": 1881,
+      "sha256": "8d21dbbe408737565af095740341784f3ecf3f422c89c8ae4a9d8e582ad54198"
+    },
+    {
+      "name": "150/docs/color_table_build_screen.png",
+      "size": 19430,
+      "sha256": "c955cbf78e50b21ad63c7b7866a228d6c0d69be6776829f91a4be159292664ec"
+    },
+    {
+      "name": "150/docs/config.json",
+      "size": 1380911,
+      "sha256": "611991a7c8f7822a97b29f95d70b8cce50722f04484fbafd755b1a5cb5251b70"
+    },
+    {
+      "name": "150/dosbox.conf",
+      "size": 10205,
+      "sha256": "a7009df685c72719214170c83e0fbc9b7ff9009b24fe4fc69499f6852da49a18"
+    },
+    {
+      "name": "150/lbx/COLSYSDI.LBX",
+      "size": 90548,
+      "sha256": "bcb8d70f928126196bb2821cc28a7c867a440f73b803fc8821a36daa2c15db89"
+    },
+    {
+      "name": "150/lbx/COMBAT.LBX",
+      "size": 1075288,
+      "sha256": "e5d416f4c0a2acf12b6e0973d5725f474e2743c923a306e7ffe33a2ef80a4ac7"
+    },
+    {
+      "name": "150/lbx/DESIGN.LBX",
+      "size": 1005244,
+      "sha256": "61013d9ef78838937cb7c86a7ba31f7454e93599f892683f99d934074e7837ee"
+    },
+    {
+      "name": "150/lbx/INFO.LBX",
+      "size": 231252,
+      "sha256": "799f8d2df6d092ac5c9a1a004ffc73d26ea1fb5b4459d489e2a5c6e0e65d17f9"
+    },
+    {
+      "name": "150/lbx/NEWGAME.LBX",
+      "size": 375616,
+      "sha256": "24f120b27c09b05b48385f41122fe603baec8a2655e67a70f189705bd9c5e2c3"
+    },
+    {
+      "name": "150/lbx/RACESEL.LBX",
+      "size": 2493776,
+      "sha256": "6954ae8e7f1eb1b5c43af68faca61321432f9c99705dbed5b3df41ba39c9ceec"
+    },
+    {
+      "name": "150/lbx/SHIPNAME.LBX",
+      "size": 12804,
+      "sha256": "9c7af13687426296ac92fb8542ace007334898ee11da0c0e4714d17165157492"
+    },
+    {
+      "name": "150/lbx/TECHNAME.LBX",
+      "size": 58451,
+      "sha256": "baa77e7a23a62f25d2f753d16c3b2642473e316706af12d0ff12785928297a5a"
+    },
+    {
+      "name": "150/lbx/de/ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "31053887c8c1d8f690dbf5d628b82bf35d6af7f376215c8dba6d208321835498"
+    },
+    {
+      "name": "150/lbx/de/EVENTMSE.LBX",
+      "size": 48256,
+      "sha256": "1c6fc167c66b59f2cb38919c8453098c729a3b80360af1bd41f0cfdd2ad551d4"
+    },
+    {
+      "name": "150/lbx/en/ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "af3fcdfb405a9aa2c7576c4229ac38e7a64d68a7a230e1e578d160f53e910702"
+    },
+    {
+      "name": "150/lbx/en/EVENTMSE.LBX",
+      "size": 48256,
+      "sha256": "515ce4379f5e7abb64942e8281959ad7b208da6d4c4c70d9fa659117097d282c"
+    },
+    {
+      "name": "150/lbx/en/HELP.LBX",
+      "size": 1014281,
+      "sha256": "79002704e45d5ca684cbbd80d52e6f19065b0656f30bc7bc7fd049eccb1161a7"
+    },
+    {
+      "name": "150/lbx/en/HESTRNGS.LBX",
+      "size": 15573,
+      "sha256": "3229f2dc89846fa3acae1d88814455278a2fcc4d4f21d9c933bfab971e9dc720"
+    },
+    {
+      "name": "150/lbx/en/MAINTEXT.LBX",
+      "size": 10504,
+      "sha256": "e17d954304b4aeb6b310716b0c51993b1871b345f5f52d3c06ab7d04375de25d"
+    },
+    {
+      "name": "150/lbx/en/RSTRING0.LBX",
+      "size": 8552,
+      "sha256": "4bd14d1d5244dc9548da024effdf4a016df1b66ce1df0998a429b5045b47e2ff"
+    },
+    {
+      "name": "150/lbx/en/SKILDESC.LBX",
+      "size": 9967,
+      "sha256": "22b553527ec7fe4f675d85a9a8010a42c88d7817f473594147bdfa8e9f2abee1"
+    },
+    {
+      "name": "150/lbx/en/TECHDESC.LBX",
+      "size": 12966,
+      "sha256": "f25bb674ed2f5f832de9d5e936e81734c4514d91405f4fbf5aa54986aafd2fe0"
+    },
+    {
+      "name": "150/lbx/es/ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "958c17d04a1707bcee62815cd37ece5e024265f4554c2be1ff79caeef2acbb27"
+    },
+    {
+      "name": "150/lbx/es/EVENTMSE.LBX",
+      "size": 48256,
+      "sha256": "f0b1193b5a8318431d29a8777571062c0183b5e2d5133dcc9aa01a25cf05f004"
+    },
+    {
+      "name": "150/lbx/fr/ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "aa9382e901d9913ca168e743dcb5e561810106ee9fb1f4a2867d4f4b305a7054"
+    },
+    {
+      "name": "150/lbx/fr/EVENTMSE.LBX",
+      "size": 48256,
+      "sha256": "31469206856ca81d2f82e37dae49d83b4b085afcaf459e8c5b0c1d231c678920"
+    },
+    {
+      "name": "150/lbx/it/ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "b769b2c8a896359995dd5314dc92b3702d73e4bc19c809695e1707ca490385e8"
+    },
+    {
+      "name": "150/lbx/it/EVENTMSE.LBX",
+      "size": 48256,
+      "sha256": "7731310f4c0aa547612d102599695aab1310359e84de3f74ebbb3955fe346823"
+    },
+    {
+      "name": "150/mods/120/SET120.CFG",
+      "size": 6666,
+      "sha256": "507a0277d4b1af5a3e8c17601d90dd5c17aa6cef82b47df1d4e83980772c65c9"
+    },
+    {
+      "name": "150/mods/120/lbx/en/HELP.LBX",
+      "size": 1014281,
+      "sha256": "3635ce886028bb7c5c2d0c916545e79323e2cf95ae708fe2b188225d6e3d91eb"
+    },
+    {
+      "name": "150/mods/150i/150.CFG",
+      "size": 1141,
+      "sha256": "d7244cbbca04f6b9b84dd61bc70638a8bba0011a48fa1cf809a86e6378ee43a1"
+    },
+    {
+      "name": "150/mods/150i/150i.CFG",
+      "size": 2381,
+      "sha256": "3152972ee04ad101c6a5681779fd563e9c74b5c299aa1df0a6f028717aaca675"
+    },
+    {
+      "name": "150/mods/150i/150m.CFG",
+      "size": 2393,
+      "sha256": "e369a3344217eb9f94ddcdb68710bd03c4032663e59e897d64d4123dc2bed29f"
+    },
+    {
+      "name": "150/mods/150i/README_150i.TXT",
+      "size": 4035,
+      "sha256": "c55c87f82c9b9a2503767048ac6ce373c180f1dc933dfa8e547d6d3a369604f9"
+    },
+    {
+      "name": "150/mods/150i/USER.CFG",
+      "size": 226,
+      "sha256": "03ff83671a45628182762ac195b0e4e60aada28cba77631884fdd041c6dd469b"
+    },
+    {
+      "name": "150/mods/150i/cfg/AIRACES.CFG",
+      "size": 14183,
+      "sha256": "449949c9838c04de23124da7d66daadf5cf62891d6fc46122567d2174d0a2d8a"
+    },
+    {
+      "name": "150/mods/150i/cfg/AISHIPS.CFG",
+      "size": 11831,
+      "sha256": "d482bd320f4dd32f3a6a28ef2f05b6abd7ef00806ad591df8b50f1fb477d5398"
+    },
+    {
+      "name": "150/mods/150i/cfg/ANTS.CFG",
+      "size": 4859,
+      "sha256": "59759b08d090234568b6289796f96c918ae2d93af0782c43a1436942211aa614"
+    },
+    {
+      "name": "150/mods/150i/cfg/DEPOSITS.LUA",
+      "size": 652,
+      "sha256": "82a2b228aa2a74df5f2c1fb4faf5b77f160bbdb601540cdbbb810a832c6ca95f"
+    },
+    {
+      "name": "150/mods/150i/cfg/IFACE.CFG",
+      "size": 4447,
+      "sha256": "4b494bfe5e3d459dbc934e8e4fa406bd7fe49e736a1491d839868d94039ad0cf"
+    },
+    {
+      "name": "150/mods/150i/cfg/PICKS_MP.CFG",
+      "size": 2445,
+      "sha256": "466eb4669e4cc84fdfcfa795e846bcad41a5d36e175d4e2908dd0186826413a4"
+    },
+    {
+      "name": "150/mods/150i/cfg/PICKS_SP.CFG",
+      "size": 2445,
+      "sha256": "ff275449a94e79faad3c5df4fac8b9259f8bb8543272e2829793385249b6809c"
+    },
+    {
+      "name": "150/mods/150i/cfg/TECHTREE.CFG",
+      "size": 7439,
+      "sha256": "bc1fd2307901460bf0e06350fe759a52e7630046b874fee0b94906d8b95388a1"
+    },
+    {
+      "name": "150/mods/150i/cfg/TECHTREE.LUA",
+      "size": 1832,
+      "sha256": "7b4993cdc184ae8e49fb121133434de771cc037e0534d1112c29be60e6c9bc5f"
+    },
+    {
+      "name": "150/mods/150i/cfg/TWEAKS.CFG",
+      "size": 21955,
+      "sha256": "fc12ca0ac2e401117bd89c417018777ee09f2f8cfd150e4595a8f0bc43a918c4"
+    },
+    {
+      "name": "150/mods/150i/lbx/KENTEXT.LBX",
+      "size": 51968,
+      "sha256": "05e6756f8a348d9e448579f7f6111d7187add2c425a785d59ca001fdcd004e98"
+    },
+    {
+      "name": "150/mods/150i/lbx/de/HERODATA.LBX",
+      "size": 6005,
+      "sha256": "7c88865bb2bce399491b0d2771c87f23264210ad9befce747df3cccf6af8f4b3"
+    },
+    {
+      "name": "150/mods/150i/lbx/en/HELP.LBX",
+      "size": 1014281,
+      "sha256": "bd0cb84aa524bf8bf0898b6ae6c6140189b5747cb43be086809cb140633ebe88"
+    },
+    {
+      "name": "150/mods/150i/lbx/en/HERODATA.LBX",
+      "size": 6005,
+      "sha256": "2dee0179cdf7c987c44da7d8dfcda1e1c65ace399ae58b9c517923d8daf8926b"
+    },
+    {
+      "name": "150/mods/150i/lbx/en/TECHDESC.LBX",
+      "size": 12966,
+      "sha256": "dfc7077ddbcfc29e42b5576fb1db34d19062102b46cd7d7a5a3a0ea956757217"
+    },
+    {
+      "name": "150/mods/150i/lbx/es/HERODATA.LBX",
+      "size": 6005,
+      "sha256": "e6cbbebb4deaa76e98324b2baec7d83d86ff9a7b7038520df5d976d449984c68"
+    },
+    {
+      "name": "150/mods/150i/lbx/fr/HERODATA.LBX",
+      "size": 6005,
+      "sha256": "4ace232319138c87045976c1ac7469575fac060f43d0482d3e68bb0779400a73"
+    },
+    {
+      "name": "150/mods/150i/lbx/it/HERODATA.LBX",
+      "size": 6005,
+      "sha256": "4f9448d1f3e94751448bc94c44428946edbfeac83968f40de5623497f3707d14"
+    },
+    {
+      "name": "150/mods/ice/ICE-M.CFG",
+      "size": 9208,
+      "sha256": "9dc239f9fe2c25efab77d8661fd0c92496dbb074540139e8c50cfbadc4deafff"
+    },
+    {
+      "name": "150/mods/ice/ICE-X.CFG",
+      "size": 9503,
+      "sha256": "f0f2ec80c7962104e54b4231607683f45e9a4a1fdfde759300078e308002868e"
+    },
+    {
+      "name": "150/mods/ice/README_ICE.TXT",
+      "size": 8510,
+      "sha256": "0c98dd1962617ebbfd55ceb61b4f5e1aaab2fb9ed1cb7cb444cf9134e5f3f550"
+    },
+    {
+      "name": "150/mods/ice/cfg/ICEMOD.CFG",
+      "size": 114541,
+      "sha256": "5e6b57825022603f9eac2144526448f8740d23bb560546f9bf4b0d975b336b9b"
+    },
+    {
+      "name": "150/mods/ice/cfg/ICEMOD.LUA",
+      "size": 2376,
+      "sha256": "13f2ef0c8d86fa94d07f69b15709ba34a6adf08152cf07d86e51e2593c863243"
+    },
+    {
+      "name": "150/mods/ice/lbx/KENTEXT.LBX",
+      "size": 51968,
+      "sha256": "bcd4399246c0b5c89e29febcfde57e0db24d061daceb0ea0b0183db7ab2819c1"
+    },
+    {
+      "name": "150/mods/ice/lbx/en/CREDITS.LBX",
+      "size": 16657,
+      "sha256": "6ee0d0c4fedf77922adb49522617f3e8364291676aaf5a4a55617b765c52e71a"
+    },
+    {
+      "name": "150/mods/ice/lbx/en/ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "c108b577e738b6bb00e8e2ef8ed878d6f6a8d186e9a2cd219313dae34abab42e"
+    },
+    {
+      "name": "150/mods/ice/lbx/en/HELP.LBX",
+      "size": 1014281,
+      "sha256": "9d86232f14b170b9773ee5e20741da434d3b0b134a4f1f671e9d789e68864cbb"
+    },
+    {
+      "name": "150/mods/ice/lbx/en/HERODATA.LBX",
+      "size": 6005,
+      "sha256": "3487e21ae28f6c81603de8dba72a0d9670744c90eadb7b936bed8993ceb2f49c"
+    },
+    {
+      "name": "150/mods/ice/lbx/en/TECHDESC.LBX",
+      "size": 12966,
+      "sha256": "e0aee94f60cc058a93a6953280ba61e7f49dc08ab98aaf7fb14f9b1d521f63a8"
+    },
+    {
+      "name": "150/mods/maps/150i-MAP.CFG",
+      "size": 2548,
+      "sha256": "a8ca7c7bddfea4437d9d5d1fe42de2459c50d97aafa191ef7b23e9acb72ec6b3"
+    },
+    {
+      "name": "150/mods/maps/150m-MAP.CFG",
+      "size": 2607,
+      "sha256": "282b13f29c6a2a8769d0433b61a14bb3034dd5b90cfb269a3b4bc132f0b8aa37"
+    },
+    {
+      "name": "150/mods/maps/GOODMAP1.CFG",
+      "size": 3775,
+      "sha256": "9d2d15236b13433b93fc666836c26d9ecfa5c6b853e0768f026cf1634ddca0ce"
+    },
+    {
+      "name": "150/mods/maps/GOODMAP2.CFG",
+      "size": 3776,
+      "sha256": "716327f165432271027dc97bbfe0ad0f2d84313a623b10eedc9cc9c214f7ab8b"
+    },
+    {
+      "name": "150/mods/maps/GOODMAP3.CFG",
+      "size": 3754,
+      "sha256": "db4535bc7e3d952af817a1b812a8b3778997a2381deae2ad5989f98899f862c9"
+    },
+    {
+      "name": "150/mods/maps/GOODMAP4.CFG",
+      "size": 3807,
+      "sha256": "1a7ae8e51db0b3effa628f1661523a82712bb48bfa233524a6a4c255fe17ed13"
+    },
+    {
+      "name": "150/mods/maps/GOODMAP5.CFG",
+      "size": 3880,
+      "sha256": "8d178701fad32b0ce0d5811c975bd16b24cc6feb785f35862f1f1944382a0147"
+    },
+    {
+      "name": "150/mods/maps/ICEMAP.CFG",
+      "size": 7852,
+      "sha256": "346df91766880830d7731622ca7d48ef7748cd3baf40f92028c3ba99ca9570d7"
+    },
+    {
+      "name": "150/mods/maps/ICEMAP_M.CFG",
+      "size": 7891,
+      "sha256": "9ae3fd02e86c5c777e82a0d2b8f7377ea8fb116a6e88d1a02b0d7074afbbe520"
+    },
+    {
+      "name": "150/mods/maps/MELEEMAP.CFG",
+      "size": 3348,
+      "sha256": "3441d26f113998ccc74fc6019b1c6ce110f40ba0f9f95e4cb0f9af0b88da1cb3"
+    },
+    {
+      "name": "150/mods/melee/MELEE.CFG",
+      "size": 30243,
+      "sha256": "fff4fad1c3bb8993d076934fa58cb3f8f59dfb331a170f18c09f0885b952aca0"
+    },
+    {
+      "name": "150/mods/mirror/MIRRNOHW.CFG",
+      "size": 336,
+      "sha256": "3c602858c04874aedee1a0eeffd438b4e362bba80afe3c0a35688738995b20f0"
+    },
+    {
+      "name": "150/mods/mirror/MIRRNOHW.LUA",
+      "size": 14726,
+      "sha256": "96c4ad3b5b12a4b9db37807d66469e4464797529a188beae69d12148710384bf"
+    },
+    {
+      "name": "150/mods/mirror/MIRROR.CFG",
+      "size": 268,
+      "sha256": "4f7c156cf2df4c2730c26a1a94ee4558fa54728cb1c9b73072a40d6a45ca1131"
+    },
+    {
+      "name": "150/mods/mirror/MIRROR.LUA",
+      "size": 14592,
+      "sha256": "b180937ddb42a16e1a22bf8c210def5356c2e31bd3181abd700a133762c97118"
+    },
+    {
+      "name": "150/mods/mirror/MIRRORHW.CFG",
+      "size": 309,
+      "sha256": "13325764c99561a874d8eb2c5d023edd62b7f4a22597c2118f4489737ebb6933"
+    },
+    {
+      "name": "150/mods/mirror/MIRRORHW.LUA",
+      "size": 3165,
+      "sha256": "e9a93a894656f93b83538f3b0c5f0acf74dde8d9820d8223f6a92071a2bc462b"
+    },
+    {
+      "name": "150/mods/misc/NOREPORT.CFG",
+      "size": 291,
+      "sha256": "8a39b4b4859f8a04318302fd743b339b4aa5ced1d08347ffa961c23b16482b19"
+    },
+    {
+      "name": "150/mods/randtech/RANDTECH.CFG",
+      "size": 190,
+      "sha256": "a3c82f93f96f04b6ed9c5a3a7784b1ba3fb67c241f1a185977dd1c85008e93fd"
+    },
+    {
+      "name": "150/mods/randtech/RANDTECH.LUA",
+      "size": 5396,
+      "sha256": "9e976f522ea9394e06ac4147a0c80742b8200631d6a498812a3345e1213d84f9"
+    },
+    {
+      "name": "150/mods/randtech/TREELESS.CFG",
+      "size": 189,
+      "sha256": "98c663af21ef353154dd2046612e165cf914ed11401be48d75edd75303d90500"
+    },
+    {
+      "name": "150/mods/vdc/CRYOGEN.LUA",
+      "size": 8443,
+      "sha256": "c730df5fc205ab263cf57334ea8774549c89c48238b159645da345674e370610"
+    },
+    {
+      "name": "150/mods/vdc/ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "f2fd8acf874eef5876e009b19a1c275c9a3ccc7c86ca9e748beb8546b290ff90"
+    },
+    {
+      "name": "150/mods/vdc/HELP.LBX",
+      "size": 1014281,
+      "sha256": "ac3b0b9f6efb2c514d2555e29dd6d75095d497cd1b7a419f8a52398d6b345464"
+    },
+    {
+      "name": "150/mods/vdc/HERODATA.LBX",
+      "size": 6005,
+      "sha256": "8b36a45b38ca6384161be3f5b39036c044ef949975422a249c667192060b36c0"
+    },
+    {
+      "name": "150/mods/vdc/KENTEXT.LBX",
+      "size": 51968,
+      "sha256": "01ecaed8f9d667e7719fd884e64ff2d390bb2ba6da8a83ef9ad44d5c45de0293"
+    },
+    {
+      "name": "150/mods/vdc/KENTEXT1.LBX",
+      "size": 20144,
+      "sha256": "22a5de228cf148c6c0b427dd34212e526d3ab97f56876f00bfef79d494999aba"
+    },
+    {
+      "name": "150/mods/vdc/MAINTEXT.LBX",
+      "size": 10504,
+      "sha256": "e65508f0c534d54b5357f790580ed2827170f91435aae55448889331201cc6ff"
+    },
+    {
+      "name": "150/mods/vdc/TECHDESC.LBX",
+      "size": 12966,
+      "sha256": "39291bdbcdb95c57de737e978e66a796815e788502bfba78542e9a9377dba862"
+    },
+    {
+      "name": "150/mods/vdc/TECHNAME.LBX",
+      "size": 10654,
+      "sha256": "a0ef32f5b980fe07c9a711d7ea376dcceacb575574c396bd37be8e29b4540ed1"
+    },
+    {
+      "name": "150/mods/vdc/VDCGM3.CFG",
+      "size": 186379,
+      "sha256": "f9c53a4d84dac67c2bf7f9e6262108d717c2871f5877199e6775a5ed38d0d597"
+    },
+    {
+      "name": "150/mods/vdc/VDCGM3_MAP.CFG",
+      "size": 7409,
+      "sha256": "d64d4b609cc2fde328d2a1d8692b77198dacc80628fc2aaad50d03a38c1d96bf"
+    },
+    {
+      "name": "150/mods/vdc/docs/ReadMe_VDC.txt",
+      "size": 190633,
+      "sha256": "c5e9b23bd2e14b4041c4476e5e69d5236019091c0dc8005b132311d5df981ec0"
+    },
+    {
+      "name": "150/mods/vdc/rainbow/RAINBOW.CFG",
+      "size": 3793,
+      "sha256": "60fe45ca546822a01f605c7526937fdc8f24486535e9aef504b481f77b2a4970"
+    },
+    {
+      "name": "150/scripts/main/MAIN0.LUA",
+      "size": 14962,
+      "sha256": "a867b197a235344a2342f99d8464ce683fb3215198e27b784e189bfe22f5acd7"
+    },
+    {
+      "name": "150/scripts/main/MAIN1.LUA",
+      "size": 4613,
+      "sha256": "58e232c08a974c9bd14ef036b61ba4955a6353aafbadb914495b35395b76b791"
+    },
+    {
+      "name": "150/scripts/main/MAIN2.LUA",
+      "size": 13376,
+      "sha256": "d03423cd77e6a03c22d5de8551ff44ba0be57f99ef621e188718fa3262c626df"
+    },
+    {
+      "name": "150/scripts/main/MAIN3.LUA",
+      "size": 17718,
+      "sha256": "b81e6158bed981f32d42119c2314fb3d43db53fe3d6619aa7a8be271f6ff7b23"
+    },
+    {
+      "name": "150/scripts/main/MAIN4.LUA",
+      "size": 26,
+      "sha256": "429ffb285389961db44eb064879cc73a662f5a2e7aca621eb26f6fd630a9e1f9"
+    },
+    {
+      "name": "150/scripts/main/MAIN5.LUA",
+      "size": 26,
+      "sha256": "070c45be8e72dffb654a8a5e07646e04d00d4d5c3b83313abf58b44def5c546a"
+    },
+    {
+      "name": "150/scripts/main/MAIN6.LUA",
+      "size": 26,
+      "sha256": "1640b3f1a86a7e875a1b3aeb1b0388ad89bca06380cc436f19d94dbe62f9faff"
+    },
+    {
+      "name": "150/scripts/main/MAIN7.LUA",
+      "size": 26,
+      "sha256": "aae989cff44611cac0f6bae51fd43730781183f0657cf8cd1de6be1505339b50"
+    },
+    {
+      "name": "150/scripts/main/MAIN8.LUA",
+      "size": 28342,
+      "sha256": "12f4a9f881f1647cb3447f8861a38e5edae6680878849d206f90e152136c8616"
+    },
+    {
+      "name": "150/scripts/main/MAIN9.LUA",
+      "size": 1703,
+      "sha256": "e8bcd58acb5c48c429ac3fd4c84fc4a2706ac1f71b9c7bea0914513456cb76df"
+    },
+    {
+      "name": "CHANGELOG_150.TXT",
+      "size": 81287,
+      "sha256": "72a1998fd26a654cc40ba880d001ad9cba40c3a69123c2520425e019e83ea7a6"
+    },
+    {
+      "name": "ORION150.EXE",
+      "size": 3397817,
+      "sha256": "2db296e052419250d21866f7c23ac2978a33b3c05b451a9516f06599b91c3f5c"
+    },
+    {
+      "name": "ORION2.CFG",
+      "size": 1909,
+      "sha256": "b73369d1f50ae0e28d9ce6ffbbc1307981611bc498f14cfc1f466f17ce68fd41"
+    },
+    {
+      "name": "watch-save10.bat",
+      "size": 1274,
+      "sha256": "1d1e3935f51704c63506e8384d7575a23f72f191cb45458335cae8c03058991a"
+    }
+  ]
+}

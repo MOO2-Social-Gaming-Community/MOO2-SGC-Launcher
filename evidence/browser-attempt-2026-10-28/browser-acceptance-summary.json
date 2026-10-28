@@ -1,0 +1,39 @@
+{
+  "status": "blocked_before_ui_acceptance",
+  "release": "Oct26 unreleased 0.4.8 Linux development",
+  "identity": {
+    "version": "0.4.8",
+    "release": "Oct26 unreleased offline development package",
+    "sha256": {
+      "binaries/linux-amd64/MOO2-SGC-Setup": "02a5c4e45ce6a189cd2d4df344f48fd6ad1894df3c3c31543ab4667f2277a411",
+      "binaries/linux-amd64/moo2-sgc-launcher": "2e0441139e3e247ff97c4bd31da13455e3b471d0c7b7bb3d8039b63722367582",
+      "launcher-0.4.8-linux-amd64.zip": "fbc960840556dfdd31c2e01e507b96511aa51947fa3e81932d087fdb8b13d873"
+    },
+    "sentinel_sha256": "372f9e420859873508ca1a568b029164956da6215f1ea1814af0355af51fd8a8"
+  },
+  "passed": [
+    "offline_setup",
+    "authenticated_same_session_api_http_200_version_0_4_8",
+    "synthetic_bytes_unchanged",
+    "release_hashes_unchanged"
+  ],
+  "blocked": [
+    "cloud_browser_navigation: net::ERR_CONNECTION_REFUSED"
+  ],
+  "not_run": [
+    "rendered_ui",
+    "profile_navigation",
+    "settings_display",
+    "payload_runtime_error_ui",
+    "refresh",
+    "exit_ui"
+  ],
+  "app_defects_established": [],
+  "cleanup": {
+    "tool_session_terminal_exit": 130,
+    "failed_browser_tabs_closed": true,
+    "disposable_install_removed": true
+  },
+  "private_address_or_token_retained": false,
+  "screenshots": []
+}

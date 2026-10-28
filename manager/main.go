@@ -8,7 +8,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"time"
 )
 
 func openBrowser(u string) error {
@@ -32,6 +31,7 @@ func main() {
 	root := flag.String("root", "", "directory containing payloads (defaults to executable directory)")
 	data := flag.String("data", "", "portable data directory (defaults to ROOT/data)")
 	noBrowser := flag.Bool("no-browser", false, "print the loopback URL without opening a browser")
+	privateURLFileOnly := flag.Bool("private-url-file-only", false, "keep the private URL in open-launcher.txt instead of standard output (update handoff)")
 	port := flag.Int("port", 0, "local UI port; default chooses an available port")
 	ver := flag.Bool("version", false, "print version")
 	cmd := flag.String("command", "serve", "serve, prepare, prepare-play, play, verify, recover-portable, check-dopefish, or resolve")
@@ -82,21 +82,13 @@ func main() {
 		defer os.Remove(lock)
 		switch *cmd {
 		case "serve":
-			e = serve(m, !*noBrowser, *port)
+			e = serve(m, !*noBrowser, *port, *privateURLFileOnly)
 		case "check-dopefish":
 			var v any
 			v, e = m.checkDopefish()
 			if e == nil {
 				fmt.Println(encode(v))
-				for {
-					m.mu.Lock()
-					running := m.running != nil
-					m.mu.Unlock()
-					if !running {
-						break
-					}
-					time.Sleep(100 * time.Millisecond)
-				}
+				e = m.waitForRuntime()
 			}
 		case "prepare-play":
 			var p Profile
@@ -128,15 +120,7 @@ func main() {
 				}
 			}
 			if e == nil {
-				for {
-					m.mu.Lock()
-					running := m.running != nil
-					m.mu.Unlock()
-					if !running {
-						break
-					}
-					time.Sleep(100 * time.Millisecond)
-				}
+				e = m.waitForRuntime()
 			}
 		case "prepare":
 			var p Profile

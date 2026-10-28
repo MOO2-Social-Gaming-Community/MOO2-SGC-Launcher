@@ -1,0 +1,31 @@
+{
+  "launcher_returncode": 0,
+  "runtime_expected_exit": 47,
+  "network_record": {
+    "arguments": [
+      "--noprimaryconf",
+      "--conf",
+      "$WORKSPACE/moo2_work/launcher_testing/failing-runtime/data/network-checks/dopefish-270608454/dopefish.conf"
+    ],
+    "config_path": "$WORKSPACE/moo2_work/launcher_testing/failing-runtime/data/network-checks/dopefish-270608454/dopefish.conf",
+    "connection_verified": false,
+    "endpoint": "moo2.thedopefish.com UDP 213",
+    "game_started": false,
+    "instructions": "Read the DOSBox CONNECT/STATUS messages; capture that screen. Type EXIT before starting the game. Process exit alone is not connectivity proof.",
+    "kind": "dopefish-connection-check",
+    "launcher": {
+      "data": "$WORKSPACE/moo2_work/launcher_testing/failing-runtime/data",
+      "executable": "$WORKSPACE/moo2_work/launcher/candidate-baseline-0.4.7",
+      "pid": 6,
+      "portable": false,
+      "root": "$WORKSPACE/moo2_work/launcher_testing/failing-runtime/data/application",
+      "version": "0.4.7"
+    },
+    "log": "$WORKSPACE/moo2_work/launcher_testing/failing-runtime/data/logs/dopefish-dopefish-270608454.log",
+    "requested_at": "2026-10-16T02:15:18Z",
+    "runtime": "$WORKSPACE/moo2_work/launcher_testing/failing-runtime/dosbox",
+    "status": "awaiting manual observation of DOSBox CONNECT/STATUS",
+    "working_directory": "$WORKSPACE/moo2_work/launcher_testing/failing-runtime/data/network-checks/dopefish-270608454"
+  },
+  "test_double": true
+}

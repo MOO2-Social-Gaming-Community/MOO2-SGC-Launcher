@@ -1,9 +1,0 @@
-PASS launcher version
-PASS test runtime selected
-PASS explicit recognized ZIP prepares without legacy payload importer
-PASS baseline activated
-PASS manual b23 source identified
-PASS source archive untouched
-PASS managed generation exists
-PASS window fill directives generated
-PASS prepared baseline verifies

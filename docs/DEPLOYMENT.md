@@ -1,3 +1,5 @@
+> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
+
 # Deployment — 0.4.6
 
 The canonical repository is `MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer`.

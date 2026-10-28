@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "candidate_version": "0.4.8",
+  "status": "unreleased-source-only",
+  "validated_at_utc": "2026-10-16T03:06:26.082206+00:00",
+  "go_version": "go1.23.12 linux/amd64",
+  "go_race": {
+    "passed_including_subtests": 257,
+    "passed_top_level": 136,
+    "failed": 0,
+    "skipped_tests": 0,
+    "tested_packages_passed": 5,
+    "package_without_tests": "moo2manager/shared/buildconfig",
+    "exit_code": 0,
+    "evidence": "recovery-settings-final-all-fixtures-go.jsonl"
+  },
+  "portable_owned_file_checks": 50,
+  "network_process_double_checks": 24,
+  "mocked_publishing_tests": 10,
+  "go_vet_exit": 0,
+  "javascript_syntax_exit": 0,
+  "ui_event_regression_exit": 0,
+  "cross_build_exit": 0,
+  "cross_builds_unsigned_not_distributed": {
+    "moo2-manager-windows-amd64.exe": {
+      "size": 7905280,
+      "sha256": "77c2c5a4aa377e15c317c9b499509eb46e90fc15771f0c92fa86f6ce79c2f79d"
+    },
+    "moo2-manager-linux-amd64": {
+      "size": 7680152,
+      "sha256": "07f63bab96679a357121f9a25224384c915190b691543a460b0c40bce32624d6"
+    },
+    "moo2-manager-darwin-amd64": {
+      "size": 7858496,
+      "sha256": "61f5c0c3fca94327d606fff18d70d92db4b5b40354b03cc497006b6cb7614c64"
+    },
+    "moo2-manager-darwin-arm64": {
+      "size": 7565138,
+      "sha256": "697ab6fe20e19127bcace57bdcc7140ce20d589d6865b033f665a95c551d248d"
+    }
+  },
+  "browser_ui": "blocked before assertions: Chromium socket operation not permitted; not retried",
+  "windows_macos_execution": "not tested",
+  "live_dopefish_multiplayer": "not tested",
+  "game_execution_in_launcher_suites": false,
+  "signed_release_created": false,
+  "github_or_publication_actions": false,
+  "separate_real_runtime_smoke": {
+    "result": "passed",
+    "scope": "adapted headless Linux launcher -> real Staging 0.83.0 -> actual 1.50.26 title screen only",
+    "launcher_sha256": "07f63bab96679a357121f9a25224384c915190b691543a460b0c40bce32624d6",
+    "process_exit_code": 0,
+    "checked_after": 541,
+    "fingerprint_before_after_equal": true,
+    "evidence": "recovery-real-launcher-smoke.json",
+    "gameplay_turns_or_multiplayer_tested": false
+  },
+  "private_settings_fix": "150.SET classified as personal state; fingerprint/preservation/reference regressions pass",
+  "portable_evidence": "recovery-settings-portable.json",
+  "network_process_double_evidence": "recovery-settings-network.json"
+}

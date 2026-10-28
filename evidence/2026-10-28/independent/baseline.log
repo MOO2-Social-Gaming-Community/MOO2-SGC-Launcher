@@ -1,0 +1,51 @@
+PASS setup command 0 succeeds
+PASS headless recovery marker mode 0600
+PASS headless initial private URL expectation
+PASS headless initial bare token expectation
+PASS headless initial private URL pattern expectation
+PASS headless initial launcher identity diagnostics preserved
+PASS headless initial launcher exit guidance preserved
+PASS headless initial setup diagnostics preserved
+PASS headless initial opener count
+PASS headless stage succeeded
+PASS headless initial process clean exit
+PASS headless restart opener count
+PASS headless handoff log private URL expectation
+PASS headless handoff log bare token expectation
+PASS headless handoff log private URL pattern expectation
+PASS headless handoff log launcher identity diagnostics preserved
+PASS headless handoff log launcher exit guidance preserved
+PASS headless handoff log mode 0600
+PASS headless setup diagnostics retained in handoff log
+PASS headless initial token absent from handoff log
+PASS headless old bearer token refused
+PASS headless new marker mode 0600
+PASS headless all descendants exited
+PASS headless private marker and locks removed
+PASS setup command 24 succeeds
+PASS normal recovery marker mode 0600
+PASS normal initial private URL expectation
+PASS normal initial bare token expectation
+PASS normal initial private URL pattern expectation
+PASS normal initial launcher identity diagnostics preserved
+PASS normal initial launcher exit guidance preserved
+PASS normal initial setup diagnostics preserved
+PASS normal initial opener count
+PASS normal stage succeeded
+PASS normal initial process clean exit
+PASS normal restart opener count
+PASS normal handoff log private URL expectation
+PASS normal handoff log bare token expectation
+PASS normal handoff log private URL pattern expectation
+PASS normal handoff log launcher identity diagnostics preserved
+PASS normal handoff log launcher exit guidance preserved
+PASS normal handoff log mode 0600
+PASS normal setup diagnostics retained in handoff log
+PASS normal initial token absent from handoff log
+PASS normal old bearer token refused
+PASS normal new marker mode 0600
+PASS normal all descendants exited
+PASS normal private marker and locks removed
+PASS recorder contains call counts only
+PASS all test process groups stopped
+TOTAL 50

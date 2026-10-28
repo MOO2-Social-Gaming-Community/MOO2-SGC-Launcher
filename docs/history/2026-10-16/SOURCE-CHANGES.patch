@@ -1,0 +1,2175 @@
+--- a/.gitignore
++++ b/.gitignore
+@@ -81,3 +81,8 @@
+ /manager/out/
+ **/Master of Orion 2*.zip
+ **/*KNOWN_GOOD*.zip
++
++# Candidate-only verification caches and private fixture copies.
++/.test-cache/
++/.test-fixtures/
++/candidate-*
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,3 +1,16 @@
++# 0.4.8 candidate — unreleased, 2026-10-16
++
++- Pin the supported patch inventory and generated selection independently of writable workspace manifests; validate legacy base identity and generated ORIONCD.INI.
++- Fingerprint newly added editable CFGs and extra data, and conservatively scan nested configuration references to excluded personal/audio/generated files.
++- Exclude EXTRACT.CFG and ORION2.LOG runtime outputs from compatibility identity; preserve 150.SET and NEW150.SET as personal state.
++- Save process start/exit failures in diagnostics and propagate runtime failure to CLI exit status without claiming connection success.
++- Make duplicate-profile selection wait for completed save and preserve newer navigation.
++- Add integrity, reference-scanner, process and deterministic UI regressions. Compile without VCS auto-stamping for source-archive builds.
++- Real launcher-to-Staging startup revealed 150.SET personal settings were incorrectly fingerprinted as extra data; classify and retain that exact settings filename without exempting arbitrary SET files.
++- Source-only handoff. No release signing/publication, private game redistribution or multiplayer certification.
++
++The entries below are historical shipped/supplied version notes, not new candidate validation claims.
++
+ # 0.4.7
+ 
+ - Remember the selected profile in userdata/ui-selection.json across launcher restarts and changing localhost ports. First-run default stays baseline 1.40b23; no automatic game upgrade.
+--- a/GITHUB-UPLOAD.md
++++ b/GITHUB-UPLOAD.md
+@@ -1,3 +1,5 @@
++> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
++
+ # GitHub Desktop upload — 0.4.7
+ 
+ Extract the complete repository ZIP contents into the cloned launcher repository, preserve `.git`, commit and push the default branch. `release/0.4.7` contains ready-signed release files. Wait for **Publish prepared release** and confirm a published **v0.4.7**.
+--- a/README.md
++++ b/README.md
+@@ -1,23 +1,23 @@
+-# Master of Orion II Social Gaming Community — Launcher & Installer
++# MOO2-SGC Launcher and Installer
+ 
+-**Version 0.4.7. In development and trusted-user testing; not a general multiplayer release.**
++**0.4.8 candidate, unreleased. Source-only engineering handoff, not an installer or gameplay certification.**
+ 
+-A small signed bootstrapper installs the environment manager. The manager imports an owned game without changing the original Steam/GOG/CD source, preserves an independent **1.40b23 baseline**, prepares the optional **1.50.26** fan-patch profile, manages supported rulesets and configures DOSBox for local, LAN or public-IPX play.
++This candidate improves the supplied 0.4.7 launcher while preserving the independent 1.40b23 baseline and optional 1.50.26 Community environment. It does not modify the original owned-game archives. PRSL, new Chat and SGC Online remain unavailable.
+ 
+-## 0.4.7 focus
++## What changed
+ 
+-The launcher remembers the selected profile across restarts and changing local-browser ports. Historical engines no longer show a misleading 1.50 Core label. The network summary shows the exact selected game executable and transport command. **Check Dopefish connection (no game)** opens a separate CONNECT/STATUS diagnostic, with no mounted game and no fabricated success indicator. Existing kernel, signature, minimum-version and repair safeguards remain in place.
++- Verify patch code and required selected-mod configuration against an embedded hash inventory rather than trusting an editable local receipt.
++- Include newly added editable configurations and extra data in the effective compatibility fingerprint; reject excluded save/audio/generated files used as custom configuration inputs.
++- Recognize ordinary game-generated files without blocking relaunch, and retain 150.SET and NEW150.SET personal settings during repair.
++- Report runtime start/exit failures accurately, including a failing CLI exit status. Process success still does not prove gameplay or connectivity.
++- Wait for a successful duplicate-profile save before selecting it, without overriding a newer navigation choice.
+ 
+-Portable Windows root: **C:\Games\MOO2-SGC**. See [START-HERE](START-HERE.md), [network and profile details](docs/NETWORK-AND-PROFILES-0.4.7.md), and [test report](docs/TEST-REPORT.md).
++See [START-HERE](START-HERE.md), [current test report](docs/TEST-REPORT.md), and [candidate changes](docs/RELEASE-NOTES-0.4.8-CANDIDATE.md).
+ 
+-## Repository/publishing
++## Build and test
+ 
+-Extract the complete repository package directly into the GitHub Desktop clone, preserve `.git`, commit and push the default branch. The **Publish prepared release** workflow verifies and publishes the already-signed `release/0.4.7` assets. Do not edit signed packages or metadata. GitHub is primary software hosting; optional R2 failover is not provisioned in this release. Website availability is not a software requirement.
++Go 1.23 or newer is required. Run `sh manager/build.sh` to compile Windows amd64, Linux amd64, macOS amd64 and macOS arm64 launchers. The builds are unsigned development candidates with no provisioned online update feed. Run `cd manager && go test -race -count=1 ./... && go vet ./...` for source checks. Optional private fixture requirements are listed in the test report.
+ 
+-The prepared offline portable integration kit can be tested before publication. The standalone setup's online installation needs the published Release, not merely committed source. [GitHub upload guide](GITHUB-UPLOAD.md).
++No game, DOSBox/runtime, private signing key, or prepared signed release is included in the source archive. Keep existing signed installations intact. Do not overlay this source archive onto a portable game installation or run the historical publication instructions for it. Existing 0.4.7 signed artifacts do not represent this changed source.
+ 
+-## Boundaries
+-
+-No commercial MOO2 files, DOSBox runtime, RKERNEL binary, or private signing key belongs in this repository/public release. Import your licensed files locally. PRSL and the new Chat extension are independent, unavailable future components; the future SGC matchmaking/relay service remains disabled. Selecting a profile does not rewrite the baseline or activate a patch automatically.
+-
+-Windows and Mac builds are compiled, not locally executed by the build environment. The connection checker must be observed on your machine; it is not proof that Dopefish is reachable until its DOSBox status actually reports a connection. Native code signing/notarization is distinct from the implemented package signatures and is not supplied.
++Windows/macOS execution, direct browser acceptance, live Dopefish connectivity and multiplayer are not certified by these launcher checks. The separately scoped real-runtime addendum in the current test report covers Linux title-screen startup through the actual launcher, not native desktop or multiplayer acceptance.
+--- a/START-HERE.md
++++ b/START-HERE.md
+@@ -1,29 +1,13 @@
+-# MOO2-SGC 0.4.7 — start here
++# Start here: 0.4.8 candidate (unreleased)
+ 
+-## Update the repository
++This is a source-only review package, not a drop-in portable upgrade or signed release. Keep the working 0.4.7 installation, owned archives, runtime and saves unchanged. Do not copy the package into C:\Games\MOO2-SGC or publish it as a release.
+ 
+-Extract the repository ZIP contents into the existing GitHub Desktop clone; preserve `.git`. Commit and push the default branch. Wait for **Publish prepared release** to publish **v0.4.7**. Files in release/0.4.7 are already signed with the existing identity. Do not edit/repack them. Keep game archives and signing keys OUT of the repository.
++1. Read `docs/TEST-REPORT.md` for current evidence and limits.
++2. Review `docs/RELEASE-NOTES-0.4.8-CANDIDATE.md` and the accompanying source patch.
++3. Extract to a separate development directory. Build using Go 1.23+ with `sh manager/build.sh`. Launch outputs are in `manager/out`; use a separate test data directory and copies of private fixtures.
++4. Run the documented automated checks. Real DOSBox/gameplay, native Windows/macOS UI, and multiplayer remain distinct acceptance stages.
++5. Only after that review should a maintainer choose whether to build/sign a new release. No signing, GitHub operation or publication was performed for this candidate.
+ 
+-## Update your portable installation
++The numeric VERSION is 0.4.8 because the existing build/version parser requires three numeric components. It is not a stability or release designation. Historical docs retain their version labels; their old artifact, signing and installation claims do not apply here.
+ 
+-Close the game. Use **Exit launcher**, not merely closing its browser tab. Back up the working harness.
+-
+-Extract the portable integration ZIP into **C:\Games\MOO2-SGC**, not an extra nested folder. Keep the existing complete `runtime\windows` directory, owned base ZIP, game files and userdata. Run **START-MOO2-SGC.cmd** there. The bundled signed offline package installs/upgrades the application without depending on GitHub publication.
+-
+-The standalone online Setup executable should be run only after the v0.4.7 Release is published. Replacing source files in GitHub is not a published software Release. The setup line about the **previously installed launcher** describes the old version, not the one being started; check **Launching/ready** and the UI's running identity.
+-
+-## First 0.4.7 network test
+-
+-Choose **Community — standard** explicitly to run **1.50.26**. The separate baseline is still 1.40b23 and remains the first-run default. This release remembers your chosen profile for subsequent reopen/restarts.
+-
+-Choose **Create network game** (or Join on the second machine) and **moo2.thedopefish.com — public IPX**, then **Save profile**. The network-plan box should show **ORION150.EXE** and **IPXNET CONNECT moo2.thedopefish.com 213**. Both players use that same connection; create/join the named game inside MOO2.
+-
+-Use **Check Dopefish connection (no game)** first. Read CONNECT/STATUS in its DOSBox window. Type **EXIT** to close it. Then prepare/verify the Community environment, confirm Network kernel verified, and launch. Diagnostic success does not certify multiplayer; retain the first failure's exact message.
+-
+-The standalone **CHECK-DOPEFISH.cmd** runs the same diagnostic after the launcher is closed. It now uses signed setup/launcher locks and runtime checks, not a bare unverified runtime call.
+-
+-## Preserve the reference
+-
+-1.40b23 baseline, optional 1.50.26 and owned Steam/GOG installations remain distinct. PRSL, new Chat and SGC Online remain disabled. No public package contains commercial game data or the DOSBox runtime. Existing private signing-key backup is unchanged. Windows Authenticode/macOS notarization are not provided.
+-
+-See `docs/NETWORK-AND-PROFILES-0.4.7.md` and `docs/TEST-REPORT.md` (or `sgc-docs/` in the portable kit). No Windows/game/live-Dopefish acceptance is claimed by this build.
++For a future native acceptance pass: test fresh and upgraded installations, baseline and Community preparation, save preservation, profile duplication failures/repeated clicks/newer navigation, process start and nonzero exits, and the separate Dopefish CONNECT/STATUS check. A normal diagnostic exit is not a successful connection, and a connection is not a completed multiplayer game.
+--- a/VERSION
++++ b/VERSION
+@@ -1 +1 @@
+-0.4.7
++0.4.8
+--- a/docs/DEPLOYMENT.md
++++ b/docs/DEPLOYMENT.md
+@@ -1,3 +1,5 @@
++> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
++
+ # Deployment — 0.4.6
+ 
+ The canonical repository is `MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer`.
+--- /dev/null
++++ b/docs/RELEASE-NOTES-0.4.8-CANDIDATE.md
+@@ -0,0 +1,16 @@
++# 0.4.8 candidate: unreleased changes
++
++Source-only engineering handoff, 2026-10-16. See [current verification report](TEST-REPORT.md) for evidence, limits and reproduction.
++
++- Pin immutable patch code/rulesets and selected configuration independently of editable local receipts.
++- Include added custom configuration/data in compatibility fingerprints; conservatively reject excluded personal/audio/generated inputs reached through nested configuration references.
++- Allow normal game-generated EXTRACT.CFG and ORION2.LOG without false integrity failures; preserve 150.SET and NEW150.SET personal state.
++- Record runtime failures and propagate nonzero runtime completion to the CLI. Never infer network success from process exit.
++- Select duplicated profiles only after successful save, preserving newer navigation.
++- Add targeted integrity/reference-scanner/process/UI regression coverage and source-archive cross-build support.
++
++Current final evidence: 257 Go test/subtest passes, 50 portable/owned-file checks, 24 diagnostic/process-double checks, 10 mocked publishing tests, deterministic UI event-flow checks, static checks and four launcher cross-builds. Counts overlap and are not unique gameplay scenarios.
++
++Not a signed installer or multiplayer release. Browser UI acceptance was blocked by the environment and not bypassed. Windows/macOS execution, live Dopefish/multiplayer and new signed upgrades are not verified here. No game or runtime payload is distributed. 0.4.7 deployment/signing docs and artifacts are historical, not instructions to publish this candidate.
++
++A separate real Linux launcher-to-Staging title-screen smoke identified an omitted normal 150.SET settings file. Its fingerprint/preservation classification was corrected and added to the regression coverage. See the separately scoped runtime addendum in the current report; the 50/24 automated suites remain process-double tests.
+--- a/docs/SECURITY-AND-TRUST.md
++++ b/docs/SECURITY-AND-TRUST.md
+@@ -1,3 +1,5 @@
++> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
++
+ # Security and trust — 0.4.1
+ 
+ - Release metadata and each executable package require an embedded-key Ed25519 signature, declared byte count and SHA-256 identity.
+--- a/docs/SIGNING.md
++++ b/docs/SIGNING.md
+@@ -1,3 +1,5 @@
++> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
++
+ # Release signing — 0.4.7
+ 
+ Existing `moo2-sgc-release-1` public identity, feed `moo2-sgc`, channel `stable`, revision 47. The previously stored private backup remains valid. No replacement key is distributed; never commit private signing material.
+--- /dev/null
++++ b/docs/TEST-REPORT-0.4.7-HISTORICAL.md
+@@ -0,0 +1,50 @@
++> Historical 0.4.7 report supplied with the original repository. Its counts and signed-build claims do not apply to the unreleased 0.4.8 candidate. See TEST-REPORT.md for current scope.
++
++# MOO2-SGC 0.4.7 — test report
++
++## Scope
++
++This is an internal build/packaging cycle from the supplied 0.4.6 repository and Dopefish diagnostic kit. It does not claim that the user's Comm Failure has been resolved or that the third-party IPX service is currently reachable. No remote GitHub/account writes were made.
++
++## Implemented and exercised
++
++The selected profile persists in the installation's own userdata and survives application restart/new localhost ports without rewriting game data. The baseline selector no longer shows a false 1.50 Core selection. Network preview and generated game config share the same command generator. The Dopefish diagnostic runs as an independent, explicit, locked DOSBox process with no game mounts. It records request details without treating process success as network success.
++
++The previous-version console line now clearly states it is NOT the launch target. The existing minimum-version floor, pinned-release fallback, signed validation, canonical RKERNEL preflight, source import, baseline preservation and optional Community profile remain in place.
++
++## Results for the final signed binaries/source
++
++| Area | Passed | Scope |
++|---|---:|---|
++| Go race suite | 118 top-level / 222 with subtests | Source tests; network/selection/API/integrity/distribution |
++| go vet / JavaScript syntax | Passed | Static/tool checks |
++| Publishing safeguards | 10 | Local unit tests, no GitHub write |
++| Network diagnostic and preference API/CLI | 24 | Real Linux manager; labelled DOSBox process double |
++| Browser UI | 34 | Actual manager API via explicit offline browser-transport bridge |
++| Full owned-file portable/Steam/CD lineage | 50 | Actual source files and generated workspaces; no game execution |
++| Old 0.4.2 kernel-missing workspace to current | 36 | Actual old/new Linux managers; driver hashes, repair and synthetic save bytes |
++| Stale signed 0.4.2 feed fallback | 15 | Actual setup binaries, local HTTPS server |
++| Interrupted download, signatures and restart | 15 | Local HTTPS proxy fixture, no live GitHub |
++| Native signed installer/launcher | 11 | Actual Linux execution |
++| Portable setup and 0.4.6 -> 0.4.7 upgrade | 20 | Actual Linux installer/launcher and existing signing identity |
++| GitHub Desktop-style checkout | 10 | Local Git core.autocrlf=true, source and signature bytes preserved |
++| Explicit local ZIP preparation | 9 | Actual canonical ZIP; source unchanged |
++
++See `evidence/QA-SUMMARY.json` and the matching JSON/log files. Suites overlap; their totals are not counts of unique game scenarios.
++
++## Explicit limitations
++
++- Windows/macOS binaries compiled; not executed in this environment. No Windows Authenticode signature or Mac notarization supplied.
++- No actual DOSBox or MOO2 engine executed. Test-double process logs are explicitly labelled. Save preservation verifies bytes, not game loadability.
++- Browser direct loopback navigation was refused by the environment (`ERR_BLOCKED_BY_ADMINISTRATOR`). UI assertions used an explicit bridge to the actual HTTP API. They are not native Windows-browser acceptance.
++- No live Dopefish DNS/UDP connection or multiplayer session verified. The user's screenshot of CONNECT/STATUS is the next transport evidence.
++- Local HTTPS fixtures do not prove GitHub publication or live downloads. Run the publication workflow after pushing.
++- First all-platform build attempt hit the tool time limit. The final build completed successfully; acceptance suites used those final signed binaries.
++
++## Signed delivery
++
++Manifest release **0.4.7**, revision **47**, existing `moo2-sgc-release-1` public identity; validity ends **2027-01-05T03:02:24Z**. No private key appears in the repository or portable kit. Installed verified applications retain offline operation; future downloads need valid signed metadata. The source-fingerprint check links packages to these build inputs, not to a claim of game certification.
++
++## Next Windows acceptance
++
++Exit old launcher/game; extract the portable kit at `C:\Games\MOO2-SGC`; run START-MOO2-SGC.cmd. Select Community — standard / 1.50.26, save Create or Join plus Dopefish. Reopen to confirm remembered profile, then run the separate connection check. Read CONNECT/STATUS, type EXIT, prepare/verify Community and launch. The baseline and owned Steam/GOG source remain separate. Keep the first error, last-network-check.json, last-launch.json and relevant screen capture.
+--- a/docs/TEST-REPORT.md
++++ b/docs/TEST-REPORT.md
+@@ -1,48 +1,105 @@
+-# MOO2-SGC 0.4.7 — test report
++# MOO2-SGC launcher 0.4.8 candidate: engineering verification
+ 
+-## Scope
++Date: 2026-10-16 UTC. Status: **unreleased source candidate**, not a signed installer, multiplayer release, or gameplay certification.
+ 
+-This is an internal build/packaging cycle from the supplied 0.4.6 repository and Dopefish diagnostic kit. It does not claim that the user's Comm Failure has been resolved or that the third-party IPX service is currently reachable. No remote GitHub/account writes were made.
++## Summary
+ 
+-## Implemented and exercised
++The supplied 0.4.7 code has been reviewed and hardened. The changes close reproducible integrity and runtime-reporting problems while preserving the baseline/Community separation. Final-source checks pass within the tested scope below. No GitHub, publication, signing, or external service action was taken. No owned game or runtime bytes are in the deliverable.
+ 
+-The selected profile persists in the installation's own userdata and survives application restart/new localhost ports without rewriting game data. The baseline selector no longer shows a false 1.50 Core selection. Network preview and generated game config share the same command generator. The Dopefish diagnostic runs as an independent, explicit, locked DOSBox process with no game mounts. It records request details without treating process success as network success.
++## Implemented changes
+ 
+-The previous-version console line now clearly states it is NOT the launch target. The existing minimum-version floor, pinned-release fallback, signed validation, canonical RKERNEL preflight, source import, baseline preservation and optional Community profile remain in place.
++1. **Do not let a local receipt certify its own contents.** The supported 1.50.26 patch now has a compiled 128-file hash inventory. Immutable scripts/code/rulesets must match that inventory, selected ENABLE.CFG must equal the resolver output, the stored selection fingerprint must match the prepared profile, and legacy archive provenance no longer skips installed-base validation. The schema-3 ORIONCD.INI harness contract is checked explicitly.
++2. **Make effective configuration identity complete.** Added editable CFGs and additional data files contribute to the fingerprint. Unsupported extra protected code/config cannot be blessed by adding it to the local manifest. A conservative scanner follows nested includes, quoted script lists, known language macros and caret escapes; it refuses custom use of save/audio/generated files whose contents are otherwise excluded from identity. It is not a complete MOO2 rules evaluator and may reject unusual custom configurations conservatively.
++3. **Distinguish gameplay outputs from inputs.** EXTRACT.CFG and ORION2.LOG do not block verification or change compatibility after a game run. 150.SET and NEW150.SET are personal state and are retained during same-engine repair. Using excluded outputs as custom configuration inputs is rejected.
++4. **Distinguish process start, process exit and actual success.** Runtime failures are written to the launch/diagnostic record. CLI diagnostic/prepare-play waits for completion and returns failure when the runtime exits unsuccessfully. Normal process exit still does not certify game rendering, connection or multiplayer. Start-failure logging was reviewed; the dynamic tests explicitly cover exit 0 and exit 47.
++5. **Fix asynchronous duplicate selection.** The UI does not switch to a missing or failed duplicate. It selects a successful copy after save completion, ignores older save results, and preserves a newer navigation choice.
++6. **Make source-archive builds reliable.** The development cross-build disables VCS auto-stamping. Version 0.4.8 is numeric for the existing parser, not a stability designation.
+ 
+-## Results for the final signed binaries/source
++## Final verification results
+ 
+-| Area | Passed | Scope |
++| Check | Result | Actual scope |
+ |---|---:|---|
+-| Go race suite | 118 top-level / 222 with subtests | Source tests; network/selection/API/integrity/distribution |
+-| go vet / JavaScript syntax | Passed | Static/tool checks |
+-| Publishing safeguards | 10 | Local unit tests, no GitHub write |
+-| Network diagnostic and preference API/CLI | 24 | Real Linux manager; labelled DOSBox process double |
+-| Browser UI | 34 | Actual manager API via explicit offline browser-transport bridge |
+-| Full owned-file portable/Steam/CD lineage | 50 | Actual source files and generated workspaces; no game execution |
+-| Old 0.4.2 kernel-missing workspace to current | 36 | Actual old/new Linux managers; driver hashes, repair and synthetic save bytes |
+-| Stale signed 0.4.2 feed fallback | 15 | Actual setup binaries, local HTTPS server |
+-| Interrupted download, signatures and restart | 15 | Local HTTPS proxy fixture, no live GitHub |
+-| Native signed installer/launcher | 11 | Actual Linux execution |
+-| Portable setup and 0.4.6 -> 0.4.7 upgrade | 20 | Actual Linux installer/launcher and existing signing identity |
+-| GitHub Desktop-style checkout | 10 | Local Git core.autocrlf=true, source and signature bytes preserved |
+-| Explicit local ZIP preparation | 9 | Actual canonical ZIP; source unchanged |
++| Go race suite, all supplied fixtures | 257 passed; 0 failed; 0 test skips | 136 top-level tests plus subtests; 5 tested packages passed. shared/buildconfig has no test files. |
++| go vet | Passed | Final source, all packages. |
++| JavaScript syntax | Passed | manager/web/app.js. |
++| Duplicate-profile regression | Passed | Deterministic Node/VM event-flow test: rejected request, delayed save, successful/failed save, stale result, newer navigation and missing saved profile. Not a browser run. |
++| Publishing safeguards | 10 passed | Mocked service only, no account/remote calls. |
++| Portable/owned-file acceptance | 50 passed | Current real Linux launcher; baseline, Steam and CD lineage, optional patch, exact file/kernel hashes, source preservation, repair, rollback, synthetic saves and locks. DOSBox process double, no game execution. |
++| Network diagnostic and selection | 24 passed | Current real Linux launcher/API/CLI with an explicitly labelled process double. No DNS/UDP/Dopefish reachability claim. |
++| Cross-compilation | 4 targets passed | Windows amd64, Linux amd64, macOS amd64 and macOS arm64 launchers. Outputs are unsigned and not included. |
+ 
+-See `evidence/QA-SUMMARY.json` and the matching JSON/log files. Suites overlap; their totals are not counts of unique game scenarios.
++Source-built candidate binaries were used for the final 50/24 acceptance runs. Local loopback HTTP/HTTPS fixtures are allowed and passed. They are not external network tests. Original owned archives were compared before/after in portable acceptance and remained unchanged. Save tests check bytes, not whether MOO2 can load them.
+ 
+-## Explicit limitations
++## Evidence and chronology
+ 
+-- Windows/macOS binaries compiled; not executed in this environment. No Windows Authenticode signature or Mac notarization supplied.
+-- No actual DOSBox or MOO2 engine executed. Test-double process logs are explicitly labelled. Save preservation verifies bytes, not game loadability.
+-- Browser direct loopback navigation was refused by the environment (`ERR_BLOCKED_BY_ADMINISTRATOR`). UI assertions used an explicit bridge to the actual HTTP API. They are not native Windows-browser acceptance.
+-- No live Dopefish DNS/UDP connection or multiplayer session verified. The user's screenshot of CONNECT/STATUS is the next transport evidence.
+-- Local HTTPS fixtures do not prove GitHub publication or live downloads. Run the publication workflow after pushing.
+-- First all-platform build attempt hit the tool time limit. The final build completed successfully; acceptance suites used those final signed binaries.
++- `evidence/recovery-settings-final-all-fixtures-go.jsonl`: authoritative final 257-pass race run after the real-runtime settings fix. `recovery-final-all-fixtures-go.jsonl` records the prior 256-pass run. `recovery-final-go.jsonl` is the immediately preceding 247-pass/2-skip run; the skips were then resolved using supplied private fixtures.
++- `evidence/recovery-settings-portable.json` and `recovery-settings-network.json`: final compiled Linux acceptance after the settings fix. Earlier recovery-portable/network files precede that fix.
++- `evidence/recovery-publishing.log`, `recovery-ui-regressions.log`, and `recovery-validation-summary.json`: final static/build/unit evidence and binary hashes.
++- `evidence/review-final-go.jsonl`: recovered earlier 244-pass/2-skip run. Three source files changed after that run, so it is not treated as final-source proof.
++- `evidence/regressions-before.log` and `ui-regressions-before.log`: reproduced pre-fix failures; their after logs show targeted repair.
++- `evidence/process-failure-before.json` / `process-failure-after.json`: the 0.4.7 CLI incorrectly returned 0 after runtime exit 47; the candidate returns 1 and records exit code 47.
++- Historical `QA-SUMMARY.json`, `FINAL-PACKAGING.json` and the original test report belong to the supplied 0.4.7 release. They are not candidate results. The historical report is retained as `TEST-REPORT-0.4.7-HISTORICAL.md`; old signed release assets and old QA bundles are excluded from this source archive.
++- The initial rerun's default Go cache path was read-only; using a cache inside the permitted workspace resolved that local setup issue. This was not a code failure.
+ 
+-## Signed delivery
++## Blocked, untested and deliberately not done
+ 
+-Manifest release **0.4.7**, revision **47**, existing `moo2-sgc-release-1` public identity; validity ends **2027-01-05T03:02:24Z**. No private key appears in the repository or portable kit. Installed verified applications retain offline operation; future downloads need valid signed metadata. The source-fingerprint check links packages to these build inputs, not to a claim of game certification.
++- **Direct Chromium UI acceptance was blocked:** the recovered launch log records `socket() failed: Operation not permitted`. It failed before UI assertions. The denied operation was not retried or bypassed. Node/VM event tests do not replace native browser acceptance.
++- **Windows and macOS were compiled, not executed.** No native installers, dialogs, browser lifecycle, runtime launch or native game session on those platforms was certified.
++- **No live Dopefish, UDP/IPX or multi-machine multiplayer test.** Configuration generation and process lifecycle are separate from transport reachability and actual game turns.
++- **No actual DOSBox or MOO2 execution by the original 50/24 automated launcher suites.** The separately scoped real-runtime addendum below closes a narrow Linux title-screen startup path only; it does not turn those process-double checks into real gameplay tests.
++- **No new signed distribution/upgrade acceptance.** Existing 0.4.7 signatures do not authenticate 0.4.8 source or binaries. Installer/release workflows require a separately built and signed new release and were not executed. Authenticode and macOS notarization are absent.
++- **No PRSL/new Chat integration or new gameplay presets.** These remain independent; selecting a launcher mod profile does not configure every in-game New Game option.
+ 
+-## Next Windows acceptance
++## Reproduction
+ 
+-Exit old launcher/game; extract the portable kit at `C:\Games\MOO2-SGC`; run START-MOO2-SGC.cmd. Select Community — standard / 1.50.26, save Create or Join plus Dopefish. Reopen to confirm remembered profile, then run the separate connection check. Read CONNECT/STATUS, type EXIT, prepare/verify Community and launch. The baseline and owned Steam/GOG source remain separate. Keep the first error, last-network-check.json, last-launch.json and relevant screen capture.
++From the source root, use Go 1.23+:
++
++```
++cd manager
++go test -race -count=1 ./...
++go vet ./...
++cd ..
++node --check manager/web/app.js
++node tests/ui_regression.js
++python3 -m unittest discover -s tests -p 'test_publish*.py' -v
++sh manager/build.sh
++```
++
++For the complete private-fixture race run, set MOO2_COMMUNITY_FIXTURE to a prepared Community generation containing manifest.json and game/, MOO2_HARNESS_FIXTURE to the supplied Windows runtime directory (read/verify only), and MOO2_TEST_ASSETS to a private fixture directory. The latter must contain the original supplied Steam ZIP named `Master of Orion 2 - steam - v1_40b23.zip` and the recognized official 1.31 patch archive named `_moo2v131_patch.zip`. The latter name is a fixture alias for the already-recovered MOO2-1.31.en.zip, not a new download. Source tests verify the relevant actual file contents. Without fixtures the relevant tests explicitly skip, not pass.
++
++Use `tests/portable_acceptance.py --help` and `tests/network_check_acceptance.py --help` for compiled Linux acceptance. They use only copies/temporary directories and a labelled process double. Do not point runtime gameplay tests at an irreplaceable live installation. Do not follow old deployment instructions for this candidate.
++
++## Next acceptance gate
++
++Review the source patch, then test the candidate separately on Windows/macOS with the owned runtime and real game. Cover UI interruption/repeated actions, upgrades/repair/rollback, save loadability, both baseline and Community, process failures, native browser behavior, and real multiplayer. Only then decide whether to build and sign a new release. Applying the source patch to an older checkout leaves historical release assets untouched; they must never be relabelled or republished as this candidate.
++
++
++## Separately scoped real-runtime integration addendum
++
++**2026-10-16: PASS for the exact final Linux launcher -> real DOSBox Staging 0.83.0 -> MOO2 1.50.26 title-screen startup path.** This is a separate real-emulator integration observation; the original 50 portable and 24 diagnostic checks above remain labelled process-double tests.
++
++The actual manager imported the supplied owned base/patch, prepared Community standard (engine 1.50.26, core 150, no extra mods, standalone/network none), verified the fixed kernel, selected the runtime and launched the game. The emulator image visibly shows Version 1.50.26. The process exited 0; post-run verification passed **541 entries**, with no bad files or reported user changes, and the effective fingerprint was identical at preparation, launch and post-run verification.
++
++Final Linux launcher SHA-256: `07f63bab96679a357121f9a25224384c915190b691543a460b0c40bce32624d6`.
++
++Engine SHA-256: `2db296e052419250d21866f7c23ac2978a33b3c05b451a9516f06599b91c3f5c`.
++
++RKERNEL SHA-256: `18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97`.
++
++Stable effective fingerprint: `1dc35679eeee79ee7f462eb3e51db1524a312d4df3bcbce3422b6d4328f24336`.
++
++Evidence: `evidence/recovery-real-launcher-smoke.json` and `evidence/recovery-real-launcher-title.png` (image SHA-256 `60d25b3ab4d90058e86b679df4452ddac07c2a0861899e0ac73a3139d29d68c3`). The screenshot was visually inspected, not inferred from normal exit. The originating runtime report is titled `FINAL-LAUNCHER-RUNTIME-2026-10-16.md` in the separate runtime evidence deliverable.
++
++### Additional reliability defect found and fixed
++
++The first real startup used the preceding Linux build `dfcdb06b23ff6158a90e4b12a34f41f7c8e186a1afc1f354e21225fb55aa2c3b`. Engine/kernel identity and 540-file verification passed, but the effective fingerprint changed because the game generated **150.SET**, a normal personal-settings file documented by the supplied 1.50.26 manual. The launcher previously recognized NEW150.SET but omitted 150.SET; this also meant the latter was not retained by same-engine repair. EXTRACT.CFG and ORION2.LOG were already handled correctly.
++
++The fix adds only the exact root-level 150.SET name to personal-state handling, preserving it and excluding its normal settings bytes from mod compatibility. It does not exempt arbitrary SET files. The custom-config scanner also rejects references to 150.SET as an excluded input, retaining the integrity boundary. The synthetic regression fails before the fix and passes after it; the final real smoke additionally demonstrates stable before/after identity. The repeat prepared a generation retaining the settings file, hence 541 checked entries rather than the earlier 540.
++
++See `evidence/recovery-real-launcher-pre-fix.json`, `recovery-150-settings-before.log`, and `recovery-150-settings-fix.json`. No 150.SET or save payload is packaged. The refreshed 257-test race run, 50/24 process-double suites, vet and four cross-builds all cover the final source. No source-code changes followed the final build.
++
++### Boundaries remain explicit
++
++The real runtime is invoked through a test-only host wrapper that forwards the manager's arguments and uses dummy video/audio, software rendering, no mouse capture, fixed CPU cycles and scripted native SDL input/capture. Engine, kernel and manager-generated game configuration are not patched; success is not simulated. This is adapted headless Linux startup, not native desktop rendering/audio or browser UI acceptance.
++
++This smoke reaches the title screen, not a played turn or save/reload cycle, and its profile has no network service. It does not certify Staging multiplayer, Dopefish, LAN/internet reliability, Windows/macOS, PRSL or tactical gameplay. A separate Classic 0.74-3 two-client native-turn/save/reload result belongs to the runtime workstream and was **not driven by this final launcher**; it must not be attributed to this launcher smoke or added to the 50/24 counts. Personal New Game choices are separate from the mod fingerprint and still require explicit in-game acceptance.
+--- /dev/null
++++ b/manager/assets/patch-files.json
+@@ -0,0 +1,646 @@
++{
++  "schema": 1,
++  "edition": "MOO2-1.50.26",
++  "files": [
++    {
++      "name": "150/ENABLE.CFG",
++      "size": 418,
++      "sha256": "11a0d37aaf26ec24dc942441030eabc11bf5a2132fa794597f9b81cfbe70d8aa"
++    },
++    {
++      "name": "150/USER.CFG",
++      "size": 2198,
++      "sha256": "d9fb1fd68b88e3926be9d45b433355a288a4a662a65595b52be275711fda966e"
++    },
++    {
++      "name": "150/build/BUILD.CFG",
++      "size": 1155,
++      "sha256": "8829629afc880b0f6991d6d3cea884e3a948ba12fcba0f1bbae06a76f6db078f"
++    },
++    {
++      "name": "150/build/BUILD0.CFG",
++      "size": 332,
++      "sha256": "e1a7d6c001e3ab761172005998d85abe71b1cf2c1b94ec3d353c2465168b742e"
++    },
++    {
++      "name": "150/build/BUILD1.CFG",
++      "size": 343,
++      "sha256": "0e4225e3bc6b673f46e11ae521810f4f50a90e94687a4f1ac3e442b1c097dd87"
++    },
++    {
++      "name": "150/build/BUILD2.CFG",
++      "size": 343,
++      "sha256": "a2255a6f2ac3787895c4c57bd9976a35e6219f1be95ba7379e1d477fce6a916c"
++    },
++    {
++      "name": "150/build/BUILD3.CFG",
++      "size": 343,
++      "sha256": "30308e7ccf01a37cff8d9706bcd707e8734b378b34deadc1e08a109f2ddd33f4"
++    },
++    {
++      "name": "150/build/BUILD4.CFG",
++      "size": 343,
++      "sha256": "897d0d086a1687ced047a6b95fb253a8f1a229013e51e2e22bc929ef449da0a4"
++    },
++    {
++      "name": "150/build/BUILD5.CFG",
++      "size": 343,
++      "sha256": "c37c0b655b2f04428c1e9ceee81f0c447d1be00031a1c71689a7adfdae50c313"
++    },
++    {
++      "name": "150/build/BUILD6.CFG",
++      "size": 343,
++      "sha256": "46aecb526af8b9a4c75ba3fd186adfc8cb9d4a23e26ebffd24f2d59aea1bb203"
++    },
++    {
++      "name": "150/build/BUILD7.CFG",
++      "size": 351,
++      "sha256": "abd6ab3c850814129ae6a6db029071a73efe1026c4a5090e7d70731ed0603c44"
++    },
++    {
++      "name": "150/build/BUILD8.CFG",
++      "size": 339,
++      "sha256": "7251548b99db53bdc0bc1c1e75bcd9579f7886a5b2d1f0263190050922d6bd1a"
++    },
++    {
++      "name": "150/build/BUILD9.CFG",
++      "size": 334,
++      "sha256": "ad039eff4104a2ccc17a697f2b60997091e8e8252df44423dd562b3520cedc2e"
++    },
++    {
++      "name": "150/docs/MANUAL_150.PDF",
++      "size": 6072534,
++      "sha256": "040ab9aee540907b55fb5b23b2a05b701d6becbc1bfd47a8d284ef3f1a32e55c"
++    },
++    {
++      "name": "150/docs/MANUAL_150.xls",
++      "size": 355328,
++      "sha256": "b58073b94d43a40a5b761fa17038428d6d353a3a2b5ee6a6ceee7ebf54355052"
++    },
++    {
++      "name": "150/docs/PARAMETERS.CFG",
++      "size": 131651,
++      "sha256": "1638115a77a795ac55f821821889b9ac202f9196d8cc3c191e42708204c674a0"
++    },
++    {
++      "name": "150/docs/color_scheme_wormholes.png",
++      "size": 1881,
++      "sha256": "8d21dbbe408737565af095740341784f3ecf3f422c89c8ae4a9d8e582ad54198"
++    },
++    {
++      "name": "150/docs/color_table_build_screen.png",
++      "size": 19430,
++      "sha256": "c955cbf78e50b21ad63c7b7866a228d6c0d69be6776829f91a4be159292664ec"
++    },
++    {
++      "name": "150/docs/config.json",
++      "size": 1380911,
++      "sha256": "611991a7c8f7822a97b29f95d70b8cce50722f04484fbafd755b1a5cb5251b70"
++    },
++    {
++      "name": "150/dosbox.conf",
++      "size": 10205,
++      "sha256": "a7009df685c72719214170c83e0fbc9b7ff9009b24fe4fc69499f6852da49a18"
++    },
++    {
++      "name": "150/lbx/COLSYSDI.LBX",
++      "size": 90548,
++      "sha256": "bcb8d70f928126196bb2821cc28a7c867a440f73b803fc8821a36daa2c15db89"
++    },
++    {
++      "name": "150/lbx/COMBAT.LBX",
++      "size": 1075288,
++      "sha256": "e5d416f4c0a2acf12b6e0973d5725f474e2743c923a306e7ffe33a2ef80a4ac7"
++    },
++    {
++      "name": "150/lbx/DESIGN.LBX",
++      "size": 1005244,
++      "sha256": "61013d9ef78838937cb7c86a7ba31f7454e93599f892683f99d934074e7837ee"
++    },
++    {
++      "name": "150/lbx/INFO.LBX",
++      "size": 231252,
++      "sha256": "799f8d2df6d092ac5c9a1a004ffc73d26ea1fb5b4459d489e2a5c6e0e65d17f9"
++    },
++    {
++      "name": "150/lbx/NEWGAME.LBX",
++      "size": 375616,
++      "sha256": "24f120b27c09b05b48385f41122fe603baec8a2655e67a70f189705bd9c5e2c3"
++    },
++    {
++      "name": "150/lbx/RACESEL.LBX",
++      "size": 2493776,
++      "sha256": "6954ae8e7f1eb1b5c43af68faca61321432f9c99705dbed5b3df41ba39c9ceec"
++    },
++    {
++      "name": "150/lbx/SHIPNAME.LBX",
++      "size": 12804,
++      "sha256": "9c7af13687426296ac92fb8542ace007334898ee11da0c0e4714d17165157492"
++    },
++    {
++      "name": "150/lbx/TECHNAME.LBX",
++      "size": 58451,
++      "sha256": "baa77e7a23a62f25d2f753d16c3b2642473e316706af12d0ff12785928297a5a"
++    },
++    {
++      "name": "150/lbx/de/ESTRINGS.LBX",
++      "size": 23052,
++      "sha256": "31053887c8c1d8f690dbf5d628b82bf35d6af7f376215c8dba6d208321835498"
++    },
++    {
++      "name": "150/lbx/de/EVENTMSE.LBX",
++      "size": 48256,
++      "sha256": "1c6fc167c66b59f2cb38919c8453098c729a3b80360af1bd41f0cfdd2ad551d4"
++    },
++    {
++      "name": "150/lbx/en/ESTRINGS.LBX",
++      "size": 23052,
++      "sha256": "af3fcdfb405a9aa2c7576c4229ac38e7a64d68a7a230e1e578d160f53e910702"
++    },
++    {
++      "name": "150/lbx/en/EVENTMSE.LBX",
++      "size": 48256,
++      "sha256": "515ce4379f5e7abb64942e8281959ad7b208da6d4c4c70d9fa659117097d282c"
++    },
++    {
++      "name": "150/lbx/en/HELP.LBX",
++      "size": 1014281,
++      "sha256": "79002704e45d5ca684cbbd80d52e6f19065b0656f30bc7bc7fd049eccb1161a7"
++    },
++    {
++      "name": "150/lbx/en/HESTRNGS.LBX",
++      "size": 15573,
++      "sha256": "3229f2dc89846fa3acae1d88814455278a2fcc4d4f21d9c933bfab971e9dc720"
++    },
++    {
++      "name": "150/lbx/en/MAINTEXT.LBX",
++      "size": 10504,
++      "sha256": "e17d954304b4aeb6b310716b0c51993b1871b345f5f52d3c06ab7d04375de25d"
++    },
++    {
++      "name": "150/lbx/en/RSTRING0.LBX",
++      "size": 8552,
++      "sha256": "4bd14d1d5244dc9548da024effdf4a016df1b66ce1df0998a429b5045b47e2ff"
++    },
++    {
++      "name": "150/lbx/en/SKILDESC.LBX",
++      "size": 9967,
++      "sha256": "22b553527ec7fe4f675d85a9a8010a42c88d7817f473594147bdfa8e9f2abee1"
++    },
++    {
++      "name": "150/lbx/en/TECHDESC.LBX",
++      "size": 12966,
++      "sha256": "f25bb674ed2f5f832de9d5e936e81734c4514d91405f4fbf5aa54986aafd2fe0"
++    },
++    {
++      "name": "150/lbx/es/ESTRINGS.LBX",
++      "size": 23052,
++      "sha256": "958c17d04a1707bcee62815cd37ece5e024265f4554c2be1ff79caeef2acbb27"
++    },
++    {
++      "name": "150/lbx/es/EVENTMSE.LBX",
++      "size": 48256,
++      "sha256": "f0b1193b5a8318431d29a8777571062c0183b5e2d5133dcc9aa01a25cf05f004"
++    },
++    {
++      "name": "150/lbx/fr/ESTRINGS.LBX",
++      "size": 23052,
++      "sha256": "aa9382e901d9913ca168e743dcb5e561810106ee9fb1f4a2867d4f4b305a7054"
++    },
++    {
++      "name": "150/lbx/fr/EVENTMSE.LBX",
++      "size": 48256,
++      "sha256": "31469206856ca81d2f82e37dae49d83b4b085afcaf459e8c5b0c1d231c678920"
++    },
++    {
++      "name": "150/lbx/it/ESTRINGS.LBX",
++      "size": 23052,
++      "sha256": "b769b2c8a896359995dd5314dc92b3702d73e4bc19c809695e1707ca490385e8"
++    },
++    {
++      "name": "150/lbx/it/EVENTMSE.LBX",
++      "size": 48256,
++      "sha256": "7731310f4c0aa547612d102599695aab1310359e84de3f74ebbb3955fe346823"
++    },
++    {
++      "name": "150/mods/120/SET120.CFG",
++      "size": 6666,
++      "sha256": "507a0277d4b1af5a3e8c17601d90dd5c17aa6cef82b47df1d4e83980772c65c9"
++    },
++    {
++      "name": "150/mods/120/lbx/en/HELP.LBX",
++      "size": 1014281,
++      "sha256": "3635ce886028bb7c5c2d0c916545e79323e2cf95ae708fe2b188225d6e3d91eb"
++    },
++    {
++      "name": "150/mods/150i/150.CFG",
++      "size": 1141,
++      "sha256": "d7244cbbca04f6b9b84dd61bc70638a8bba0011a48fa1cf809a86e6378ee43a1"
++    },
++    {
++      "name": "150/mods/150i/150i.CFG",
++      "size": 2381,
++      "sha256": "3152972ee04ad101c6a5681779fd563e9c74b5c299aa1df0a6f028717aaca675"
++    },
++    {
++      "name": "150/mods/150i/150m.CFG",
++      "size": 2393,
++      "sha256": "e369a3344217eb9f94ddcdb68710bd03c4032663e59e897d64d4123dc2bed29f"
++    },
++    {
++      "name": "150/mods/150i/README_150i.TXT",
++      "size": 4035,
++      "sha256": "c55c87f82c9b9a2503767048ac6ce373c180f1dc933dfa8e547d6d3a369604f9"
++    },
++    {
++      "name": "150/mods/150i/USER.CFG",
++      "size": 226,
++      "sha256": "03ff83671a45628182762ac195b0e4e60aada28cba77631884fdd041c6dd469b"
++    },
++    {
++      "name": "150/mods/150i/cfg/AIRACES.CFG",
++      "size": 14183,
++      "sha256": "449949c9838c04de23124da7d66daadf5cf62891d6fc46122567d2174d0a2d8a"
++    },
++    {
++      "name": "150/mods/150i/cfg/AISHIPS.CFG",
++      "size": 11831,
++      "sha256": "d482bd320f4dd32f3a6a28ef2f05b6abd7ef00806ad591df8b50f1fb477d5398"
++    },
++    {
++      "name": "150/mods/150i/cfg/ANTS.CFG",
++      "size": 4859,
++      "sha256": "59759b08d090234568b6289796f96c918ae2d93af0782c43a1436942211aa614"
++    },
++    {
++      "name": "150/mods/150i/cfg/DEPOSITS.LUA",
++      "size": 652,
++      "sha256": "82a2b228aa2a74df5f2c1fb4faf5b77f160bbdb601540cdbbb810a832c6ca95f"
++    },
++    {
++      "name": "150/mods/150i/cfg/IFACE.CFG",
++      "size": 4447,
++      "sha256": "4b494bfe5e3d459dbc934e8e4fa406bd7fe49e736a1491d839868d94039ad0cf"
++    },
++    {
++      "name": "150/mods/150i/cfg/PICKS_MP.CFG",
++      "size": 2445,
++      "sha256": "466eb4669e4cc84fdfcfa795e846bcad41a5d36e175d4e2908dd0186826413a4"
++    },
++    {
++      "name": "150/mods/150i/cfg/PICKS_SP.CFG",
++      "size": 2445,
++      "sha256": "ff275449a94e79faad3c5df4fac8b9259f8bb8543272e2829793385249b6809c"
++    },
++    {
++      "name": "150/mods/150i/cfg/TECHTREE.CFG",
++      "size": 7439,
++      "sha256": "bc1fd2307901460bf0e06350fe759a52e7630046b874fee0b94906d8b95388a1"
++    },
++    {
++      "name": "150/mods/150i/cfg/TECHTREE.LUA",
++      "size": 1832,
++      "sha256": "7b4993cdc184ae8e49fb121133434de771cc037e0534d1112c29be60e6c9bc5f"
++    },
++    {
++      "name": "150/mods/150i/cfg/TWEAKS.CFG",
++      "size": 21955,
++      "sha256": "fc12ca0ac2e401117bd89c417018777ee09f2f8cfd150e4595a8f0bc43a918c4"
++    },
++    {
++      "name": "150/mods/150i/lbx/KENTEXT.LBX",
++      "size": 51968,
++      "sha256": "05e6756f8a348d9e448579f7f6111d7187add2c425a785d59ca001fdcd004e98"
++    },
++    {
++      "name": "150/mods/150i/lbx/de/HERODATA.LBX",
++      "size": 6005,
++      "sha256": "7c88865bb2bce399491b0d2771c87f23264210ad9befce747df3cccf6af8f4b3"
++    },
++    {
++      "name": "150/mods/150i/lbx/en/HELP.LBX",
++      "size": 1014281,
++      "sha256": "bd0cb84aa524bf8bf0898b6ae6c6140189b5747cb43be086809cb140633ebe88"
++    },
++    {
++      "name": "150/mods/150i/lbx/en/HERODATA.LBX",
++      "size": 6005,
++      "sha256": "2dee0179cdf7c987c44da7d8dfcda1e1c65ace399ae58b9c517923d8daf8926b"
++    },
++    {
++      "name": "150/mods/150i/lbx/en/TECHDESC.LBX",
++      "size": 12966,
++      "sha256": "dfc7077ddbcfc29e42b5576fb1db34d19062102b46cd7d7a5a3a0ea956757217"
++    },
++    {
++      "name": "150/mods/150i/lbx/es/HERODATA.LBX",
++      "size": 6005,
++      "sha256": "e6cbbebb4deaa76e98324b2baec7d83d86ff9a7b7038520df5d976d449984c68"
++    },
++    {
++      "name": "150/mods/150i/lbx/fr/HERODATA.LBX",
++      "size": 6005,
++      "sha256": "4ace232319138c87045976c1ac7469575fac060f43d0482d3e68bb0779400a73"
++    },
++    {
++      "name": "150/mods/150i/lbx/it/HERODATA.LBX",
++      "size": 6005,
++      "sha256": "4f9448d1f3e94751448bc94c44428946edbfeac83968f40de5623497f3707d14"
++    },
++    {
++      "name": "150/mods/ice/ICE-M.CFG",
++      "size": 9208,
++      "sha256": "9dc239f9fe2c25efab77d8661fd0c92496dbb074540139e8c50cfbadc4deafff"
++    },
++    {
++      "name": "150/mods/ice/ICE-X.CFG",
++      "size": 9503,
++      "sha256": "f0f2ec80c7962104e54b4231607683f45e9a4a1fdfde759300078e308002868e"
++    },
++    {
++      "name": "150/mods/ice/README_ICE.TXT",
++      "size": 8510,
++      "sha256": "0c98dd1962617ebbfd55ceb61b4f5e1aaab2fb9ed1cb7cb444cf9134e5f3f550"
++    },
++    {
++      "name": "150/mods/ice/cfg/ICEMOD.CFG",
++      "size": 114541,
++      "sha256": "5e6b57825022603f9eac2144526448f8740d23bb560546f9bf4b0d975b336b9b"
++    },
++    {
++      "name": "150/mods/ice/cfg/ICEMOD.LUA",
++      "size": 2376,
++      "sha256": "13f2ef0c8d86fa94d07f69b15709ba34a6adf08152cf07d86e51e2593c863243"
++    },
++    {
++      "name": "150/mods/ice/lbx/KENTEXT.LBX",
++      "size": 51968,
++      "sha256": "bcd4399246c0b5c89e29febcfde57e0db24d061daceb0ea0b0183db7ab2819c1"
++    },
++    {
++      "name": "150/mods/ice/lbx/en/CREDITS.LBX",
++      "size": 16657,
++      "sha256": "6ee0d0c4fedf77922adb49522617f3e8364291676aaf5a4a55617b765c52e71a"
++    },
++    {
++      "name": "150/mods/ice/lbx/en/ESTRINGS.LBX",
++      "size": 23052,
++      "sha256": "c108b577e738b6bb00e8e2ef8ed878d6f6a8d186e9a2cd219313dae34abab42e"
++    },
++    {
++      "name": "150/mods/ice/lbx/en/HELP.LBX",
++      "size": 1014281,
++      "sha256": "9d86232f14b170b9773ee5e20741da434d3b0b134a4f1f671e9d789e68864cbb"
++    },
++    {
++      "name": "150/mods/ice/lbx/en/HERODATA.LBX",
++      "size": 6005,
++      "sha256": "3487e21ae28f6c81603de8dba72a0d9670744c90eadb7b936bed8993ceb2f49c"
++    },
++    {
++      "name": "150/mods/ice/lbx/en/TECHDESC.LBX",
++      "size": 12966,
++      "sha256": "e0aee94f60cc058a93a6953280ba61e7f49dc08ab98aaf7fb14f9b1d521f63a8"
++    },
++    {
++      "name": "150/mods/maps/150i-MAP.CFG",
++      "size": 2548,
++      "sha256": "a8ca7c7bddfea4437d9d5d1fe42de2459c50d97aafa191ef7b23e9acb72ec6b3"
++    },
++    {
++      "name": "150/mods/maps/150m-MAP.CFG",
++      "size": 2607,
++      "sha256": "282b13f29c6a2a8769d0433b61a14bb3034dd5b90cfb269a3b4bc132f0b8aa37"
++    },
++    {
++      "name": "150/mods/maps/GOODMAP1.CFG",
++      "size": 3775,
++      "sha256": "9d2d15236b13433b93fc666836c26d9ecfa5c6b853e0768f026cf1634ddca0ce"
++    },
++    {
++      "name": "150/mods/maps/GOODMAP2.CFG",
++      "size": 3776,
++      "sha256": "716327f165432271027dc97bbfe0ad0f2d84313a623b10eedc9cc9c214f7ab8b"
++    },
++    {
++      "name": "150/mods/maps/GOODMAP3.CFG",
++      "size": 3754,
++      "sha256": "db4535bc7e3d952af817a1b812a8b3778997a2381deae2ad5989f98899f862c9"
++    },
++    {
++      "name": "150/mods/maps/GOODMAP4.CFG",
++      "size": 3807,
++      "sha256": "1a7ae8e51db0b3effa628f1661523a82712bb48bfa233524a6a4c255fe17ed13"
++    },
++    {
++      "name": "150/mods/maps/GOODMAP5.CFG",
++      "size": 3880,
++      "sha256": "8d178701fad32b0ce0d5811c975bd16b24cc6feb785f35862f1f1944382a0147"
++    },
++    {
++      "name": "150/mods/maps/ICEMAP.CFG",
++      "size": 7852,
++      "sha256": "346df91766880830d7731622ca7d48ef7748cd3baf40f92028c3ba99ca9570d7"
++    },
++    {
++      "name": "150/mods/maps/ICEMAP_M.CFG",
++      "size": 7891,
++      "sha256": "9ae3fd02e86c5c777e82a0d2b8f7377ea8fb116a6e88d1a02b0d7074afbbe520"
++    },
++    {
++      "name": "150/mods/maps/MELEEMAP.CFG",
++      "size": 3348,
++      "sha256": "3441d26f113998ccc74fc6019b1c6ce110f40ba0f9f95e4cb0f9af0b88da1cb3"
++    },
++    {
++      "name": "150/mods/melee/MELEE.CFG",
++      "size": 30243,
++      "sha256": "fff4fad1c3bb8993d076934fa58cb3f8f59dfb331a170f18c09f0885b952aca0"
++    },
++    {
++      "name": "150/mods/mirror/MIRRNOHW.CFG",
++      "size": 336,
++      "sha256": "3c602858c04874aedee1a0eeffd438b4e362bba80afe3c0a35688738995b20f0"
++    },
++    {
++      "name": "150/mods/mirror/MIRRNOHW.LUA",
++      "size": 14726,
++      "sha256": "96c4ad3b5b12a4b9db37807d66469e4464797529a188beae69d12148710384bf"
++    },
++    {
++      "name": "150/mods/mirror/MIRROR.CFG",
++      "size": 268,
++      "sha256": "4f7c156cf2df4c2730c26a1a94ee4558fa54728cb1c9b73072a40d6a45ca1131"
++    },
++    {
++      "name": "150/mods/mirror/MIRROR.LUA",
++      "size": 14592,
++      "sha256": "b180937ddb42a16e1a22bf8c210def5356c2e31bd3181abd700a133762c97118"
++    },
++    {
++      "name": "150/mods/mirror/MIRRORHW.CFG",
++      "size": 309,
++      "sha256": "13325764c99561a874d8eb2c5d023edd62b7f4a22597c2118f4489737ebb6933"
++    },
++    {
++      "name": "150/mods/mirror/MIRRORHW.LUA",
++      "size": 3165,
++      "sha256": "e9a93a894656f93b83538f3b0c5f0acf74dde8d9820d8223f6a92071a2bc462b"
++    },
++    {
++      "name": "150/mods/misc/NOREPORT.CFG",
++      "size": 291,
++      "sha256": "8a39b4b4859f8a04318302fd743b339b4aa5ced1d08347ffa961c23b16482b19"
++    },
++    {
++      "name": "150/mods/randtech/RANDTECH.CFG",
++      "size": 190,
++      "sha256": "a3c82f93f96f04b6ed9c5a3a7784b1ba3fb67c241f1a185977dd1c85008e93fd"
++    },
++    {
++      "name": "150/mods/randtech/RANDTECH.LUA",
++      "size": 5396,
++      "sha256": "9e976f522ea9394e06ac4147a0c80742b8200631d6a498812a3345e1213d84f9"
++    },
++    {
++      "name": "150/mods/randtech/TREELESS.CFG",
++      "size": 189,
++      "sha256": "98c663af21ef353154dd2046612e165cf914ed11401be48d75edd75303d90500"
++    },
++    {
++      "name": "150/mods/vdc/CRYOGEN.LUA",
++      "size": 8443,
++      "sha256": "c730df5fc205ab263cf57334ea8774549c89c48238b159645da345674e370610"
++    },
++    {
++      "name": "150/mods/vdc/ESTRINGS.LBX",
++      "size": 23052,
++      "sha256": "f2fd8acf874eef5876e009b19a1c275c9a3ccc7c86ca9e748beb8546b290ff90"
++    },
++    {
++      "name": "150/mods/vdc/HELP.LBX",
++      "size": 1014281,
++      "sha256": "ac3b0b9f6efb2c514d2555e29dd6d75095d497cd1b7a419f8a52398d6b345464"
++    },
++    {
++      "name": "150/mods/vdc/HERODATA.LBX",
++      "size": 6005,
++      "sha256": "8b36a45b38ca6384161be3f5b39036c044ef949975422a249c667192060b36c0"
++    },
++    {
++      "name": "150/mods/vdc/KENTEXT.LBX",
++      "size": 51968,
++      "sha256": "01ecaed8f9d667e7719fd884e64ff2d390bb2ba6da8a83ef9ad44d5c45de0293"
++    },
++    {
++      "name": "150/mods/vdc/KENTEXT1.LBX",
++      "size": 20144,
++      "sha256": "22a5de228cf148c6c0b427dd34212e526d3ab97f56876f00bfef79d494999aba"
++    },
++    {
++      "name": "150/mods/vdc/MAINTEXT.LBX",
++      "size": 10504,
++      "sha256": "e65508f0c534d54b5357f790580ed2827170f91435aae55448889331201cc6ff"
++    },
++    {
++      "name": "150/mods/vdc/TECHDESC.LBX",
++      "size": 12966,
++      "sha256": "39291bdbcdb95c57de737e978e66a796815e788502bfba78542e9a9377dba862"
++    },
++    {
++      "name": "150/mods/vdc/TECHNAME.LBX",
++      "size": 10654,
++      "sha256": "a0ef32f5b980fe07c9a711d7ea376dcceacb575574c396bd37be8e29b4540ed1"
++    },
++    {
++      "name": "150/mods/vdc/VDCGM3.CFG",
++      "size": 186379,
++      "sha256": "f9c53a4d84dac67c2bf7f9e6262108d717c2871f5877199e6775a5ed38d0d597"
++    },
++    {
++      "name": "150/mods/vdc/VDCGM3_MAP.CFG",
++      "size": 7409,
++      "sha256": "d64d4b609cc2fde328d2a1d8692b77198dacc80628fc2aaad50d03a38c1d96bf"
++    },
++    {
++      "name": "150/mods/vdc/docs/ReadMe_VDC.txt",
++      "size": 190633,
++      "sha256": "c5e9b23bd2e14b4041c4476e5e69d5236019091c0dc8005b132311d5df981ec0"
++    },
++    {
++      "name": "150/mods/vdc/rainbow/RAINBOW.CFG",
++      "size": 3793,
++      "sha256": "60fe45ca546822a01f605c7526937fdc8f24486535e9aef504b481f77b2a4970"
++    },
++    {
++      "name": "150/scripts/main/MAIN0.LUA",
++      "size": 14962,
++      "sha256": "a867b197a235344a2342f99d8464ce683fb3215198e27b784e189bfe22f5acd7"
++    },
++    {
++      "name": "150/scripts/main/MAIN1.LUA",
++      "size": 4613,
++      "sha256": "58e232c08a974c9bd14ef036b61ba4955a6353aafbadb914495b35395b76b791"
++    },
++    {
++      "name": "150/scripts/main/MAIN2.LUA",
++      "size": 13376,
++      "sha256": "d03423cd77e6a03c22d5de8551ff44ba0be57f99ef621e188718fa3262c626df"
++    },
++    {
++      "name": "150/scripts/main/MAIN3.LUA",
++      "size": 17718,
++      "sha256": "b81e6158bed981f32d42119c2314fb3d43db53fe3d6619aa7a8be271f6ff7b23"
++    },
++    {
++      "name": "150/scripts/main/MAIN4.LUA",
++      "size": 26,
++      "sha256": "429ffb285389961db44eb064879cc73a662f5a2e7aca621eb26f6fd630a9e1f9"
++    },
++    {
++      "name": "150/scripts/main/MAIN5.LUA",
++      "size": 26,
++      "sha256": "070c45be8e72dffb654a8a5e07646e04d00d4d5c3b83313abf58b44def5c546a"
++    },
++    {
++      "name": "150/scripts/main/MAIN6.LUA",
++      "size": 26,
++      "sha256": "1640b3f1a86a7e875a1b3aeb1b0388ad89bca06380cc436f19d94dbe62f9faff"
++    },
++    {
++      "name": "150/scripts/main/MAIN7.LUA",
++      "size": 26,
++      "sha256": "aae989cff44611cac0f6bae51fd43730781183f0657cf8cd1de6be1505339b50"
++    },
++    {
++      "name": "150/scripts/main/MAIN8.LUA",
++      "size": 28342,
++      "sha256": "12f4a9f881f1647cb3447f8861a38e5edae6680878849d206f90e152136c8616"
++    },
++    {
++      "name": "150/scripts/main/MAIN9.LUA",
++      "size": 1703,
++      "sha256": "e8bcd58acb5c48c429ac3fd4c84fc4a2706ac1f71b9c7bea0914513456cb76df"
++    },
++    {
++      "name": "CHANGELOG_150.TXT",
++      "size": 81287,
++      "sha256": "72a1998fd26a654cc40ba880d001ad9cba40c3a69123c2520425e019e83ea7a6"
++    },
++    {
++      "name": "ORION150.EXE",
++      "size": 3397817,
++      "sha256": "2db296e052419250d21866f7c23ac2978a33b3c05b451a9516f06599b91c3f5c"
++    },
++    {
++      "name": "ORION2.CFG",
++      "size": 1909,
++      "sha256": "b73369d1f50ae0e28d9ce6ffbbc1307981611bc498f14cfc1f466f17ce68fd41"
++    },
++    {
++      "name": "watch-save10.bat",
++      "size": 1274,
++      "sha256": "1d1e3935f51704c63506e8384d7575a23f72f191cb45458335cae8c03058991a"
++    }
++  ]
++}
+--- a/manager/build.sh
++++ b/manager/build.sh
+@@ -5,5 +5,5 @@
+ for target in windows-amd64 linux-amd64 darwin-amd64 darwin-arm64; do
+  OS=${target%-*}; ARCH=${target#*-}; NAME="moo2-manager-$target"
+  [ "$OS" != windows ] || NAME="$NAME.exe"
+- CGO_ENABLED=0 GOOS="$OS" GOARCH="$ARCH" go build -trimpath -ldflags='-s -w' -o "out/$NAME" .
++ CGO_ENABLED=0 GOOS="$OS" GOARCH="$ARCH" go build -buildvcs=false -trimpath -ldflags='-s -w' -o "out/$NAME" .
+ done
+--- /dev/null
++++ b/manager/build_patch_index.py
+@@ -0,0 +1,15 @@
++"""Generate hashes only, from the exact supported patch. No payload is embedded."""
++import hashlib, json, os, zipfile
++from pathlib import Path
++archive = Path(os.environ['MOO2_PATCH_ZIP'])
++expected = '0ac9151e9cf752ec34b6db998d8b390f48e492d8443e8f1658112b93c7f6a921'
++if hashlib.sha256(archive.read_bytes()).hexdigest() != expected:
++    raise SystemExit('Refusing an unrecognized patch archive')
++prefix = 'MOO2-1.50.26/patch/'
++with zipfile.ZipFile(archive) as z:
++    records = [{'name': n[len(prefix):], 'size': len(b), 'sha256': hashlib.sha256(b).hexdigest()}
++               for n in sorted(z.namelist()) if n.startswith(prefix) and not n.endswith('/')
++               for b in [z.read(n)]]
++(Path(__file__).parent / 'assets/patch-files.json').write_text(
++    json.dumps({'schema': 1, 'edition': 'MOO2-1.50.26', 'files': records}, indent=2) + '\n')
++print(len(records), 'patch file hashes written; no payload copied')
+--- /dev/null
++++ b/manager/config_dependencies.go
+@@ -0,0 +1,197 @@
++package main
++
++import (
++	"errors"
++	"fmt"
++	"os"
++	"path"
++	"strings"
++	"unicode"
++)
++
++// This is a conservative reference scanner, not the game's rules evaluator.
++// Recognize comments, quoted strings, caret escapes and quoted script lists so
++// excluded personal/audio/generated bytes cannot hide behind a static include.
++func configStatements(b []byte) ([][]string, error) {
++	var statements [][]string
++	var tokens []string
++	var word strings.Builder
++	quoted, escaped, comment := false, false, false
++	flush := func() {
++		if word.Len() > 0 {
++			tokens = append(tokens, word.String())
++			word.Reset()
++		}
++	}
++	for _, r := range string(b) {
++		if comment {
++			if r == '\n' {
++				comment = false
++			}
++			continue
++		}
++		if escaped {
++			word.WriteRune(r)
++			escaped = false
++			continue
++		}
++		if r == '^' {
++			escaped = true
++			continue
++		}
++		if r == '"' {
++			quoted = !quoted
++			continue
++		}
++		if quoted {
++			word.WriteRune(r)
++			continue
++		}
++		if r == '#' {
++			flush()
++			comment = true
++			continue
++		}
++		if r == ';' {
++			flush()
++			statements = append(statements, tokens)
++			tokens = nil
++			continue
++		}
++		if r == '=' {
++			flush()
++			tokens = append(tokens, "=")
++			continue
++		}
++		if unicode.IsSpace(r) {
++			flush()
++			continue
++		}
++		word.WriteRune(r)
++	}
++	if quoted || escaped {
++		return nil, errors.New("unsupported unterminated custom configuration string/escape")
++	}
++	flush()
++	if len(tokens) > 0 {
++		statements = append(statements, tokens)
++	}
++	return statements, nil
++}
++func excludedConfigInput(name string) bool {
++	return isRuntimeOutput(name) || (isUserFile(name) && !strings.EqualFold(path.Ext(name), ".cfg"))
++}
++func configReferenceCandidates(current, value string) ([]string, error) {
++	value = strings.TrimPrefix(strings.TrimSpace(value), "?")
++	value = strings.ReplaceAll(value, `\`, "/")
++	if value == "0" || value == "" {
++		return nil, nil
++	}
++	if strings.Contains(value, ":") {
++		return nil, errors.New("custom config drive/device paths are not supported")
++	}
++	values := []string{value}
++	for key, replacements := range map[string][]string{"$LANG$": {"en", "de", "fr", "es", "it"}, "$LANGUAGE$": {"English", "German", "French", "Spanish", "Italian"}, "$LANG_ID$": {"0", "1", "2", "3", "4"}, "$ID$": {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}} {
++		var next []string
++		for _, v := range values {
++			if strings.Contains(v, key) {
++				for _, r := range replacements {
++					next = append(next, strings.ReplaceAll(v, key, r))
++				}
++			} else {
++				next = append(next, v)
++			}
++		}
++		values = next
++	}
++	out := []string{}
++	for _, v := range values {
++		// Ordinary names are game-root-relative. Conservatively check both
++		// documented current-file and current-directory interpretations of '..'.
++		if strings.HasPrefix(v, "../") {
++			out = append(out, path.Clean(path.Join(path.Dir(current), v)), path.Clean(path.Join(path.Dir(current), strings.TrimPrefix(v, "../"))))
++		} else {
++			out = append(out, strings.TrimPrefix(path.Clean("/"+v), "/"))
++		}
++	}
++	return out, nil
++}
++func validateConfigDependencies(files map[string]string) error {
++	queue := []string{}
++	for name := range files {
++		if isUserFile(name) && strings.EqualFold(path.Ext(name), ".cfg") {
++			queue = append(queue, name)
++		}
++	}
++	seen := map[string]bool{}
++	for len(queue) > 0 {
++		name := queue[0]
++		queue = queue[1:]
++		name = strings.ToUpper(name)
++		if seen[name] {
++			continue
++		}
++		seen[name] = true
++		file, ok := files[name]
++		if !ok {
++			continue
++		}
++		info, e := os.Stat(file)
++		if e != nil {
++			return e
++		}
++		if info.Size() > 4<<20 {
++			return fmt.Errorf("custom configuration input exceeds 4 MiB: %s", name)
++		}
++		b, e := os.ReadFile(file)
++		if e != nil {
++			return e
++		}
++		statements, e := configStatements(b)
++		if e != nil {
++			return fmt.Errorf("%s: %w", name, e)
++		}
++		for _, tokens := range statements {
++			if len(tokens) < 2 {
++				continue
++			}
++			include := strings.EqualFold(tokens[0], "include")
++			refs := []string{}
++			if include {
++				refs = append(refs, tokens[1:]...)
++			} else {
++				for i, tok := range tokens {
++					if tok != "=" || i == 0 || i+1 >= len(tokens) {
++						continue
++					}
++					key := strings.ToLower(tokens[i-1])
++					if strings.HasSuffix(key, ".lbx") || strings.HasSuffix(key, ".lua") || strings.HasSuffix(key, ".cfg") || strings.HasSuffix(key, "script") {
++						for _, v := range tokens[i+1:] {
++							refs = append(refs, strings.Split(v, ";")...)
++						}
++					}
++				}
++			}
++			for _, ref := range refs {
++				candidates, e := configReferenceCandidates(name, ref)
++				if e != nil {
++					return fmt.Errorf("%s: %w", name, e)
++				}
++				for _, target := range candidates {
++					if excludedConfigInput(target) {
++						return fmt.Errorf("custom configuration %s references excluded save/audio/generated file %s; use a separate configuration/data file", name, target)
++					}
++					if include {
++						queue = append(queue, target)
++					}
++				}
++			}
++		}
++	}
++	return nil
++}
++
++// Focused single-file adapter for the reference-scanner unit tests.
++func validateEditableConfigReferences(name, file string) error {
++	return validateConfigDependencies(map[string]string{strings.ToUpper(name): file})
++}
+--- /dev/null
++++ b/manager/config_dependencies_test.go
+@@ -0,0 +1,75 @@
++package main
++
++import (
++	"os"
++	"path/filepath"
++	"reflect"
++	"strings"
++	"testing"
++)
++
++func TestConfigStatementsPreserveReferences(t *testing.T) {
++	got, err := configStatements([]byte("# ignored include \\EXTRACT.CFG;\ninclude \"\\150\\build\\custom.txt\"; pregame_script = \"first.lua;second.lua\"; value = \"caret ^\" quote\";"))
++	want := [][]string{{"include", `\150\build\custom.txt`}, {"pregame_script", "=", "first.lua;second.lua"}, {"value", "=", `caret " quote`}}
++	if err != nil || !reflect.DeepEqual(got, want) {
++		t.Fatalf("got %#v, %v; want %#v", got, err, want)
++	}
++	for _, input := range []string{`include "unfinished;`, "include unfinished^"} {
++		if _, err := configStatements([]byte(input)); err == nil {
++			t.Fatalf("accepted unterminated input %q", input)
++		}
++	}
++}
++
++func TestConfigDependenciesFollowNestedNonCFGIncludes(t *testing.T) {
++	root := t.TempDir()
++	files := map[string]string{}
++	write := func(name, contents string) {
++		t.Helper()
++		file := filepath.Join(root, filepath.FromSlash(name))
++		if err := os.MkdirAll(filepath.Dir(file), 0700); err != nil {
++			t.Fatal(err)
++		}
++		if err := os.WriteFile(file, []byte(contents), 0600); err != nil {
++			t.Fatal(err)
++		}
++		files[strings.ToUpper(name)] = file
++	}
++	write("150/USER.CFG", `include "\150\build\EXTRA.TXT";`)
++	write("150/build/EXTRA.TXT", `include \150\USER.CFG; # A cycle must terminate.`)
++	if err := validateConfigDependencies(files); err != nil {
++		t.Fatal(err)
++	}
++	write("150/build/EXTRA.TXT", `include \ORION2.LOG;`)
++	if err := validateConfigDependencies(files); err == nil {
++		t.Fatal("indirect excluded runtime output accepted")
++	}
++	write("150/build/EXTRA.TXT", `pregame_script = "safe.lua;\SAVE1.GAM";`)
++	if err := validateConfigDependencies(files); err == nil {
++		t.Fatal("excluded input inside quoted script list accepted")
++	}
++	write("150/build/EXTRA.TXT", strings.Repeat("#", (4<<20)+1))
++	if err := validateConfigDependencies(files); err == nil {
++		t.Fatal("oversized included input accepted")
++	}
++}
++
++func TestConfigReferencesExpandKnownMacros(t *testing.T) {
++	got, err := configReferenceCandidates("150/USER.CFG", `\SAVE$LANG_ID$.GAM`)
++	if err != nil || len(got) != 5 {
++		t.Fatal(got, err)
++	}
++	for _, name := range got {
++		if !excludedConfigInput(name) {
++			t.Fatalf("expanded save not recognized: %s", name)
++		}
++	}
++	if _, err := configReferenceCandidates("150/USER.CFG", `C:\private.cfg`); err == nil {
++		t.Fatal("drive path accepted")
++	}
++	for _, value := range []string{"", "0"} {
++		if got, err := configReferenceCandidates("150/USER.CFG", value); err != nil || len(got) != 0 {
++			t.Fatal(got, err)
++		}
++	}
++}
+--- a/manager/fs.go
++++ b/manager/fs.go
+@@ -189,7 +189,7 @@
+ 	return nil
+ }
+ func isPersonalSeed(n string) bool {
+-	return !strings.Contains(n, "/") && (strings.HasSuffix(n, ".gam") || strings.HasSuffix(n, ".rac") || n == "hof.m2" || n == "mox.set")
++	return !strings.Contains(n, "/") && (strings.HasSuffix(n, ".gam") || strings.HasSuffix(n, ".rac") || n == "hof.m2" || n == "mox.set" || n == "150.set" || n == "new150.set")
+ }
+ func isUserFile(n string) bool {
+ 	n = strings.ToLower(filepath.ToSlash(n))
+--- a/manager/import_game.go
++++ b/manager/import_game.go
+@@ -365,7 +365,8 @@
+ 		return verifyEditionManifest(mf, game)
+ 	}
+ 	if mf.SourceBaseKind == "" && mf.SourceBase == BaseHash {
+-		return nil
++		// Legacy ZIP provenance is not a substitute for installed-file identity.
++		return verifyPinnedBase(game, mf.Files, baseIndex().Files)
+ 	}
+ 	if mf.SourceBaseKind != "fingerprinted-dos-131" || !regexp.MustCompile(`^[a-f0-9]{64}$`).MatchString(mf.SourceBase) {
+ 		return errors.New("unrecognized source fingerprint")
+--- a/manager/import_game_test.go
++++ b/manager/import_game_test.go
+@@ -144,7 +144,7 @@
+ 			t.Fatal("unknown source accepted")
+ 		}
+ 	}
+-	if e := verifyBaseIdentity(Manifest{SourceBase: BaseHash}, t.TempDir()); e != nil {
+-		t.Fatal("historical source rejected", e)
++	if e := verifyBaseIdentity(Manifest{SourceBase: BaseHash}, t.TempDir()); e == nil {
++		t.Fatal("historical archive provenance accepted without installed files")
+ 	}
+ }
+--- /dev/null
++++ b/manager/integrity_regression_test.go
+@@ -0,0 +1,273 @@
++package main
++
++import (
++	"os"
++	"path/filepath"
++	"testing"
++)
++
++// The fixture stays private. Copy it before testing: never alter an owned source
++// or a prepared environment another test/actual emulator may be using.
++func communityFixtureCopy(t *testing.T) string {
++	t.Helper()
++	source := os.Getenv("MOO2_COMMUNITY_FIXTURE")
++	if source == "" {
++		t.Skip("private prepared Community fixture not supplied")
++	}
++	dir := t.TempDir()
++	if e := walkRegular(source, func(n, src string) error { return copyFile(src, filepath.Join(dir, filepath.FromSlash(n))) }); e != nil {
++		t.Fatal(e)
++	}
++	v, e := verifyDir(dir)
++	if e != nil || !v.OK {
++		t.Fatalf("initial fixture invalid: %+v, %v", v, e)
++	}
++	return dir
++}
++func TestAddedEditableConfigurationChangesFingerprint(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	initial, _ := verifyDir(dir)
++	file := filepath.Join(dir, "game", "150", "build", "CUSTOM.CFG")
++	if e := os.WriteFile(file, []byte("# first custom config\n"), 0600); e != nil {
++		t.Fatal(e)
++	}
++	first, e := verifyDir(dir)
++	if e != nil || !first.OK {
++		t.Fatal(first, e)
++	}
++	if first.Fingerprint == initial.Fingerprint {
++		t.Error("new editable CFG omitted from compatibility fingerprint")
++	}
++	if e = os.WriteFile(file, []byte("# changed custom config\n"), 0600); e != nil {
++		t.Fatal(e)
++	}
++	second, e := verifyDir(dir)
++	if e != nil || !second.OK {
++		t.Fatal(second, e)
++	}
++	if first.Fingerprint == second.Fingerprint {
++		t.Error("changed editable CFG omitted from compatibility fingerprint")
++	}
++	if e = os.Remove(file); e != nil {
++		t.Fatal(e)
++	}
++	final, e := verifyDir(dir)
++	if e != nil || final.Fingerprint != initial.Fingerprint {
++		t.Fatal("deleting optional config did not restore identity", final, e)
++	}
++}
++func TestMissingSelectedConfigurationCannotHideInManifest(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	var mf Manifest
++	if e := readWorkspaceManifest(dir, &mf); e != nil {
++		t.Fatal(e)
++	}
++	delete(mf.Files, "150/ENABLE.CFG")
++	if e := atomicJSON(filepath.Join(dir, "manifest.json"), mf); e != nil {
++		t.Fatal(e)
++	}
++	if e := os.Remove(filepath.Join(dir, "game", "150", "ENABLE.CFG")); e != nil {
++		t.Fatal(e)
++	}
++	v, e := verifyDir(dir)
++	if e == nil && v.OK {
++		t.Fatal("missing selected-mod config accepted after local receipt edit")
++	}
++}
++func TestPatchCodeCannotBeBlessedByLocalManifest(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	var mf Manifest
++	if e := readWorkspaceManifest(dir, &mf); e != nil {
++		t.Fatal(e)
++	}
++	name := "150/scripts/main/MAIN0.LUA"
++	file := filepath.Join(dir, "game", filepath.FromSlash(name))
++	b := []byte("-- changed local script\n")
++	if e := os.WriteFile(file, b, 0600); e != nil {
++		t.Fatal(e)
++	}
++	h, e := hashFile(file)
++	if e != nil {
++		t.Fatal(e)
++	}
++	mf.Files[name] = FileRecord{SHA256: h, Size: int64(len(b))}
++	if e := atomicJSON(filepath.Join(dir, "manifest.json"), mf); e != nil {
++		t.Fatal(e)
++	}
++	v, e := verifyDir(dir)
++	if e == nil && v.OK {
++		t.Fatal("modified patch code accepted after local receipt edit")
++	}
++}
++
++func TestLegacyReceiptStillRequiresCompiledBaseIdentity(t *testing.T) {
++	mf := Manifest{Schema: 1, SourceBase: BaseHash, Files: map[string]FileRecord{}}
++	if e := verifyBaseIdentity(mf, t.TempDir()); e == nil {
++		t.Fatal("legacy archive hash bypassed installed-file identity")
++	}
++}
++func TestPatchInventoryContainsRequiredCodeAndConfig(t *testing.T) {
++	index := patchIndex()
++	if len(index.Files) != 128 {
++		t.Fatal("unexpected patch inventory size", len(index.Files))
++	}
++	required := map[string]bool{"ORION150.EXE": false, "ORION2.CFG": false, "150/ENABLE.CFG": false, "150/USER.CFG": false, "150/scripts/main/MAIN0.LUA": false}
++	seen := map[string]bool{}
++	for _, p := range index.Files {
++		if _, e := safeRel(p.Name); e != nil || seen[p.Name] || len(p.SHA256) != 64 || p.Size < 0 {
++			t.Fatal("invalid patch pin", p)
++		}
++		seen[p.Name] = true
++		if _, ok := required[p.Name]; ok {
++			required[p.Name] = true
++		}
++	}
++	for name, found := range required {
++		if !found {
++			t.Fatal("required patch pin missing", name)
++		}
++	}
++}
++
++func TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	game := filepath.Join(dir, "game")
++	var mf Manifest
++	if e := readWorkspaceManifest(dir, &mf); e != nil {
++		t.Fatal(e)
++	}
++	if e := copyFile(filepath.Join(game, "ORION131.EXE"), filepath.Join(game, "ORION2.EXE")); e != nil {
++		t.Fatal(e)
++	}
++	for _, r := range baseIndex().Files {
++		mf.Files[r.Name] = FileRecord{SHA256: r.SHA256, Size: r.Size, Mutable: isUserFile(r.Name)}
++	}
++	mf.Schema = 1
++	mf.SourceBaseKind = ""
++	mf.SourceBase = BaseHash
++	if e := verifyBaseIdentity(mf, game); e != nil {
++		t.Fatal("valid legacy bytes must remain supported", e)
++	}
++	b := []byte("changed base data")
++	file := filepath.Join(game, "GAME.LBX")
++	if e := os.WriteFile(file, b, 0600); e != nil {
++		t.Fatal(e)
++	}
++	h, e := hashFile(file)
++	if e != nil {
++		t.Fatal(e)
++	}
++	mf.Files["GAME.LBX"] = FileRecord{SHA256: h, Size: int64(len(b))}
++	if e = verifyBaseIdentity(mf, game); e == nil {
++		t.Fatal("forged legacy receipt blessed changed base data")
++	}
++}
++
++func TestGeneratedGameOutputsDoNotBlockRelaunch(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	initial, _ := verifyDir(dir)
++	for _, name := range []string{"EXTRACT.CFG", "ORION2.LOG", "150.SET", "NEW150.SET", "SAVE10.GAM"} {
++		if e := os.WriteFile(filepath.Join(dir, "game", name), []byte("runtime-output fixture, not a real save"), 0600); e != nil {
++			t.Fatal(e)
++		}
++	}
++	after, e := verifyDir(dir)
++	if e != nil || !after.OK || after.Fingerprint != initial.Fingerprint {
++		t.Fatal("runtime outputs changed compatibility or blocked verification", after, e)
++	}
++	preserved := t.TempDir()
++	if e = preserveUserState(filepath.Join(dir, "game"), preserved, false); e != nil {
++		t.Fatal(e)
++	}
++	for _, name := range []string{"150.SET", "NEW150.SET", "SAVE10.GAM"} {
++		if !exists(filepath.Join(preserved, name)) {
++			t.Fatal("personal state not retained", name)
++		}
++	}
++	for _, name := range []string{"EXTRACT.CFG", "ORION2.LOG"} {
++		if exists(filepath.Join(preserved, name)) {
++			t.Fatal("generated output incorrectly migrated", name)
++		}
++	}
++}
++func TestUnknownExtensionConfigChangesFingerprint(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	cfg := filepath.Join(dir, "game", "150", "USER.CFG")
++	if e := os.WriteFile(cfg, []byte("include \\150\\build\\EXTRA.TXT;\n"), 0600); e != nil {
++		t.Fatal(e)
++	}
++	extra := filepath.Join(dir, "game", "150", "build", "EXTRA.TXT")
++	if e := os.WriteFile(extra, []byte("ship_initiative = 0;\n"), 0600); e != nil {
++		t.Fatal(e)
++	}
++	first, e := verifyDir(dir)
++	if e != nil || !first.OK {
++		t.Fatal(first, e)
++	}
++	if e = os.WriteFile(extra, []byte("ship_initiative = 1;\n"), 0600); e != nil {
++		t.Fatal(e)
++	}
++	second, e := verifyDir(dir)
++	if e != nil || !second.OK || first.Fingerprint == second.Fingerprint {
++		t.Fatal("extra TXT config bytes missing from identity", second, e)
++	}
++}
++func TestUnknownCodeCannotBeAddedToReceipt(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	var mf Manifest
++	if e := readWorkspaceManifest(dir, &mf); e != nil {
++		t.Fatal(e)
++	}
++	name := "150/scripts/main/EXTRA.LUA"
++	file := filepath.Join(dir, "game", filepath.FromSlash(name))
++	b := []byte("-- unsupported extra code\n")
++	if e := os.WriteFile(file, b, 0600); e != nil {
++		t.Fatal(e)
++	}
++	h, _ := hashFile(file)
++	mf.Files[name] = FileRecord{SHA256: h, Size: int64(len(b))}
++	if e := atomicJSON(filepath.Join(dir, "manifest.json"), mf); e != nil {
++		t.Fatal(e)
++	}
++	v, e := verifyDir(dir)
++	if e == nil && v.OK {
++		t.Fatal("local receipt blessed added code")
++	}
++}
++func TestForgedSelectionReceiptRejected(t *testing.T) {
++	dir := communityFixtureCopy(t)
++	var mf Manifest
++	if e := readWorkspaceManifest(dir, &mf); e != nil {
++		t.Fatal(e)
++	}
++	other := mf.Profile
++	other.Core = "150i"
++	resolved, e := resolve(other)
++	if e != nil {
++		t.Fatal(e)
++	}
++	mf.Resolution.Fingerprint = resolved.Fingerprint
++	if e = atomicJSON(filepath.Join(dir, "manifest.json"), mf); e != nil {
++		t.Fatal(e)
++	}
++	v, e := verifyDir(dir)
++	if e == nil && v.OK {
++		t.Fatal("forged resolution selected unprepared ruleset")
++	}
++}
++func TestExcludedOutputsCannotBeCustomInputs(t *testing.T) {
++	for _, line := range []string{`include \EXTRACT.CFG;`, `include ?..\EXTRACT.CFG;`, `include \SAVE1.GAM;`, `include \150.SET;`, `pregame_script = \ORION2.LOG;`, `main.lua = \MOX.SET;`, `newgame_postprocessor_script = \NEW150.SET;`, `sound.lbx = \SOUND.LBX;`} {
++		t.Run(line, func(t *testing.T) {
++			file := filepath.Join(t.TempDir(), "USER.CFG")
++			os.WriteFile(file, []byte(line), 0600)
++			if e := validateEditableConfigReferences("150/USER.CFG", file); e == nil {
++				t.Fatal("excluded input accepted", line)
++			}
++		})
++	}
++	file := filepath.Join(t.TempDir(), "USER.CFG")
++	os.WriteFile(file, []byte("# include \\EXTRACT.CFG; ignored comment\ninclude \\150\\build\\EXTRA.TXT;\n"), 0600)
++	if e := validateEditableConfigReferences("150/USER.CFG", file); e != nil {
++		t.Fatal(e)
++	}
++}
+--- a/manager/main.go
++++ b/manager/main.go
+@@ -8,7 +8,6 @@
+ 	"os/exec"
+ 	"path/filepath"
+ 	"runtime"
+-	"time"
+ )
+ 
+ func openBrowser(u string) error {
+@@ -88,15 +87,7 @@
+ 			v, e = m.checkDopefish()
+ 			if e == nil {
+ 				fmt.Println(encode(v))
+-				for {
+-					m.mu.Lock()
+-					running := m.running != nil
+-					m.mu.Unlock()
+-					if !running {
+-						break
+-					}
+-					time.Sleep(100 * time.Millisecond)
+-				}
++				e = m.waitForRuntime()
+ 			}
+ 		case "prepare-play":
+ 			var p Profile
+@@ -128,15 +119,7 @@
+ 				}
+ 			}
+ 			if e == nil {
+-				for {
+-					m.mu.Lock()
+-					running := m.running != nil
+-					m.mu.Unlock()
+-					if !running {
+-						break
+-					}
+-					time.Sleep(100 * time.Millisecond)
+-				}
++				e = m.waitForRuntime()
+ 			}
+ 		case "prepare":
+ 			var p Profile
+--- a/manager/manager.go
++++ b/manager/manager.go
+@@ -64,6 +64,8 @@
+ 	running        *exec.Cmd
+ 	runningProfile string
+ 	runningKind    string
++	runtimeDone    chan struct{}
++	runtimeError   error
+ 	uiMu           sync.Mutex
+ 	lastExit       string
+ }
+@@ -408,15 +410,40 @@
+ 	if e != nil {
+ 		return v, e
+ 	}
++	if mf.Resolution.Fingerprint != resolution.Fingerprint {
++		return v, errors.New("stored selection fingerprint differs from prepared profile")
++	}
+ 	if mf.Profile.Engine == "1.50.26" && mf.SourcePatch != PatchHash {
+ 		return v, errors.New("unrecognized patch fingerprint")
+ 	}
+ 	game := filepath.Join(dir, "game")
++	if mf.Schema >= 3 {
++		want, _ := resources.ReadFile("assets/harness/ORIONCD.INI")
++		got, err := os.ReadFile(filepath.Join(game, "ORIONCD.INI"))
++		if err != nil || string(got) != string(want) {
++			return v, errors.New("generated ORIONCD.INI differs from harness contract")
++		}
++	}
+ 	if e = verifyBaseIdentity(mf, game); e != nil {
+ 		return v, e
+ 	}
++	if mf.Profile.Engine == "1.50.26" {
++		if e = verifyPatchIdentity(mf, game, resolution); e != nil {
++			return v, e
++		}
++	}
++	allowed := compiledWorkspaceFiles(mf)
+ 	seen := map[string]bool{}
++	cfgSet := map[string]bool{}
++	extraFiles := map[string]string{}
++	actualFiles := map[string]string{}
+ 	for n, rec := range mf.Files {
++		if isRuntimeOutput(n) {
++			continue
++		}
++		if strings.EqualFold(filepath.Ext(n), ".cfg") {
++			cfgSet[n] = true
++		}
+ 		rel, e := safeRel(n)
+ 		if e != nil {
+ 			return v, e
+@@ -443,6 +470,23 @@
+ 		seen[n] = true
+ 	}
+ 	e = walkRegular(game, func(n, f string) error {
++		actualFiles[strings.ToUpper(n)] = f
++		if isRuntimeOutput(n) {
++			return nil
++		}
++		if !allowed[n] && !isUserFile(n) {
++			if protectedContent(n) {
++				v.Bad = append(v.Bad, n+" (outside compiled file inventory)")
++			}
++			h, e := hashFile(f)
++			if e != nil {
++				return e
++			}
++			extraFiles[n] = h
++		}
++		if strings.EqualFold(filepath.Ext(n), ".cfg") {
++			cfgSet[n] = true
++		}
+ 		if seen[n] {
+ 			return nil
+ 		}
+@@ -458,6 +502,11 @@
+ 	})
+ 	if e != nil {
+ 		return v, e
++	}
++	if mf.Profile.Engine == "1.50.26" {
++		if e = validateConfigDependencies(actualFiles); e != nil {
++			return v, e
++		}
+ 	}
+ 	exe, want := "ORION2.EXE", BaseEngineHash
+ 	if mf.Profile.Engine == "1.2" {
+@@ -485,10 +534,8 @@
+ 	h := sha256.New()
+ 	h.Write([]byte(resolution.Fingerprint))
+ 	cfgNames := []string{}
+-	for n := range mf.Files {
+-		if strings.EqualFold(filepath.Ext(n), ".cfg") {
+-			cfgNames = append(cfgNames, n)
+-		}
++	for n := range cfgSet {
++		cfgNames = append(cfgNames, n)
+ 	}
+ 	sort.Strings(cfgNames)
+ 	for _, n := range cfgNames {
+@@ -519,6 +566,17 @@
+ 		h.Write([]byte(mf.Files[n].SHA256))
+ 		h.Write([]byte{0})
+ 	}
++	extraNames := []string{}
++	for n := range extraFiles {
++		extraNames = append(extraNames, n)
++	}
++	sort.Strings(extraNames)
++	for _, n := range extraNames {
++		h.Write([]byte("extra:" + strings.ToUpper(n)))
++		h.Write([]byte{0})
++		h.Write([]byte(extraFiles[n]))
++		h.Write([]byte{0})
++	}
+ 	v.Fingerprint = hex.EncodeToString(h.Sum(nil))
+ 	sort.Strings(v.Bad)
+ 	sort.Strings(v.UserChanges)
+--- a/manager/network_diagnostics.go
++++ b/manager/network_diagnostics.go
+@@ -127,11 +127,14 @@
+ 		return nil, errors.New("close the game or previous network check first")
+ 	}
+ 	if e = cmd.Start(); e != nil {
++		_ = recordProcessStartFailure(filepath.Join(m.Data, "logs", "last-network-check.json"), record, e)
+ 		m.mu.Unlock()
+ 		logfile.Close()
+ 		return nil, fmt.Errorf("DOSBox diagnostic failed to start: %w", e)
+ 	}
+ 	m.running = cmd
++	m.runtimeDone = make(chan struct{})
++	m.runtimeError = nil
+ 	m.runningProfile = "Dopefish connection check"
+ 	m.runningKind = "network-check"
+ 	m.lastExit = ""
+@@ -139,8 +142,11 @@
+ 	go func() {
+ 		e := cmd.Wait()
+ 		logfile.Close()
++		recordError := recordProcessExit(filepath.Join(m.Data, "logs", "last-network-check.json"), record, e)
+ 		m.mu.Lock()
+ 		defer m.mu.Unlock()
++		m.runtimeError = e
++		defer close(m.runtimeDone)
+ 		m.running = nil
+ 		m.runningProfile = ""
+ 		m.runningKind = ""
+@@ -148,6 +154,9 @@
+ 		if e != nil {
+ 			m.lastExit = "Network diagnostic process failed: " + e.Error() + ". Inspect " + logPath
+ 		}
++		if recordError != nil {
++			m.lastExit += "; could not save process result: " + recordError.Error()
++		}
+ 	}()
+ 	return record, nil
+ }
+--- a/manager/network_diagnostics_test.go
++++ b/manager/network_diagnostics_test.go
+@@ -3,6 +3,7 @@
+ import (
+ 	"os"
+ 	"path/filepath"
++	"runtime"
+ 	"strings"
+ 	"testing"
+ )
+@@ -69,3 +70,52 @@
+ 		t.Fatal(r, e)
+ 	}
+ }
++
++func TestRuntimeCompletionDistinguishesProcessFailure(t *testing.T) {
++	if runtime.GOOS == "windows" {
++		t.Skip("Unix process fixture")
++	}
++	for _, code := range []string{"0", "47"} {
++		t.Run(code, func(t *testing.T) {
++			root := t.TempDir()
++			exe := filepath.Join(root, "dosbox")
++			if e := os.WriteFile(exe, []byte("#!/bin/sh\n# Explicit process test double; no DOSBox or connection\nexit "+code+"\n"), 0700); e != nil {
++				t.Fatal(e)
++			}
++			m, e := newManager(root, filepath.Join(root, "userdata"))
++			if e != nil {
++				t.Fatal(e)
++			}
++			if e = atomicJSON(filepath.Join(m.Data, "settings.json"), Settings{exe}); e != nil {
++				t.Fatal(e)
++			}
++			if _, e = m.checkDopefish(); e != nil {
++				t.Fatal(e)
++			}
++			e = m.waitForRuntime()
++			if (e == nil) != (code == "0") {
++				t.Fatalf("runtime exit %s: %v", code, e)
++			}
++			var record map[string]any
++			if e = readJSON(filepath.Join(m.Data, "logs", "last-network-check.json"), &record); e != nil {
++				t.Fatal(e)
++			}
++			expected := float64(0)
++			if code == "47" {
++				expected = 47
++			}
++			if record["process_exit_code"] != expected || record["process_exited"] != true {
++				t.Fatal(record)
++			}
++			if record["connection_verified"] != false || record["game_started"] != false {
++				t.Fatal("invented connectivity", record)
++			}
++			m.mu.Lock()
++			running := m.running != nil
++			m.mu.Unlock()
++			if running {
++				t.Fatal("process completion did not release gate")
++			}
++		})
++	}
++}
+--- /dev/null
++++ b/manager/patch_integrity.go
+@@ -0,0 +1,97 @@
++package main
++
++import (
++	"crypto/sha256"
++	"encoding/hex"
++	"encoding/json"
++	"fmt"
++	"os"
++	"path/filepath"
++	"strings"
++)
++
++func patchIndex() BaseIndex {
++	b, e := resources.ReadFile("assets/patch-files.json")
++	if e != nil {
++		panic(e)
++	}
++	var index BaseIndex
++	if e = json.Unmarshal(b, &index); e != nil || index.Schema != 1 {
++		panic("invalid compiled patch inventory")
++	}
++	return index
++}
++
++// A writable workspace receipt cannot bless different scripts/rulesets or omit
++// required files. Generated selection and explicitly editable CFGs stay distinct.
++func verifyPatchIdentity(mf Manifest, game string, resolution Resolution) error {
++	for _, pin := range patchIndex().Files {
++		expected := pin
++		if pin.Name == "150/ENABLE.CFG" {
++			sum := sha256.Sum256([]byte(resolution.Config))
++			expected.SHA256 = hex.EncodeToString(sum[:])
++			expected.Size = int64(len(resolution.Config))
++		}
++		rec, ok := mf.Files[pin.Name]
++		if !ok {
++			return fmt.Errorf("required patch file absent from manifest: %s", pin.Name)
++		}
++		file := filepath.Join(game, filepath.FromSlash(pin.Name))
++		if e := noSymlinkAncestors(file); e != nil {
++			return e
++		}
++		if e := regularFile(file); e != nil {
++			return fmt.Errorf("required patch file missing: %s: %w", pin.Name, e)
++		}
++		if isUserFile(pin.Name) {
++			continue
++		}
++		if rec.SHA256 != expected.SHA256 || rec.Size != expected.Size {
++			return fmt.Errorf("patch file identity differs from supported recipe: %s", pin.Name)
++		}
++		if e := requireHash(file, expected.SHA256); e != nil {
++			return fmt.Errorf("patch file differs from supported recipe: %s: %w", pin.Name, e)
++		}
++	}
++	// Keep this explicit: selected-mod verification must not depend on a local
++	// receipt enumerating ENABLE.CFG, even if inventories evolve later.
++	b, e := os.ReadFile(filepath.Join(game, "150", "ENABLE.CFG"))
++	if e != nil || string(b) != resolution.Config {
++		return fmt.Errorf("selected mods configuration missing or changed")
++	}
++	return nil
++}
++
++func compiledWorkspaceFiles(mf Manifest) map[string]bool {
++	records := baseIndex().Files
++	if mf.Schema == 2 || mf.Schema == 3 {
++		edition, e := editionByID(strings.TrimPrefix(mf.SourceBaseKind, "known-edition-v2:"))
++		if e == nil {
++			records = expectedBaseFiles(edition, mf.Profile.Engine)
++			if mf.Schema >= 3 {
++				records = normalizedBaseFiles(edition, mf.Profile.Engine)
++			}
++		}
++	}
++	allowed := map[string]bool{"DIG.INI": true, "MDI.INI": true, "ORIONCD.INI": true}
++	for _, r := range records {
++		allowed[r.Name] = true
++	}
++	if mf.Profile.Engine == "1.50.26" {
++		for _, r := range patchIndex().Files {
++			allowed[r.Name] = true
++		}
++	}
++	return allowed
++}
++func isRuntimeOutput(name string) bool {
++	name = strings.ToLower(filepath.ToSlash(name))
++	return name == "extract.cfg" || name == "orion2.log"
++}
++func protectedContent(name string) bool {
++	switch strings.ToLower(filepath.Ext(name)) {
++	case ".exe", ".com", ".dll", ".lbx", ".lua", ".cfg", ".conf", ".bat":
++		return true
++	}
++	return false
++}
+--- /dev/null
++++ b/manager/process_result.go
+@@ -0,0 +1,56 @@
++package main
++
++import (
++	"fmt"
++	"os/exec"
++	"time"
++)
++
++// Startup and process completion are separate facts. Neither certifies that
++// DOSBox connected, MOO2 displayed correctly, or a multiplayer turn succeeded.
++func recordProcessExit(path string, initial map[string]any, processError error) error {
++	result := make(map[string]any, len(initial)+5)
++	for k, v := range initial {
++		result[k] = v
++	}
++	result["process_exited"] = true
++	result["finished_at"] = time.Now().UTC().Format(time.RFC3339)
++	result["process_exit_code"] = 0
++	result["status"] = "Process exited normally; game and IPX success still require observation"
++	if processError != nil {
++		result["process_exit_code"] = -1
++		if exit, ok := processError.(*exec.ExitError); ok {
++			result["process_exit_code"] = exit.ExitCode()
++		}
++		result["process_error"] = processError.Error()
++		result["status"] = "Runtime process failed; inspect the process log"
++	}
++	return atomicJSON(path, result)
++}
++func (m *Manager) waitForRuntime() error {
++	m.mu.Lock()
++	done := m.runtimeDone
++	m.mu.Unlock()
++	if done == nil {
++		return nil
++	}
++	<-done
++	m.mu.Lock()
++	defer m.mu.Unlock()
++	if m.runtimeError != nil {
++		return fmt.Errorf("runtime process failed: %w", m.runtimeError)
++	}
++	return nil
++}
++
++func recordProcessStartFailure(path string, initial map[string]any, processError error) error {
++	result := make(map[string]any, len(initial)+4)
++	for k, v := range initial {
++		result[k] = v
++	}
++	result["process_start_failed"] = true
++	result["process_started"] = false
++	result["process_error"] = processError.Error()
++	result["status"] = "Runtime process could not start; no diagnostic/game process ran"
++	return atomicJSON(path, result)
++}
+--- a/manager/runtime.go
++++ b/manager/runtime.go
+@@ -374,7 +374,11 @@
+ 	if e = readWorkspaceManifest(dir, &mf); e != nil {
+ 		return nil, e
+ 	}
+-	if r.Fingerprint != mf.Resolution.Fingerprint {
++	preparedResolution, e := resolve(mf.Profile)
++	if e != nil {
++		return nil, e
++	}
++	if r.Fingerprint != preparedResolution.Fingerprint {
+ 		return nil, errors.New("selected engine/mods differ from the prepared environment; Prepare first")
+ 	}
+ 	candidates := m.runtimeCandidates()
+@@ -437,11 +441,14 @@
+ 		return nil, errors.New("a game is already running")
+ 	}
+ 	if e = cmd.Start(); e != nil {
++		_ = recordProcessStartFailure(filepath.Join(m.Data, "logs", "last-launch.json"), launchRecord, e)
+ 		m.mu.Unlock()
+ 		logfile.Close()
+ 		return nil, fmt.Errorf("DOSBox failed to start: %w", e)
+ 	}
+ 	m.running = cmd
++	m.runtimeDone = make(chan struct{})
++	m.runtimeError = nil
+ 	m.runningProfile = p.ID
+ 	m.runningKind = "game"
+ 	m.lastExit = ""
+@@ -449,14 +456,20 @@
+ 	go func() {
+ 		e := cmd.Wait()
+ 		logfile.Close()
++		recordError := recordProcessExit(filepath.Join(m.Data, "logs", "last-launch.json"), launchRecord, e)
+ 		m.mu.Lock()
+ 		defer m.mu.Unlock()
++		m.runtimeError = e
++		defer close(m.runtimeDone)
+ 		m.running = nil
+ 		m.runningProfile = ""
+ 		m.runningKind = ""
+ 		m.lastExit = "DOSBox exited normally. Game success must be confirmed in-game."
+ 		if e != nil {
+ 			m.lastExit = "DOSBox exit: " + e.Error() + ". Inspect " + logpath
++		}
++		if recordError != nil {
++			m.lastExit += "; could not save process result: " + recordError.Error()
+ 		}
+ 	}()
+ 	return map[string]any{"pid": cmd.Process.Pid, "log": logpath, "arguments": args, "game_path": game, "configuration": cfg, "fingerprint": v.Fingerprint, "launcher_version": Version, "kernel": kernel, "working_directory": game, "network_service": effectiveNetworkService(p), "status": "DOSBox process started; game and IPX connection are not yet verified", "instructions": "In MOO2 choose Multiplayer / Network, then Start New Game or Join Game. Match engine and mod fingerprints on both machines."}, nil
+--- a/manager/shared/buildconfig/config.go
++++ b/manager/shared/buildconfig/config.go
+@@ -9,7 +9,7 @@
+ // This default refuses all network updates until a maintainer provisions trust.
+ var Encoded string
+ 
+-const Version = "0.4.7"
++const Version = "0.4.8"
+ 
+ func Trust() (distribution.Trust, error) {
+ 	t := distribution.Trust{Schema: 1, Feed: "moo2-sgc", Channel: "stable", Keys: map[string]string{}, Endpoints: []distribution.Endpoint{}, AllowedHosts: []string{}}
+--- a/manager/web/app.js
++++ b/manager/web/app.js
+@@ -4,7 +4,7 @@
+ if(fragment){sessionStorage.setItem('moo2-token',fragment);history.replaceState(null,'',location.pathname);}
+ const auth=sessionStorage.getItem('moo2-token')||'';
+ let state=null,currentID='baseline',lastResult='',lastJob='',first=true,offline=false;
+-let selectionQueue=Promise.resolve(),previewRevision=0;
++let selectionQueue=Promise.resolve(),previewRevision=0,pendingDuplicate=null;
+ function error(e){$('error').textContent=String(e.message||e);$('error').classList.remove('hidden');}
+ function clearError(){$('error').classList.add('hidden');}
+ async function api(path,body){const r=await fetch('/api/'+path,{method:body===undefined?'GET':'POST',headers:{Authorization:'Bearer '+auth,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body)});const v=await r.json();if(!r.ok)throw Error(v.error||r.statusText);return v;}
+@@ -25,6 +25,7 @@
+  const n=r.network||{};$('network-plan').textContent='Selected game: '+p.engine+' / '+(p.engine==='1.50.26'?'ORION150.EXE':'ORION2.EXE')+'\n'+(n.enabled?(n.endpoint+'\n'+n.command):'LOCAL PLAY — no IPX tunnel')+'\n'+(n.instructions||'');
+  }catch(e){if(revision!==previewRevision)return;$('resolution').textContent=e.message;$('network-plan').textContent='Selection needs attention: '+e.message;}}
+ async function action(action,extra={}){clearError();try{await selectionQueue;const v=await api('action',{action,...extra});if((action==='quit'||action==='launcher-apply')){offline=true;$('progress').textContent=action==='launcher-apply'?'Applying staged update; the launcher will open a new tab.':'Launcher exited. You may close this tab.';return;}await poll();return v;}catch(e){error(e);}}
++function completeDuplicate(job){if(!pendingDuplicate||job.busy||job.kind!=='save'||job.result?.id!==pendingDuplicate.id)return;const pending=pendingDuplicate;pendingDuplicate=null;if(!job.error&&state.profiles.some(p=>p.id===pending.id)&&currentID===pending.previous)loadProfile(pending.id,true);}
+ function resultObject(r){return JSON.stringify(r,null,2);}
+ async function poll(){if(offline)return;try{
+  state=await api('state');if(first){const remembered=state.selected_profile_id||state.default_profile||'baseline';currentID=state.profiles.some(p=>p.id===remembered)?remembered:'baseline';}const ai=state.application||{};$('application-identity').textContent='Running launcher '+state.version+' | '+(ai.executable||'')+' | Application root: '+(ai.root||'')+' | Game root: '+(state.portable_root||'');$('version').textContent=state.version; if(state.distribution){const d=state.distribution;$('distribution-status').textContent=(d.production_feed_configured?'Signed GitHub feed configured (remote availability is checked on request).':'Production feed not configured. ')+(d.development_trust?'Development signing key; offline test packages only. ':'')+' GitHub primary; Cloudflare R2 optional. '+(d.trusted_revision?'Trusted revision: '+d.trusted_revision+'. ':'')+'Application root: '+d.app_root;}$('data-path').textContent=(state.portable?'Portable root: '+state.portable_root+' | ':'')+'Data: '+state.data_path;
+@@ -45,6 +46,7 @@
+  $('launch').disabled=blocked||!state.active[currentID]||!runtime.length||!!(kp&&kp.required&&!kp.ok);
+  if(first){first=false;loadProfile(currentID);const addresses=await api('addresses');$('addresses').textContent='This computer’s IPv4 addresses: '+(addresses.join(' · ')||'none detected')+'. Give the reachable LAN address to joining players.';}
+  if(!job.busy&&lastJob!==fingerprint){renderHistory();if(job.kind==='activate'&&!job.error)loadProfile(currentID);lastJob=fingerprint;}
++ completeDuplicate(job);
+  }catch(e){error(e);}}
+ $('profiles').addEventListener('change',()=>loadProfile($('profiles').value,true));
+ $('engine').addEventListener('change',()=>{const p=selected();p.mods=[];if(p.engine==='1.50.26')p.core='150';modUI(p);preview();});
+@@ -62,7 +64,7 @@
+ $('use-runtime').onclick=()=>action('runtime-select',{runtime_path:$('runtime-path').value.trim()||$('runtime-select').value});
+ $('remove').onclick=()=>{if(confirm('Deactivate this profile? All existing files and saves remain retained.'))action('remove',{id:currentID});};
+ $('activate').onclick=()=>{const g=$('history').value;if(g&&confirm('Activate this retained generation? Newer saves remain in their own generation and are NOT merged.'))action('activate',{id:currentID,generation:g});};
+-$('duplicate').onclick=async()=>{const id=prompt('New profile ID: lowercase letters, digits, hyphens; up to 40 characters');if(!id)return;if(state.profiles.some(p=>p.id===id)){error('That profile ID already exists.');return;}const p=selected();p.id=id;p.name+=' — copy';await action('save',{profile:p});currentID=id;setTimeout(async()=>{await poll();loadProfile(id);},600);};
++$('duplicate').onclick=async()=>{if(pendingDuplicate)return;const id=prompt('New profile ID: lowercase letters, digits, hyphens; up to 40 characters');if(!id)return;if(state.profiles.some(p=>p.id===id)){error('That profile ID already exists.');return;}const p=selected();p.id=id;p.name+=' — copy';pendingDuplicate={id,previous:currentID};const accepted=await action('save',{profile:p});if(!accepted)pendingDuplicate=null;};
+ if(!auth){error('Open the private URL printed by the launcher or stored in data/open-launcher.txt. This page has no authorization token.');}else{poll();setInterval(poll,1500);}
+ 
+ $('import-payload').onclick=()=>action('payload-import',{payload_kind:$('payload-kind').value,source_path:$('payload-path').value.trim()});
+--- /dev/null
++++ b/tests/ui_regression.js
+@@ -0,0 +1,24 @@
++'use strict';
++// Focused deterministic event-flow tests; no claim of a native browser run.
++const fs=require('fs'),vm=require('vm'),assert=require('assert');
++const source=fs.readFileSync(__dirname+'/../manager/web/app.js','utf8');
++const start=source.indexOf("$('duplicate').onclick=");
++const end=source.indexOf('\nif(!auth)',start);
++assert(start>=0&&end>start,'duplicate event handler not found');
++const helperStart=source.indexOf('function completeDuplicate(');
++const helperEnd=source.indexOf('\nfunction ',helperStart+1);
++const helper=helperStart>=0?source.slice(helperStart,helperEnd):'';
++async function scenario(accepted=true){
++ const button={},ctx={state:{profiles:[{id:'baseline',name:'Baseline'}]},currentID:'baseline',pendingDuplicate:null,prompt:()=> 'copy-test',selected:()=>({id:'baseline',name:'Baseline'}),error:()=>{},action:async()=>accepted?{status:'started'}:undefined,setTimeout:()=>{},poll:async()=>{},$:()=>button,loadProfile:(id)=>{ctx.currentID=id}};
++ vm.createContext(ctx);vm.runInContext(helper+'\n'+source.slice(start,end),ctx);
++ await button.onclick();return {ctx,button};
++}
++(async()=>{
++ let {ctx}=await scenario(false);assert.equal(ctx.currentID,'baseline','rejected duplicate must retain current profile');assert.equal(ctx.pendingDuplicate,null);
++ ({ctx}=await scenario());assert.equal(ctx.currentID,'baseline','accepted save must not switch before completion');
++ ctx.completeDuplicate({kind:'save',result:{id:'old-save'},busy:false,error:''});assert(ctx.pendingDuplicate,'older completed save must not consume pending duplicate');ctx.state.profiles.push({id:'copy-test'});ctx.completeDuplicate({kind:'save',result:{id:'copy-test'},busy:true,error:''});assert.equal(ctx.currentID,'baseline');ctx.completeDuplicate({kind:'save',result:{id:'copy-test'},busy:false,error:''});assert.equal(ctx.currentID,'copy-test');
++ ({ctx}=await scenario());ctx.completeDuplicate({kind:'save',result:{id:'copy-test'},busy:false,error:'invalid profile'});assert.equal(ctx.currentID,'baseline');assert.equal(ctx.pendingDuplicate,null);
++ ({ctx}=await scenario());ctx.state.profiles.push({id:'copy-test'});ctx.currentID='community';ctx.completeDuplicate({kind:'save',result:{id:'copy-test'},busy:false,error:''});assert.equal(ctx.currentID,'community','delayed completion must preserve newer navigation');
++ ({ctx}=await scenario());ctx.completeDuplicate({kind:'save',result:{id:'copy-test'},busy:false,error:''});assert.equal(ctx.currentID,'baseline','missing saved profile must not become selected');
++ console.log('PASS: duplicate rejected, pending, successful, failed, newer navigation, and missing-profile flows');
++})().catch(e=>{console.error(e);process.exitCode=1});

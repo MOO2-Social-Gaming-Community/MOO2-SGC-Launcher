@@ -1,5 +1,0 @@
-	moo2manager/cmd/bootstrapper		coverage: 0.0% of statements
-	moo2manager/shared/buildconfig		coverage: 0.0% of statements
-ok  	moo2manager	0.047s	coverage: 36.8% of statements
-ok  	moo2manager/cmd/releasectl	0.008s	coverage: 21.9% of statements
-ok  	moo2manager/shared/distribution	0.098s	coverage: 71.3% of statements

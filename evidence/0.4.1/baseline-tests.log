@@ -1,5 +1,0 @@
-?   	moo2manager/cmd/bootstrapper	[no test files]
-?   	moo2manager/shared/buildconfig	[no test files]
-ok  	moo2manager	0.026s
-ok  	moo2manager/cmd/releasectl	0.006s
-ok  	moo2manager/shared/distribution	0.084s

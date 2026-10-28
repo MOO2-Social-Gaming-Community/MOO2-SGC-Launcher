@@ -1,3 +1,5 @@
+> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
+
 # Security and trust — 0.4.1
 
 - Release metadata and each executable package require an embedded-key Ed25519 signature, declared byte count and SHA-256 identity.

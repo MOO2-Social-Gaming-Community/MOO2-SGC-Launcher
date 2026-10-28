@@ -1,3 +1,5 @@
+> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
+
 # Release signing — 0.4.7
 
 Existing `moo2-sgc-release-1` public identity, feed `moo2-sgc`, channel `stable`, revision 47. The previously stored private backup remains valid. No replacement key is distributed; never commit private signing material.

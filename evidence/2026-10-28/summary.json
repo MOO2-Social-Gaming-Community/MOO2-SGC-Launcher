@@ -1,0 +1,48 @@
+{
+  "go_race": {
+    "test_and_subtest_passes": 243,
+    "private_fixture_skips": [
+      "TestRealBaselineMatchesSteam",
+      "TestRealOfficialDownloadContentAuthentication",
+      "TestHarnessPrivateRuntimeFixture",
+      "TestAddedEditableConfigurationChangesFingerprint",
+      "TestMissingSelectedConfigurationCannotHideInManifest",
+      "TestPatchCodeCannotBeBlessedByLocalManifest",
+      "TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase",
+      "TestGeneratedGameOutputsDoNotBlockRelaunch",
+      "TestUnknownExtensionConfigChangesFingerprint",
+      "TestUnknownCodeCannotBeAddedToReceipt",
+      "TestForgedSelectionReceiptRejected"
+    ],
+    "test_failures": 0,
+    "tested_packages": 5
+  },
+  "bootstrap": 35,
+  "headless": 31,
+  "privacy": 49,
+  "independent_extended_runtime": 143,
+  "mocked_publish_safeguards": 10,
+  "exit_codes": {
+    "go-race.exit": 0,
+    "headless31.exit": 0,
+    "go-vet.exit": 0,
+    "js-syntax.exit": 0,
+    "baseline-negative.exit": 1,
+    "ui-regression.exit": 0,
+    "privacy49.exit": 0,
+    "focused-go.exit": 0,
+    "build.exit": 0,
+    "publish-unit.exit": 0,
+    "bootstrap35.exit": 0,
+    "patch-apply.exit": 0
+  },
+  "baseline_negative_expected_failure": true,
+  "bootstrap_opener_calls": 0,
+  "native_platform_executed": "linux-amd64",
+  "cross_compiled_only": [
+    "windows-amd64",
+    "darwin-amd64",
+    "darwin-arm64"
+  ],
+  "release_scope": "disposable offline development signing only; no production release; no game/emulator/PRSL; no external service; no old-to-new migration acceptance"
+}

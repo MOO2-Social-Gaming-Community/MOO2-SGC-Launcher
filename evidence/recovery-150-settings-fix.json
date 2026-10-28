@@ -1,0 +1,15 @@
+{
+  "scope": "Normal generated settings classification; no guest data changed",
+  "evidence_source": "supplied 1.50.26 manual, Interface Changes / Default Settings, identifies 150.SET as game settings; real title-screen smoke generated it",
+  "pre_fix_launcher_sha256": "dfcdb06b23ff6158a90e4b12a34f41f7c8e186a1afc1f354e21225fb55aa2c3b",
+  "pre_fix_prepared_fingerprint": "1dc35679eeee79ee7f462eb3e51db1524a312d4df3bcbce3422b6d4328f24336",
+  "pre_fix_after_fingerprint": "5ee2b182a8edc0844e9448c5b4f8d654da1a8b1a04384bc15850a66e44e82b35",
+  "root_cause": "150.SET was treated as extra unknown data; EXTRACT.CFG and ORION2.LOG were already excluded runtime outputs.",
+  "change": "Add only the exact root-level 150.SET name to existing personal-state classification; retain it during same-engine repair and refuse custom CFG references to it. Arbitrary SET files are not exempt.",
+  "synthetic_regression_before": "recovery-150-settings-before.log: reproduced failure",
+  "regression_after": "recovery-settings-final-all-fixtures-go.jsonl: 257 passed with race detection; includes fingerprint, preservation and excluded-config-input cases",
+  "post_fix_launcher_sha256": "07f63bab96679a357121f9a25224384c915190b691543a460b0c40bce32624d6",
+  "post_fix_fingerprint_stable": true,
+  "post_fix_checked": 541,
+  "private_settings_or_save_bytes_packaged": false
+}

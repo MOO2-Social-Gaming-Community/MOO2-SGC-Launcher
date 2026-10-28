@@ -81,3 +81,8 @@ Thumbs.db
 /manager/out/
 **/Master of Orion 2*.zip
 **/*KNOWN_GOOD*.zip
+
+# Candidate-only verification caches and private fixture copies.
+/.test-cache/
+/.test-fixtures/
+/candidate-*

@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 )
@@ -67,5 +68,54 @@ func TestNetworkPlanAndLaunchCommandStayIdentical(t *testing.T) {
 	r, e := resolve(p)
 	if e != nil || r.Network.Enabled || r.Network.Command != "" {
 		t.Fatal(r, e)
+	}
+}
+
+func TestRuntimeCompletionDistinguishesProcessFailure(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("Unix process fixture")
+	}
+	for _, code := range []string{"0", "47"} {
+		t.Run(code, func(t *testing.T) {
+			root := t.TempDir()
+			exe := filepath.Join(root, "dosbox")
+			if e := os.WriteFile(exe, []byte("#!/bin/sh\n# Explicit process test double; no DOSBox or connection\nexit "+code+"\n"), 0700); e != nil {
+				t.Fatal(e)
+			}
+			m, e := newManager(root, filepath.Join(root, "userdata"))
+			if e != nil {
+				t.Fatal(e)
+			}
+			if e = atomicJSON(filepath.Join(m.Data, "settings.json"), Settings{exe}); e != nil {
+				t.Fatal(e)
+			}
+			if _, e = m.checkDopefish(); e != nil {
+				t.Fatal(e)
+			}
+			e = m.waitForRuntime()
+			if (e == nil) != (code == "0") {
+				t.Fatalf("runtime exit %s: %v", code, e)
+			}
+			var record map[string]any
+			if e = readJSON(filepath.Join(m.Data, "logs", "last-network-check.json"), &record); e != nil {
+				t.Fatal(e)
+			}
+			expected := float64(0)
+			if code == "47" {
+				expected = 47
+			}
+			if record["process_exit_code"] != expected || record["process_exited"] != true {
+				t.Fatal(record)
+			}
+			if record["connection_verified"] != false || record["game_started"] != false {
+				t.Fatal("invented connectivity", record)
+			}
+			m.mu.Lock()
+			running := m.running != nil
+			m.mu.Unlock()
+			if running {
+				t.Fatal("process completion did not release gate")
+			}
+		})
 	}
 }

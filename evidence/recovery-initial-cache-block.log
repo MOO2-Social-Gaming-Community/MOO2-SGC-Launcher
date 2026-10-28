@@ -1,0 +1,1 @@
+failed to initialize build cache at $HOME/.cache/go-build: mkdir $HOME/.cache/go-build: read-only file system

@@ -1,3 +1,24 @@
+# 0.4.8 review continuation — unreleased, 2026-10-28
+
+- Keep the restarted private local URL out of the fixed updater helper's handoff log without dropping ordinary diagnostics. Older helpers and historical logs are outside this correction.
+- Add explicit startup-output policy tests and optional privacy assertions to the headless lifecycle fixture.
+- Preserve the October 26 `--no-browser` propagation fix and October 21 stronger offline-bootstrap fixture.
+- Refresh review/build/run instructions and source inventories. No production release or new gameplay/PRSL feature.
+- Current verification: 243 Go test/subtest passes and 11 private-fixture skips; 35 bootstrap, 31 headless, 49 privacy and 143 independent runtime checks. Suites overlap and are not summed. Linux executed; Windows/macOS compiled only.
+
+# 0.4.8 candidate — unreleased, 2026-10-16
+
+- Pin the supported patch inventory and generated selection independently of writable workspace manifests; validate legacy base identity and generated ORIONCD.INI.
+- Fingerprint newly added editable CFGs and extra data, and conservatively scan nested configuration references to excluded personal/audio/generated files.
+- Exclude EXTRACT.CFG and ORION2.LOG runtime outputs from compatibility identity; preserve 150.SET and NEW150.SET as personal state.
+- Save process start/exit failures in diagnostics and propagate runtime failure to CLI exit status without claiming connection success.
+- Make duplicate-profile selection wait for completed save and preserve newer navigation.
+- Add integrity, reference-scanner, process and deterministic UI regressions. Compile without VCS auto-stamping for source-archive builds.
+- Real launcher-to-Staging startup revealed 150.SET personal settings were incorrectly fingerprinted as extra data; classify and retain that exact settings filename without exempting arbitrary SET files.
+- Source-only handoff. No release signing/publication, private game redistribution or multiplayer certification.
+
+The entries below are historical shipped/supplied version notes, not new candidate validation claims.
+
 # 0.4.7
 
 - Remember the selected profile in userdata/ui-selection.json across launcher restarts and changing localhost ports. First-run default stays baseline 1.40b23; no automatic game upgrade.

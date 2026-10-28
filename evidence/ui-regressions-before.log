@@ -1,0 +1,9 @@
+AssertionError [ERR_ASSERTION]: rejected duplicate must retain current profile
+    at $WORKSPACE/moo2_work/launcher/tests/ui_regression.js:17:41 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'copy-test',
+  expected: 'baseline',
+  operator: '==',
+  diff: 'simple'
+}

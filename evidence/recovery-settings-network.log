@@ -1,0 +1,24 @@
+PASS fresh selection remains baseline
+PASS selection remembered without saving game settings
+PASS selection preserves runtime preferences
+PASS preference selection does not build an environment
+PASS selection survives real launcher restart/new local port
+PASS restart preserves all original profile files
+PASS runtime selection does not reset remembered profile
+PASS diagnostic process identified separately from game
+PASS diagnostic runs without owned source or prepared game
+PASS diagnostic uses dedicated directory outside game
+PASS diagnostic uses independent pinned config arguments
+PASS diagnostic connects and checks actual shell status commands
+PASS diagnostic neither mounts nor runs game
+PASS diagnostic remains open for manual observation
+PASS no connectivity success fabricated
+PASS second diagnostic cannot compete for session
+PASS launcher remains locked while diagnostic is open
+PASS diagnostic releases process gate
+PASS exit is not reported as connection success
+PASS host process log proves test-double scope
+PASS export includes independent diagnostic record
+PASS diagnostic preserved source/profile selection
+PASS CLI diagnostic waits for process and returns without starting game
+PASS CLI diagnostic releases data and app locks

@@ -4,7 +4,7 @@ const fragment=location.hash.slice(1);
 if(fragment){sessionStorage.setItem('moo2-token',fragment);history.replaceState(null,'',location.pathname);}
 const auth=sessionStorage.getItem('moo2-token')||'';
 let state=null,currentID='baseline',lastResult='',lastJob='',first=true,offline=false;
-let selectionQueue=Promise.resolve(),previewRevision=0;
+let selectionQueue=Promise.resolve(),previewRevision=0,pendingDuplicate=null;
 function error(e){$('error').textContent=String(e.message||e);$('error').classList.remove('hidden');}
 function clearError(){$('error').classList.add('hidden');}
 async function api(path,body){const r=await fetch('/api/'+path,{method:body===undefined?'GET':'POST',headers:{Authorization:'Bearer '+auth,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body)});const v=await r.json();if(!r.ok)throw Error(v.error||r.statusText);return v;}
@@ -25,6 +25,7 @@ async function preview(){const revision=++previewRevision;try{updateCoreDesc();c
  const n=r.network||{};$('network-plan').textContent='Selected game: '+p.engine+' / '+(p.engine==='1.50.26'?'ORION150.EXE':'ORION2.EXE')+'\n'+(n.enabled?(n.endpoint+'\n'+n.command):'LOCAL PLAY — no IPX tunnel')+'\n'+(n.instructions||'');
  }catch(e){if(revision!==previewRevision)return;$('resolution').textContent=e.message;$('network-plan').textContent='Selection needs attention: '+e.message;}}
 async function action(action,extra={}){clearError();try{await selectionQueue;const v=await api('action',{action,...extra});if((action==='quit'||action==='launcher-apply')){offline=true;$('progress').textContent=action==='launcher-apply'?'Applying staged update; the launcher will open a new tab.':'Launcher exited. You may close this tab.';return;}await poll();return v;}catch(e){error(e);}}
+function completeDuplicate(job){if(!pendingDuplicate||job.busy||job.kind!=='save'||job.result?.id!==pendingDuplicate.id)return;const pending=pendingDuplicate;pendingDuplicate=null;if(!job.error&&state.profiles.some(p=>p.id===pending.id)&&currentID===pending.previous)loadProfile(pending.id,true);}
 function resultObject(r){return JSON.stringify(r,null,2);}
 async function poll(){if(offline)return;try{
  state=await api('state');if(first){const remembered=state.selected_profile_id||state.default_profile||'baseline';currentID=state.profiles.some(p=>p.id===remembered)?remembered:'baseline';}const ai=state.application||{};$('application-identity').textContent='Running launcher '+state.version+' | '+(ai.executable||'')+' | Application root: '+(ai.root||'')+' | Game root: '+(state.portable_root||'');$('version').textContent=state.version; if(state.distribution){const d=state.distribution;$('distribution-status').textContent=(d.production_feed_configured?'Signed GitHub feed configured (remote availability is checked on request).':'Production feed not configured. ')+(d.development_trust?'Development signing key; offline test packages only. ':'')+' GitHub primary; Cloudflare R2 optional. '+(d.trusted_revision?'Trusted revision: '+d.trusted_revision+'. ':'')+'Application root: '+d.app_root;}$('data-path').textContent=(state.portable?'Portable root: '+state.portable_root+' | ':'')+'Data: '+state.data_path;
@@ -45,6 +46,7 @@ async function poll(){if(offline)return;try{
  $('launch').disabled=blocked||!state.active[currentID]||!runtime.length||!!(kp&&kp.required&&!kp.ok);
  if(first){first=false;loadProfile(currentID);const addresses=await api('addresses');$('addresses').textContent='This computer’s IPv4 addresses: '+(addresses.join(' · ')||'none detected')+'. Give the reachable LAN address to joining players.';}
  if(!job.busy&&lastJob!==fingerprint){renderHistory();if(job.kind==='activate'&&!job.error)loadProfile(currentID);lastJob=fingerprint;}
+ completeDuplicate(job);
  }catch(e){error(e);}}
 $('profiles').addEventListener('change',()=>loadProfile($('profiles').value,true));
 $('engine').addEventListener('change',()=>{const p=selected();p.mods=[];if(p.engine==='1.50.26')p.core='150';modUI(p);preview();});
@@ -62,7 +64,7 @@ $('install-runtime').onclick=()=>action('runtime-install');
 $('use-runtime').onclick=()=>action('runtime-select',{runtime_path:$('runtime-path').value.trim()||$('runtime-select').value});
 $('remove').onclick=()=>{if(confirm('Deactivate this profile? All existing files and saves remain retained.'))action('remove',{id:currentID});};
 $('activate').onclick=()=>{const g=$('history').value;if(g&&confirm('Activate this retained generation? Newer saves remain in their own generation and are NOT merged.'))action('activate',{id:currentID,generation:g});};
-$('duplicate').onclick=async()=>{const id=prompt('New profile ID: lowercase letters, digits, hyphens; up to 40 characters');if(!id)return;if(state.profiles.some(p=>p.id===id)){error('That profile ID already exists.');return;}const p=selected();p.id=id;p.name+=' — copy';await action('save',{profile:p});currentID=id;setTimeout(async()=>{await poll();loadProfile(id);},600);};
+$('duplicate').onclick=async()=>{if(pendingDuplicate)return;const id=prompt('New profile ID: lowercase letters, digits, hyphens; up to 40 characters');if(!id)return;if(state.profiles.some(p=>p.id===id)){error('That profile ID already exists.');return;}const p=selected();p.id=id;p.name+=' — copy';pendingDuplicate={id,previous:currentID};const accepted=await action('save',{profile:p});if(!accepted)pendingDuplicate=null;};
 if(!auth){error('Open the private URL printed by the launcher or stored in data/open-launcher.txt. This page has no authorization token.');}else{poll();setInterval(poll,1500);}
 
 $('import-payload').onclick=()=>action('payload-import',{payload_kind:$('payload-kind').value,source_path:$('payload-path').value.trim()});

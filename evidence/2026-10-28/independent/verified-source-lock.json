@@ -1,0 +1,17 @@
+{
+  "source": "<review-workspace>/moo2_review_20261028/privacy_work",
+  "release": "<review-workspace>/moo2_review_20261028/privacy_release",
+  "source_fingerprint_sha256": "a6474d50191a8e930994448bb9eb72563ebdfa2efe1f3c4987af18c2ae281924",
+  "changed_source_sha256": {
+    "manager/main.go": "45e1f88e451a3aa68743e067c8056dd6fca9e3ade22aff946ea249f5a8ba9ef2",
+    "manager/server.go": "7f53c535017b7dc7dfdd4a0c99ae1df09c7ce2f91f1b1c9285b58b48c4e270fa",
+    "manager/startup_privacy_test.go": "3c28e77ea2b53400ee22570a2cc00d85ef935901efe167e1516d975c6eb2be49",
+    "manager/cmd/bootstrapper/main.go": "6562e6b4b0717de72985256b023e09e14c7ad656eded2ef0d44389cc7969ab7a",
+    "tests/headless_handoff.py": "588eed37030a4714ff2231a2580e49e0f7e629df124a8774d34c351f6ab78ec6"
+  },
+  "binaries": {
+    "moo2-sgc-launcher": "cc5a6e4836437eb4aecde2bf47e3a356615a4f50e7879efd03182754c24dc4f7",
+    "MOO2-SGC-Setup": "6ebdc2e6027e51910de630cd519ac206cd95a55782b2ef603b9fe99ae2dc14af"
+  },
+  "manifest_sha256": "c896f722e32eb9832dbbed1e086ce82811e43b527ee5f11ced36371f15ec83fc"
+}

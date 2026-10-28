@@ -1,0 +1,8 @@
+=== RUN   TestAddedEditableConfigurationChangesFingerprint
+--- PASS: TestAddedEditableConfigurationChangesFingerprint (2.89s)
+=== RUN   TestMissingSelectedConfigurationCannotHideInManifest
+--- PASS: TestMissingSelectedConfigurationCannotHideInManifest (0.93s)
+=== RUN   TestPatchCodeCannotBeBlessedByLocalManifest
+--- PASS: TestPatchCodeCannotBeBlessedByLocalManifest (0.95s)
+PASS
+ok  	moo2manager	4.772s

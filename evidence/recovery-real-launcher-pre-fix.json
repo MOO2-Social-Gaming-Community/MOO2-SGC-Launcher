@@ -1,0 +1,151 @@
+{
+  "scope": "Real final 0.4.8 manager to real Staging 0.83.0 1.50.26 title-screen smoke; headless host renderer/input overrides only",
+  "launcher_sha256": "dfcdb06b23ff6158a90e4b12a34f41f7c8e186a1afc1f354e21225fb55aa2c3b",
+  "wrapper_sha256": "53f9c01744e4db8bedeab64b22dc8ff9709e740d2096ac672ffed95b23d55efe",
+  "base_import": {
+    "cached": "$WORKSPACE/moo2_runtime/final_launcher/userdata/cache/base-import-f50ec2cb07acd73362144a0a9f8c0fcb7813fa7cc32b3471f7a9ae7454246a95.zip",
+    "edition": "CD-derived manual English DOS 1.40b23 (preferred portable baseline)",
+    "effective_baseline": "1.40b23",
+    "files": 408,
+    "sha256": "f50ec2cb07acd73362144a0a9f8c0fcb7813fa7cc32b3471f7a9ae7454246a95",
+    "source_modified": false,
+    "source_version": "1.40b23",
+    "uploaded": false
+  },
+  "patch_import": {
+    "cached": "$WORKSPACE/moo2_runtime/final_launcher/userdata/cache/patch-1.50.26.zip",
+    "kind": "patch",
+    "sha256": "0ac9151e9cf752ec34b6db998d8b390f48e492d8443e8f1658112b93c7f6a921",
+    "size": 12105924,
+    "source_modified": false,
+    "uploaded": false
+  },
+  "profile": {
+    "id": "community",
+    "name": "Community \u2014 standard",
+    "engine": "1.50.26",
+    "core": "150",
+    "mods": [],
+    "fullscreen": false,
+    "role": "standalone",
+    "network_service": "none",
+    "host": "",
+    "port": 21300
+  },
+  "prepared": {
+    "archived_saves": "retained only in original source ZIP",
+    "chat": "not injected",
+    "effective_baseline": "1.40b23",
+    "engine": "1.50.26",
+    "lineage": [
+      {
+        "version": "1.40b23",
+        "operation": "recognized owned source",
+        "engine_sha256": "7ae2ac2e5904ca330009af2827279d889906b0b9b7a8854c38eb707a56e955b5"
+      },
+      {
+        "version": "1.50.26",
+        "operation": "community add-on",
+        "engine_sha256": "2db296e052419250d21866f7c23ac2978a33b3c05b451a9516f06599b91c3f5c"
+      }
+    ],
+    "path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072",
+    "prsl": "not injected",
+    "source_version": "1.40b23",
+    "verification": {
+      "ok": true,
+      "checked": 540,
+      "bad": [],
+      "user_changes": [],
+      "fingerprint": "1dc35679eeee79ee7f462eb3e51db1524a312d4df3bcbce3422b6d4328f24336",
+      "generation": "g1792119409810631072"
+    }
+  },
+  "runtime_select": {
+    "runtime": "$WORKSPACE/moo2_runtime/final_launcher/dosbox",
+    "trust": "user-selected executable; not certified by this manager"
+  },
+  "launch": {
+    "arguments": [
+      "--noprimaryconf",
+      "--conf",
+      "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/dosbox-manager.conf",
+      "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game/ORION150.EXE"
+    ],
+    "configuration": "[sdl]\nfullscreen = off\nfullscreen_mode = forced-borderless\nwindow_size = 800x600\nwindow_position = auto\npause_when_inactive = off\nmute_when_inactive = off\noutput = opengl\n\n[render]\naspect = auto\nviewport = fit\ninteger_scaling = off\nshader = sharp\n\n[sblaster]\nsbtype = sb16\nsbbase = 220\nirq = 5\ndma = 1\nhdma = 5\noplmode = auto\n",
+    "fingerprint": "1dc35679eeee79ee7f462eb3e51db1524a312d4df3bcbce3422b6d4328f24336",
+    "game_path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game",
+    "instructions": "In MOO2 choose Multiplayer / Network, then Start New Game or Join Game. Match engine and mod fingerprints on both machines.",
+    "kernel": {
+      "game_path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game",
+      "kernel_path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game/RKERNEL.COM",
+      "expected_sha256": "18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97",
+      "actual_sha256": "18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97",
+      "required": true,
+      "ok": true
+    },
+    "launcher_version": "0.4.8",
+    "log": "$WORKSPACE/moo2_runtime/final_launcher/userdata/logs/game-community-20261016T025650Z.log",
+    "network_service": "none",
+    "pid": 21,
+    "status": "DOSBox process started; game and IPX connection are not yet verified",
+    "working_directory": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game"
+  },
+  "last_exit": "DOSBox exited normally. Game success must be confirmed in-game.",
+  "last_launch": {
+    "application_root": "$WORKSPACE/moo2_runtime/final_launcher/userdata/application",
+    "arguments": [
+      "--noprimaryconf",
+      "--conf",
+      "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/dosbox-manager.conf",
+      "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game/ORION150.EXE"
+    ],
+    "config_path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/dosbox-manager.conf",
+    "data_root": "$WORKSPACE/moo2_runtime/final_launcher/userdata",
+    "engine": "1.50.26",
+    "finished_at": "2026-10-16T02:57:05Z",
+    "game_executable": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game/ORION150.EXE",
+    "game_path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game",
+    "kernel": {
+      "game_path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game",
+      "kernel_path": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game/RKERNEL.COM",
+      "expected_sha256": "18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97",
+      "actual_sha256": "18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97",
+      "required": true,
+      "ok": true
+    },
+    "launcher_executable": "$WORKSPACE/moo2_work/launcher/manager/out/moo2-manager-linux-amd64",
+    "launcher_version": "0.4.8",
+    "log": "$WORKSPACE/moo2_runtime/final_launcher/userdata/logs/game-community-20261016T025650Z.log",
+    "network": {
+      "enabled": false,
+      "service": "none",
+      "role": "standalone",
+      "instructions": "Local play: no IPX connection is configured. Choose Create or Join network game before using MOO2 Multiplayer / Network.",
+      "connection_verified": false
+    },
+    "network_service": "none",
+    "process_exit_code": 0,
+    "process_exited": true,
+    "profile": "community",
+    "runtime": "$WORKSPACE/moo2_runtime/final_launcher/dosbox",
+    "status": "Process exited normally; game and IPX success still require observation",
+    "working_directory": "$WORKSPACE/moo2_runtime/final_launcher/userdata/environments/community/g1792119409810631072/game"
+  },
+  "verify_after": {
+    "ok": true,
+    "checked": 540,
+    "bad": [],
+    "user_changes": [],
+    "fingerprint": "5ee2b182a8edc0844e9448c5b4f8d654da1a8b1a04384bc15850a66e44e82b35",
+    "generation": "g1792119409810631072"
+  },
+  "captures": [
+    {
+      "file": "capture/image0001.png",
+      "sha256": "60d25b3ab4d90058e86b679df4452ddac07c2a0861899e0ac73a3139d29d68c3"
+    }
+  ],
+  "engine_sha256": "2db296e052419250d21866f7c23ac2978a33b3c05b451a9516f06599b91c3f5c",
+  "kernel_sha256": "18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97"
+}
