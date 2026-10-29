@@ -1,10 +1,21 @@
-# 0.4.8 review continuation — unreleased, 2026-10-28
+# 0.5.1 — Private Windows-first GUI candidate (2026-10-29)
 
-- Keep the restarted private local URL out of the fixed updater helper's handoff log without dropping ordinary diagnostics. Older helpers and historical logs are outside this correction.
-- Add explicit startup-output policy tests and optional privacy assertions to the headless lifecycle fixture.
-- Preserve the October 26 `--no-browser` propagation fix and October 21 stronger offline-bootstrap fixture.
-- Refresh review/build/run instructions and source inventories. No production release or new gameplay/PRSL feature.
-- Current verification: 243 Go test/subtest passes and 11 private-fixture skips; 35 bootstrap, 31 headless, 49 privacy and 143 independent runtime checks. Suites overlap and are not summed. Linux executed; Windows/macOS compiled only.
+- Keep the delivered 0.5.0 and published 0.4.8 checkpoints unchanged. The new candidate uses a separate per-user test root and fresh setup.
+- Add official-store acquisition guidance and return-to-import controls; no game redistribution or unsupported installer execution.
+- Show bounded download progress and cancel blocked network requests safely, preserving verified caches and prepared games; retry does not inherit cancellation.
+- Add saved per-profile display, audio mute and background behavior settings without changing compatibility fingerprints, game rules, or emulator hardware.
+- Keep native Windows, rendered browser, actual gameplay/save, signing and publication gates explicit. Linux/API tests and cross-compiles do not certify Windows.
+
+# 0.5.0 — Private GUI candidate (2026-10-28)
+
+- App-style single-file entry point with offline signed launcher embedding, automatic graphical startup, isolated per-user data, repeated-click session reuse, and visible progress/retry/recovery/exit.
+- Graphical source/runtime selection and verified preparation; Community 1.50.26 standard rules suggested for new GUI users, legacy 1.40b23 retained as a separate explicit option, existing profiles preserved.
+- Windows GUI-subsystem binaries and hidden console helpers; no terminal, Go install, CMD wrapper or config editing in the player workflow.
+- Conservative interruption recovery preserves live/unknown launcher and game states; no changes to original installations, saves, or shortcuts.
+- Normal initial browser deferral is separate from explicit headless policy, including signed update/restart handoffs.
+- No PRSL/new Chat readiness claim, new balance preset, game-data bundle, production signing, or publication. Native desktop/gameplay acceptance remains separate from Linux/API and cross-build evidence.
+
+The user reports publishing 0.4.8; that baseline is unchanged. Entries below describe earlier work.
 
 # 0.4.8 candidate — unreleased, 2026-10-16
 

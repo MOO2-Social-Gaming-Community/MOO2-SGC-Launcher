@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"moo2manager/shared/desktop"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -117,6 +118,9 @@ func (m *Manager) checkDopefish() (any, error) {
 		return nil, e
 	}
 	cmd := exec.Command(exe, args...)
+	if m.DesktopGUI {
+		desktop.SuppressConsole(cmd)
+	}
 	cmd.Dir = dir
 	cmd.Stdout = logfile
 	cmd.Stderr = logfile

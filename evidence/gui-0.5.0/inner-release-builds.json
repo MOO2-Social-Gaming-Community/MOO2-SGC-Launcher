@@ -1,0 +1,42 @@
+{
+  "version": "0.5.0",
+  "development": true,
+  "toolchain": "go version go1.27.3 linux/amd64",
+  "targets": [
+    {
+      "target": "windows-amd64",
+      "setup_bytes": 7698944,
+      "launcher_bytes": 9377792,
+      "launcher_zip_bytes": 7094909,
+      "compiled": true,
+      "executed_here": false
+    },
+    {
+      "target": "linux-amd64",
+      "setup_bytes": 7463072,
+      "launcher_bytes": 9101472,
+      "launcher_zip_bytes": 6916339,
+      "compiled": true,
+      "executed_here": false
+    },
+    {
+      "target": "darwin-amd64",
+      "setup_bytes": 7602720,
+      "launcher_bytes": 9263936,
+      "launcher_zip_bytes": 6998313,
+      "compiled": true,
+      "executed_here": false
+    },
+    {
+      "target": "darwin-arm64",
+      "setup_bytes": 7030194,
+      "launcher_bytes": 8650690,
+      "launcher_zip_bytes": 6443873,
+      "compiled": true,
+      "executed_here": false
+    }
+  ],
+  "game_data_included": false,
+  "windows_authenticode": false,
+  "macos_notarization": false
+}

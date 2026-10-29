@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -173,36 +172,17 @@ func (m *Manager) ensureOfficial131() error {
 	return m.downloadOfficial131(downloadClient(), Official131URL)
 }
 func (m *Manager) downloadOfficial131(client *http.Client, url string) error {
-	resp, e := client.Get(url)
+	ctx := m.downloadContext()
+	downloaded, e := downloadTemporary(ctx, client, url, filepath.Join(m.Data, "cache"), 16<<20, m.downloadProgress("Official DOS 1.31 patch"))
 	if e != nil {
-		return fmt.Errorf("download official 1.31: %w; alternatively import the original 1.31 patch ZIP in Packages", e)
+		return m.downloadError(ctx, e)
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		return fmt.Errorf("official 1.31 HTTP %d", resp.StatusCode)
-	}
-	const max = 16 << 20
-	if resp.ContentLength > max {
-		return errors.New("official update exceeds size limit")
-	}
-	f, e := os.CreateTemp(filepath.Join(m.Data, "cache"), ".official-download-")
-	if e != nil {
+	defer os.Remove(downloaded.path)
+	if e = m.checkCancellation(); e != nil {
 		return e
 	}
-	name := f.Name()
-	defer os.Remove(name)
-	n, e := io.Copy(f, io.LimitReader(resp.Body, max+1))
-	ce := f.Close()
-	if e != nil {
-		return e
-	}
-	if ce != nil {
-		return ce
-	}
-	if n > max || resp.ContentLength >= 0 && n != resp.ContentLength {
-		return errors.New("truncated/oversized official update")
-	}
-	_, e = m.importOfficial131(name)
+	m.progress("Verifying official DOS 1.31 patch files; the existing prepared game is unchanged…")
+	_, e = m.importOfficial131(downloaded.path)
 	return e
 }
 func engineRank(v string) int {

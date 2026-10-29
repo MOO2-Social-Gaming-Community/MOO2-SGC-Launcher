@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -45,29 +46,36 @@ type VerifyResult struct {
 	Generation  string   `json:"generation"`
 }
 type Job struct {
-	Busy    bool   `json:"busy"`
-	Kind    string `json:"kind"`
-	Message string `json:"message"`
-	Error   string `json:"error"`
-	Result  any    `json:"result,omitempty"`
+	Busy            bool   `json:"busy"`
+	Kind            string `json:"kind"`
+	Message         string `json:"message"`
+	Error           string `json:"error"`
+	Result          any    `json:"result,omitempty"`
+	Cancelable      bool   `json:"cancelable"`
+	CancelRequested bool   `json:"cancel_requested"`
 }
 type Settings struct {
 	RuntimePath string `json:"runtime_path"`
 }
 type Manager struct {
-	Root, Data     string
-	Portable       bool
-	AppRoot        string
-	mu             sync.Mutex
-	op             sync.Mutex
-	job            Job
-	running        *exec.Cmd
-	runningProfile string
-	runningKind    string
-	runtimeDone    chan struct{}
-	runtimeError   error
-	uiMu           sync.Mutex
-	lastExit       string
+	Root, Data       string
+	Portable         bool
+	AppRoot          string
+	DesktopGUI       bool
+	DeferBrowserOnce bool // Initial parent redirect only; never an update policy.
+	NoShortcut       bool // Per-process policy, deliberately not saved in user settings.
+	mu               sync.Mutex
+	op               sync.Mutex
+	job              Job
+	jobContext       context.Context
+	cancelJob        context.CancelFunc
+	running          *exec.Cmd
+	runningProfile   string
+	runningKind      string
+	runtimeDone      chan struct{}
+	runtimeError     error
+	uiMu             sync.Mutex
+	lastExit         string
 }
 
 func newManager(root, data string) (*Manager, error) {
@@ -102,14 +110,21 @@ func newManager(root, data string) (*Manager, error) {
 	}
 	return m, nil
 }
-func (m *Manager) progress(s string) { m.mu.Lock(); m.job.Message = s; m.mu.Unlock() }
+func (m *Manager) progress(s string) {
+	m.mu.Lock()
+	if !m.job.CancelRequested {
+		m.job.Message = s
+	}
+	m.mu.Unlock()
+}
 func (m *Manager) startJob(kind string, fn func() (any, error)) error {
 	m.mu.Lock()
 	if m.job.Busy || m.running != nil {
 		m.mu.Unlock()
 		return errors.New("another operation or game is running; finish it first")
 	}
-	m.job = Job{Busy: true, Kind: kind, Message: "Starting " + kind}
+	m.jobContext, m.cancelJob = context.WithCancel(context.Background())
+	m.job = Job{Busy: true, Kind: kind, Message: "Starting " + kind, Cancelable: kind == "prepare-play" || kind == "prepare" || kind == "runtime-install" || kind == "runtime-import" || kind == "patch-refresh"}
 	m.mu.Unlock()
 	go func() {
 		m.op.Lock()
@@ -117,9 +132,15 @@ func (m *Manager) startJob(kind string, fn func() (any, error)) error {
 		r, e := fn()
 		m.mu.Lock()
 		defer m.mu.Unlock()
+		m.cancelJob()
+		m.cancelJob = nil
+		m.jobContext = nil
 		m.job.Busy = false
+		m.job.Cancelable = false
 		m.job.Result = r
-		if e != nil {
+		if errors.Is(e, errOperationCanceled) {
+			m.job.Message = "Canceled safely. Your existing prepared game is kept. You can retry when ready."
+		} else if e != nil {
 			m.job.Error = e.Error()
 			m.job.Message = kind + " stopped"
 		} else {
@@ -217,6 +238,9 @@ func (m *Manager) payload(which string) (string, string, string, error) {
 	return "", "", "", fmt.Errorf("missing %s; import your local archive in Packages & updates, or retain the existing private payloads folder", name)
 }
 func (m *Manager) build(p Profile) (any, error) {
+	if e := m.checkCancellation(); e != nil {
+		return nil, e
+	}
 	if m.isPortableBaseline(p.ID) && p.Engine != "1.40b23" {
 		return nil, errors.New("portable baseline is fixed at 1.40b23; choose or duplicate a different profile for another engine")
 	}
@@ -296,6 +320,9 @@ func (m *Manager) build(p Profile) (any, error) {
 			return nil, e
 		}
 	}
+	if e = m.checkCancellation(); e != nil {
+		return nil, e
+	}
 	old, _, oe := m.activePath(p.ID)
 	if oe == nil {
 		var om Manifest
@@ -349,6 +376,9 @@ func (m *Manager) build(p Profile) (any, error) {
 	}
 	if !v.OK {
 		return nil, fmt.Errorf("staging verification failed: %v", v.Bad)
+	}
+	if e = m.beginCommit(); e != nil {
+		return nil, e
 	}
 	if m.isPortableBaseline(p.ID) {
 		// Write project-owned config before activation; an unwritable config must
@@ -699,11 +729,18 @@ func (m *Manager) state() (any, error) {
 	active := map[string]string{}
 	hist := map[string]any{}
 	network := map[string]NetworkPreflight{}
+	prepared := map[string]any{}
 	for _, p := range ps {
 		dir, g, e := m.activePath(p.ID)
 		if e == nil {
 			active[p.ID] = g
 			network[p.ID] = inspectNetworkKernel(filepath.Join(dir, "game"), p.Engine)
+			var mf Manifest
+			if err := readWorkspaceManifest(dir, &mf); err == nil {
+				if r, err := resolve(mf.Profile); err == nil {
+					prepared[p.ID] = map[string]string{"fingerprint": r.Fingerprint, "engine": mf.Profile.Engine, "core": mf.Profile.Core}
+				}
+			}
 		}
 		h, _ := m.history(p.ID)
 		hist[p.ID] = h
@@ -711,7 +748,7 @@ func (m *Manager) state() (any, error) {
 	m.mu.Lock()
 	j, r, kind, exit := m.job, m.runningProfile, m.runningKind, m.lastExit
 	m.mu.Unlock()
-	return map[string]any{"application": m.applicationIdentity(), "network_preflight": network, "portable": m.Portable, "portable_root": m.Root, "portable_recovery_pending": m.Portable && exists(m.baselineJournal()), "default_profile": "baseline", "selected_profile_id": m.selectedProfileID(), "version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "running_kind": kind, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "network_services": networkServices(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
+	return map[string]any{"application": m.applicationIdentity(), "prepared": prepared, "runtime_status": m.runtimeStatus(), "network_preflight": network, "portable": m.Portable, "portable_root": m.Root, "portable_recovery_pending": m.Portable && exists(m.baselineJournal()), "default_profile": "baseline", "selected_profile_id": m.selectedProfileID(), "version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "running_kind": kind, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "network_services": networkServices(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
 }
 func encode(v any) string { b, _ := json.MarshalIndent(v, "", "  "); return string(b) }
 

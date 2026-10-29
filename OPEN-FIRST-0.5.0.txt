@@ -1,0 +1,42 @@
+MOO2-SGC 0.5.0 — private Windows GUI test candidate
+
+OPEN ONE FILE
+Double-click MOO2-SGC-0.5.0-Windows.exe.
+No Go installation, terminal, CMD wrapper, or config editing is needed.
+
+The launcher opens a local browser window and prepares a separate private
+installation. It does not replace your current launcher, shortcuts, or saves.
+
+IN THE WINDOW
+1. Browse to your owned MOO2 folder or ZIP. Originals stay unchanged.
+2. Choose your version and mods. New setup suggests Community 1.50.26 standard;
+   the independent legacy 1.40b23 option remains available. Existing selections
+   are preserved. No experimental balance rules are switched on for you.
+3. Choose Prepare selected game. If a supported patch/runtime is missing, use
+   the visible verified-download or local-import controls. The app itself is
+   included offline; game and runtime files are not bundled.
+4. Review the Ready result, then choose Play MOO2.
+
+Later, open the same file again. A second click reopens the existing launcher.
+Finish by closing the game normally and choosing Exit launcher in the window.
+Closing the browser tab alone does not stop the launcher.
+
+IF SOMETHING STOPS
+Read the graphical error. Setup offers Retry, Recover interrupted startup,
+and Exit. Recovery never clears a live or unknown game/process lock. An unknown
+previous game state is deliberately left untouched rather than risk your saves.
+A missing default browser or read-only private folder must be corrected through
+your operating system settings. Do not remove protective locks blindly.
+
+IMPORTANT TEST LIMITS
+This candidate is unsigned by Windows Authenticode and has NOT yet been tested
+on a native Windows laptop or in a rendered browser here. It is not a production
+release. Do not disable security protection or bypass organizational policy.
+Windows native file dialogs, game-window visibility, real gameplay, and saves
+still need the separate acceptance checklist in the source ZIP.
+
+GOG folders may be discovered, but not every GOG/regional edition is supported.
+PRSL and the new Chat extension are not installed or required. No game files
+are uploaded. The published/reviewed 0.4.8 release remains unchanged.
+
+The source ZIP is for maintainers/review; normal players open only the EXE.

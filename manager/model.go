@@ -35,16 +35,17 @@ type Mod struct {
 	Source       string   `json:"source"`
 }
 type Profile struct {
-	ID             string   `json:"id"`
-	Name           string   `json:"name"`
-	Engine         string   `json:"engine"`
-	Core           string   `json:"core"`
-	Mods           []string `json:"mods"`
-	Fullscreen     bool     `json:"fullscreen"`
-	Role           string   `json:"role"`
-	NetworkService string   `json:"network_service,omitempty"`
-	Host           string   `json:"host"`
-	Port           int      `json:"port"`
+	ID             string               `json:"id"`
+	Name           string               `json:"name"`
+	Engine         string               `json:"engine"`
+	Core           string               `json:"core"`
+	Mods           []string             `json:"mods"`
+	Fullscreen     bool                 `json:"fullscreen"`
+	Presentation   PresentationSettings `json:"presentation,omitempty"`
+	Role           string               `json:"role"`
+	NetworkService string               `json:"network_service,omitempty"`
+	Host           string               `json:"host"`
+	Port           int                  `json:"port"`
 }
 type Resolution struct {
 	Requested   Profile     `json:"profile"`
@@ -123,6 +124,9 @@ func catalog() []Mod {
 	return out
 }
 func validateProfile(p Profile) error {
+	if e := validatePresentation(p.Presentation); e != nil {
+		return e
+	}
 	if !idPattern.MatchString(p.ID) {
 		return errors.New("profile ID must be 1–40 lowercase letters, digits, underscores or hyphens")
 	}

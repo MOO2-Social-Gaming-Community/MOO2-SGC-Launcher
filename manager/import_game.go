@@ -245,6 +245,9 @@ func detectGameFolders() []string {
 	return out
 }
 func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
+	if e := m.checkCancellation(); e != nil {
+		return nil, e
+	}
 	if _, e := resolve(p); e != nil {
 		return nil, e
 	}
@@ -289,12 +292,15 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 			choices = nil
 		} else {
 			if len(choices) != 1 {
-				return nil, errors.New("owned game source required: choose a detected game folder, paste its path, or import your recognized base.zip. The game is not downloaded or redistributed")
+				return nil, errors.New("choose your owned MOO2 folder or ZIP with Browse, or choose a detected installation. The game is not downloaded or redistributed")
 			}
 			if _, e = m.importFolder(choices[0]); e != nil {
 				return nil, e
 			}
 		}
+	}
+	if e := m.checkCancellation(); e != nil {
+		return nil, e
 	}
 	edition, e := m.currentEdition()
 	if e != nil {
@@ -332,12 +338,13 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 			}
 		}
 	}
+	if e = m.checkCancellation(); e != nil {
+		return nil, e
+	}
 	if m.Portable && platform() == "windows/amd64" {
 		// Never substitute a globally installed emulator for the verified bundle.
-		if !exists(m.harnessRuntimePath()) {
-			if _, e := m.installRuntime(); e != nil {
-				return nil, fmt.Errorf("portable DOSBox runtime: %w", e)
-			}
+		if _, e := m.installRuntime(); e != nil {
+			return nil, fmt.Errorf("portable DOSBox runtime: %w", e)
 		}
 		if _, e := m.localHarnessRuntime(); e != nil {
 			return nil, e
@@ -346,6 +353,9 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 		if _, e := m.installRuntime(); e != nil {
 			return nil, fmt.Errorf("DOSBox runtime: %w", e)
 		}
+	}
+	if e = m.checkCancellation(); e != nil {
+		return nil, e
 	}
 	result, e := m.build(p)
 	if e != nil {

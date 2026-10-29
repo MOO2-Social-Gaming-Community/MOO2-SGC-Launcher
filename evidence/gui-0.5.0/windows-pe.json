@@ -1,0 +1,24 @@
+{
+  "version": "0.5.0",
+  "windows_gui_subsystem_verified": true,
+  "checks": [
+    {
+      "file": "desktop_05/MOO2-SGC-windows-amd64.exe",
+      "sha256": "6cd937f3963f8aed892e9cf78ef0f6fbd0fd6c6c286e6dd554f387a678402e40",
+      "pe_subsystem": 2,
+      "native_executed": false
+    },
+    {
+      "file": "release_05/binaries/windows-amd64/MOO2-SGC-Launcher.exe",
+      "sha256": "f5d556facccecd9bd443eb672c72496644bf9ca5166710e9f13780c68f3fa7fa",
+      "pe_subsystem": 2,
+      "native_executed": false
+    },
+    {
+      "file": "release_05/binaries/windows-amd64/MOO2-SGC-Setup.exe",
+      "sha256": "c7ff25e9edc55ac8aac8519c0e37e650d56864a78daa36c3ffa5a205dac41cee",
+      "pe_subsystem": 2,
+      "native_executed": false
+    }
+  ]
+}

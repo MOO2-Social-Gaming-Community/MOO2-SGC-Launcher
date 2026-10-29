@@ -1,0 +1,56 @@
+{
+  "development": true,
+  "offline_launcher_install": true,
+  "game_data_included": false,
+  "source_index_sha256": "3d6f451426531cc4fc8ea380cd24a0f3731317c393cf029f9517e3f75eac338b",
+  "artifacts": [
+    {
+      "target": "windows-amd64",
+      "file": "MOO2-SGC-windows-amd64.exe",
+      "version": "0.5.1",
+      "bytes": 15236096,
+      "sha256": "908b784e9ec8733ba2f282b84c735c285110e7fee74f9325ae9175aa5c27cd7a",
+      "embedded_package_sha256": "bccecbfde086cde226e64002ce48e5f4ad4efe1747b52b71004792a48a5b59a3",
+      "gui_subsystem": true,
+      "cross_compiled": true,
+      "native_os_tested": false,
+      "os_signed": false
+    },
+    {
+      "target": "linux-amd64",
+      "file": "MOO2-SGC-linux-amd64",
+      "version": "0.5.1",
+      "bytes": 14803104,
+      "sha256": "79447fde4ecd85b5f15c695ec41183347563b3634f2b648c45c05f243118efa6",
+      "embedded_package_sha256": "899fe6cde47420bc59f23b6e8162a78f63006b32483968afea17d7b5b275f869",
+      "gui_subsystem": false,
+      "cross_compiled": false,
+      "native_os_tested": false,
+      "os_signed": false
+    },
+    {
+      "target": "darwin-amd64",
+      "file": "MOO2-SGC-darwin-amd64",
+      "version": "0.5.1",
+      "bytes": 15054096,
+      "sha256": "889c8a6de7e56bdd379a3728f2425ff8f908eb2eb225e54668f0ebc0224ec2cf",
+      "embedded_package_sha256": "a07f6b216bee8385e415166cd95c65133906234376a6b68b069cb6f2a7ad2aec",
+      "gui_subsystem": false,
+      "cross_compiled": true,
+      "native_os_tested": false,
+      "os_signed": false
+    },
+    {
+      "target": "darwin-arm64",
+      "file": "MOO2-SGC-darwin-arm64",
+      "version": "0.5.1",
+      "bytes": 13978354,
+      "sha256": "e3f15f7cbfe0510c04c5c0d459abef0254b4482fe10d5dbf7373c9d778683ec8",
+      "embedded_package_sha256": "5de72ffce2db4e519b38c11985753b1decad50200a4706b1ed85fef0375b10c7",
+      "gui_subsystem": false,
+      "cross_compiled": true,
+      "native_os_tested": false,
+      "os_signed": false
+    }
+  ]
+}

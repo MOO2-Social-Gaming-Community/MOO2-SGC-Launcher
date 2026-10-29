@@ -80,7 +80,7 @@ def main() -> None:
             launcher = native_dir / launcher_name
             setup = native_dir / setup_name
             for path, cmd in ((launcher, "."), (setup, "./cmd/bootstrapper")):
-                run(["go", "build", "-trimpath", "-buildvcs=false", "-ldflags="+flags, "-o", str(path), cmd], env=env)
+                run(["go", "build", "-trimpath", "-buildvcs=false", "-ldflags="+flags+(" -H=windowsgui" if system == "windows" else ""), "-o", str(path), cmd], env=env)
                 path.chmod(0o755)
             filename = f"launcher-{VERSION}-{target}.zip"
             files = {launcher_name: launcher, setup_name: setup, "SOURCE-FINGERPRINT.json": source_file,

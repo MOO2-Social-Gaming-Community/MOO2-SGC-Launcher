@@ -1,14 +1,12 @@
 package main
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
 	"errors"
 	"fmt"
 	"io"
+	"moo2manager/shared/desktop"
 	"net"
 	"net/http"
-	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -29,13 +27,15 @@ type RuntimeRecipe struct {
 	Requirement string `json:"requirement"`
 }
 
+const WindowsRuntimeArchiveSHA256 = "725b915e325a6d410ce30a10989fd492fdad07f6611fff40ff77f160478810f4"
+
 func platform() string { return runtime.GOOS + "/" + runtime.GOARCH }
 func runtimeRecipeForPlatform() RuntimeRecipe {
 	r := RuntimeRecipe{Version: "0.83.0", Supported: true}
 	switch runtime.GOOS {
 	case "windows":
 		r.URL = "https://github.com/dosbox-staging/dosbox-staging/releases/download/v0.83.0/dosbox-staging-windows-x64-v0.83.0.zip"
-		r.SHA256 = "725b915e325a6d410ce30a10989fd492fdad07f6611fff40ff77f160478810f4"
+		r.SHA256 = WindowsRuntimeArchiveSHA256
 		r.Format = "zip"
 		r.Requirement = "64-bit Windows 10/11 target; Windows execution not tested here"
 		if runtime.GOARCH != "amd64" {
@@ -62,45 +62,6 @@ func runtimeRecipeForPlatform() RuntimeRecipe {
 func trustedDownloadHost(h string) bool {
 	return h == "github.com" || h == "release-assets.githubusercontent.com" || h == "objects.githubusercontent.com" || h == "moo2mod.com" || h == "www.moo2mod.com"
 }
-func downloadVerifiedWith(client *http.Client, src, dest, want string, max int64) error {
-	// Caller controls transport for tests; production restricts every HTTPS redirect.
-	resp, e := client.Get(src)
-	if e != nil {
-		return e
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		return fmt.Errorf("download HTTP %d", resp.StatusCode)
-	}
-	if resp.ContentLength > max {
-		return errors.New("download exceeds size limit")
-	}
-	f, e := os.CreateTemp(filepath.Dir(dest), ".download-")
-	if e != nil {
-		return e
-	}
-	tmp := f.Name()
-	defer os.Remove(tmp)
-	h := sha256.New()
-	n, e := io.Copy(io.MultiWriter(f, h), io.LimitReader(resp.Body, max+1))
-	ce := f.Close()
-	if e != nil {
-		return e
-	}
-	if ce != nil {
-		return ce
-	}
-	if n > max {
-		return errors.New("download exceeded limit")
-	}
-	if resp.ContentLength >= 0 && n != resp.ContentLength {
-		return errors.New("truncated download")
-	}
-	if hex.EncodeToString(h.Sum(nil)) != want {
-		return errors.New("download checksum mismatch; cached package was not replaced")
-	}
-	return replaceFile(tmp, dest)
-}
 func downloadClient() *http.Client {
 	return &http.Client{Timeout: 5 * time.Minute, CheckRedirect: func(req *http.Request, via []*http.Request) error {
 		if len(via) > 8 {
@@ -111,19 +72,6 @@ func downloadClient() *http.Client {
 		}
 		return nil
 	}}
-}
-func downloadVerified(src, dest, want string, max int64) error {
-	u, e := url.Parse(src)
-	if e != nil || u.Scheme != "https" || !trustedDownloadHost(u.Hostname()) {
-		return errors.New("only approved HTTPS distribution hosts may supply packages")
-	}
-	if e = noSymlinkAncestors(dest); e != nil {
-		return e
-	}
-	if e = os.MkdirAll(filepath.Dir(dest), 0700); e != nil {
-		return e
-	}
-	return downloadVerifiedWith(downloadClient(), src, dest, want, max)
 }
 func (m *Manager) runtimeCandidates() []string {
 	out := []string{}
@@ -142,8 +90,11 @@ func (m *Manager) runtimeCandidates() []string {
 		}
 	}
 	if m.Portable && runtime.GOOS == "windows" {
-		// The project's pinned runtime has precedence over global/user installs.
+		// Other detected executables are not usable substitutes for this mode.
+		// State reports a separate metadata-only readiness check; every launch
+		// verifies the complete pinned runtime before executing it.
 		add(m.harnessRuntimePath())
+		return out
 	}
 	add(m.getSettings().RuntimePath)
 	managed := filepath.Join(m.Data, "runtime")
@@ -187,12 +138,15 @@ func (m *Manager) runtimeCandidates() []string {
 	return out
 }
 func (m *Manager) installRuntime() (any, error) {
-	if m.Portable && runtime.GOOS == "windows" && exists(m.harnessRuntimePath()) {
-		exe, err := m.localHarnessRuntime()
-		if err != nil {
-			return nil, err
+	if e := m.checkCancellation(); e != nil {
+		return nil, e
+	}
+	if m.Portable && runtime.GOOS == "windows" {
+		if exe, err := m.localHarnessRuntime(); err == nil {
+			return map[string]string{"runtime": exe, "version": "0.83.0", "verification": "existing complete runtime matched compiled SHA-256"}, nil
 		}
-		return map[string]string{"runtime": exe, "version": "0.83.0", "verification": "existing exact supplied harness file manifest"}, nil
+		// Missing, partial and checksum-failing managed copies all use the same
+		// verified staging path. The old tree is retained, never patched in place.
 	}
 
 	r := runtimeRecipeForPlatform()
@@ -202,13 +156,19 @@ func (m *Manager) installRuntime() (any, error) {
 	archive := filepath.Join(m.Data, "cache", "dosbox-"+runtime.GOOS+"-"+r.Version+"."+r.Format)
 	if e := requireHash(archive, r.SHA256); e != nil {
 		m.progress("Downloading official DOSBox Staging; verifying the published SHA-256 before extraction…")
-		if e = downloadVerified(r.URL, archive, r.SHA256, 512*1024*1024); e != nil {
+		if e = m.downloadPackage("DOSBox Staging", r.URL, archive, r.SHA256, 512*1024*1024); e != nil {
 			return nil, e
 		}
 	}
-	parent := filepath.Join(m.Data, "runtime")
+	if e := m.checkCancellation(); e != nil {
+		return nil, e
+	}
 	if m.Portable && runtime.GOOS == "windows" {
-		parent = filepath.Join(m.Root, "runtime")
+		return m.installWindowsRuntimeArchive(archive)
+	}
+	parent := filepath.Join(m.Data, "runtime")
+	if e := noSymlinkAncestors(parent); e != nil {
+		return nil, e
 	}
 	if e := os.MkdirAll(parent, 0700); e != nil {
 		return nil, e
@@ -274,24 +234,10 @@ func (m *Manager) installRuntime() (any, error) {
 			return nil, e
 		}
 	}
-	if m.Portable && runtime.GOOS == "windows" {
-		sourceDir := filepath.Dir(exe)
-		if e = verifyHarnessRuntime(sourceDir); e != nil {
-			return nil, e
-		}
-		dest := filepath.Join(parent, "windows")
-		if exists(dest) {
-			return nil, errors.New("portable runtime already exists; verification failure requires restoring the supplied harness, not silently replacing it")
-		}
-		if e = os.Rename(sourceDir, dest); e != nil {
-			return nil, e
-		}
-		exe = filepath.Join(dest, "dosbox.exe")
-		if e = atomicJSON(filepath.Join(m.Data, "settings.json"), Settings{exe}); e != nil {
-			return nil, e
-		}
-		return map[string]string{"runtime": exe, "version": r.Version, "verification": "exact supplied harness file manifest"}, nil
+	if e = m.beginRuntimeCommit(); e != nil {
+		return nil, e
 	}
+	defer m.endRuntimeCommit()
 	rel, _ := filepath.Rel(extracted, exe)
 	dest := filepath.Join(parent, "staging-"+r.Version+"-"+fmt.Sprint(time.Now().UnixNano()))
 	if e = os.Rename(extracted, dest); e != nil {
@@ -320,7 +266,7 @@ func dosboxConfig(game string, p Profile) (string, error) {
 	if strings.ContainsAny(game, "\"\r\n\x00") {
 		return "", errors.New("game path cannot be represented safely")
 	}
-	base := harnessBaseConfig()
+	base := presentationBaseConfig(p)
 	if p.Role == "standalone" {
 		return base, nil
 	}
@@ -426,11 +372,16 @@ func (m *Manager) launch(p Profile) (any, error) {
 		logfile.Close()
 		return nil, e
 	}
-	if e = m.rememberProfile(p.ID); e != nil {
+	// Play remembers display/audio preferences without changing the requested
+	// rules, existing generations or the original owned source.
+	if _, e = m.savePresentation(p.ID, p.Fullscreen, p.Presentation); e != nil {
 		logfile.Close()
 		return nil, e
 	}
 	cmd := exec.Command(exe, args...)
+	if m.DesktopGUI {
+		desktop.SuppressConsole(cmd)
+	}
 	cmd.Dir = game
 	cmd.Stdout = logfile
 	cmd.Stderr = logfile
@@ -477,7 +428,7 @@ func (m *Manager) launch(p Profile) (any, error) {
 func (m *Manager) refreshPatch() (any, error) {
 	dst := filepath.Join(m.Data, "cache", "patch-1.50.26.zip")
 	m.progress("Refreshing the supported community patch; rejecting bytes that differ from the pinned build…")
-	if e := downloadVerified("https://moo2mod.com/patch/MOO2-1.50.26.zip", dst, PatchHash, 64*1024*1024); e != nil {
+	if e := m.downloadPackage("Community patch 1.50.26", "https://moo2mod.com/patch/MOO2-1.50.26.zip", dst, PatchHash, 64*1024*1024); e != nil {
 		return nil, e
 	}
 	return map[string]string{"cached": "1.50.26", "sha256": PatchHash, "activation": "Existing environments unchanged. Use Prepare/Repair to reconstruct."}, nil

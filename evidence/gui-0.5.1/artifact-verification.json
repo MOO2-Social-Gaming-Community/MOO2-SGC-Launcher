@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "independent Ed25519 manifest signature",
+    "all 142 indexed source files match",
+    "windows-amd64 package signature, ZIP inventory, source index, outer hash and exact embedded payload",
+    "Windows PE GUI subsystem2; Authenticode certificate directory absent",
+    "linux-amd64 package signature, ZIP inventory, source index, outer hash and exact embedded payload",
+    "darwin-amd64 package signature, ZIP inventory, source index, outer hash and exact embedded payload",
+    "darwin-arm64 package signature, ZIP inventory, source index, outer hash and exact embedded payload"
+  ],
+  "count": 7,
+  "native_windows_tested": false,
+  "os_signed": false
+}

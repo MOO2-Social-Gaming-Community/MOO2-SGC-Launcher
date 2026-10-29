@@ -29,6 +29,11 @@ func (m *Manager) selectedProfileID() string {
 			return saved.ProfileID
 		}
 	}
+	// A desktop first run recommends the unmodified Community standard profile.
+	// Existing saved choices and legacy CLI defaults are never silently changed.
+	if m.DesktopGUI {
+		return "community"
+	}
 	// First run, removed profile, invalid preferences: retain the accepted baseline default.
 	return "baseline"
 }

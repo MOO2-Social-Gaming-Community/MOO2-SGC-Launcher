@@ -3,34 +3,23 @@ package main
 import (
 	"flag"
 	"fmt"
+	"moo2manager/shared/desktop"
 	d "moo2manager/shared/distribution"
 	"os"
-	"os/exec"
 	"path/filepath"
-	"runtime"
 )
 
-func openBrowser(u string) error {
-	var c *exec.Cmd
-	switch runtime.GOOS {
-	case "windows":
-		c = exec.Command("rundll32", "url.dll,FileProtocolHandler", u)
-	case "darwin":
-		c = exec.Command("open", u)
-	default:
-		c = exec.Command("xdg-open", u)
-	}
-	if e := c.Start(); e != nil {
-		return e
-	}
-	go func() { _ = c.Wait() }()
-	return nil
-}
+var desktopGUIMode bool
+
+func openBrowser(u string) error { return desktop.OpenBrowser(u) }
 func main() {
+	flag.BoolVar(&desktopGUIMode, "desktop-gui", false, "use native desktop errors and terminal-free update handoff")
 	appRoot := flag.String("app-root", "", "stable bootstrap-managed application root; user profiles remain in --data")
 	root := flag.String("root", "", "directory containing payloads (defaults to executable directory)")
 	data := flag.String("data", "", "portable data directory (defaults to ROOT/data)")
 	noBrowser := flag.Bool("no-browser", false, "print the loopback URL without opening a browser")
+	deferBrowserOnce := flag.Bool("defer-browser-once", false, "internal desktop handoff: parent opens only this initial browser session")
+	noShortcut := flag.Bool("no-shortcut", false, "do not create or replace shortcuts during launcher updates")
 	privateURLFileOnly := flag.Bool("private-url-file-only", false, "keep the private URL in open-launcher.txt instead of standard output (update handoff)")
 	port := flag.Int("port", 0, "local UI port; default chooses an available port")
 	ver := flag.Bool("version", false, "print version")
@@ -67,6 +56,9 @@ func main() {
 		fail(e)
 	}
 	m.AppRoot = *appRoot
+	m.DesktopGUI = desktopGUIMode
+	m.DeferBrowserOnce = *deferBrowserOnce
+	m.NoShortcut = *noShortcut
 	fmt.Fprintln(os.Stderr, "MOO2-SGC Launcher", Version, "executable", exe, "application root", *appRoot, "game root", m.Root, "data", m.Data)
 	// An exclusive process lock prevents two managers from mutating one data directory.
 	lock := filepath.Join(m.Data, "manager.lock")
@@ -157,6 +149,9 @@ func main() {
 	}()
 	if e != nil {
 		fmt.Fprintln(os.Stderr, "Error:", e)
+		if desktopGUIMode {
+			desktop.ShowError("MOO2-SGC Launcher", e.Error())
+		}
 		code = 1
 	}
 	if code != 0 {
@@ -164,4 +159,10 @@ func main() {
 		os.Exit(code)
 	}
 }
-func fail(e error) { fmt.Fprintln(os.Stderr, "Error:", e); os.Exit(1) }
+func fail(e error) {
+	fmt.Fprintln(os.Stderr, "Error:", e)
+	if desktopGUIMode {
+		desktop.ShowError("MOO2-SGC Launcher", e.Error())
+	}
+	os.Exit(1)
+}

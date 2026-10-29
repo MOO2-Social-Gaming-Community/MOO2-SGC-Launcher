@@ -20,14 +20,17 @@ import (
 )
 
 type actionRequest struct {
-	Action      string  `json:"action"`
-	Profile     Profile `json:"profile"`
-	ID          string  `json:"id"`
-	Generation  string  `json:"generation"`
-	RuntimePath string  `json:"runtime_path"`
-	SourcePath  string  `json:"source_path"`
-	PayloadKind string  `json:"payload_kind"`
-	OfflinePath string  `json:"offline_path"`
+	Action       string               `json:"action"`
+	Profile      Profile              `json:"profile"`
+	ID           string               `json:"id"`
+	Generation   string               `json:"generation"`
+	RuntimePath  string               `json:"runtime_path"`
+	SourcePath   string               `json:"source_path"`
+	PayloadKind  string               `json:"payload_kind"`
+	OfflinePath  string               `json:"offline_path"`
+	PickerKind   string               `json:"picker_kind"`
+	Fullscreen   bool                 `json:"fullscreen"`
+	Presentation PresentationSettings `json:"presentation"`
 }
 type localServer struct {
 	manager   *Manager
@@ -35,6 +38,7 @@ type localServer struct {
 	host      string
 	server    *http.Server
 	noBrowser bool
+	pick      func(string) (string, error)
 }
 
 func token() string {
@@ -87,6 +91,12 @@ func (s *localServer) handler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		switch r.URL.Path {
+		case "/api/identity":
+			if r.Method != "GET" {
+				http.Error(w, "GET required", 405)
+				return
+			}
+			jsonResponse(w, 200, s.manager.applicationIdentity())
 		case "/api/state":
 			if r.Method != "GET" {
 				http.Error(w, "GET required", 405)
@@ -165,6 +175,14 @@ func (s *localServer) action(w http.ResponseWriter, r *http.Request) {
 		jsonResponse(w, 400, map[string]string{"error": e.Error()})
 		return
 	}
+	if a.Action == "cancel" {
+		if err := s.manager.cancelOperation(); err != nil {
+			jsonResponse(w, 409, map[string]string{"error": err.Error()})
+			return
+		}
+		jsonResponse(w, 200, map[string]string{"status": "cancellation requested"})
+		return
+	}
 	if a.Action == "quit" || a.Action == "launcher-apply" {
 		s.manager.mu.Lock()
 		busy := s.manager.job.Busy || s.manager.running != nil
@@ -191,6 +209,21 @@ func (s *localServer) action(w http.ResponseWriter, r *http.Request) {
 	}
 	var work func() (any, error)
 	switch a.Action {
+	case "browse":
+		if _, _, _, err := pickerType(a.PickerKind); err != nil {
+			jsonResponse(w, 400, map[string]string{"error": err.Error()})
+			return
+		}
+		work = func() (any, error) {
+			pick := s.pick
+			if pick == nil {
+				pick = nativePick
+			}
+			path, err := pick(a.PickerKind)
+			return pickerResult(a.PickerKind, path, err)
+		}
+	case "runtime-import":
+		work = func() (any, error) { return s.manager.importRuntime(a.SourcePath) }
 	case "check-dopefish":
 		work = s.manager.checkDopefish
 	case "prepare-play":
@@ -205,6 +238,8 @@ func (s *localServer) action(w http.ResponseWriter, r *http.Request) {
 		work = s.manager.recoverPortableBaseline
 	case "prepare":
 		work = func() (any, error) { return s.manager.build(a.Profile) }
+	case "presentation-save":
+		work = func() (any, error) { return s.manager.savePresentation(a.ID, a.Fullscreen, a.Presentation) }
 	case "save":
 		work = func() (any, error) { e := s.manager.saveProfile(a.Profile); return a.Profile, e }
 	case "verify":
@@ -282,9 +317,12 @@ func serve(m *Manager, open bool, requestedPort int, privateURLFileOnly bool) er
 	defer os.Remove(recoveryPath)
 	printLauncherURL(os.Stdout, u, recoveryPath, privateURLFileOnly)
 	fmt.Println("Use Exit launcher in the UI. Closing the browser tab does not stop the manager.")
-	if open {
+	if initialBrowserAllowed(open, m.DeferBrowserOnce) {
 		if e = openBrowser(u); e != nil {
 			fmt.Println("Browser could not be opened automatically:", e)
+			if m.DesktopGUI {
+				return fmt.Errorf("the default browser could not open. Set a default browser in Windows Settings, then reopen the launcher: %w", e)
+			}
 		}
 	}
 	signals := make(chan os.Signal, 2)
@@ -316,3 +354,7 @@ func serve(m *Manager, open bool, requestedPort int, privateURLFileOnly bool) er
 	}
 	return e
 }
+
+// Explicit no-browser is retained by localServer; this flag only defers the
+// first open to the desktop parent and is never forwarded to the updater.
+func initialBrowserAllowed(open, deferOnce bool) bool { return open && !deferOnce }

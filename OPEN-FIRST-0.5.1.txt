@@ -1,0 +1,53 @@
+MOO2-SGC 0.5.1 — private Windows x64 GUI test candidate
+
+OPEN ONE FILE
+Double-click MOO2-SGC-0.5.1-Windows.exe.
+No Go installation, terminal, CMD wrapper or config editing is needed.
+The local browser interface opens automatically.
+
+THIS IS A SEPARATE TEST INSTALLATION
+0.5.1 uses a new private-gui-0.5.1 folder. It leaves your 0.5.0 test setup and
+working launcher alone. Choose your owned game source again; old test profiles
+and saves are not migrated automatically. Later opens reuse this new setup.
+
+IN THE WINDOW
+1. Already have MOO2? Browse to your supported owned game folder or ZIP.
+   Otherwise use the official Steam/GOG links, install your owned copy through
+   that store/client, then return and choose I've installed it — find my game.
+   This candidate does not provide a full-game backup-site downloader or run
+   unknown installers. GOG-specific editions are not yet validated.
+2. Choose the version and mods. New setup suggests Community 1.50.26 standard;
+   legacy 1.40b23 remains available. No experimental balance is selected.
+3. Choose Prepare selected game. Required approved patches and DOSBox can be
+   downloaded with visible progress, or imported through the graphical controls.
+   Cancel interrupts downloads; verification and activation use safe boundaries.
+   Retry preserves your previously prepared game and verified cached packages.
+4. Review Ready. Optional Display, sound and background settings let you set
+   fullscreen, starting window size, audio mute and background behavior.
+   Save settings or choose Play MOO2. No re-prepare is needed for these settings.
+
+Finish by closing the game normally, then choose Exit launcher. Closing only
+its browser tab does NOT stop the launcher. Double-clicking the same EXE while
+it runs reopens its existing session.
+
+IF SOMETHING STOPS
+Read the graphical error. Setup offers Retry, Recover interrupted startup and
+Exit. Recovery never removes live or unknown game/process locks. Do not remove
+protective locks blindly. Missing-browser or folder-permission issues need
+correction through Windows settings, not a terminal command.
+
+TEST LIMITS
+This candidate is unsigned by Windows Authenticode. Native Windows dialogs,
+rendered browser UI, actual game-window visibility, audio, gameplay and saves
+have not been verified on a Windows laptop here. It is not production-ready.
+Do not disable security protection or bypass organizational policy.
+
+For a short review: open it, browse a source (try Cancel once), prepare, review
+Ready, change a display setting, and check Play opens a visible game. If time
+permits, create a disposable save and reload it. Send the exact first error or
+screenshots of Ready/the game. Crop personal paths and browser address bars;
+do not send the local private-session URL.
+
+No original game files are modified or uploaded. Game/runtime files are not
+bundled. PRSL and new Chat are not installed or required. No public publication
+was performed. The source ZIP is for maintainers; players need only the EXE.

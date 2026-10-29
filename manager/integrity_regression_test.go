@@ -129,12 +129,45 @@ func TestPatchInventoryContainsRequiredCodeAndConfig(t *testing.T) {
 	}
 }
 
+// Only a fully verified Steam-derived fixture can lack the historical 1.31
+// executable legitimately. An explicitly supplied legacy fixture must satisfy
+// the legacy case; missing/wrong bytes never become a successful assertion.
+func skipLegacyReceiptForSteam(mf Manifest, missing bool, explicitLegacy bool) bool {
+	if !missing || explicitLegacy {
+		return false
+	}
+	return mf.SourceBaseKind == "known-edition-v2:steam-en-140b23" || mf.SourceBaseKind == "known-edition-v2:steam-en-140b23-harness"
+}
+
+func TestLegacyReceiptSkipIsLineageSpecific(t *testing.T) {
+	for _, kind := range []string{"known-edition-v2:steam-en-140b23", "known-edition-v2:steam-en-140b23-harness", "known-edition-v2:manual-en-140b23", "known-edition-v2:legacy-en-131", "unknown", ""} {
+		steam := kind == "known-edition-v2:steam-en-140b23" || kind == "known-edition-v2:steam-en-140b23-harness"
+		for _, missing := range []bool{false, true} {
+			for _, explicit := range []bool{false, true} {
+				if got := skipLegacyReceiptForSteam(Manifest{SourceBaseKind: kind}, missing, explicit); got != (steam && missing && !explicit) {
+					t.Fatalf("kind=%s missing=%v explicit=%v skip=%v", kind, missing, explicit, got)
+				}
+			}
+		}
+	}
+}
+
 func TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase(t *testing.T) {
+	legacy := os.Getenv("MOO2_LEGACY_COMMUNITY_FIXTURE")
+	if legacy != "" {
+		t.Setenv("MOO2_COMMUNITY_FIXTURE", legacy)
+	}
 	dir := communityFixtureCopy(t)
 	game := filepath.Join(dir, "game")
 	var mf Manifest
 	if e := readWorkspaceManifest(dir, &mf); e != nil {
 		t.Fatal(e)
+	}
+	// communityFixtureCopy above verifies the entire fixture before this gate.
+	// Steam starts at 1.40b23 and has no retained ORION131.EXE; do not invent one.
+	_, statErr := os.Stat(filepath.Join(game, "ORION131.EXE"))
+	if skipLegacyReceiptForSteam(mf, os.IsNotExist(statErr), legacy != "") {
+		t.Skip("verified Steam 1.40b23 Community fixture has no official 1.31 executable; set MOO2_LEGACY_COMMUNITY_FIXTURE to a genuine legacy-derived Community fixture for this 1.31-dependent case")
 	}
 	if e := copyFile(filepath.Join(game, "ORION131.EXE"), filepath.Join(game, "ORION2.EXE")); e != nil {
 		t.Fatal(e)

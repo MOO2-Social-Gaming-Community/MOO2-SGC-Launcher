@@ -1,0 +1,109 @@
+{
+  "version": "0.5.0",
+  "status": "independent source and private development artifact checks passed; native Windows and rendered GUI gates remain open",
+  "source_root": "<workspace>/moo2_gui_single_file_20261028/work",
+  "release": "<workspace>/moo2_gui_single_file_20261028/release_05",
+  "desktop": "<workspace>/moo2_gui_single_file_20261028/desktop_05",
+  "source_fingerprint_sha256": "467874d729a66f904234ae02ca16f63297b1014ff8b531f76f62a59e64af3caf",
+  "source_snapshot_matches_current_manager": true,
+  "go_race": {
+    "test_subtest_passes": 334,
+    "package_passes": 7,
+    "failures": 0,
+    "skips": [
+      "TestRealBaselineMatchesSteam",
+      "TestRealOfficialDownloadContentAuthentication",
+      "TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase"
+    ],
+    "skip_reason": "Genuine original 1.31 archive/executable or legacy-derived Community fixture unavailable; valid Steam-derived Community fixture cannot substitute",
+    "log": "reviewer-050-final3-go.jsonl",
+    "includes_real_runtime_and_community_fixtures": true,
+    "includes_independent_prestart_failure_injection_process_doubles": true
+  },
+  "additional_checks": {
+    "go_vet": "passed",
+    "node_syntax": "both scripts passed",
+    "node_vm_suites": "ui_regression.js and gui_onboarding_regression.js passed; not rendered browser",
+    "windows_amd64_test_crosscompiles": "manager, cmd/desktop, shared/desktop passed; not executed",
+    "artifact_signature_member_source_pe_checks": 59,
+    "linux_compiled_lifecycle_checks": 30,
+    "lifecycle_browser": "recorder only; not rendered",
+    "game_executed": false
+  },
+  "inputs": {
+    "community_private_fixture_files": 539,
+    "community_fixture_unchanged": true,
+    "owned_base_sha256": "1a946338e703852ff834875cc205f24d5439161fde53ffeb5ffff87f6b21649c",
+    "owned_patch_sha256": "0ac9151e9cf752ec34b6db998d8b390f48e492d8443e8f1658112b93c7f6a921",
+    "owned_input_hashes_unchanged": true
+  },
+  "reviewed_controls": [
+    "Embedded signed manifest and package signatures, archive/member hashes and exact member set; bounded path-safe extraction; no unsigned receipt substitution; no recursive outer or game payload",
+    "Literal 127.0.0.1 canonical port/lowercase fragment validation; no raw fragment, proxies, redirects, URL credentials/query; authenticated root/data/version identity; token-free logs",
+    "Kernel outer lock; explicit conservative dead-owner recovery; unknown/live runtime records retained; private root ownership history only for fresh roots; missing/null launch field refused",
+    "Initial ownership publication O_EXCL prevents delayed concurrent first click from resetting attempted=true; bounded read-only concurrent writer check; deterministic regression and compiled simultaneous-click check",
+    "Successful pre-start record write required before every game/diagnostic Start; marker-write error prevents child; positive double observes conservative unknown record before process start",
+    "Native picker fixed dialog-kind enum, authenticated POST/token/origin, cancel preserves state; no user commands or terminal fallback on Windows",
+    "Prepare invokes complete preparation pipeline; readiness binds profile/revision/fingerprint; pending source and stale resolve cannot enable Play; duplicate operation/navigation guards",
+    "Pinned official runtime matches existing 660-file inventory without relaxed trust; import and transactional repair retain prior managed tree and original inputs",
+    "One-time --defer-browser-once is distinct from explicit --no-browser; update drops deferral but preserves explicit headless/no-shortcut/DesktopGUI policies",
+    "Actual DOSBox runtime/diagnostic use CREATE_NO_WINDOW without HideWindow/SW_HIDE; setup/manager/health helpers retain hidden-window policy",
+    "Catalog/profile/version honesty retained; no PRSL/Chat/experimental default or invented universal GOG support"
+  ],
+  "open_gates": [
+    "Native Windows 11 first-open, common-dialog foreground/focus/cancel, no-console experience, default-browser failure and updater lifecycle not executed",
+    "Actual Windows SDL game-window visibility, inputs/audio/fullscreen, real version/new-game/save/reload journey not executed",
+    "Rendered browser not executed: same-exec private loopback Chromium/Playwright launch failed before navigation with process_singleton_posix.cc socket() Operation not permitted; no bypass/retry performed",
+    "Three genuine 1.31/legacy fixture-dependent checks remain explicitly skipped",
+    "macOS/Linux binaries are internal cross-build artifacts, not certified OS-appropriate end-user application packaging",
+    "Development signatures are not Windows Authenticode; no public release, publication or SmartScreen certification"
+  ],
+  "final_windows_artifact": {
+    "platform": "windows-amd64",
+    "file": "MOO2-SGC-windows-amd64.exe",
+    "sha256": "6cd937f3963f8aed892e9cf78ef0f6fbd0fd6c6c286e6dd554f387a678402e40",
+    "bytes": 15228416,
+    "source_fingerprint_sha256": "467874d729a66f904234ae02ca16f63297b1014ff8b531f76f62a59e64af3caf",
+    "outer_pe": {
+      "machine": "0x8664",
+      "magic": "0x20b",
+      "subsystem": 2,
+      "certificate_directory": [
+        0,
+        0
+      ]
+    },
+    "inner_pe": {
+      "MOO2-SGC-Launcher.exe": {
+        "machine": "0x8664",
+        "magic": "0x20b",
+        "subsystem": 2,
+        "certificate_directory": [
+          0,
+          0
+        ]
+      },
+      "MOO2-SGC-Setup.exe": {
+        "machine": "0x8664",
+        "magic": "0x20b",
+        "subsystem": 2,
+        "certificate_directory": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "evidence_files": [
+    "reviewer-050-final3-go.jsonl",
+    "reviewer-050-final3-vet.log",
+    "reviewer-050-final3-source-inputs.json",
+    "reviewer-050-final-artifacts.json",
+    "reviewer-050-final-desktop-lifecycle.json",
+    "reviewer-050-final-desktop-lifecycle.log",
+    "reviewer-community-before.json",
+    "reviewer-community-after.json",
+    "browser-route-smoke.json"
+  ],
+  "intermediate_evidence_warning": "final2 aggregate failure was an overbroad legacy test fixture assumption, corrected by narrow verified-Steam-only missing-ORION131 skip; final3 is authoritative. Prior release_01..04 and desktop_01..04 are intermediate."
+}

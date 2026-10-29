@@ -1,52 +1,34 @@
-# Launcher 0.4.8 — current source review, 28 October 2026
+# Start here: MOO2-SGC 0.5.1 private GUI candidate
 
-**Complete source; unreleased. Not a drop-in update or installer.** Keep your working installation, original archives and saves unchanged. The current status is in `docs/TEST-REPORT.md`; dated reports under `docs/history/` retain their historical scope.
+**The goal is an app, not a terminal workflow.** This development candidate is based on the reviewed 0.4.8 launcher; it does not replace the user's published 0.4.8 release.
 
-## Build a native review binary
+## For a player on Windows 11 (x64)
 
-Prerequisite: Go **1.23 or newer** available as `go` (`go version` should identify the compiler). The module uses the Go standard library, so source compilation does not need game files or module downloads. Extract this package into a **new, separate folder**. Run these commands from `launcher/`.
+Use the matching **single-file `MOO2-SGC-0.5.1-Windows.exe`** supplied with the private candidate. Double-click it. Do not install Go, run CMD wrappers, or edit configuration files.
 
-### Linux or macOS shell
+1. A browser window shows verification and setup progress. The launcher installs only itself into a separate per-user private folder. It does not replace an existing launcher or shortcut.
+2. If needed, follow the official Steam/GOG store links to obtain your owned game. Sign-in, purchase and installation stay with the official store/client; this candidate does not download a complete game from a third-party backup site. Then return to the launcher. In the graphical chooser, **Browse** to a supported owned game folder or ZIP. Source files are verified and copied; Steam/GOG originals and their saves are not modified or uploaded. Not every regional or GOG edition has a verified recognition recipe.
+3. Choose the game version and community ruleset you want. For a new GUI user, **Community 1.50.26 / standard rules** is suggested; **legacy 1.40b23** remains an independent option. Existing saved selections are retained. No experimental SCG/Tournament balance is selected automatically.
+4. Use **Prepare**. Missing supported community patch/runtime files can be obtained through the visible verified-download flow, or choose an existing supported runtime through the graphical controls. Launcher installation itself is offline; game preparation can need those additional files or internet access.
+5. Review the readiness result. Optional **Display, sound and background settings** provide fullscreen, starting window size, mute and single-player background pause. Save settings or choose **Play**; these presentation changes do not require preparing the game again. Preparation never starts a game automatically.
 
-```sh
-mkdir -p review-bin review-root review-data
-(cd manager && go build -buildvcs=false -trimpath -o ../review-bin/moo2-manager .)
-./review-bin/moo2-manager --version
-./review-bin/moo2-manager --root "$PWD/review-root" --data "$PWD/review-data" --no-browser
-```
+Downloads show received bytes/percentage when total size is supplied. **Cancel preparation** interrupts downloads; verification and short activation steps stop only at safe boundaries. Failed or canceled downloads keep the previous verified cache and prepared game.
 
-### Windows PowerShell
+**Separate test setup:** 0.5.1 uses the per-user `MOO2-SGC/private-gui-0.5.1` folder, distinct from 0.5.0. Choose the owned source again; no old test profiles or saves are migrated automatically. Keep the old EXE if you need to return to that old test installation.
 
-```powershell
-New-Item -ItemType Directory -Force review-bin, review-root, review-data | Out-Null
-Push-Location manager
-go build -buildvcs=false -trimpath -o ../review-bin/moo2-manager.exe .
-Pop-Location
-.\review-bin\moo2-manager.exe --version
-.\review-bin\moo2-manager.exe --root "$PWD\review-root" --data "$PWD\review-data" --no-browser
-```
+Later, double-click the same file. It reuses the private installation; a second click reopens the current session rather than starting another manager. Use **Exit launcher** when finished. Closing a browser tab alone does not stop a running game or launcher.
 
-Stop if the build fails; do not continue with a binary left over from an earlier attempt. Windows/macOS instructions are the source's native build route, **not a claim that they were executed here**.
+If setup stops, its page provides **Retry**, **Recover interrupted startup**, and **Exit**. Recovery never clears a live/unknown process lock. If a previous game has no confirmed exit record, recovery deliberately stops rather than risking its files. A missing default browser or unwritable private folder is shown as an error; no terminal command is part of normal recovery.
 
-The manager prints a private loopback URL and writes `review-data/open-launcher.txt` while running. To preview the UI, manually open that URL in a browser on the same computer. Do not share the URL or the marker: its fragment is a session credential. `--no-browser` suppresses automatic opening, not the local server. Use the UI Quit action or Ctrl+C when finished; closing the browser tab alone does not stop the manager.
+## Important limits
 
-Without owned game archives and an appropriate runtime, you can inspect the launcher but cannot play. This build has no provisioned online release feed. Do not try to apply an existing signed 0.4.7 package to this changed source or regard an old signature as authenticating it.
+- This is a **private development candidate**, not a production-ready release. Windows/macOS builds are cross-compiled, not native-tested here; Windows Authenticode and macOS notarization are absent. Do not bypass OS security warnings or enterprise policy.
+- No game data, emulator, PRSL adapter, or new Chat extension is embedded. The original in-game chat is unchanged. The separate newSCG cruiser prototype is not activated.
+- Windows is the first native acceptance target. macOS and Linux build architecture is retained, but native desktop launch, pickers, runtime behavior, and packaging still need their own acceptance checks.
+- Do not copy this source tree or its test outputs over a working installation or saves. No assistant GitHub publication/deployment was performed.
 
-## Automated source checks
+## For maintainers only
 
-Python 3.11+ and Node.js are needed for their respective checks. Go's race detector also needs a supported native host and C toolchain. From `launcher/`:
+This source tree is not itself the single-file executable. `packaging/build_release.py --development` produces disposable offline-signed inner packages; `packaging/build_desktop.py` verifies and embeds a matching package in a separate outer executable. The builder refuses a package whose source fingerprint no longer matches the tree. Those scripts require the maintainer's existing Go toolchain; **players do not**.
 
-```sh
-(cd manager && go test -race -count=1 ./... && go vet ./...)
-node --check manager/web/app.js
-node tests/ui_regression.js
-python3 -m unittest discover -s tests -p 'test_publish*.py' -v
-```
-
-These checks use authored fixtures and loopback services; some Go tests explicitly **skip** without private supplied game/runtime fixtures. See `docs/TEST-REPORT.md` for exact counts and prerequisites. Do not set private-fixture paths to your only copy of a working install.
-
-For advanced Linux-only offline bootstrap/handoff reproduction, see `docs/DEVELOPMENT-ACCEPTANCE.md`. It builds a temporary development-signed test release, not a production installer. `sh manager/build.sh` is the optional four-target cross-build route; cross-build success does not prove native execution.
-
-## Review order
-
-Source/static checks → isolated launcher/UI inspection → owned-copy real runtime/save tests → native-platform and migration acceptance → separate multiplayer checks. A signed release is a later maintainer decision. No GitHub push, publication, production signing, live PRSL hook or gameplay rule activation is authorized by this review package.
+Read `docs/WINDOWS-FIRST-ACCEPTANCE-0.5.1.md` and the final build/test evidence before distributing a native test candidate. Historical 0.4.x documents describe their own artifacts and are not 0.5.1 acceptance evidence.

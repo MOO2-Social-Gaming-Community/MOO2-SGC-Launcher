@@ -1,0 +1,1009 @@
+{"Time":"2026-10-15T19:28:53.862939391-07:00","Action":"start","Package":"moo2manager"}
+{"Time":"2026-10-15T19:28:53.863166026-07:00","Action":"start","Package":"moo2manager/cmd/bootstrapper"}
+{"Time":"2026-10-15T19:28:53.863288427-07:00","Action":"run","Package":"moo2manager/cmd/bootstrapper","Test":"TestPortableMinimumVersion"}
+{"Time":"2026-10-15T19:28:53.863294476-07:00","Action":"output","Package":"moo2manager/cmd/bootstrapper","Test":"TestPortableMinimumVersion","Output":"=== RUN   TestPortableMinimumVersion\n"}
+{"Time":"2026-10-15T19:28:53.863303329-07:00","Action":"output","Package":"moo2manager/cmd/bootstrapper","Test":"TestPortableMinimumVersion","Output":"--- PASS: TestPortableMinimumVersion (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.86331084-07:00","Action":"pass","Package":"moo2manager/cmd/bootstrapper","Test":"TestPortableMinimumVersion","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863318041-07:00","Action":"output","Package":"moo2manager/cmd/bootstrapper","Output":"PASS\n"}
+{"Time":"2026-10-15T19:28:53.863321075-07:00","Action":"output","Package":"moo2manager/cmd/bootstrapper","Output":"ok  \tmoo2manager/cmd/bootstrapper\t(cached)\n"}
+{"Time":"2026-10-15T19:28:53.8633247-07:00","Action":"pass","Package":"moo2manager/cmd/bootstrapper","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.86362251-07:00","Action":"start","Package":"moo2manager/cmd/releasectl"}
+{"Time":"2026-10-15T19:28:53.863629731-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence"}
+{"Time":"2026-10-15T19:28:53.863632115-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence","Output":"=== RUN   TestLauncherPublicationFence\n"}
+{"Time":"2026-10-15T19:28:53.863634578-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/ORION2.EXE"}
+{"Time":"2026-10-15T19:28:53.863636491-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/ORION2.EXE","Output":"=== RUN   TestLauncherPublicationFence/ORION2.EXE\n"}
+{"Time":"2026-10-15T19:28:53.863640617-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/ORION2.EXE","Output":"--- PASS: TestLauncherPublicationFence/ORION2.EXE (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863642991-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/ORION2.EXE","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863645374-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/150/ORION150.EXE"}
+{"Time":"2026-10-15T19:28:53.863646816-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/150/ORION150.EXE","Output":"=== RUN   TestLauncherPublicationFence/150/ORION150.EXE\n"}
+{"Time":"2026-10-15T19:28:53.86367656-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/150/ORION150.EXE","Output":"--- PASS: TestLauncherPublicationFence/150/ORION150.EXE (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863679755-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/150/ORION150.EXE","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863682259-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/GALAXY.LBX"}
+{"Time":"2026-10-15T19:28:53.863684602-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/GALAXY.LBX","Output":"=== RUN   TestLauncherPublicationFence/GALAXY.LBX\n"}
+{"Time":"2026-10-15T19:28:53.863688187-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/GALAXY.LBX","Output":"--- PASS: TestLauncherPublicationFence/GALAXY.LBX (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863690351-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/GALAXY.LBX","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863692394-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/SAVE1.GAM"}
+{"Time":"2026-10-15T19:28:53.863698092-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/SAVE1.GAM","Output":"=== RUN   TestLauncherPublicationFence/SAVE1.GAM\n"}
+{"Time":"2026-10-15T19:28:53.863700506-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/SAVE1.GAM","Output":"--- PASS: TestLauncherPublicationFence/SAVE1.GAM (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863702579-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/SAVE1.GAM","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863704341-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.key"}
+{"Time":"2026-10-15T19:28:53.863705984-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.key","Output":"=== RUN   TestLauncherPublicationFence/private.key\n"}
+{"Time":"2026-10-15T19:28:53.863708377-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.key","Output":"--- PASS: TestLauncherPublicationFence/private.key (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.86371047-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.key","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863712393-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.pem"}
+{"Time":"2026-10-15T19:28:53.863713865-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.pem","Output":"=== RUN   TestLauncherPublicationFence/private.pem\n"}
+{"Time":"2026-10-15T19:28:53.863715998-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.pem","Output":"--- PASS: TestLauncherPublicationFence/private.pem (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863717901-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/private.pem","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863719564-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/payloads/base.zip"}
+{"Time":"2026-10-15T19:28:53.863721056-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/payloads/base.zip","Output":"=== RUN   TestLauncherPublicationFence/payloads/base.zip\n"}
+{"Time":"2026-10-15T19:28:53.863723189-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/payloads/base.zip","Output":"--- PASS: TestLauncherPublicationFence/payloads/base.zip (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863725032-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/payloads/base.zip","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863726744-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/.env"}
+{"Time":"2026-10-15T19:28:53.863728227-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/.env","Output":"=== RUN   TestLauncherPublicationFence/.env\n"}
+{"Time":"2026-10-15T19:28:53.86373035-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/.env","Output":"--- PASS: TestLauncherPublicationFence/.env (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863732393-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/.env","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863734135-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/../outside"}
+{"Time":"2026-10-15T19:28:53.863735607-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/../outside","Output":"=== RUN   TestLauncherPublicationFence/../outside\n"}
+{"Time":"2026-10-15T19:28:53.86373761-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/../outside","Output":"--- PASS: TestLauncherPublicationFence/../outside (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863741015-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence/../outside","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863743129-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence","Output":"--- PASS: TestLauncherPublicationFence (0.02s)\n"}
+{"Time":"2026-10-15T19:28:53.863744881-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherPublicationFence","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:53.863747846-07:00","Action":"run","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherZIPIndexIncludesAllBytes"}
+{"Time":"2026-10-15T19:28:53.863749228-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherZIPIndexIncludesAllBytes","Output":"=== RUN   TestLauncherZIPIndexIncludesAllBytes\n"}
+{"Time":"2026-10-15T19:28:53.86375118-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherZIPIndexIncludesAllBytes","Output":"--- PASS: TestLauncherZIPIndexIncludesAllBytes (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.863752803-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Test":"TestLauncherZIPIndexIncludesAllBytes","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863754415-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Output":"PASS\n"}
+{"Time":"2026-10-15T19:28:53.863756168-07:00","Action":"output","Package":"moo2manager/cmd/releasectl","Output":"ok  \tmoo2manager/cmd/releasectl\t(cached)\n"}
+{"Time":"2026-10-15T19:28:53.863759383-07:00","Action":"pass","Package":"moo2manager/cmd/releasectl","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863783198-07:00","Action":"start","Package":"moo2manager/shared/buildconfig"}
+{"Time":"2026-10-15T19:28:53.863787174-07:00","Action":"output","Package":"moo2manager/shared/buildconfig","Output":"?   \tmoo2manager/shared/buildconfig\t[no test files]\n"}
+{"Time":"2026-10-15T19:28:53.863789387-07:00","Action":"skip","Package":"moo2manager/shared/buildconfig","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.863793673-07:00","Action":"start","Package":"moo2manager/shared/distribution"}
+{"Time":"2026-10-15T19:28:53.865039609-07:00","Action":"start","Package":"moo2manager/shared/layout"}
+{"Time":"2026-10-15T19:28:53.865057515-07:00","Action":"run","Package":"moo2manager/shared/layout","Test":"TestExplicitMarker"}
+{"Time":"2026-10-15T19:28:53.8650605-07:00","Action":"output","Package":"moo2manager/shared/layout","Test":"TestExplicitMarker","Output":"=== RUN   TestExplicitMarker\n"}
+{"Time":"2026-10-15T19:28:53.865066779-07:00","Action":"output","Package":"moo2manager/shared/layout","Test":"TestExplicitMarker","Output":"--- PASS: TestExplicitMarker (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.865069633-07:00","Action":"pass","Package":"moo2manager/shared/layout","Test":"TestExplicitMarker","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.865072698-07:00","Action":"run","Package":"moo2manager/shared/layout","Test":"TestInvalidMarkerFailsClosed"}
+{"Time":"2026-10-15T19:28:53.8650743-07:00","Action":"output","Package":"moo2manager/shared/layout","Test":"TestInvalidMarkerFailsClosed","Output":"=== RUN   TestInvalidMarkerFailsClosed\n"}
+{"Time":"2026-10-15T19:28:53.865076934-07:00","Action":"output","Package":"moo2manager/shared/layout","Test":"TestInvalidMarkerFailsClosed","Output":"--- PASS: TestInvalidMarkerFailsClosed (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.865079227-07:00","Action":"pass","Package":"moo2manager/shared/layout","Test":"TestInvalidMarkerFailsClosed","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.865081751-07:00","Action":"output","Package":"moo2manager/shared/layout","Output":"PASS\n"}
+{"Time":"2026-10-15T19:28:53.865083694-07:00","Action":"output","Package":"moo2manager/shared/layout","Output":"ok  \tmoo2manager/shared/layout\t(cached)\n"}
+{"Time":"2026-10-15T19:28:53.865086177-07:00","Action":"pass","Package":"moo2manager/shared/layout","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.873167162-07:00","Action":"run","Package":"moo2manager","Test":"TestPayloadImportRejectsUnknownAndPreservesCache"}
+{"Time":"2026-10-15T19:28:53.87322703-07:00","Action":"output","Package":"moo2manager","Test":"TestPayloadImportRejectsUnknownAndPreservesCache","Output":"=== RUN   TestPayloadImportRejectsUnknownAndPreservesCache\n"}
+{"Time":"2026-10-15T19:28:53.874672425-07:00","Action":"output","Package":"moo2manager","Test":"TestPayloadImportRejectsUnknownAndPreservesCache","Output":"--- PASS: TestPayloadImportRejectsUnknownAndPreservesCache (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.874686046-07:00","Action":"pass","Package":"moo2manager","Test":"TestPayloadImportRejectsUnknownAndPreservesCache","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.874717983-07:00","Action":"run","Package":"moo2manager","Test":"TestPayloadImportPathAndKind"}
+{"Time":"2026-10-15T19:28:53.874720617-07:00","Action":"output","Package":"moo2manager","Test":"TestPayloadImportPathAndKind","Output":"=== RUN   TestPayloadImportPathAndKind\n"}
+{"Time":"2026-10-15T19:28:53.875565074-07:00","Action":"output","Package":"moo2manager","Test":"TestPayloadImportPathAndKind","Output":"--- PASS: TestPayloadImportPathAndKind (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.87557587-07:00","Action":"pass","Package":"moo2manager","Test":"TestPayloadImportPathAndKind","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.875590822-07:00","Action":"run","Package":"moo2manager","Test":"TestDistributionDoesNotRequirePRSL"}
+{"Time":"2026-10-15T19:28:53.875592895-07:00","Action":"output","Package":"moo2manager","Test":"TestDistributionDoesNotRequirePRSL","Output":"=== RUN   TestDistributionDoesNotRequirePRSL\n"}
+{"Time":"2026-10-15T19:28:53.876429922-07:00","Action":"output","Package":"moo2manager","Test":"TestDistributionDoesNotRequirePRSL","Output":"--- PASS: TestDistributionDoesNotRequirePRSL (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.87644241-07:00","Action":"pass","Package":"moo2manager","Test":"TestDistributionDoesNotRequirePRSL","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.876446436-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions"}
+{"Time":"2026-10-15T19:28:53.876448429-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions","Output":"=== RUN   TestKnownSourceEditions\n"}
+{"Time":"2026-10-15T19:28:53.882948102-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation"}
+{"Time":"2026-10-15T19:28:53.882970926-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation","Output":"=== RUN   TestManifestValidation\n"}
+{"Time":"2026-10-15T19:28:53.882990365-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-schema"}
+{"Time":"2026-10-15T19:28:53.882992728-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-schema","Output":"=== RUN   TestManifestValidation/future-schema\n"}
+{"Time":"2026-10-15T19:28:53.888443451-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-schema","Output":"--- PASS: TestManifestValidation/future-schema (0.01s)\n"}
+{"Time":"2026-10-15T19:28:53.888463421-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-schema","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:53.888473075-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-feed"}
+{"Time":"2026-10-15T19:28:53.888477141-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-feed","Output":"=== RUN   TestManifestValidation/wrong-feed\n"}
+{"Time":"2026-10-15T19:28:53.891638502-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-feed","Output":"--- PASS: TestManifestValidation/wrong-feed (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.891665862-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-feed","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.891675677-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-channel"}
+{"Time":"2026-10-15T19:28:53.89167774-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-channel","Output":"=== RUN   TestManifestValidation/wrong-channel\n"}
+{"Time":"2026-10-15T19:28:53.895279311-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-channel","Output":"--- PASS: TestManifestValidation/wrong-channel (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.895294443-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/wrong-channel","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.89529908-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/expired"}
+{"Time":"2026-10-15T19:28:53.895302915-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/expired","Output":"=== RUN   TestManifestValidation/expired\n"}
+{"Time":"2026-10-15T19:28:53.898862835-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/expired","Output":"--- PASS: TestManifestValidation/expired (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.898876706-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/expired","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.898880942-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-publication"}
+{"Time":"2026-10-15T19:28:53.898883596-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-publication","Output":"=== RUN   TestManifestValidation/future-publication\n"}
+{"Time":"2026-10-15T19:28:53.90216248-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-publication","Output":"--- PASS: TestManifestValidation/future-publication (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.902193165-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/future-publication","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.902197251-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/excessive-lifetime"}
+{"Time":"2026-10-15T19:28:53.902199855-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/excessive-lifetime","Output":"=== RUN   TestManifestValidation/excessive-lifetime\n"}
+{"Time":"2026-10-15T19:28:53.905486862-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/excessive-lifetime","Output":"--- PASS: TestManifestValidation/excessive-lifetime (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.905500922-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/excessive-lifetime","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.905505269-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/zero-revision"}
+{"Time":"2026-10-15T19:28:53.905508263-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/zero-revision","Output":"=== RUN   TestManifestValidation/zero-revision\n"}
+{"Time":"2026-10-15T19:28:53.908298486-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/zero-revision","Output":"--- PASS: TestManifestValidation/zero-revision (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.908327989-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/zero-revision","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.908332305-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/duplicate-package"}
+{"Time":"2026-10-15T19:28:53.908334839-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/duplicate-package","Output":"=== RUN   TestManifestValidation/duplicate-package\n"}
+{"Time":"2026-10-15T19:28:53.912029007-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/duplicate-package","Output":"--- PASS: TestManifestValidation/duplicate-package (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.912055737-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/duplicate-package","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.912061255-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsigned-package"}
+{"Time":"2026-10-15T19:28:53.912063939-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsigned-package","Output":"=== RUN   TestManifestValidation/unsigned-package\n"}
+{"Time":"2026-10-15T19:28:53.915686651-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsigned-package","Output":"--- PASS: TestManifestValidation/unsigned-package (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.91571999-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsigned-package","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.915735884-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-kind"}
+{"Time":"2026-10-15T19:28:53.915738097-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-kind","Output":"=== RUN   TestManifestValidation/unsupported-kind\n"}
+{"Time":"2026-10-15T19:28:53.917158856-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions/manual-en-140b23"}
+{"Time":"2026-10-15T19:28:53.917169502-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/manual-en-140b23","Output":"=== RUN   TestKnownSourceEditions/manual-en-140b23\n"}
+{"Time":"2026-10-15T19:28:53.917414694-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/manual-en-140b23","Output":"--- PASS: TestKnownSourceEditions/manual-en-140b23 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.917434163-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions/manual-en-140b23","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.917436817-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12-harness"}
+{"Time":"2026-10-15T19:28:53.91743903-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12-harness","Output":"=== RUN   TestKnownSourceEditions/cd-en-12-harness\n"}
+{"Time":"2026-10-15T19:28:53.91758812-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12-harness","Output":"--- PASS: TestKnownSourceEditions/cd-en-12-harness (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.917591686-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12-harness","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.917608661-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23-harness"}
+{"Time":"2026-10-15T19:28:53.917610543-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23-harness","Output":"=== RUN   TestKnownSourceEditions/steam-en-140b23-harness\n"}
+{"Time":"2026-10-15T19:28:53.917805131-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23-harness","Output":"--- PASS: TestKnownSourceEditions/steam-en-140b23-harness (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.917809537-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23-harness","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.917812281-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131-harness"}
+{"Time":"2026-10-15T19:28:53.917814174-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131-harness","Output":"=== RUN   TestKnownSourceEditions/legacy-en-131-harness\n"}
+{"Time":"2026-10-15T19:28:53.917999077-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131-harness","Output":"--- PASS: TestKnownSourceEditions/legacy-en-131-harness (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.918001721-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131-harness","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.918013899-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12"}
+{"Time":"2026-10-15T19:28:53.918015982-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12","Output":"=== RUN   TestKnownSourceEditions/cd-en-12\n"}
+{"Time":"2026-10-15T19:28:53.91825106-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12","Output":"--- PASS: TestKnownSourceEditions/cd-en-12 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.918256838-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions/cd-en-12","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.918259602-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23"}
+{"Time":"2026-10-15T19:28:53.918261125-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23","Output":"=== RUN   TestKnownSourceEditions/steam-en-140b23\n"}
+{"Time":"2026-10-15T19:28:53.918436704-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23","Output":"--- PASS: TestKnownSourceEditions/steam-en-140b23 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.918445487-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions/steam-en-140b23","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.918448011-07:00","Action":"run","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131"}
+{"Time":"2026-10-15T19:28:53.918449924-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131","Output":"=== RUN   TestKnownSourceEditions/legacy-en-131\n"}
+{"Time":"2026-10-15T19:28:53.918691611-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131","Output":"--- PASS: TestKnownSourceEditions/legacy-en-131 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.918695787-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions/legacy-en-131","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.919192731-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-kind","Output":"--- PASS: TestManifestValidation/unsupported-kind (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.919198319-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-kind","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.919200673-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-platform"}
+{"Time":"2026-10-15T19:28:53.919202465-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-platform","Output":"=== RUN   TestManifestValidation/unsupported-platform\n"}
+{"Time":"2026-10-15T19:28:53.930244219-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-platform","Output":"--- PASS: TestManifestValidation/unsupported-platform (0.01s)\n"}
+{"Time":"2026-10-15T19:28:53.930261034-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unsupported-platform","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:53.930266271-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unrecorded-rights"}
+{"Time":"2026-10-15T19:28:53.930268104-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unrecorded-rights","Output":"=== RUN   TestManifestValidation/unrecorded-rights\n"}
+{"Time":"2026-10-15T19:28:53.933340013-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unrecorded-rights","Output":"--- PASS: TestManifestValidation/unrecorded-rights (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.933369146-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/unrecorded-rights","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.93337181-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/missing-file-index"}
+{"Time":"2026-10-15T19:28:53.933373923-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/missing-file-index","Output":"=== RUN   TestManifestValidation/missing-file-index\n"}
+{"Time":"2026-10-15T19:28:53.936460944-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/missing-file-index","Output":"--- PASS: TestManifestValidation/missing-file-index (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.936473332-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/missing-file-index","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.936475846-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/file-traversal"}
+{"Time":"2026-10-15T19:28:53.936477778-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/file-traversal","Output":"=== RUN   TestManifestValidation/file-traversal\n"}
+{"Time":"2026-10-15T19:28:53.939411343-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/file-traversal","Output":"--- PASS: TestManifestValidation/file-traversal (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.939422539-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/file-traversal","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.939427466-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/untrusted-package-host"}
+{"Time":"2026-10-15T19:28:53.939434847-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/untrusted-package-host","Output":"=== RUN   TestManifestValidation/untrusted-package-host\n"}
+{"Time":"2026-10-15T19:28:53.942519475-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/untrusted-package-host","Output":"--- PASS: TestManifestValidation/untrusted-package-host (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.942532634-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation/untrusted-package-host","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.942566294-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation","Output":"--- PASS: TestManifestValidation (0.06s)\n"}
+{"Time":"2026-10-15T19:28:53.94257028-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestValidation","Elapsed":0.06}
+{"Time":"2026-10-15T19:28:53.942589708-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback"}
+{"Time":"2026-10-15T19:28:53.942591791-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback","Output":"=== RUN   TestManifestAuthenticityAndRollback\n"}
+{"Time":"2026-10-15T19:28:53.945998074-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/tampered-bytes"}
+{"Time":"2026-10-15T19:28:53.946006146-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/tampered-bytes","Output":"=== RUN   TestManifestAuthenticityAndRollback/tampered-bytes\n"}
+{"Time":"2026-10-15T19:28:53.946494888-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/tampered-bytes","Output":"--- PASS: TestManifestAuthenticityAndRollback/tampered-bytes (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.946504983-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/tampered-bytes","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.946508829-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/unknown-key"}
+{"Time":"2026-10-15T19:28:53.946511793-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/unknown-key","Output":"=== RUN   TestManifestAuthenticityAndRollback/unknown-key\n"}
+{"Time":"2026-10-15T19:28:53.94663872-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/unknown-key","Output":"--- PASS: TestManifestAuthenticityAndRollback/unknown-key (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.946641645-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/unknown-key","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.946719249-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/older-revision"}
+{"Time":"2026-10-15T19:28:53.946721232-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/older-revision","Output":"=== RUN   TestManifestAuthenticityAndRollback/older-revision\n"}
+{"Time":"2026-10-15T19:28:53.947483499-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/older-revision","Output":"--- PASS: TestManifestAuthenticityAndRollback/older-revision (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.947494365-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/older-revision","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.94749826-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/same-revision-different-digest"}
+{"Time":"2026-10-15T19:28:53.947500323-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/same-revision-different-digest","Output":"=== RUN   TestManifestAuthenticityAndRollback/same-revision-different-digest\n"}
+{"Time":"2026-10-15T19:28:53.948442906-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/same-revision-different-digest","Output":"--- PASS: TestManifestAuthenticityAndRollback/same-revision-different-digest (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.948449225-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/same-revision-different-digest","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.948454193-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/identical-revision-retry"}
+{"Time":"2026-10-15T19:28:53.948456116-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/identical-revision-retry","Output":"=== RUN   TestManifestAuthenticityAndRollback/identical-revision-retry\n"}
+{"Time":"2026-10-15T19:28:53.949759291-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/identical-revision-retry","Output":"--- PASS: TestManifestAuthenticityAndRollback/identical-revision-retry (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.949762957-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/identical-revision-retry","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.949786031-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/wrong-state-feed"}
+{"Time":"2026-10-15T19:28:53.949788324-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/wrong-state-feed","Output":"=== RUN   TestManifestAuthenticityAndRollback/wrong-state-feed\n"}
+{"Time":"2026-10-15T19:28:53.950564511-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/wrong-state-feed","Output":"--- PASS: TestManifestAuthenticityAndRollback/wrong-state-feed (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.950568076-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/wrong-state-feed","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.950595777-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/signed-duplicate-JSON-key"}
+{"Time":"2026-10-15T19:28:53.950599252-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/signed-duplicate-JSON-key","Output":"=== RUN   TestManifestAuthenticityAndRollback/signed-duplicate-JSON-key\n"}
+{"Time":"2026-10-15T19:28:53.951442408-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/signed-duplicate-JSON-key","Output":"--- PASS: TestManifestAuthenticityAndRollback/signed-duplicate-JSON-key (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.951450089-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback/signed-duplicate-JSON-key","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.951453985-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback","Output":"--- PASS: TestManifestAuthenticityAndRollback (0.01s)\n"}
+{"Time":"2026-10-15T19:28:53.951480494-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestAuthenticityAndRollback","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:53.951483689-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestStrictJSONAndTrust"}
+{"Time":"2026-10-15T19:28:53.951487535-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestStrictJSONAndTrust","Output":"=== RUN   TestStrictJSONAndTrust\n"}
+{"Time":"2026-10-15T19:28:53.96406712-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestStrictJSONAndTrust","Output":"--- PASS: TestStrictJSONAndTrust (0.01s)\n"}
+{"Time":"2026-10-15T19:28:53.964085768-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestStrictJSONAndTrust","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:53.964090184-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestPackageSignatureBindsFileIndex"}
+{"Time":"2026-10-15T19:28:53.964092618-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestPackageSignatureBindsFileIndex","Output":"=== RUN   TestPackageSignatureBindsFileIndex\n"}
+{"Time":"2026-10-15T19:28:53.966440266-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestPackageSignatureBindsFileIndex","Output":"--- PASS: TestPackageSignatureBindsFileIndex (0.00s)\n"}
+{"Time":"2026-10-15T19:28:53.966449109-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestPackageSignatureBindsFileIndex","Elapsed":0}
+{"Time":"2026-10-15T19:28:53.966468839-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestDownloadMirrorFailover"}
+{"Time":"2026-10-15T19:28:53.966471142-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadMirrorFailover","Output":"=== RUN   TestDownloadMirrorFailover\n"}
+{"Time":"2026-10-15T19:28:54.00942649-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadMirrorFailover","Output":"--- PASS: TestDownloadMirrorFailover (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.009459439-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestDownloadMirrorFailover","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.009471727-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume"}
+{"Time":"2026-10-15T19:28:54.009474201-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume","Output":"=== RUN   TestDownloadResume\n"}
+{"Time":"2026-10-15T19:28:54.009482543-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-supported"}
+{"Time":"2026-10-15T19:28:54.009484316-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-supported","Output":"=== RUN   TestDownloadResume/range-supported\n"}
+{"Time":"2026-10-15T19:28:54.027145354-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-supported","Output":"--- PASS: TestDownloadResume/range-supported (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.027177311-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-supported","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.027191893-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-ignored"}
+{"Time":"2026-10-15T19:28:54.027194246-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-ignored","Output":"=== RUN   TestDownloadResume/range-ignored\n"}
+{"Time":"2026-10-15T19:28:54.045127962-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-ignored","Output":"--- PASS: TestDownloadResume/range-ignored (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.045161952-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-ignored","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.045168041-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-invalid"}
+{"Time":"2026-10-15T19:28:54.045170505-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-invalid","Output":"=== RUN   TestDownloadResume/range-invalid\n"}
+{"Time":"2026-10-15T19:28:54.084063767-07:00","Action":"output","Package":"moo2manager","Test":"TestKnownSourceEditions","Output":"--- PASS: TestKnownSourceEditions (0.21s)\n"}
+{"Time":"2026-10-15T19:28:54.084118728-07:00","Action":"pass","Package":"moo2manager","Test":"TestKnownSourceEditions","Elapsed":0.21}
+{"Time":"2026-10-15T19:28:54.084125018-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage"}
+{"Time":"2026-10-15T19:28:54.084127772-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage","Output":"=== RUN   TestInstallationLineage\n"}
+{"Time":"2026-10-15T19:28:54.084130306-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.2"}
+{"Time":"2026-10-15T19:28:54.084132058-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.2","Output":"=== RUN   TestInstallationLineage/cd-en-12-1.2\n"}
+{"Time":"2026-10-15T19:28:54.084070207-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-invalid","Output":"--- PASS: TestDownloadResume/range-invalid (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.084143755-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/range-invalid","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.084147411-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/corrupt-partial"}
+{"Time":"2026-10-15T19:28:54.084151016-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/corrupt-partial","Output":"=== RUN   TestDownloadResume/corrupt-partial\n"}
+{"Time":"2026-10-15T19:28:54.104625966-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/corrupt-partial","Output":"--- PASS: TestDownloadResume/corrupt-partial (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.104678794-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume/corrupt-partial","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.104691533-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume","Output":"--- PASS: TestDownloadResume (0.10s)\n"}
+{"Time":"2026-10-15T19:28:54.104705504-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestDownloadResume","Elapsed":0.1}
+{"Time":"2026-10-15T19:28:54.104710161-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestInterruptedDownloadResumesWithinSession"}
+{"Time":"2026-10-15T19:28:54.104712594-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestInterruptedDownloadResumesWithinSession","Output":"=== RUN   TestInterruptedDownloadResumesWithinSession\n"}
+{"Time":"2026-10-15T19:28:54.123210259-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.2","Output":"--- PASS: TestInstallationLineage/cd-en-12-1.2 (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.123242767-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.2","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.123296016-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.31"}
+{"Time":"2026-10-15T19:28:54.123300172-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.31","Output":"=== RUN   TestInstallationLineage/cd-en-12-1.31\n"}
+{"Time":"2026-10-15T19:28:54.136737785-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestInterruptedDownloadResumesWithinSession","Output":"--- PASS: TestInterruptedDownloadResumesWithinSession (0.03s)\n"}
+{"Time":"2026-10-15T19:28:54.136759908-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestInterruptedDownloadResumesWithinSession","Elapsed":0.03}
+{"Time":"2026-10-15T19:28:54.136764214-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestCorruptPrimaryDoesNotPoisonMirror"}
+{"Time":"2026-10-15T19:28:54.136766668-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestCorruptPrimaryDoesNotPoisonMirror","Output":"=== RUN   TestCorruptPrimaryDoesNotPoisonMirror\n"}
+{"Time":"2026-10-15T19:28:54.160056297-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestCorruptPrimaryDoesNotPoisonMirror","Output":"--- PASS: TestCorruptPrimaryDoesNotPoisonMirror (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.160098389-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestCorruptPrimaryDoesNotPoisonMirror","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.160103607-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestDownloadSizeAndSignatureRefusal"}
+{"Time":"2026-10-15T19:28:54.160106051-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadSizeAndSignatureRefusal","Output":"=== RUN   TestDownloadSizeAndSignatureRefusal\n"}
+{"Time":"2026-10-15T19:28:54.169234807-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.31","Output":"--- PASS: TestInstallationLineage/cd-en-12-1.31 (0.05s)\n"}
+{"Time":"2026-10-15T19:28:54.169259493-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.31","Elapsed":0.05}
+{"Time":"2026-10-15T19:28:54.169279453-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.40b23"}
+{"Time":"2026-10-15T19:28:54.169282698-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.40b23","Output":"=== RUN   TestInstallationLineage/cd-en-12-1.40b23\n"}
+{"Time":"2026-10-15T19:28:54.175896053-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestDownloadSizeAndSignatureRefusal","Output":"--- PASS: TestDownloadSizeAndSignatureRefusal (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.175916103-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestDownloadSizeAndSignatureRefusal","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.175920449-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestHTTPSDowngradeRefusal"}
+{"Time":"2026-10-15T19:28:54.175961931-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestHTTPSDowngradeRefusal","Output":"=== RUN   TestHTTPSDowngradeRefusal\n"}
+{"Time":"2026-10-15T19:28:54.199707974-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestHTTPSDowngradeRefusal","Output":"--- PASS: TestHTTPSDowngradeRefusal (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.199816755-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestHTTPSDowngradeRefusal","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.199822733-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestManifestMirrorFailoverAndAntiRollback"}
+{"Time":"2026-10-15T19:28:54.199824967-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestMirrorFailoverAndAntiRollback","Output":"=== RUN   TestManifestMirrorFailoverAndAntiRollback\n"}
+{"Time":"2026-10-15T19:28:54.21131318-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.40b23","Output":"--- PASS: TestInstallationLineage/cd-en-12-1.40b23 (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.211338818-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.40b23","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.212079151-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.50.26"}
+{"Time":"2026-10-15T19:28:54.212088876-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.50.26","Output":"=== RUN   TestInstallationLineage/cd-en-12-1.50.26\n"}
+{"Time":"2026-10-15T19:28:54.24376133-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestManifestMirrorFailoverAndAntiRollback","Output":"--- PASS: TestManifestMirrorFailoverAndAntiRollback (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.243833987-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestManifestMirrorFailoverAndAntiRollback","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.243873195-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestInstallRepairRollbackAndSignedReceipt"}
+{"Time":"2026-10-15T19:28:54.24387624-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestInstallRepairRollbackAndSignedReceipt","Output":"=== RUN   TestInstallRepairRollbackAndSignedReceipt\n"}
+{"Time":"2026-10-15T19:28:54.251023319-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.50.26","Output":"--- PASS: TestInstallationLineage/cd-en-12-1.50.26 (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.25104446-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage/cd-en-12-1.50.26","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.251048036-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.40b23"}
+{"Time":"2026-10-15T19:28:54.251050489-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.40b23","Output":"=== RUN   TestInstallationLineage/steam-en-140b23-1.40b23\n"}
+{"Time":"2026-10-15T19:28:54.280904446-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestInstallRepairRollbackAndSignedReceipt","Output":"--- PASS: TestInstallRepairRollbackAndSignedReceipt (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.280938106-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestInstallRepairRollbackAndSignedReceipt","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.280943204-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestFailedHealthLeavesPointerAndUserData"}
+{"Time":"2026-10-15T19:28:54.280946408-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestFailedHealthLeavesPointerAndUserData","Output":"=== RUN   TestFailedHealthLeavesPointerAndUserData\n"}
+{"Time":"2026-10-15T19:28:54.289611255-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.40b23","Output":"--- PASS: TestInstallationLineage/steam-en-140b23-1.40b23 (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.289638856-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.40b23","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.289727988-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.50.26"}
+{"Time":"2026-10-15T19:28:54.289733375-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.50.26","Output":"=== RUN   TestInstallationLineage/steam-en-140b23-1.50.26\n"}
+{"Time":"2026-10-15T19:28:54.298726763-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestFailedHealthLeavesPointerAndUserData","Output":"--- PASS: TestFailedHealthLeavesPointerAndUserData (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.298743087-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestFailedHealthLeavesPointerAndUserData","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.298748605-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestInstallerRequiresHealthAndSignedSelection"}
+{"Time":"2026-10-15T19:28:54.298764448-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestInstallerRequiresHealthAndSignedSelection","Output":"=== RUN   TestInstallerRequiresHealthAndSignedSelection\n"}
+{"Time":"2026-10-15T19:28:54.308892271-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestInstallerRequiresHealthAndSignedSelection","Output":"--- PASS: TestInstallerRequiresHealthAndSignedSelection (0.01s)\n"}
+{"Time":"2026-10-15T19:28:54.308925861-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestInstallerRequiresHealthAndSignedSelection","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:54.308934634-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive"}
+{"Time":"2026-10-15T19:28:54.308938229-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive","Output":"=== RUN   TestExtractUnsafeArchive\n"}
+{"Time":"2026-10-15T19:28:54.308942365-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/../escape"}
+{"Time":"2026-10-15T19:28:54.30894567-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/../escape","Output":"=== RUN   TestExtractUnsafeArchive/../escape\n"}
+{"Time":"2026-10-15T19:28:54.310219272-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/../escape","Output":"--- PASS: TestExtractUnsafeArchive/../escape (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.310231069-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/../escape","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.310241415-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive//absolute"}
+{"Time":"2026-10-15T19:28:54.310246582-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive//absolute","Output":"=== RUN   TestExtractUnsafeArchive//absolute\n"}
+{"Time":"2026-10-15T19:28:54.311734871-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive//absolute","Output":"--- PASS: TestExtractUnsafeArchive//absolute (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.311745707-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive//absolute","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.311751075-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/AUX.txt"}
+{"Time":"2026-10-15T19:28:54.311753979-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/AUX.txt","Output":"=== RUN   TestExtractUnsafeArchive/AUX.txt\n"}
+{"Time":"2026-10-15T19:28:54.313284681-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/AUX.txt","Output":"--- PASS: TestExtractUnsafeArchive/AUX.txt (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.313302147-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/AUX.txt","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.313306052-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/a\\b"}
+{"Time":"2026-10-15T19:28:54.313310028-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/a\\b","Output":"=== RUN   TestExtractUnsafeArchive/a\\b\n"}
+{"Time":"2026-10-15T19:28:54.314870554-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/a\\b","Output":"--- PASS: TestExtractUnsafeArchive/a\\b (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.314884454-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/a\\b","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.31488857-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/x/../x"}
+{"Time":"2026-10-15T19:28:54.314890433-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/x/../x","Output":"=== RUN   TestExtractUnsafeArchive/x/../x\n"}
+{"Time":"2026-10-15T19:28:54.316735209-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/x/../x","Output":"--- PASS: TestExtractUnsafeArchive/x/../x (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.31674276-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive/x/../x","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.316773766-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive","Output":"--- PASS: TestExtractUnsafeArchive (0.01s)\n"}
+{"Time":"2026-10-15T19:28:54.316777201-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestExtractUnsafeArchive","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:54.316795177-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestSymlinksAndLocks"}
+{"Time":"2026-10-15T19:28:54.31679718-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestSymlinksAndLocks","Output":"=== RUN   TestSymlinksAndLocks\n"}
+{"Time":"2026-10-15T19:28:54.317158714-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestSymlinksAndLocks","Output":"--- PASS: TestSymlinksAndLocks (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.317169691-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestSymlinksAndLocks","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.317172695-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestTrustedStatePersists"}
+{"Time":"2026-10-15T19:28:54.317174578-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestTrustedStatePersists","Output":"=== RUN   TestTrustedStatePersists\n"}
+{"Time":"2026-10-15T19:28:54.321286713-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestTrustedStatePersists","Output":"--- PASS: TestTrustedStatePersists (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.321297149-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestTrustedStatePersists","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.321301044-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestNetworkDiagnosticsRedactURLTokens"}
+{"Time":"2026-10-15T19:28:54.321302957-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestNetworkDiagnosticsRedactURLTokens","Output":"=== RUN   TestNetworkDiagnosticsRedactURLTokens\n"}
+{"Time":"2026-10-15T19:28:54.321365029-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestNetworkDiagnosticsRedactURLTokens","Output":"--- PASS: TestNetworkDiagnosticsRedactURLTokens (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.321369506-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestNetworkDiagnosticsRedactURLTokens","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.321389064-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestVersionFloor"}
+{"Time":"2026-10-15T19:28:54.321395614-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestVersionFloor","Output":"=== RUN   TestVersionFloor\n"}
+{"Time":"2026-10-15T19:28:54.321468031-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestVersionFloor","Output":"--- PASS: TestVersionFloor (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.321472317-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestVersionFloor","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.321485707-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestStaleLatestFallsThroughToPinnedRelease"}
+{"Time":"2026-10-15T19:28:54.321490564-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestStaleLatestFallsThroughToPinnedRelease","Output":"=== RUN   TestStaleLatestFallsThroughToPinnedRelease\n"}
+{"Time":"2026-10-15T19:28:54.330456096-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.50.26","Output":"--- PASS: TestInstallationLineage/steam-en-140b23-1.50.26 (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.330503756-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage/steam-en-140b23-1.50.26","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.330562653-07:00","Action":"run","Package":"moo2manager","Test":"TestInstallationLineage/legacy-en-131-1.50.26"}
+{"Time":"2026-10-15T19:28:54.330565588-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/legacy-en-131-1.50.26","Output":"=== RUN   TestInstallationLineage/legacy-en-131-1.50.26\n"}
+{"Time":"2026-10-15T19:28:54.335667405-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestStaleLatestFallsThroughToPinnedRelease","Output":"--- PASS: TestStaleLatestFallsThroughToPinnedRelease (0.01s)\n"}
+{"Time":"2026-10-15T19:28:54.335682828-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestStaleLatestFallsThroughToPinnedRelease","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:54.335687946-07:00","Action":"run","Package":"moo2manager/shared/distribution","Test":"TestOfflineAndMismatchedReleaseFloor"}
+{"Time":"2026-10-15T19:28:54.335690329-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestOfflineAndMismatchedReleaseFloor","Output":"=== RUN   TestOfflineAndMismatchedReleaseFloor\n"}
+{"Time":"2026-10-15T19:28:54.33935241-07:00","Action":"output","Package":"moo2manager/shared/distribution","Test":"TestOfflineAndMismatchedReleaseFloor","Output":"--- PASS: TestOfflineAndMismatchedReleaseFloor (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.339373391-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Test":"TestOfflineAndMismatchedReleaseFloor","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.339377567-07:00","Action":"output","Package":"moo2manager/shared/distribution","Output":"PASS\n"}
+{"Time":"2026-10-15T19:28:54.36772662-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage/legacy-en-131-1.50.26","Output":"--- PASS: TestInstallationLineage/legacy-en-131-1.50.26 (0.04s)\n"}
+{"Time":"2026-10-15T19:28:54.367756945-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage/legacy-en-131-1.50.26","Elapsed":0.04}
+{"Time":"2026-10-15T19:28:54.404178495-07:00","Action":"output","Package":"moo2manager","Test":"TestInstallationLineage","Output":"--- PASS: TestInstallationLineage (0.32s)\n"}
+{"Time":"2026-10-15T19:28:54.40421564-07:00","Action":"pass","Package":"moo2manager","Test":"TestInstallationLineage","Elapsed":0.32}
+{"Time":"2026-10-15T19:28:54.40422227-07:00","Action":"run","Package":"moo2manager","Test":"TestVersionProfilesAndCommands"}
+{"Time":"2026-10-15T19:28:54.404224694-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands","Output":"=== RUN   TestVersionProfilesAndCommands\n"}
+{"Time":"2026-10-15T19:28:54.404228039-07:00","Action":"run","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.2"}
+{"Time":"2026-10-15T19:28:54.404237102-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.2","Output":"=== RUN   TestVersionProfilesAndCommands/1.2\n"}
+{"Time":"2026-10-15T19:28:54.40460812-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.2","Output":"--- PASS: TestVersionProfilesAndCommands/1.2 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.404623843-07:00","Action":"pass","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.2","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.404638505-07:00","Action":"run","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.31"}
+{"Time":"2026-10-15T19:28:54.404640288-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.31","Output":"=== RUN   TestVersionProfilesAndCommands/1.31\n"}
+{"Time":"2026-10-15T19:28:54.404940071-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.31","Output":"--- PASS: TestVersionProfilesAndCommands/1.31 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.404964367-07:00","Action":"pass","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.31","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.404967171-07:00","Action":"run","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.40b23"}
+{"Time":"2026-10-15T19:28:54.404968833-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.40b23","Output":"=== RUN   TestVersionProfilesAndCommands/1.40b23\n"}
+{"Time":"2026-10-15T19:28:54.40510881-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.40b23","Output":"--- PASS: TestVersionProfilesAndCommands/1.40b23 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.40512264-07:00","Action":"pass","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.40b23","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.405130893-07:00","Action":"run","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.50.26"}
+{"Time":"2026-10-15T19:28:54.405132465-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.50.26","Output":"=== RUN   TestVersionProfilesAndCommands/1.50.26\n"}
+{"Time":"2026-10-15T19:28:54.406384575-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.50.26","Output":"--- PASS: TestVersionProfilesAndCommands/1.50.26 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.406390383-07:00","Action":"pass","Package":"moo2manager","Test":"TestVersionProfilesAndCommands/1.50.26","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.406431684-07:00","Action":"output","Package":"moo2manager","Test":"TestVersionProfilesAndCommands","Output":"--- PASS: TestVersionProfilesAndCommands (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.40643525-07:00","Action":"pass","Package":"moo2manager","Test":"TestVersionProfilesAndCommands","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.406453617-07:00","Action":"run","Package":"moo2manager","Test":"TestContentVerifiedZipImport"}
+{"Time":"2026-10-15T19:28:54.406468389-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport","Output":"=== RUN   TestContentVerifiedZipImport\n"}
+{"Time":"2026-10-15T19:28:54.406514296-07:00","Action":"run","Package":"moo2manager","Test":"TestContentVerifiedZipImport/root_and_case"}
+{"Time":"2026-10-15T19:28:54.40651676-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/root_and_case","Output":"=== RUN   TestContentVerifiedZipImport/root_and_case\n"}
+{"Time":"2026-10-15T19:28:54.411188853-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/root_and_case","Output":"--- PASS: TestContentVerifiedZipImport/root_and_case (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.411338634-07:00","Action":"pass","Package":"moo2manager","Test":"TestContentVerifiedZipImport/root_and_case","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.41134286-07:00","Action":"run","Package":"moo2manager","Test":"TestContentVerifiedZipImport/modified_data"}
+{"Time":"2026-10-15T19:28:54.411345003-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/modified_data","Output":"=== RUN   TestContentVerifiedZipImport/modified_data\n"}
+{"Time":"2026-10-15T19:28:54.41374549-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/modified_data","Output":"--- PASS: TestContentVerifiedZipImport/modified_data (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.413757808-07:00","Action":"pass","Package":"moo2manager","Test":"TestContentVerifiedZipImport/modified_data","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.413761333-07:00","Action":"run","Package":"moo2manager","Test":"TestContentVerifiedZipImport/missing_data"}
+{"Time":"2026-10-15T19:28:54.413763266-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/missing_data","Output":"=== RUN   TestContentVerifiedZipImport/missing_data\n"}
+{"Time":"2026-10-15T19:28:54.41539669-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/missing_data","Output":"--- PASS: TestContentVerifiedZipImport/missing_data (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.415411962-07:00","Action":"pass","Package":"moo2manager","Test":"TestContentVerifiedZipImport/missing_data","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.41541704-07:00","Action":"run","Package":"moo2manager","Test":"TestContentVerifiedZipImport/traversal"}
+{"Time":"2026-10-15T19:28:54.415420405-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/traversal","Output":"=== RUN   TestContentVerifiedZipImport/traversal\n"}
+{"Time":"2026-10-15T19:28:54.420133718-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/traversal","Output":"--- PASS: TestContentVerifiedZipImport/traversal (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.420152185-07:00","Action":"pass","Package":"moo2manager","Test":"TestContentVerifiedZipImport/traversal","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.420158224-07:00","Action":"run","Package":"moo2manager","Test":"TestContentVerifiedZipImport/ambiguous_root"}
+{"Time":"2026-10-15T19:28:54.42016213-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/ambiguous_root","Output":"=== RUN   TestContentVerifiedZipImport/ambiguous_root\n"}
+{"Time":"2026-10-15T19:28:54.425292661-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/ambiguous_root","Output":"--- PASS: TestContentVerifiedZipImport/ambiguous_root (0.01s)\n"}
+{"Time":"2026-10-15T19:28:54.425308865-07:00","Action":"pass","Package":"moo2manager","Test":"TestContentVerifiedZipImport/ambiguous_root","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:54.425329145-07:00","Action":"run","Package":"moo2manager","Test":"TestContentVerifiedZipImport/case_collision"}
+{"Time":"2026-10-15T19:28:54.42533255-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/case_collision","Output":"=== RUN   TestContentVerifiedZipImport/case_collision\n"}
+{"Time":"2026-10-15T19:28:54.429988619-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport/case_collision","Output":"--- PASS: TestContentVerifiedZipImport/case_collision (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.430001588-07:00","Action":"pass","Package":"moo2manager","Test":"TestContentVerifiedZipImport/case_collision","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.430006085-07:00","Action":"output","Package":"moo2manager","Test":"TestContentVerifiedZipImport","Output":"--- PASS: TestContentVerifiedZipImport (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.43000963-07:00","Action":"pass","Package":"moo2manager","Test":"TestContentVerifiedZipImport","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.430042238-07:00","Action":"run","Package":"moo2manager","Test":"TestMutableAudioNotPinnedButCodeStillPinned"}
+{"Time":"2026-10-15T19:28:54.430044732-07:00","Action":"output","Package":"moo2manager","Test":"TestMutableAudioNotPinnedButCodeStillPinned","Output":"=== RUN   TestMutableAudioNotPinnedButCodeStillPinned\n"}
+{"Time":"2026-10-15T19:28:54.430363222-07:00","Action":"output","Package":"moo2manager","Test":"TestMutableAudioNotPinnedButCodeStillPinned","Output":"--- PASS: TestMutableAudioNotPinnedButCodeStillPinned (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.430378905-07:00","Action":"pass","Package":"moo2manager","Test":"TestMutableAudioNotPinnedButCodeStillPinned","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.43038194-07:00","Action":"run","Package":"moo2manager","Test":"TestBaselineWrongInputRejected"}
+{"Time":"2026-10-15T19:28:54.430383983-07:00","Action":"output","Package":"moo2manager","Test":"TestBaselineWrongInputRejected","Output":"=== RUN   TestBaselineWrongInputRejected\n"}
+{"Time":"2026-10-15T19:28:54.431801337-07:00","Action":"output","Package":"moo2manager","Test":"TestBaselineWrongInputRejected","Output":"--- PASS: TestBaselineWrongInputRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.431808938-07:00","Action":"pass","Package":"moo2manager","Test":"TestBaselineWrongInputRejected","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.431813545-07:00","Action":"run","Package":"moo2manager","Test":"TestRealBaselineMatchesSteam"}
+{"Time":"2026-10-15T19:28:54.43181695-07:00","Action":"output","Package":"moo2manager","Test":"TestRealBaselineMatchesSteam","Output":"=== RUN   TestRealBaselineMatchesSteam\n"}
+{"Time":"2026-10-15T19:28:54.431867014-07:00","Action":"output","Package":"moo2manager","Test":"TestRealBaselineMatchesSteam","Output":"    editions_test.go:242: optional owned-file fixture not provided\n"}
+{"Time":"2026-10-15T19:28:54.431880634-07:00","Action":"output","Package":"moo2manager","Test":"TestRealBaselineMatchesSteam","Output":"--- SKIP: TestRealBaselineMatchesSteam (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.431910829-07:00","Action":"skip","Package":"moo2manager","Test":"TestRealBaselineMatchesSteam","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.431971729-07:00","Action":"run","Package":"moo2manager","Test":"TestRealOfficialDownloadContentAuthentication"}
+{"Time":"2026-10-15T19:28:54.431977537-07:00","Action":"output","Package":"moo2manager","Test":"TestRealOfficialDownloadContentAuthentication","Output":"=== RUN   TestRealOfficialDownloadContentAuthentication\n"}
+{"Time":"2026-10-15T19:28:54.431999129-07:00","Action":"output","Package":"moo2manager","Test":"TestRealOfficialDownloadContentAuthentication","Output":"    editions_test.go:269: optional owned-file fixture not provided\n"}
+{"Time":"2026-10-15T19:28:54.432017697-07:00","Action":"output","Package":"moo2manager","Test":"TestRealOfficialDownloadContentAuthentication","Output":"--- SKIP: TestRealOfficialDownloadContentAuthentication (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.432039409-07:00","Action":"skip","Package":"moo2manager","Test":"TestRealOfficialDownloadContentAuthentication","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.432044096-07:00","Action":"run","Package":"moo2manager","Test":"TestForgedLineageRejected"}
+{"Time":"2026-10-15T19:28:54.432046549-07:00","Action":"output","Package":"moo2manager","Test":"TestForgedLineageRejected","Output":"=== RUN   TestForgedLineageRejected\n"}
+{"Time":"2026-10-15T19:28:54.506171664-07:00","Action":"output","Package":"moo2manager","Test":"TestForgedLineageRejected","Output":"--- PASS: TestForgedLineageRejected (0.07s)\n"}
+{"Time":"2026-10-15T19:28:54.506213986-07:00","Action":"pass","Package":"moo2manager","Test":"TestForgedLineageRejected","Elapsed":0.07}
+{"Time":"2026-10-15T19:28:54.506221227-07:00","Action":"run","Package":"moo2manager","Test":"TestOldImportedReceiptEditionAlias"}
+{"Time":"2026-10-15T19:28:54.50622343-07:00","Action":"output","Package":"moo2manager","Test":"TestOldImportedReceiptEditionAlias","Output":"=== RUN   TestOldImportedReceiptEditionAlias\n"}
+{"Time":"2026-10-15T19:28:54.555814007-07:00","Action":"output","Package":"moo2manager","Test":"TestOldImportedReceiptEditionAlias","Output":"--- PASS: TestOldImportedReceiptEditionAlias (0.05s)\n"}
+{"Time":"2026-10-15T19:28:54.555857301-07:00","Action":"pass","Package":"moo2manager","Test":"TestOldImportedReceiptEditionAlias","Elapsed":0.05}
+{"Time":"2026-10-15T19:28:54.555871082-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths"}
+{"Time":"2026-10-15T19:28:54.555882038-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths","Output":"=== RUN   TestSafePaths\n"}
+{"Time":"2026-10-15T19:28:54.555886665-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/.._escape"}
+{"Time":"2026-10-15T19:28:54.555888627-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/.._escape","Output":"=== RUN   TestSafePaths/.._escape\n"}
+{"Time":"2026-10-15T19:28:54.555989557-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/.._escape","Output":"--- PASS: TestSafePaths/.._escape (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.555998279-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/.._escape","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556021794-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/_absolute"}
+{"Time":"2026-10-15T19:28:54.556024378-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/_absolute","Output":"=== RUN   TestSafePaths/_absolute\n"}
+{"Time":"2026-10-15T19:28:54.556090426-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/_absolute","Output":"--- PASS: TestSafePaths/_absolute (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.556096424-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/_absolute","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556121662-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/C:_path"}
+{"Time":"2026-10-15T19:28:54.556123995-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/C:_path","Output":"=== RUN   TestSafePaths/C:_path\n"}
+{"Time":"2026-10-15T19:28:54.556189292-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/C:_path","Output":"--- PASS: TestSafePaths/C:_path (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.556193909-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/C:_path","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556209752-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/folder\\file"}
+{"Time":"2026-10-15T19:28:54.556212506-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/folder\\file","Output":"=== RUN   TestSafePaths/folder\\file\n"}
+{"Time":"2026-10-15T19:28:54.556265624-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/folder\\file","Output":"--- PASS: TestSafePaths/folder\\file (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.556292775-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/folder\\file","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556297171-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/a__b"}
+{"Time":"2026-10-15T19:28:54.556300135-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a__b","Output":"=== RUN   TestSafePaths/a__b\n"}
+{"Time":"2026-10-15T19:28:54.55645209-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a__b","Output":"--- PASS: TestSafePaths/a__b (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.556457428-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/a__b","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556478619-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/a_._b"}
+{"Time":"2026-10-15T19:28:54.556480993-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a_._b","Output":"=== RUN   TestSafePaths/a_._b\n"}
+{"Time":"2026-10-15T19:28:54.556595211-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a_._b","Output":"--- PASS: TestSafePaths/a_._b (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.556615241-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/a_._b","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556637334-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/a_.._b"}
+{"Time":"2026-10-15T19:28:54.556639937-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a_.._b","Output":"=== RUN   TestSafePaths/a_.._b\n"}
+{"Time":"2026-10-15T19:28:54.556785623-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a_.._b","Output":"--- PASS: TestSafePaths/a_.._b (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.556795968-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/a_.._b","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556801907-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/CON"}
+{"Time":"2026-10-15T19:28:54.556811-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/CON","Output":"=== RUN   TestSafePaths/CON\n"}
+{"Time":"2026-10-15T19:28:54.556859282-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/CON","Output":"--- PASS: TestSafePaths/CON (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.556887493-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/CON","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.5568921-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/aux.cfg"}
+{"Time":"2026-10-15T19:28:54.556894944-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/aux.cfg","Output":"=== RUN   TestSafePaths/aux.cfg\n"}
+{"Time":"2026-10-15T19:28:54.556943145-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/aux.cfg","Output":"--- PASS: TestSafePaths/aux.cfg (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.55696661-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/aux.cfg","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.556988963-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/foo."}
+{"Time":"2026-10-15T19:28:54.556992318-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/foo.","Output":"=== RUN   TestSafePaths/foo.\n"}
+{"Time":"2026-10-15T19:28:54.557038096-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/foo.","Output":"--- PASS: TestSafePaths/foo. (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.557059828-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/foo.","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.55708809-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/foo_"}
+{"Time":"2026-10-15T19:28:54.557091164-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/foo_","Output":"=== RUN   TestSafePaths/foo_\n"}
+{"Time":"2026-10-15T19:28:54.557147307-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/foo_","Output":"--- PASS: TestSafePaths/foo_ (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.557163842-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/foo_","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.557199534-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/x_file"}
+{"Time":"2026-10-15T19:28:54.557202749-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/x_file","Output":"=== RUN   TestSafePaths/x_file\n"}
+{"Time":"2026-10-15T19:28:54.557234376-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/x_file","Output":"--- PASS: TestSafePaths/x_file (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.557256308-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/x_file","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.557280925-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/x_file#01"}
+{"Time":"2026-10-15T19:28:54.557283989-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/x_file#01","Output":"=== RUN   TestSafePaths/x_file#01\n"}
+{"Time":"2026-10-15T19:28:54.557335255-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/x_file#01","Output":"--- PASS: TestSafePaths/x_file#01 (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.557357287-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/x_file#01","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.557382174-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/a:stream"}
+{"Time":"2026-10-15T19:28:54.557385509-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a:stream","Output":"=== RUN   TestSafePaths/a:stream\n"}
+{"Time":"2026-10-15T19:28:54.557424627-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a:stream","Output":"--- PASS: TestSafePaths/a:stream (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.55744694-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/a:stream","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.557463614-07:00","Action":"run","Package":"moo2manager","Test":"TestSafePaths/a?b"}
+{"Time":"2026-10-15T19:28:54.557466879-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a?b","Output":"=== RUN   TestSafePaths/a?b\n"}
+{"Time":"2026-10-15T19:28:54.557514419-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths/a?b","Output":"--- PASS: TestSafePaths/a?b (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.557535731-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths/a?b","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.55756919-07:00","Action":"output","Package":"moo2manager","Test":"TestSafePaths","Output":"--- PASS: TestSafePaths (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.557577943-07:00","Action":"pass","Package":"moo2manager","Test":"TestSafePaths","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.557603271-07:00","Action":"run","Package":"moo2manager","Test":"TestGoodPath"}
+{"Time":"2026-10-15T19:28:54.557605704-07:00","Action":"output","Package":"moo2manager","Test":"TestGoodPath","Output":"=== RUN   TestGoodPath\n"}
+{"Time":"2026-10-15T19:28:54.55785967-07:00","Action":"output","Package":"moo2manager","Test":"TestGoodPath","Output":"--- PASS: TestGoodPath (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.557866129-07:00","Action":"pass","Package":"moo2manager","Test":"TestGoodPath","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.557882734-07:00","Action":"run","Package":"moo2manager","Test":"TestZipTraversalPreflight"}
+{"Time":"2026-10-15T19:28:54.557885267-07:00","Action":"output","Package":"moo2manager","Test":"TestZipTraversalPreflight","Output":"=== RUN   TestZipTraversalPreflight\n"}
+{"Time":"2026-10-15T19:28:54.56157604-07:00","Action":"output","Package":"moo2manager","Test":"TestZipTraversalPreflight","Output":"--- PASS: TestZipTraversalPreflight (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.561586566-07:00","Action":"pass","Package":"moo2manager","Test":"TestZipTraversalPreflight","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.561592174-07:00","Action":"run","Package":"moo2manager","Test":"TestZipCaseCollision"}
+{"Time":"2026-10-15T19:28:54.561595168-07:00","Action":"output","Package":"moo2manager","Test":"TestZipCaseCollision","Output":"=== RUN   TestZipCaseCollision\n"}
+{"Time":"2026-10-15T19:28:54.564848946-07:00","Action":"output","Package":"moo2manager","Test":"TestZipCaseCollision","Output":"--- PASS: TestZipCaseCollision (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.564862796-07:00","Action":"pass","Package":"moo2manager","Test":"TestZipCaseCollision","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.564866131-07:00","Action":"run","Package":"moo2manager","Test":"TestZipExistingOverlayRefused"}
+{"Time":"2026-10-15T19:28:54.564868575-07:00","Action":"output","Package":"moo2manager","Test":"TestZipExistingOverlayRefused","Output":"=== RUN   TestZipExistingOverlayRefused\n"}
+{"Time":"2026-10-15T19:28:54.570615435-07:00","Action":"output","Package":"moo2manager","Test":"TestZipExistingOverlayRefused","Output":"--- PASS: TestZipExistingOverlayRefused (0.01s)\n"}
+{"Time":"2026-10-15T19:28:54.570626211-07:00","Action":"pass","Package":"moo2manager","Test":"TestZipExistingOverlayRefused","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:54.570634904-07:00","Action":"run","Package":"moo2manager","Test":"TestZipSymlinkRefused"}
+{"Time":"2026-10-15T19:28:54.570636977-07:00","Action":"output","Package":"moo2manager","Test":"TestZipSymlinkRefused","Output":"=== RUN   TestZipSymlinkRefused\n"}
+{"Time":"2026-10-15T19:28:54.570952523-07:00","Action":"output","Package":"moo2manager","Test":"TestZipSymlinkRefused","Output":"--- PASS: TestZipSymlinkRefused (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.570969128-07:00","Action":"pass","Package":"moo2manager","Test":"TestZipSymlinkRefused","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.570971571-07:00","Action":"run","Package":"moo2manager","Test":"TestFreshInstallOmitsArchivedSaves"}
+{"Time":"2026-10-15T19:28:54.570974696-07:00","Action":"output","Package":"moo2manager","Test":"TestFreshInstallOmitsArchivedSaves","Output":"=== RUN   TestFreshInstallOmitsArchivedSaves\n"}
+{"Time":"2026-10-15T19:28:54.577474599-07:00","Action":"output","Package":"moo2manager","Test":"TestFreshInstallOmitsArchivedSaves","Output":"--- PASS: TestFreshInstallOmitsArchivedSaves (0.01s)\n"}
+{"Time":"2026-10-15T19:28:54.577489792-07:00","Action":"pass","Package":"moo2manager","Test":"TestFreshInstallOmitsArchivedSaves","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:54.577494218-07:00","Action":"run","Package":"moo2manager","Test":"TestBroadCFGIsNotMutable"}
+{"Time":"2026-10-15T19:28:54.577496211-07:00","Action":"output","Package":"moo2manager","Test":"TestBroadCFGIsNotMutable","Output":"=== RUN   TestBroadCFGIsNotMutable\n"}
+{"Time":"2026-10-15T19:28:54.5775632-07:00","Action":"output","Package":"moo2manager","Test":"TestBroadCFGIsNotMutable","Output":"--- PASS: TestBroadCFGIsNotMutable (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.57758336-07:00","Action":"pass","Package":"moo2manager","Test":"TestBroadCFGIsNotMutable","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.577586865-07:00","Action":"run","Package":"moo2manager","Test":"TestAtomicReplacement"}
+{"Time":"2026-10-15T19:28:54.577588858-07:00","Action":"output","Package":"moo2manager","Test":"TestAtomicReplacement","Output":"=== RUN   TestAtomicReplacement\n"}
+{"Time":"2026-10-15T19:28:54.57784091-07:00","Action":"output","Package":"moo2manager","Test":"TestAtomicReplacement","Output":"--- PASS: TestAtomicReplacement (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.577845177-07:00","Action":"pass","Package":"moo2manager","Test":"TestAtomicReplacement","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.577859548-07:00","Action":"run","Package":"moo2manager","Test":"TestAtomicJSONRejectsTrailingData"}
+{"Time":"2026-10-15T19:28:54.577861992-07:00","Action":"output","Package":"moo2manager","Test":"TestAtomicJSONRejectsTrailingData","Output":"=== RUN   TestAtomicJSONRejectsTrailingData\n"}
+{"Time":"2026-10-15T19:28:54.57805045-07:00","Action":"output","Package":"moo2manager","Test":"TestAtomicJSONRejectsTrailingData","Output":"--- PASS: TestAtomicJSONRejectsTrailingData (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.578055357-07:00","Action":"pass","Package":"moo2manager","Test":"TestAtomicJSONRejectsTrailingData","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.578069748-07:00","Action":"run","Package":"moo2manager","Test":"TestDownloadValidatesBeforeReplacement"}
+{"Time":"2026-10-15T19:28:54.578071701-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadValidatesBeforeReplacement","Output":"=== RUN   TestDownloadValidatesBeforeReplacement\n"}
+{"Time":"2026-10-15T19:28:54.579866793-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadValidatesBeforeReplacement","Output":"--- PASS: TestDownloadValidatesBeforeReplacement (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.579878521-07:00","Action":"pass","Package":"moo2manager","Test":"TestDownloadValidatesBeforeReplacement","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.579883188-07:00","Action":"run","Package":"moo2manager","Test":"TestDownloadBounds"}
+{"Time":"2026-10-15T19:28:54.579885091-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadBounds","Output":"=== RUN   TestDownloadBounds\n"}
+{"Time":"2026-10-15T19:28:54.581244649-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadBounds","Output":"--- PASS: TestDownloadBounds (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.581252971-07:00","Action":"pass","Package":"moo2manager","Test":"TestDownloadBounds","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.581255716-07:00","Action":"run","Package":"moo2manager","Test":"TestDownloadNetworkFailurePreservesCache"}
+{"Time":"2026-10-15T19:28:54.581257628-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadNetworkFailurePreservesCache","Output":"=== RUN   TestDownloadNetworkFailurePreservesCache\n"}
+{"Time":"2026-10-15T19:28:54.58188115-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadNetworkFailurePreservesCache","Output":"--- PASS: TestDownloadNetworkFailurePreservesCache (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.581891986-07:00","Action":"pass","Package":"moo2manager","Test":"TestDownloadNetworkFailurePreservesCache","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.581896212-07:00","Action":"run","Package":"moo2manager","Test":"TestDownloadHostRestriction"}
+{"Time":"2026-10-15T19:28:54.581897874-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadHostRestriction","Output":"=== RUN   TestDownloadHostRestriction\n"}
+{"Time":"2026-10-15T19:28:54.581957973-07:00","Action":"output","Package":"moo2manager","Test":"TestDownloadHostRestriction","Output":"--- PASS: TestDownloadHostRestriction (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.581960817-07:00","Action":"pass","Package":"moo2manager","Test":"TestDownloadHostRestriction","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.581975038-07:00","Action":"run","Package":"moo2manager","Test":"TestHarnessConfigurationContract"}
+{"Time":"2026-10-15T19:28:54.581976561-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessConfigurationContract","Output":"=== RUN   TestHarnessConfigurationContract\n"}
+{"Time":"2026-10-15T19:28:54.58218594-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessConfigurationContract","Output":"--- PASS: TestHarnessConfigurationContract (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.582200652-07:00","Action":"pass","Package":"moo2manager","Test":"TestHarnessConfigurationContract","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.582213951-07:00","Action":"run","Package":"moo2manager","Test":"TestHarnessExactArgumentConstruction"}
+{"Time":"2026-10-15T19:28:54.582215874-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessExactArgumentConstruction","Output":"=== RUN   TestHarnessExactArgumentConstruction\n"}
+{"Time":"2026-10-15T19:28:54.58234856-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessExactArgumentConstruction","Output":"--- PASS: TestHarnessExactArgumentConstruction (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.58236235-07:00","Action":"pass","Package":"moo2manager","Test":"TestHarnessExactArgumentConstruction","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.582374919-07:00","Action":"run","Package":"moo2manager","Test":"TestHarnessAudioByteParity"}
+{"Time":"2026-10-15T19:28:54.582376521-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessAudioByteParity","Output":"=== RUN   TestHarnessAudioByteParity\n"}
+{"Time":"2026-10-15T19:28:54.582763223-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessAudioByteParity","Output":"--- PASS: TestHarnessAudioByteParity (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.582776643-07:00","Action":"pass","Package":"moo2manager","Test":"TestHarnessAudioByteParity","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.582789932-07:00","Action":"run","Package":"moo2manager","Test":"TestHarnessKernelRejectsUnknownBytes"}
+{"Time":"2026-10-15T19:28:54.582792766-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessKernelRejectsUnknownBytes","Output":"=== RUN   TestHarnessKernelRejectsUnknownBytes\n"}
+{"Time":"2026-10-15T19:28:54.582912503-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessKernelRejectsUnknownBytes","Output":"--- PASS: TestHarnessKernelRejectsUnknownBytes (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.58291673-07:00","Action":"pass","Package":"moo2manager","Test":"TestHarnessKernelRejectsUnknownBytes","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.582931602-07:00","Action":"run","Package":"moo2manager","Test":"TestNormalizedPinsContainRuntimeKernel"}
+{"Time":"2026-10-15T19:28:54.582933454-07:00","Action":"output","Package":"moo2manager","Test":"TestNormalizedPinsContainRuntimeKernel","Output":"=== RUN   TestNormalizedPinsContainRuntimeKernel\n"}
+{"Time":"2026-10-15T19:28:54.740371051-07:00","Action":"output","Package":"moo2manager","Test":"TestNormalizedPinsContainRuntimeKernel","Output":"--- PASS: TestNormalizedPinsContainRuntimeKernel (0.16s)\n"}
+{"Time":"2026-10-15T19:28:54.740418-07:00","Action":"pass","Package":"moo2manager","Test":"TestNormalizedPinsContainRuntimeKernel","Elapsed":0.16}
+{"Time":"2026-10-15T19:28:54.740430458-07:00","Action":"run","Package":"moo2manager","Test":"TestRuntimeIndexPinsExecutableDLLsAndResources"}
+{"Time":"2026-10-15T19:28:54.740433002-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeIndexPinsExecutableDLLsAndResources","Output":"=== RUN   TestRuntimeIndexPinsExecutableDLLsAndResources\n"}
+{"Time":"2026-10-15T19:28:54.759040965-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeIndexPinsExecutableDLLsAndResources","Output":"--- PASS: TestRuntimeIndexPinsExecutableDLLsAndResources (0.02s)\n"}
+{"Time":"2026-10-15T19:28:54.759075956-07:00","Action":"pass","Package":"moo2manager","Test":"TestRuntimeIndexPinsExecutableDLLsAndResources","Elapsed":0.02}
+{"Time":"2026-10-15T19:28:54.759081044-07:00","Action":"run","Package":"moo2manager","Test":"TestPortableRootDoesNotAutoImportOrOverwriteGame"}
+{"Time":"2026-10-15T19:28:54.759083217-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRootDoesNotAutoImportOrOverwriteGame","Output":"=== RUN   TestPortableRootDoesNotAutoImportOrOverwriteGame\n"}
+{"Time":"2026-10-15T19:28:54.760097155-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRootDoesNotAutoImportOrOverwriteGame","Output":"--- PASS: TestPortableRootDoesNotAutoImportOrOverwriteGame (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.760129523-07:00","Action":"pass","Package":"moo2manager","Test":"TestPortableRootDoesNotAutoImportOrOverwriteGame","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.760143844-07:00","Action":"run","Package":"moo2manager","Test":"TestPortableRecoveryRestoresSnapshot"}
+{"Time":"2026-10-15T19:28:54.760145777-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRecoveryRestoresSnapshot","Output":"=== RUN   TestPortableRecoveryRestoresSnapshot\n"}
+{"Time":"2026-10-15T19:28:54.761471596-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRecoveryRestoresSnapshot","Output":"--- PASS: TestPortableRecoveryRestoresSnapshot (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.761510514-07:00","Action":"pass","Package":"moo2manager","Test":"TestPortableRecoveryRestoresSnapshot","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.761514129-07:00","Action":"run","Package":"moo2manager","Test":"TestPortableRecoveryBeforeInitialRenameDoesNotDeleteOldGame"}
+{"Time":"2026-10-15T19:28:54.761516122-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRecoveryBeforeInitialRenameDoesNotDeleteOldGame","Output":"=== RUN   TestPortableRecoveryBeforeInitialRenameDoesNotDeleteOldGame\n"}
+{"Time":"2026-10-15T19:28:54.762721393-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRecoveryBeforeInitialRenameDoesNotDeleteOldGame","Output":"--- PASS: TestPortableRecoveryBeforeInitialRenameDoesNotDeleteOldGame (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.762730837-07:00","Action":"pass","Package":"moo2manager","Test":"TestPortableRecoveryBeforeInitialRenameDoesNotDeleteOldGame","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.762734142-07:00","Action":"run","Package":"moo2manager","Test":"TestPortableRecoveryRejectsTraversal"}
+{"Time":"2026-10-15T19:28:54.762736405-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRecoveryRejectsTraversal","Output":"=== RUN   TestPortableRecoveryRejectsTraversal\n"}
+{"Time":"2026-10-15T19:28:54.763703233-07:00","Action":"output","Package":"moo2manager","Test":"TestPortableRecoveryRejectsTraversal","Output":"--- PASS: TestPortableRecoveryRejectsTraversal (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.763712577-07:00","Action":"pass","Package":"moo2manager","Test":"TestPortableRecoveryRejectsTraversal","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.763716163-07:00","Action":"run","Package":"moo2manager","Test":"TestStandaloneConfigCannotContainNetworkCommands"}
+{"Time":"2026-10-15T19:28:54.763718035-07:00","Action":"output","Package":"moo2manager","Test":"TestStandaloneConfigCannotContainNetworkCommands","Output":"=== RUN   TestStandaloneConfigCannotContainNetworkCommands\n"}
+{"Time":"2026-10-15T19:28:54.763870471-07:00","Action":"output","Package":"moo2manager","Test":"TestStandaloneConfigCannotContainNetworkCommands","Output":"--- PASS: TestStandaloneConfigCannotContainNetworkCommands (0.00s)\n"}
+{"Time":"2026-10-15T19:28:54.763879334-07:00","Action":"pass","Package":"moo2manager","Test":"TestStandaloneConfigCannotContainNetworkCommands","Elapsed":0}
+{"Time":"2026-10-15T19:28:54.763898863-07:00","Action":"run","Package":"moo2manager","Test":"TestHarnessPrivateRuntimeFixture"}
+{"Time":"2026-10-15T19:28:54.763901767-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessPrivateRuntimeFixture","Output":"=== RUN   TestHarnessPrivateRuntimeFixture\n"}
+{"Time":"2026-10-15T19:28:55.344038419-07:00","Action":"output","Package":"moo2manager/shared/distribution","Output":"ok  \tmoo2manager/shared/distribution\t1.469s\n"}
+{"Time":"2026-10-15T19:28:55.352119463-07:00","Action":"pass","Package":"moo2manager/shared/distribution","Elapsed":1.488}
+{"Time":"2026-10-15T19:28:56.383512855-07:00","Action":"output","Package":"moo2manager","Test":"TestHarnessPrivateRuntimeFixture","Output":"--- PASS: TestHarnessPrivateRuntimeFixture (1.62s)\n"}
+{"Time":"2026-10-15T19:28:56.383597601-07:00","Action":"pass","Package":"moo2manager","Test":"TestHarnessPrivateRuntimeFixture","Elapsed":1.62}
+{"Time":"2026-10-15T19:28:56.383605813-07:00","Action":"run","Package":"moo2manager","Test":"TestFolderSnapshotBoundary"}
+{"Time":"2026-10-15T19:28:56.383609248-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary","Output":"=== RUN   TestFolderSnapshotBoundary\n"}
+{"Time":"2026-10-15T19:28:56.383614746-07:00","Action":"run","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/recognized"}
+{"Time":"2026-10-15T19:28:56.38361749-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/recognized","Output":"=== RUN   TestFolderSnapshotBoundary/recognized\n"}
+{"Time":"2026-10-15T19:28:56.384141945-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/recognized","Output":"--- PASS: TestFolderSnapshotBoundary/recognized (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.384152791-07:00","Action":"pass","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/recognized","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.384158569-07:00","Action":"run","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/modified"}
+{"Time":"2026-10-15T19:28:56.384161564-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/modified","Output":"=== RUN   TestFolderSnapshotBoundary/modified\n"}
+{"Time":"2026-10-15T19:28:56.384496709-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/modified","Output":"--- PASS: TestFolderSnapshotBoundary/modified (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.384507114-07:00","Action":"pass","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/modified","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.384512252-07:00","Action":"run","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/missing"}
+{"Time":"2026-10-15T19:28:56.384515116-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/missing","Output":"=== RUN   TestFolderSnapshotBoundary/missing\n"}
+{"Time":"2026-10-15T19:28:56.384847007-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/missing","Output":"--- PASS: TestFolderSnapshotBoundary/missing (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.384855209-07:00","Action":"pass","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/missing","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.384860176-07:00","Action":"run","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/wrong-size"}
+{"Time":"2026-10-15T19:28:56.384863291-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/wrong-size","Output":"=== RUN   TestFolderSnapshotBoundary/wrong-size\n"}
+{"Time":"2026-10-15T19:28:56.385149213-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/wrong-size","Output":"--- PASS: TestFolderSnapshotBoundary/wrong-size (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.385166138-07:00","Action":"pass","Package":"moo2manager","Test":"TestFolderSnapshotBoundary/wrong-size","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.385179017-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderSnapshotBoundary","Output":"--- PASS: TestFolderSnapshotBoundary (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.385226337-07:00","Action":"pass","Package":"moo2manager","Test":"TestFolderSnapshotBoundary","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.385232136-07:00","Action":"run","Package":"moo2manager","Test":"TestBaseIndexIsOnlyFingerprints"}
+{"Time":"2026-10-15T19:28:56.38523492-07:00","Action":"output","Package":"moo2manager","Test":"TestBaseIndexIsOnlyFingerprints","Output":"=== RUN   TestBaseIndexIsOnlyFingerprints\n"}
+{"Time":"2026-10-15T19:28:56.389988052-07:00","Action":"output","Package":"moo2manager","Test":"TestBaseIndexIsOnlyFingerprints","Output":"--- PASS: TestBaseIndexIsOnlyFingerprints (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.390001753-07:00","Action":"pass","Package":"moo2manager","Test":"TestBaseIndexIsOnlyFingerprints","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.390006069-07:00","Action":"run","Package":"moo2manager","Test":"TestImportedBaseTraversal"}
+{"Time":"2026-10-15T19:28:56.390008953-07:00","Action":"output","Package":"moo2manager","Test":"TestImportedBaseTraversal","Output":"=== RUN   TestImportedBaseTraversal\n"}
+{"Time":"2026-10-15T19:28:56.395681144-07:00","Action":"output","Package":"moo2manager","Test":"TestImportedBaseTraversal","Output":"--- PASS: TestImportedBaseTraversal (0.01s)\n"}
+{"Time":"2026-10-15T19:28:56.395696086-07:00","Action":"pass","Package":"moo2manager","Test":"TestImportedBaseTraversal","Elapsed":0.01}
+{"Time":"2026-10-15T19:28:56.395702005-07:00","Action":"run","Package":"moo2manager","Test":"TestPrepareRejectsMissingSourceBeforeDownloads"}
+{"Time":"2026-10-15T19:28:56.395705149-07:00","Action":"output","Package":"moo2manager","Test":"TestPrepareRejectsMissingSourceBeforeDownloads","Output":"=== RUN   TestPrepareRejectsMissingSourceBeforeDownloads\n"}
+{"Time":"2026-10-15T19:28:56.397408376-07:00","Action":"output","Package":"moo2manager","Test":"TestPrepareRejectsMissingSourceBeforeDownloads","Output":"--- PASS: TestPrepareRejectsMissingSourceBeforeDownloads (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.397420694-07:00","Action":"pass","Package":"moo2manager","Test":"TestPrepareRejectsMissingSourceBeforeDownloads","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.397425471-07:00","Action":"run","Package":"moo2manager","Test":"TestLocalImportRequiresAbsolutePath"}
+{"Time":"2026-10-15T19:28:56.397428385-07:00","Action":"output","Package":"moo2manager","Test":"TestLocalImportRequiresAbsolutePath","Output":"=== RUN   TestLocalImportRequiresAbsolutePath\n"}
+{"Time":"2026-10-15T19:28:56.397492069-07:00","Action":"output","Package":"moo2manager","Test":"TestLocalImportRequiresAbsolutePath","Output":"--- PASS: TestLocalImportRequiresAbsolutePath (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.397501313-07:00","Action":"pass","Package":"moo2manager","Test":"TestLocalImportRequiresAbsolutePath","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.397523626-07:00","Action":"run","Package":"moo2manager","Test":"TestFolderWorkspaceVerificationPinsActualFiles"}
+{"Time":"2026-10-15T19:28:56.397527181-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderWorkspaceVerificationPinsActualFiles","Output":"=== RUN   TestFolderWorkspaceVerificationPinsActualFiles\n"}
+{"Time":"2026-10-15T19:28:56.397801316-07:00","Action":"output","Package":"moo2manager","Test":"TestFolderWorkspaceVerificationPinsActualFiles","Output":"--- PASS: TestFolderWorkspaceVerificationPinsActualFiles (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.397811621-07:00","Action":"pass","Package":"moo2manager","Test":"TestFolderWorkspaceVerificationPinsActualFiles","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.397816719-07:00","Action":"run","Package":"moo2manager","Test":"TestUnknownWorkspaceSourceKindRejected"}
+{"Time":"2026-10-15T19:28:56.397819884-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownWorkspaceSourceKindRejected","Output":"=== RUN   TestUnknownWorkspaceSourceKindRejected\n"}
+{"Time":"2026-10-15T19:28:56.402754024-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownWorkspaceSourceKindRejected","Output":"--- PASS: TestUnknownWorkspaceSourceKindRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:28:56.402768986-07:00","Action":"pass","Package":"moo2manager","Test":"TestUnknownWorkspaceSourceKindRejected","Elapsed":0}
+{"Time":"2026-10-15T19:28:56.402773382-07:00","Action":"run","Package":"moo2manager","Test":"TestAddedEditableConfigurationChangesFingerprint"}
+{"Time":"2026-10-15T19:28:56.402776176-07:00","Action":"output","Package":"moo2manager","Test":"TestAddedEditableConfigurationChangesFingerprint","Output":"=== RUN   TestAddedEditableConfigurationChangesFingerprint\n"}
+{"Time":"2026-10-15T19:29:01.831303051-07:00","Action":"output","Package":"moo2manager","Test":"TestAddedEditableConfigurationChangesFingerprint","Output":"--- PASS: TestAddedEditableConfigurationChangesFingerprint (5.43s)\n"}
+{"Time":"2026-10-15T19:29:01.831346455-07:00","Action":"pass","Package":"moo2manager","Test":"TestAddedEditableConfigurationChangesFingerprint","Elapsed":5.43}
+{"Time":"2026-10-15T19:29:01.831428246-07:00","Action":"run","Package":"moo2manager","Test":"TestMissingSelectedConfigurationCannotHideInManifest"}
+{"Time":"2026-10-15T19:29:01.83143124-07:00","Action":"output","Package":"moo2manager","Test":"TestMissingSelectedConfigurationCannotHideInManifest","Output":"=== RUN   TestMissingSelectedConfigurationCannotHideInManifest\n"}
+{"Time":"2026-10-15T19:29:03.852100736-07:00","Action":"output","Package":"moo2manager","Test":"TestMissingSelectedConfigurationCannotHideInManifest","Output":"--- PASS: TestMissingSelectedConfigurationCannotHideInManifest (2.02s)\n"}
+{"Time":"2026-10-15T19:29:03.852140204-07:00","Action":"pass","Package":"moo2manager","Test":"TestMissingSelectedConfigurationCannotHideInManifest","Elapsed":2.02}
+{"Time":"2026-10-15T19:29:03.852160284-07:00","Action":"run","Package":"moo2manager","Test":"TestPatchCodeCannotBeBlessedByLocalManifest"}
+{"Time":"2026-10-15T19:29:03.852163118-07:00","Action":"output","Package":"moo2manager","Test":"TestPatchCodeCannotBeBlessedByLocalManifest","Output":"=== RUN   TestPatchCodeCannotBeBlessedByLocalManifest\n"}
+{"Time":"2026-10-15T19:29:05.947845734-07:00","Action":"output","Package":"moo2manager","Test":"TestPatchCodeCannotBeBlessedByLocalManifest","Output":"--- PASS: TestPatchCodeCannotBeBlessedByLocalManifest (2.10s)\n"}
+{"Time":"2026-10-15T19:29:05.947881917-07:00","Action":"pass","Package":"moo2manager","Test":"TestPatchCodeCannotBeBlessedByLocalManifest","Elapsed":2.1}
+{"Time":"2026-10-15T19:29:05.947888667-07:00","Action":"run","Package":"moo2manager","Test":"TestLegacyReceiptStillRequiresCompiledBaseIdentity"}
+{"Time":"2026-10-15T19:29:05.947891431-07:00","Action":"output","Package":"moo2manager","Test":"TestLegacyReceiptStillRequiresCompiledBaseIdentity","Output":"=== RUN   TestLegacyReceiptStillRequiresCompiledBaseIdentity\n"}
+{"Time":"2026-10-15T19:29:05.953435122-07:00","Action":"output","Package":"moo2manager","Test":"TestLegacyReceiptStillRequiresCompiledBaseIdentity","Output":"--- PASS: TestLegacyReceiptStillRequiresCompiledBaseIdentity (0.01s)\n"}
+{"Time":"2026-10-15T19:29:05.953468852-07:00","Action":"pass","Package":"moo2manager","Test":"TestLegacyReceiptStillRequiresCompiledBaseIdentity","Elapsed":0.01}
+{"Time":"2026-10-15T19:29:05.953474119-07:00","Action":"run","Package":"moo2manager","Test":"TestPatchInventoryContainsRequiredCodeAndConfig"}
+{"Time":"2026-10-15T19:29:05.953476483-07:00","Action":"output","Package":"moo2manager","Test":"TestPatchInventoryContainsRequiredCodeAndConfig","Output":"=== RUN   TestPatchInventoryContainsRequiredCodeAndConfig\n"}
+{"Time":"2026-10-15T19:29:05.96983383-07:00","Action":"output","Package":"moo2manager","Test":"TestPatchInventoryContainsRequiredCodeAndConfig","Output":"--- PASS: TestPatchInventoryContainsRequiredCodeAndConfig (0.02s)\n"}
+{"Time":"2026-10-15T19:29:05.969861752-07:00","Action":"pass","Package":"moo2manager","Test":"TestPatchInventoryContainsRequiredCodeAndConfig","Elapsed":0.02}
+{"Time":"2026-10-15T19:29:05.969873128-07:00","Action":"run","Package":"moo2manager","Test":"TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase"}
+{"Time":"2026-10-15T19:29:05.969875272-07:00","Action":"output","Package":"moo2manager","Test":"TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase","Output":"=== RUN   TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase\n"}
+{"Time":"2026-10-15T19:29:08.016234912-07:00","Action":"output","Package":"moo2manager","Test":"TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase","Output":"--- PASS: TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase (2.05s)\n"}
+{"Time":"2026-10-15T19:29:08.016273509-07:00","Action":"pass","Package":"moo2manager","Test":"TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase","Elapsed":2.05}
+{"Time":"2026-10-15T19:29:08.016281171-07:00","Action":"run","Package":"moo2manager","Test":"TestGeneratedGameOutputsDoNotBlockRelaunch"}
+{"Time":"2026-10-15T19:29:08.016283864-07:00","Action":"output","Package":"moo2manager","Test":"TestGeneratedGameOutputsDoNotBlockRelaunch","Output":"=== RUN   TestGeneratedGameOutputsDoNotBlockRelaunch\n"}
+{"Time":"2026-10-15T19:29:11.405092851-07:00","Action":"output","Package":"moo2manager","Test":"TestGeneratedGameOutputsDoNotBlockRelaunch","Output":"--- PASS: TestGeneratedGameOutputsDoNotBlockRelaunch (3.39s)\n"}
+{"Time":"2026-10-15T19:29:11.405130827-07:00","Action":"pass","Package":"moo2manager","Test":"TestGeneratedGameOutputsDoNotBlockRelaunch","Elapsed":3.39}
+{"Time":"2026-10-15T19:29:11.405137898-07:00","Action":"run","Package":"moo2manager","Test":"TestUnknownExtensionConfigChangesFingerprint"}
+{"Time":"2026-10-15T19:29:11.405143416-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownExtensionConfigChangesFingerprint","Output":"=== RUN   TestUnknownExtensionConfigChangesFingerprint\n"}
+{"Time":"2026-10-15T19:29:14.944012645-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownExtensionConfigChangesFingerprint","Output":"--- PASS: TestUnknownExtensionConfigChangesFingerprint (3.54s)\n"}
+{"Time":"2026-10-15T19:29:14.944045754-07:00","Action":"pass","Package":"moo2manager","Test":"TestUnknownExtensionConfigChangesFingerprint","Elapsed":3.54}
+{"Time":"2026-10-15T19:29:14.944051823-07:00","Action":"run","Package":"moo2manager","Test":"TestUnknownCodeCannotBeAddedToReceipt"}
+{"Time":"2026-10-15T19:29:14.944054607-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownCodeCannotBeAddedToReceipt","Output":"=== RUN   TestUnknownCodeCannotBeAddedToReceipt\n"}
+{"Time":"2026-10-15T19:29:17.402963563-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownCodeCannotBeAddedToReceipt","Output":"--- PASS: TestUnknownCodeCannotBeAddedToReceipt (2.46s)\n"}
+{"Time":"2026-10-15T19:29:17.403049039-07:00","Action":"pass","Package":"moo2manager","Test":"TestUnknownCodeCannotBeAddedToReceipt","Elapsed":2.46}
+{"Time":"2026-10-15T19:29:17.403092353-07:00","Action":"run","Package":"moo2manager","Test":"TestForgedSelectionReceiptRejected"}
+{"Time":"2026-10-15T19:29:17.403095417-07:00","Action":"output","Package":"moo2manager","Test":"TestForgedSelectionReceiptRejected","Output":"=== RUN   TestForgedSelectionReceiptRejected\n"}
+{"Time":"2026-10-15T19:29:18.946647107-07:00","Action":"output","Package":"moo2manager","Test":"TestForgedSelectionReceiptRejected","Output":"--- PASS: TestForgedSelectionReceiptRejected (1.54s)\n"}
+{"Time":"2026-10-15T19:29:18.946755818-07:00","Action":"pass","Package":"moo2manager","Test":"TestForgedSelectionReceiptRejected","Elapsed":1.54}
+{"Time":"2026-10-15T19:29:18.946801375-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs"}
+{"Time":"2026-10-15T19:29:18.9468048-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs\n"}
+{"Time":"2026-10-15T19:29:18.946873511-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\EXTRACT.CFG;"}
+{"Time":"2026-10-15T19:29:18.946886521-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\EXTRACT.CFG;","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs/include_\\EXTRACT.CFG;\n"}
+{"Time":"2026-10-15T19:29:18.947175948-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\EXTRACT.CFG;","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs/include_\\EXTRACT.CFG; (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.947221255-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\EXTRACT.CFG;","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.947255125-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_?..\\EXTRACT.CFG;"}
+{"Time":"2026-10-15T19:29:18.947264028-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_?..\\EXTRACT.CFG;","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs/include_?..\\EXTRACT.CFG;\n"}
+{"Time":"2026-10-15T19:29:18.947477464-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_?..\\EXTRACT.CFG;","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs/include_?..\\EXTRACT.CFG; (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.947521138-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_?..\\EXTRACT.CFG;","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.947551944-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\SAVE1.GAM;"}
+{"Time":"2026-10-15T19:29:18.94755606-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\SAVE1.GAM;","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs/include_\\SAVE1.GAM;\n"}
+{"Time":"2026-10-15T19:29:18.947788984-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\SAVE1.GAM;","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs/include_\\SAVE1.GAM; (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.947830255-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/include_\\SAVE1.GAM;","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.947861661-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/pregame_script_=_\\ORION2.LOG;"}
+{"Time":"2026-10-15T19:29:18.947866128-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/pregame_script_=_\\ORION2.LOG;","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs/pregame_script_=_\\ORION2.LOG;\n"}
+{"Time":"2026-10-15T19:29:18.94813144-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/pregame_script_=_\\ORION2.LOG;","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs/pregame_script_=_\\ORION2.LOG; (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.948174534-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/pregame_script_=_\\ORION2.LOG;","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.948204888-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/main.lua_=_\\MOX.SET;"}
+{"Time":"2026-10-15T19:29:18.948208564-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/main.lua_=_\\MOX.SET;","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs/main.lua_=_\\MOX.SET;\n"}
+{"Time":"2026-10-15T19:29:18.948406947-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/main.lua_=_\\MOX.SET;","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs/main.lua_=_\\MOX.SET; (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.948466585-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/main.lua_=_\\MOX.SET;","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.948510991-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/newgame_postprocessor_script_=_\\NEW150.SET;"}
+{"Time":"2026-10-15T19:29:18.948514476-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/newgame_postprocessor_script_=_\\NEW150.SET;","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs/newgame_postprocessor_script_=_\\NEW150.SET;\n"}
+{"Time":"2026-10-15T19:29:18.94879456-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/newgame_postprocessor_script_=_\\NEW150.SET;","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs/newgame_postprocessor_script_=_\\NEW150.SET; (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.948835991-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/newgame_postprocessor_script_=_\\NEW150.SET;","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.948867197-07:00","Action":"run","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/sound.lbx_=_\\SOUND.LBX;"}
+{"Time":"2026-10-15T19:29:18.948870892-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/sound.lbx_=_\\SOUND.LBX;","Output":"=== RUN   TestExcludedOutputsCannotBeCustomInputs/sound.lbx_=_\\SOUND.LBX;\n"}
+{"Time":"2026-10-15T19:29:18.949073812-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/sound.lbx_=_\\SOUND.LBX;","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs/sound.lbx_=_\\SOUND.LBX; (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.949123876-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs/sound.lbx_=_\\SOUND.LBX;","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.949295019-07:00","Action":"output","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs","Output":"--- PASS: TestExcludedOutputsCannotBeCustomInputs (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.949334047-07:00","Action":"pass","Package":"moo2manager","Test":"TestExcludedOutputsCannotBeCustomInputs","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.94936342-07:00","Action":"run","Package":"moo2manager","Test":"TestDefaultProfilesResolve"}
+{"Time":"2026-10-15T19:29:18.949368007-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve","Output":"=== RUN   TestDefaultProfilesResolve\n"}
+{"Time":"2026-10-15T19:29:18.949426834-07:00","Action":"run","Package":"moo2manager","Test":"TestDefaultProfilesResolve/community"}
+{"Time":"2026-10-15T19:29:18.949432382-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/community","Output":"=== RUN   TestDefaultProfilesResolve/community\n"}
+{"Time":"2026-10-15T19:29:18.95043926-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/community","Output":"--- PASS: TestDefaultProfilesResolve/community (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.95047992-07:00","Action":"pass","Package":"moo2manager","Test":"TestDefaultProfilesResolve/community","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.950515803-07:00","Action":"run","Package":"moo2manager","Test":"TestDefaultProfilesResolve/multiplayer"}
+{"Time":"2026-10-15T19:29:18.950519388-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/multiplayer","Output":"=== RUN   TestDefaultProfilesResolve/multiplayer\n"}
+{"Time":"2026-10-15T19:29:18.951492035-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/multiplayer","Output":"--- PASS: TestDefaultProfilesResolve/multiplayer (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.951537742-07:00","Action":"pass","Package":"moo2manager","Test":"TestDefaultProfilesResolve/multiplayer","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.951569079-07:00","Action":"run","Package":"moo2manager","Test":"TestDefaultProfilesResolve/original"}
+{"Time":"2026-10-15T19:29:18.951573485-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/original","Output":"=== RUN   TestDefaultProfilesResolve/original\n"}
+{"Time":"2026-10-15T19:29:18.951710127-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/original","Output":"--- PASS: TestDefaultProfilesResolve/original (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.951748344-07:00","Action":"pass","Package":"moo2manager","Test":"TestDefaultProfilesResolve/original","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.951780351-07:00","Action":"run","Package":"moo2manager","Test":"TestDefaultProfilesResolve/baseline"}
+{"Time":"2026-10-15T19:29:18.951783586-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/baseline","Output":"=== RUN   TestDefaultProfilesResolve/baseline\n"}
+{"Time":"2026-10-15T19:29:18.951876924-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/baseline","Output":"--- PASS: TestDefaultProfilesResolve/baseline (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.951918134-07:00","Action":"pass","Package":"moo2manager","Test":"TestDefaultProfilesResolve/baseline","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.951982249-07:00","Action":"run","Package":"moo2manager","Test":"TestDefaultProfilesResolve/cd-original"}
+{"Time":"2026-10-15T19:29:18.951987837-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/cd-original","Output":"=== RUN   TestDefaultProfilesResolve/cd-original\n"}
+{"Time":"2026-10-15T19:29:18.952082728-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve/cd-original","Output":"--- PASS: TestDefaultProfilesResolve/cd-original (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.952150558-07:00","Action":"pass","Package":"moo2manager","Test":"TestDefaultProfilesResolve/cd-original","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.952208303-07:00","Action":"output","Package":"moo2manager","Test":"TestDefaultProfilesResolve","Output":"--- PASS: TestDefaultProfilesResolve (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.952235233-07:00","Action":"pass","Package":"moo2manager","Test":"TestDefaultProfilesResolve","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.952256675-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves"}
+{"Time":"2026-10-15T19:29:18.95226041-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves","Output":"=== RUN   TestEveryBundledCoreResolves\n"}
+{"Time":"2026-10-15T19:29:18.953263282-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150i"}
+{"Time":"2026-10-15T19:29:18.953270352-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150i","Output":"=== RUN   TestEveryBundledCoreResolves/150i\n"}
+{"Time":"2026-10-15T19:29:18.954240916-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150i","Output":"--- PASS: TestEveryBundledCoreResolves/150i (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.95428429-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150i","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.954314615-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150m"}
+{"Time":"2026-10-15T19:29:18.954318531-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150m","Output":"=== RUN   TestEveryBundledCoreResolves/150m\n"}
+{"Time":"2026-10-15T19:29:18.955282195-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150m","Output":"--- PASS: TestEveryBundledCoreResolves/150m (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.955323385-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150m","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.95535322-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150"}
+{"Time":"2026-10-15T19:29:18.955356464-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150","Output":"=== RUN   TestEveryBundledCoreResolves/150\n"}
+{"Time":"2026-10-15T19:29:18.956418113-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150","Output":"--- PASS: TestEveryBundledCoreResolves/150 (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.956465583-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/150","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.956497931-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE"}
+{"Time":"2026-10-15T19:29:18.956501346-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE","Output":"=== RUN   TestEveryBundledCoreResolves/ICE\n"}
+{"Time":"2026-10-15T19:29:18.957469236-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE","Output":"--- PASS: TestEveryBundledCoreResolves/ICE (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.957510967-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.957540842-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE-X"}
+{"Time":"2026-10-15T19:29:18.957544547-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE-X","Output":"=== RUN   TestEveryBundledCoreResolves/ICE-X\n"}
+{"Time":"2026-10-15T19:29:18.958491306-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE-X","Output":"--- PASS: TestEveryBundledCoreResolves/ICE-X (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.958532787-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ICE-X","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.958564534-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/Melee"}
+{"Time":"2026-10-15T19:29:18.95856826-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/Melee","Output":"=== RUN   TestEveryBundledCoreResolves/Melee\n"}
+{"Time":"2026-10-15T19:29:18.959504052-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/Melee","Output":"--- PASS: TestEveryBundledCoreResolves/Melee (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.959545033-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/Melee","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.959574646-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/VDC-GM3"}
+{"Time":"2026-10-15T19:29:18.959578031-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/VDC-GM3","Output":"=== RUN   TestEveryBundledCoreResolves/VDC-GM3\n"}
+{"Time":"2026-10-15T19:29:18.960589636-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/VDC-GM3","Output":"--- PASS: TestEveryBundledCoreResolves/VDC-GM3 (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.96063271-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/VDC-GM3","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.960685468-07:00","Action":"run","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ver120"}
+{"Time":"2026-10-15T19:29:18.960689624-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ver120","Output":"=== RUN   TestEveryBundledCoreResolves/ver120\n"}
+{"Time":"2026-10-15T19:29:18.962136987-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ver120","Output":"--- PASS: TestEveryBundledCoreResolves/ver120 (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.962182334-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves/ver120","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.962208863-07:00","Action":"output","Package":"moo2manager","Test":"TestEveryBundledCoreResolves","Output":"--- PASS: TestEveryBundledCoreResolves (0.01s)\n"}
+{"Time":"2026-10-15T19:29:18.962229013-07:00","Action":"pass","Package":"moo2manager","Test":"TestEveryBundledCoreResolves","Elapsed":0.01}
+{"Time":"2026-10-15T19:29:18.962249203-07:00","Action":"run","Package":"moo2manager","Test":"TestCoreDependenciesAreVisible"}
+{"Time":"2026-10-15T19:29:18.962251396-07:00","Action":"output","Package":"moo2manager","Test":"TestCoreDependenciesAreVisible","Output":"=== RUN   TestCoreDependenciesAreVisible\n"}
+{"Time":"2026-10-15T19:29:18.963483967-07:00","Action":"output","Package":"moo2manager","Test":"TestCoreDependenciesAreVisible","Output":"--- PASS: TestCoreDependenciesAreVisible (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.963521302-07:00","Action":"pass","Package":"moo2manager","Test":"TestCoreDependenciesAreVisible","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.963541392-07:00","Action":"run","Package":"moo2manager","Test":"TestExclusiveMapConflict"}
+{"Time":"2026-10-15T19:29:18.963543585-07:00","Action":"output","Package":"moo2manager","Test":"TestExclusiveMapConflict","Output":"=== RUN   TestExclusiveMapConflict\n"}
+{"Time":"2026-10-15T19:29:18.96456883-07:00","Action":"output","Package":"moo2manager","Test":"TestExclusiveMapConflict","Output":"--- PASS: TestExclusiveMapConflict (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.964607517-07:00","Action":"pass","Package":"moo2manager","Test":"TestExclusiveMapConflict","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.964626255-07:00","Action":"run","Package":"moo2manager","Test":"TestTwoCoreConflict"}
+{"Time":"2026-10-15T19:29:18.964628318-07:00","Action":"output","Package":"moo2manager","Test":"TestTwoCoreConflict","Output":"=== RUN   TestTwoCoreConflict\n"}
+{"Time":"2026-10-15T19:29:18.965856182-07:00","Action":"output","Package":"moo2manager","Test":"TestTwoCoreConflict","Output":"--- PASS: TestTwoCoreConflict (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.965894749-07:00","Action":"pass","Package":"moo2manager","Test":"TestTwoCoreConflict","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.965913977-07:00","Action":"run","Package":"moo2manager","Test":"TestNoPRSLBackdoor"}
+{"Time":"2026-10-15T19:29:18.965916251-07:00","Action":"output","Package":"moo2manager","Test":"TestNoPRSLBackdoor","Output":"=== RUN   TestNoPRSLBackdoor\n"}
+{"Time":"2026-10-15T19:29:18.969447117-07:00","Action":"output","Package":"moo2manager","Test":"TestNoPRSLBackdoor","Output":"--- PASS: TestNoPRSLBackdoor (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.969490101-07:00","Action":"pass","Package":"moo2manager","Test":"TestNoPRSLBackdoor","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.96951013-07:00","Action":"run","Package":"moo2manager","Test":"TestUnknownPackageRefused"}
+{"Time":"2026-10-15T19:29:18.969512624-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownPackageRefused","Output":"=== RUN   TestUnknownPackageRefused\n"}
+{"Time":"2026-10-15T19:29:18.97055913-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownPackageRefused","Output":"--- PASS: TestUnknownPackageRefused (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.970596705-07:00","Action":"pass","Package":"moo2manager","Test":"TestUnknownPackageRefused","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.970615012-07:00","Action":"run","Package":"moo2manager","Test":"TestOriginalCannotHaveMods"}
+{"Time":"2026-10-15T19:29:18.970617526-07:00","Action":"output","Package":"moo2manager","Test":"TestOriginalCannotHaveMods","Output":"=== RUN   TestOriginalCannotHaveMods\n"}
+{"Time":"2026-10-15T19:29:18.970702632-07:00","Action":"output","Package":"moo2manager","Test":"TestOriginalCannotHaveMods","Output":"--- PASS: TestOriginalCannotHaveMods (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.970731775-07:00","Action":"pass","Package":"moo2manager","Test":"TestOriginalCannotHaveMods","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.970747328-07:00","Action":"run","Package":"moo2manager","Test":"TestUnknownEngineRefused"}
+{"Time":"2026-10-15T19:29:18.970750182-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownEngineRefused","Output":"=== RUN   TestUnknownEngineRefused\n"}
+{"Time":"2026-10-15T19:29:18.970805354-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownEngineRefused","Output":"--- PASS: TestUnknownEngineRefused (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.970840335-07:00","Action":"pass","Package":"moo2manager","Test":"TestUnknownEngineRefused","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.970855598-07:00","Action":"run","Package":"moo2manager","Test":"TestDisabledExtensionsAbsent"}
+{"Time":"2026-10-15T19:29:18.970862588-07:00","Action":"output","Package":"moo2manager","Test":"TestDisabledExtensionsAbsent","Output":"=== RUN   TestDisabledExtensionsAbsent\n"}
+{"Time":"2026-10-15T19:29:18.971771992-07:00","Action":"output","Package":"moo2manager","Test":"TestDisabledExtensionsAbsent","Output":"--- PASS: TestDisabledExtensionsAbsent (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.971806032-07:00","Action":"pass","Package":"moo2manager","Test":"TestDisabledExtensionsAbsent","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.971825581-07:00","Action":"run","Package":"moo2manager","Test":"TestDeterministicOrder"}
+{"Time":"2026-10-15T19:29:18.971828064-07:00","Action":"output","Package":"moo2manager","Test":"TestDeterministicOrder","Output":"=== RUN   TestDeterministicOrder\n"}
+{"Time":"2026-10-15T19:29:18.974050758-07:00","Action":"output","Package":"moo2manager","Test":"TestDeterministicOrder","Output":"--- PASS: TestDeterministicOrder (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.974093782-07:00","Action":"pass","Package":"moo2manager","Test":"TestDeterministicOrder","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.974114843-07:00","Action":"run","Package":"moo2manager","Test":"TestLocalOptionsDoNotChangeRulesFingerprint"}
+{"Time":"2026-10-15T19:29:18.974117046-07:00","Action":"output","Package":"moo2manager","Test":"TestLocalOptionsDoNotChangeRulesFingerprint","Output":"=== RUN   TestLocalOptionsDoNotChangeRulesFingerprint\n"}
+{"Time":"2026-10-15T19:29:18.976106596-07:00","Action":"output","Package":"moo2manager","Test":"TestLocalOptionsDoNotChangeRulesFingerprint","Output":"--- PASS: TestLocalOptionsDoNotChangeRulesFingerprint (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.976149219-07:00","Action":"pass","Package":"moo2manager","Test":"TestLocalOptionsDoNotChangeRulesFingerprint","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.976169749-07:00","Action":"run","Package":"moo2manager","Test":"TestJoinInjectionRefused"}
+{"Time":"2026-10-15T19:29:18.976172162-07:00","Action":"output","Package":"moo2manager","Test":"TestJoinInjectionRefused","Output":"=== RUN   TestJoinInjectionRefused\n"}
+{"Time":"2026-10-15T19:29:18.976243878-07:00","Action":"output","Package":"moo2manager","Test":"TestJoinInjectionRefused","Output":"--- PASS: TestJoinInjectionRefused (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.976270147-07:00","Action":"pass","Package":"moo2manager","Test":"TestJoinInjectionRefused","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.97628548-07:00","Action":"run","Package":"moo2manager","Test":"TestBadProfileIDs"}
+{"Time":"2026-10-15T19:29:18.976287964-07:00","Action":"output","Package":"moo2manager","Test":"TestBadProfileIDs","Output":"=== RUN   TestBadProfileIDs\n"}
+{"Time":"2026-10-15T19:29:18.976351848-07:00","Action":"output","Package":"moo2manager","Test":"TestBadProfileIDs","Output":"--- PASS: TestBadProfileIDs (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.976462852-07:00","Action":"pass","Package":"moo2manager","Test":"TestBadProfileIDs","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.976483993-07:00","Action":"run","Package":"moo2manager","Test":"TestDOSBoxRoles"}
+{"Time":"2026-10-15T19:29:18.976486126-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles","Output":"=== RUN   TestDOSBoxRoles\n"}
+{"Time":"2026-10-15T19:29:18.976526336-07:00","Action":"run","Package":"moo2manager","Test":"TestDOSBoxRoles/host"}
+{"Time":"2026-10-15T19:29:18.976528769-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles/host","Output":"=== RUN   TestDOSBoxRoles/host\n"}
+{"Time":"2026-10-15T19:29:18.976773491-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles/host","Output":"--- PASS: TestDOSBoxRoles/host (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.976809023-07:00","Action":"pass","Package":"moo2manager","Test":"TestDOSBoxRoles/host","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.976828873-07:00","Action":"run","Package":"moo2manager","Test":"TestDOSBoxRoles/join"}
+{"Time":"2026-10-15T19:29:18.976831016-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles/join","Output":"=== RUN   TestDOSBoxRoles/join\n"}
+{"Time":"2026-10-15T19:29:18.976985594-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles/join","Output":"--- PASS: TestDOSBoxRoles/join (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.97701667-07:00","Action":"pass","Package":"moo2manager","Test":"TestDOSBoxRoles/join","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.977035678-07:00","Action":"run","Package":"moo2manager","Test":"TestDOSBoxRoles/standalone"}
+{"Time":"2026-10-15T19:29:18.977037641-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles/standalone","Output":"=== RUN   TestDOSBoxRoles/standalone\n"}
+{"Time":"2026-10-15T19:29:18.977238728-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles/standalone","Output":"--- PASS: TestDOSBoxRoles/standalone (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.97727407-07:00","Action":"pass","Package":"moo2manager","Test":"TestDOSBoxRoles/standalone","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.977309353-07:00","Action":"output","Package":"moo2manager","Test":"TestDOSBoxRoles","Output":"--- PASS: TestDOSBoxRoles (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.977333789-07:00","Action":"pass","Package":"moo2manager","Test":"TestDOSBoxRoles","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.977352526-07:00","Action":"run","Package":"moo2manager","Test":"TestOriginalLaunchExecutable"}
+{"Time":"2026-10-15T19:29:18.977354639-07:00","Action":"output","Package":"moo2manager","Test":"TestOriginalLaunchExecutable","Output":"=== RUN   TestOriginalLaunchExecutable\n"}
+{"Time":"2026-10-15T19:29:18.977466034-07:00","Action":"output","Package":"moo2manager","Test":"TestOriginalLaunchExecutable","Output":"--- PASS: TestOriginalLaunchExecutable (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.977496519-07:00","Action":"pass","Package":"moo2manager","Test":"TestOriginalLaunchExecutable","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.977512052-07:00","Action":"run","Package":"moo2manager","Test":"TestConfigPathInjection"}
+{"Time":"2026-10-15T19:29:18.977514235-07:00","Action":"output","Package":"moo2manager","Test":"TestConfigPathInjection","Output":"=== RUN   TestConfigPathInjection\n"}
+{"Time":"2026-10-15T19:29:18.977566432-07:00","Action":"output","Package":"moo2manager","Test":"TestConfigPathInjection","Output":"--- PASS: TestConfigPathInjection (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.977588785-07:00","Action":"pass","Package":"moo2manager","Test":"TestConfigPathInjection","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.977604108-07:00","Action":"run","Package":"moo2manager","Test":"TestUpstreamNumericVersions"}
+{"Time":"2026-10-15T19:29:18.977605891-07:00","Action":"output","Package":"moo2manager","Test":"TestUpstreamNumericVersions","Output":"=== RUN   TestUpstreamNumericVersions\n"}
+{"Time":"2026-10-15T19:29:18.97780173-07:00","Action":"output","Package":"moo2manager","Test":"TestUpstreamNumericVersions","Output":"--- PASS: TestUpstreamNumericVersions (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.97783524-07:00","Action":"pass","Package":"moo2manager","Test":"TestUpstreamNumericVersions","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.977851153-07:00","Action":"run","Package":"moo2manager","Test":"TestUpstreamFailureDoesNotGuess"}
+{"Time":"2026-10-15T19:29:18.977853406-07:00","Action":"output","Package":"moo2manager","Test":"TestUpstreamFailureDoesNotGuess","Output":"=== RUN   TestUpstreamFailureDoesNotGuess\n"}
+{"Time":"2026-10-15T19:29:18.978193429-07:00","Action":"output","Package":"moo2manager","Test":"TestUpstreamFailureDoesNotGuess","Output":"--- PASS: TestUpstreamFailureDoesNotGuess (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.978227759-07:00","Action":"pass","Package":"moo2manager","Test":"TestUpstreamFailureDoesNotGuess","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.978244654-07:00","Action":"run","Package":"moo2manager","Test":"TestDopefishRelayConfigForCreateAndJoin"}
+{"Time":"2026-10-15T19:29:18.978247028-07:00","Action":"output","Package":"moo2manager","Test":"TestDopefishRelayConfigForCreateAndJoin","Output":"=== RUN   TestDopefishRelayConfigForCreateAndJoin\n"}
+{"Time":"2026-10-15T19:29:18.978750241-07:00","Action":"output","Package":"moo2manager","Test":"TestDopefishRelayConfigForCreateAndJoin","Output":"--- PASS: TestDopefishRelayConfigForCreateAndJoin (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.978794286-07:00","Action":"pass","Package":"moo2manager","Test":"TestDopefishRelayConfigForCreateAndJoin","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.978812954-07:00","Action":"run","Package":"moo2manager","Test":"TestFutureSGCNetworkServiceIsReserved"}
+{"Time":"2026-10-15T19:29:18.978815297-07:00","Action":"output","Package":"moo2manager","Test":"TestFutureSGCNetworkServiceIsReserved","Output":"=== RUN   TestFutureSGCNetworkServiceIsReserved\n"}
+{"Time":"2026-10-15T19:29:18.97887118-07:00","Action":"output","Package":"moo2manager","Test":"TestFutureSGCNetworkServiceIsReserved","Output":"--- PASS: TestFutureSGCNetworkServiceIsReserved (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.978892972-07:00","Action":"pass","Package":"moo2manager","Test":"TestFutureSGCNetworkServiceIsReserved","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.978907484-07:00","Action":"run","Package":"moo2manager","Test":"TestDirectJoinAllowsSafeHostname"}
+{"Time":"2026-10-15T19:29:18.978910037-07:00","Action":"output","Package":"moo2manager","Test":"TestDirectJoinAllowsSafeHostname","Output":"=== RUN   TestDirectJoinAllowsSafeHostname\n"}
+{"Time":"2026-10-15T19:29:18.980121617-07:00","Action":"output","Package":"moo2manager","Test":"TestDirectJoinAllowsSafeHostname","Output":"--- PASS: TestDirectJoinAllowsSafeHostname (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.980163259-07:00","Action":"pass","Package":"moo2manager","Test":"TestDirectJoinAllowsSafeHostname","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.980182257-07:00","Action":"run","Package":"moo2manager","Test":"TestDopefishDiagnosticIsGameIndependent"}
+{"Time":"2026-10-15T19:29:18.980184731-07:00","Action":"output","Package":"moo2manager","Test":"TestDopefishDiagnosticIsGameIndependent","Output":"=== RUN   TestDopefishDiagnosticIsGameIndependent\n"}
+{"Time":"2026-10-15T19:29:18.980287783-07:00","Action":"output","Package":"moo2manager","Test":"TestDopefishDiagnosticIsGameIndependent","Output":"--- PASS: TestDopefishDiagnosticIsGameIndependent (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.980313711-07:00","Action":"pass","Package":"moo2manager","Test":"TestDopefishDiagnosticIsGameIndependent","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.980328583-07:00","Action":"run","Package":"moo2manager","Test":"TestDiagnosticWithoutRuntimeFailsWithoutGameMutation"}
+{"Time":"2026-10-15T19:29:18.980330626-07:00","Action":"output","Package":"moo2manager","Test":"TestDiagnosticWithoutRuntimeFailsWithoutGameMutation","Output":"=== RUN   TestDiagnosticWithoutRuntimeFailsWithoutGameMutation\n"}
+{"Time":"2026-10-15T19:29:18.981592981-07:00","Action":"output","Package":"moo2manager","Test":"TestDiagnosticWithoutRuntimeFailsWithoutGameMutation","Output":"--- PASS: TestDiagnosticWithoutRuntimeFailsWithoutGameMutation (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.983957575-07:00","Action":"pass","Package":"moo2manager","Test":"TestDiagnosticWithoutRuntimeFailsWithoutGameMutation","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.983969973-07:00","Action":"run","Package":"moo2manager","Test":"TestNetworkPlanAndLaunchCommandStayIdentical"}
+{"Time":"2026-10-15T19:29:18.983972647-07:00","Action":"output","Package":"moo2manager","Test":"TestNetworkPlanAndLaunchCommandStayIdentical","Output":"=== RUN   TestNetworkPlanAndLaunchCommandStayIdentical\n"}
+{"Time":"2026-10-15T19:29:18.985300018-07:00","Action":"output","Package":"moo2manager","Test":"TestNetworkPlanAndLaunchCommandStayIdentical","Output":"--- PASS: TestNetworkPlanAndLaunchCommandStayIdentical (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.985355851-07:00","Action":"pass","Package":"moo2manager","Test":"TestNetworkPlanAndLaunchCommandStayIdentical","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.985376962-07:00","Action":"run","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure"}
+{"Time":"2026-10-15T19:29:18.985379506-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure","Output":"=== RUN   TestRuntimeCompletionDistinguishesProcessFailure\n"}
+{"Time":"2026-10-15T19:29:18.985426265-07:00","Action":"run","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/0"}
+{"Time":"2026-10-15T19:29:18.985429369-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/0","Output":"=== RUN   TestRuntimeCompletionDistinguishesProcessFailure/0\n"}
+{"Time":"2026-10-15T19:29:18.988566925-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/0","Output":"--- PASS: TestRuntimeCompletionDistinguishesProcessFailure/0 (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.988609548-07:00","Action":"pass","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/0","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.988631851-07:00","Action":"run","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/47"}
+{"Time":"2026-10-15T19:29:18.988634064-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/47","Output":"=== RUN   TestRuntimeCompletionDistinguishesProcessFailure/47\n"}
+{"Time":"2026-10-15T19:29:18.991772311-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/47","Output":"--- PASS: TestRuntimeCompletionDistinguishesProcessFailure/47 (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.991813822-07:00","Action":"pass","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure/47","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.991849945-07:00","Action":"output","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure","Output":"--- PASS: TestRuntimeCompletionDistinguishesProcessFailure (0.01s)\n"}
+{"Time":"2026-10-15T19:29:18.99187328-07:00","Action":"pass","Package":"moo2manager","Test":"TestRuntimeCompletionDistinguishesProcessFailure","Elapsed":0.01}
+{"Time":"2026-10-15T19:29:18.991894731-07:00","Action":"run","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal"}
+{"Time":"2026-10-15T19:29:18.991897666-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal","Output":"=== RUN   TestOwnedKernelRejectsAmbiguityTamperAndTraversal\n"}
+{"Time":"2026-10-15T19:29:18.99197469-07:00","Action":"run","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/unknown"}
+{"Time":"2026-10-15T19:29:18.991978886-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/unknown","Output":"=== RUN   TestOwnedKernelRejectsAmbiguityTamperAndTraversal/unknown\n"}
+{"Time":"2026-10-15T19:29:18.994177554-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/unknown","Output":"--- PASS: TestOwnedKernelRejectsAmbiguityTamperAndTraversal/unknown (0.00s)\n"}
+{"Time":"2026-10-15T19:29:18.994227828-07:00","Action":"pass","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/unknown","Elapsed":0}
+{"Time":"2026-10-15T19:29:18.994252425-07:00","Action":"run","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/duplicate"}
+{"Time":"2026-10-15T19:29:18.99425611-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/duplicate","Output":"=== RUN   TestOwnedKernelRejectsAmbiguityTamperAndTraversal/duplicate\n"}
+{"Time":"2026-10-15T19:29:19.007511899-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/duplicate","Output":"--- PASS: TestOwnedKernelRejectsAmbiguityTamperAndTraversal/duplicate (0.01s)\n"}
+{"Time":"2026-10-15T19:29:19.007570265-07:00","Action":"pass","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/duplicate","Elapsed":0.01}
+{"Time":"2026-10-15T19:29:19.007608752-07:00","Action":"run","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/traversal"}
+{"Time":"2026-10-15T19:29:19.007615242-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/traversal","Output":"=== RUN   TestOwnedKernelRejectsAmbiguityTamperAndTraversal/traversal\n"}
+{"Time":"2026-10-15T19:29:19.009613514-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/traversal","Output":"--- PASS: TestOwnedKernelRejectsAmbiguityTamperAndTraversal/traversal (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.0096787-07:00","Action":"pass","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/traversal","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.009701113-07:00","Action":"run","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/oversize"}
+{"Time":"2026-10-15T19:29:19.009703627-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/oversize","Output":"=== RUN   TestOwnedKernelRejectsAmbiguityTamperAndTraversal/oversize\n"}
+{"Time":"2026-10-15T19:29:19.01405771-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/oversize","Output":"--- PASS: TestOwnedKernelRejectsAmbiguityTamperAndTraversal/oversize (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.014107143-07:00","Action":"pass","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/oversize","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.014129296-07:00","Action":"run","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/exe-not-com"}
+{"Time":"2026-10-15T19:29:19.014131839-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/exe-not-com","Output":"=== RUN   TestOwnedKernelRejectsAmbiguityTamperAndTraversal/exe-not-com\n"}
+{"Time":"2026-10-15T19:29:19.016526307-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/exe-not-com","Output":"--- PASS: TestOwnedKernelRejectsAmbiguityTamperAndTraversal/exe-not-com (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.01656902-07:00","Action":"pass","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal/exe-not-com","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.016595119-07:00","Action":"output","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal","Output":"--- PASS: TestOwnedKernelRejectsAmbiguityTamperAndTraversal (0.02s)\n"}
+{"Time":"2026-10-15T19:29:19.016619335-07:00","Action":"pass","Package":"moo2manager","Test":"TestOwnedKernelRejectsAmbiguityTamperAndTraversal","Elapsed":0.02}
+{"Time":"2026-10-15T19:29:19.016645934-07:00","Action":"run","Package":"moo2manager","Test":"TestMissingKernelPreflightHasActualGamePath"}
+{"Time":"2026-10-15T19:29:19.016648598-07:00","Action":"output","Package":"moo2manager","Test":"TestMissingKernelPreflightHasActualGamePath","Output":"=== RUN   TestMissingKernelPreflightHasActualGamePath\n"}
+{"Time":"2026-10-15T19:29:19.016989321-07:00","Action":"output","Package":"moo2manager","Test":"TestMissingKernelPreflightHasActualGamePath","Output":"--- PASS: TestMissingKernelPreflightHasActualGamePath (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.017024553-07:00","Action":"pass","Package":"moo2manager","Test":"TestMissingKernelPreflightHasActualGamePath","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.01704925-07:00","Action":"run","Package":"moo2manager","Test":"TestLegacySourceGetsMandatoryKernelPin"}
+{"Time":"2026-10-15T19:29:19.017051223-07:00","Action":"output","Package":"moo2manager","Test":"TestLegacySourceGetsMandatoryKernelPin","Output":"=== RUN   TestLegacySourceGetsMandatoryKernelPin\n"}
+{"Time":"2026-10-15T19:29:19.142272306-07:00","Action":"output","Package":"moo2manager","Test":"TestLegacySourceGetsMandatoryKernelPin","Output":"--- PASS: TestLegacySourceGetsMandatoryKernelPin (0.13s)\n"}
+{"Time":"2026-10-15T19:29:19.142353826-07:00","Action":"pass","Package":"moo2manager","Test":"TestLegacySourceGetsMandatoryKernelPin","Elapsed":0.13}
+{"Time":"2026-10-15T19:29:19.142399684-07:00","Action":"run","Package":"moo2manager","Test":"TestNetworkModesShareVerifiedGameDirectory"}
+{"Time":"2026-10-15T19:29:19.1424037-07:00","Action":"output","Package":"moo2manager","Test":"TestNetworkModesShareVerifiedGameDirectory","Output":"=== RUN   TestNetworkModesShareVerifiedGameDirectory\n"}
+{"Time":"2026-10-15T19:29:19.142720378-07:00","Action":"output","Package":"moo2manager","Test":"TestNetworkModesShareVerifiedGameDirectory","Output":"--- PASS: TestNetworkModesShareVerifiedGameDirectory (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.14275557-07:00","Action":"pass","Package":"moo2manager","Test":"TestNetworkModesShareVerifiedGameDirectory","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.142773146-07:00","Action":"run","Package":"moo2manager","Test":"TestSelectionPersistenceAndMigration"}
+{"Time":"2026-10-15T19:29:19.142775259-07:00","Action":"output","Package":"moo2manager","Test":"TestSelectionPersistenceAndMigration","Output":"=== RUN   TestSelectionPersistenceAndMigration\n"}
+{"Time":"2026-10-15T19:29:19.146931259-07:00","Action":"output","Package":"moo2manager","Test":"TestSelectionPersistenceAndMigration","Output":"--- PASS: TestSelectionPersistenceAndMigration (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.146975014-07:00","Action":"pass","Package":"moo2manager","Test":"TestSelectionPersistenceAndMigration","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.146995945-07:00","Action":"run","Package":"moo2manager","Test":"TestSelectionInvalidStateFallsBack"}
+{"Time":"2026-10-15T19:29:19.146998779-07:00","Action":"output","Package":"moo2manager","Test":"TestSelectionInvalidStateFallsBack","Output":"=== RUN   TestSelectionInvalidStateFallsBack\n"}
+{"Time":"2026-10-15T19:29:19.148050202-07:00","Action":"output","Package":"moo2manager","Test":"TestSelectionInvalidStateFallsBack","Output":"--- PASS: TestSelectionInvalidStateFallsBack (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.14808893-07:00","Action":"pass","Package":"moo2manager","Test":"TestSelectionInvalidStateFallsBack","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.148108689-07:00","Action":"run","Package":"moo2manager","Test":"TestSelectionAPIAuthenticationAndIsolation"}
+{"Time":"2026-10-15T19:29:19.148113746-07:00","Action":"output","Package":"moo2manager","Test":"TestSelectionAPIAuthenticationAndIsolation","Output":"=== RUN   TestSelectionAPIAuthenticationAndIsolation\n"}
+{"Time":"2026-10-15T19:29:19.155101229-07:00","Action":"output","Package":"moo2manager","Test":"TestSelectionAPIAuthenticationAndIsolation","Output":"--- PASS: TestSelectionAPIAuthenticationAndIsolation (0.01s)\n"}
+{"Time":"2026-10-15T19:29:19.155149621-07:00","Action":"pass","Package":"moo2manager","Test":"TestSelectionAPIAuthenticationAndIsolation","Elapsed":0.01}
+{"Time":"2026-10-15T19:29:19.155171803-07:00","Action":"run","Package":"moo2manager","Test":"TestConcurrentSelection"}
+{"Time":"2026-10-15T19:29:19.155174588-07:00","Action":"output","Package":"moo2manager","Test":"TestConcurrentSelection","Output":"=== RUN   TestConcurrentSelection\n"}
+{"Time":"2026-10-15T19:29:19.207181629-07:00","Action":"output","Package":"moo2manager","Test":"TestConcurrentSelection","Output":"--- PASS: TestConcurrentSelection (0.05s)\n"}
+{"Time":"2026-10-15T19:29:19.207490044-07:00","Action":"pass","Package":"moo2manager","Test":"TestConcurrentSelection","Elapsed":0.05}
+{"Time":"2026-10-15T19:29:19.207526648-07:00","Action":"run","Package":"moo2manager","Test":"TestAPINeedsToken"}
+{"Time":"2026-10-15T19:29:19.207529943-07:00","Action":"output","Package":"moo2manager","Test":"TestAPINeedsToken","Output":"=== RUN   TestAPINeedsToken\n"}
+{"Time":"2026-10-15T19:29:19.208403133-07:00","Action":"output","Package":"moo2manager","Test":"TestAPINeedsToken","Output":"--- PASS: TestAPINeedsToken (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.208443603-07:00","Action":"pass","Package":"moo2manager","Test":"TestAPINeedsToken","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.208464414-07:00","Action":"run","Package":"moo2manager","Test":"TestHostRebindingRejected"}
+{"Time":"2026-10-15T19:29:19.208467018-07:00","Action":"output","Package":"moo2manager","Test":"TestHostRebindingRejected","Output":"=== RUN   TestHostRebindingRejected\n"}
+{"Time":"2026-10-15T19:29:19.209393176-07:00","Action":"output","Package":"moo2manager","Test":"TestHostRebindingRejected","Output":"--- PASS: TestHostRebindingRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.209432063-07:00","Action":"pass","Package":"moo2manager","Test":"TestHostRebindingRejected","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.209452373-07:00","Action":"run","Package":"moo2manager","Test":"TestCrossOriginRejected"}
+{"Time":"2026-10-15T19:29:19.209454767-07:00","Action":"output","Package":"moo2manager","Test":"TestCrossOriginRejected","Output":"=== RUN   TestCrossOriginRejected\n"}
+{"Time":"2026-10-15T19:29:19.210224204-07:00","Action":"output","Package":"moo2manager","Test":"TestCrossOriginRejected","Output":"--- PASS: TestCrossOriginRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.210263412-07:00","Action":"pass","Package":"moo2manager","Test":"TestCrossOriginRejected","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.210395166-07:00","Action":"run","Package":"moo2manager","Test":"TestAuthorizedState"}
+{"Time":"2026-10-15T19:29:19.210406002-07:00","Action":"output","Package":"moo2manager","Test":"TestAuthorizedState","Output":"=== RUN   TestAuthorizedState\n"}
+{"Time":"2026-10-15T19:29:19.215580087-07:00","Action":"output","Package":"moo2manager","Test":"TestAuthorizedState","Output":"--- PASS: TestAuthorizedState (0.01s)\n"}
+{"Time":"2026-10-15T19:29:19.215683479-07:00","Action":"pass","Package":"moo2manager","Test":"TestAuthorizedState","Elapsed":0.01}
+{"Time":"2026-10-15T19:29:19.215728276-07:00","Action":"run","Package":"moo2manager","Test":"TestStaticAppServed"}
+{"Time":"2026-10-15T19:29:19.215733173-07:00","Action":"output","Package":"moo2manager","Test":"TestStaticAppServed","Output":"=== RUN   TestStaticAppServed\n"}
+{"Time":"2026-10-15T19:29:19.216612432-07:00","Action":"output","Package":"moo2manager","Test":"TestStaticAppServed","Output":"--- PASS: TestStaticAppServed (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.216683797-07:00","Action":"pass","Package":"moo2manager","Test":"TestStaticAppServed","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.21671241-07:00","Action":"run","Package":"moo2manager","Test":"TestNoArbitraryFileServing"}
+{"Time":"2026-10-15T19:29:19.216715344-07:00","Action":"output","Package":"moo2manager","Test":"TestNoArbitraryFileServing","Output":"=== RUN   TestNoArbitraryFileServing\n"}
+{"Time":"2026-10-15T19:29:19.217492943-07:00","Action":"output","Package":"moo2manager","Test":"TestNoArbitraryFileServing","Output":"--- PASS: TestNoArbitraryFileServing (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.217559621-07:00","Action":"pass","Package":"moo2manager","Test":"TestNoArbitraryFileServing","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.217596305-07:00","Action":"run","Package":"moo2manager","Test":"TestUnknownActionRejected"}
+{"Time":"2026-10-15T19:29:19.217600912-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownActionRejected","Output":"=== RUN   TestUnknownActionRejected\n"}
+{"Time":"2026-10-15T19:29:19.218447062-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownActionRejected","Output":"--- PASS: TestUnknownActionRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.218503926-07:00","Action":"pass","Package":"moo2manager","Test":"TestUnknownActionRejected","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.218529765-07:00","Action":"run","Package":"moo2manager","Test":"TestActionGETRejected"}
+{"Time":"2026-10-15T19:29:19.218532969-07:00","Action":"output","Package":"moo2manager","Test":"TestActionGETRejected","Output":"=== RUN   TestActionGETRejected\n"}
+{"Time":"2026-10-15T19:29:19.219269678-07:00","Action":"output","Package":"moo2manager","Test":"TestActionGETRejected","Output":"--- PASS: TestActionGETRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.219321464-07:00","Action":"pass","Package":"moo2manager","Test":"TestActionGETRejected","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.21934579-07:00","Action":"run","Package":"moo2manager","Test":"TestUnknownFieldsRejected"}
+{"Time":"2026-10-15T19:29:19.219353922-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownFieldsRejected","Output":"=== RUN   TestUnknownFieldsRejected\n"}
+{"Time":"2026-10-15T19:29:19.22020528-07:00","Action":"output","Package":"moo2manager","Test":"TestUnknownFieldsRejected","Output":"--- PASS: TestUnknownFieldsRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.220257077-07:00","Action":"pass","Package":"moo2manager","Test":"TestUnknownFieldsRejected","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.220279219-07:00","Action":"run","Package":"moo2manager","Test":"TestPRSLAPICannotEnable"}
+{"Time":"2026-10-15T19:29:19.220281693-07:00","Action":"output","Package":"moo2manager","Test":"TestPRSLAPICannotEnable","Output":"=== RUN   TestPRSLAPICannotEnable\n"}
+{"Time":"2026-10-15T19:29:19.222156673-07:00","Action":"output","Package":"moo2manager","Test":"TestPRSLAPICannotEnable","Output":"--- PASS: TestPRSLAPICannotEnable (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.222210843-07:00","Action":"pass","Package":"moo2manager","Test":"TestPRSLAPICannotEnable","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.222234938-07:00","Action":"run","Package":"moo2manager","Test":"TestGenerationPathTraversalRejected"}
+{"Time":"2026-10-15T19:29:19.222237302-07:00","Action":"output","Package":"moo2manager","Test":"TestGenerationPathTraversalRejected","Output":"=== RUN   TestGenerationPathTraversalRejected\n"}
+{"Time":"2026-10-15T19:29:19.224059258-07:00","Action":"output","Package":"moo2manager","Test":"TestGenerationPathTraversalRejected","Output":"--- PASS: TestGenerationPathTraversalRejected (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.224101491-07:00","Action":"pass","Package":"moo2manager","Test":"TestGenerationPathTraversalRejected","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.224122121-07:00","Action":"run","Package":"moo2manager","Test":"TestProfileSaveAndReload"}
+{"Time":"2026-10-15T19:29:19.224124885-07:00","Action":"output","Package":"moo2manager","Test":"TestProfileSaveAndReload","Output":"=== RUN   TestProfileSaveAndReload\n"}
+{"Time":"2026-10-15T19:29:19.228223521-07:00","Action":"output","Package":"moo2manager","Test":"TestProfileSaveAndReload","Output":"--- PASS: TestProfileSaveAndReload (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.228267766-07:00","Action":"pass","Package":"moo2manager","Test":"TestProfileSaveAndReload","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.228287936-07:00","Action":"run","Package":"moo2manager","Test":"TestInvalidBuildDoesNotWriteWorkspace"}
+{"Time":"2026-10-15T19:29:19.228290189-07:00","Action":"output","Package":"moo2manager","Test":"TestInvalidBuildDoesNotWriteWorkspace","Output":"=== RUN   TestInvalidBuildDoesNotWriteWorkspace\n"}
+{"Time":"2026-10-15T19:29:19.230589226-07:00","Action":"output","Package":"moo2manager","Test":"TestInvalidBuildDoesNotWriteWorkspace","Output":"--- PASS: TestInvalidBuildDoesNotWriteWorkspace (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.231962625-07:00","Action":"pass","Package":"moo2manager","Test":"TestInvalidBuildDoesNotWriteWorkspace","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.231973201-07:00","Action":"run","Package":"moo2manager","Test":"TestAbsentPayloadHonestFailure"}
+{"Time":"2026-10-15T19:29:19.231975714-07:00","Action":"output","Package":"moo2manager","Test":"TestAbsentPayloadHonestFailure","Output":"=== RUN   TestAbsentPayloadHonestFailure\n"}
+{"Time":"2026-10-15T19:29:19.232865128-07:00","Action":"output","Package":"moo2manager","Test":"TestAbsentPayloadHonestFailure","Output":"--- PASS: TestAbsentPayloadHonestFailure (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.232905658-07:00","Action":"pass","Package":"moo2manager","Test":"TestAbsentPayloadHonestFailure","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.232925458-07:00","Action":"run","Package":"moo2manager","Test":"TestBusyJobRejectsSecondOperation"}
+{"Time":"2026-10-15T19:29:19.232928292-07:00","Action":"output","Package":"moo2manager","Test":"TestBusyJobRejectsSecondOperation","Output":"=== RUN   TestBusyJobRejectsSecondOperation\n"}
+{"Time":"2026-10-15T19:29:19.233722315-07:00","Action":"output","Package":"moo2manager","Test":"TestBusyJobRejectsSecondOperation","Output":"--- PASS: TestBusyJobRejectsSecondOperation (0.00s)\n"}
+{"Time":"2026-10-15T19:29:19.23376637-07:00","Action":"pass","Package":"moo2manager","Test":"TestBusyJobRejectsSecondOperation","Elapsed":0}
+{"Time":"2026-10-15T19:29:19.233785418-07:00","Action":"run","Package":"moo2manager","Test":"TestNoAPIWildcards"}
+{"Time":"2026-10-15T19:29:19.233787732-07:00","Action":"output","Package":"moo2manager","Test":"TestNoAPIWildcards","Output":"=== RUN   TestNoAPIWildcards\n"}
+{"Time":"2026-10-15T19:29:19.239118638-07:00","Action":"output","Package":"moo2manager","Test":"TestNoAPIWildcards","Output":"--- PASS: TestNoAPIWildcards (0.01s)\n"}
+{"Time":"2026-10-15T19:29:19.239166278-07:00","Action":"pass","Package":"moo2manager","Test":"TestNoAPIWildcards","Elapsed":0.01}
+{"Time":"2026-10-15T19:29:19.239191225-07:00","Action":"output","Package":"moo2manager","Output":"PASS\n"}
+{"Time":"2026-10-15T19:29:20.241529305-07:00","Action":"output","Package":"moo2manager","Output":"ok  \tmoo2manager\t26.378s\n"}
+{"Time":"2026-10-15T19:29:22.31015115-07:00","Action":"pass","Package":"moo2manager","Elapsed":28.447}

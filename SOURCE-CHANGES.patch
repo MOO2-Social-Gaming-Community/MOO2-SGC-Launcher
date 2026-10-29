@@ -1,0 +1,1804 @@
+--- a/CANDIDATE-MANIFEST.json
++++ b/CANDIDATE-MANIFEST.json
+@@ -1,12 +1,10 @@
+ {
+   "schema": 1,
+-  "candidate_version": "0.5.0",
+-  "status": "private-gui-development-candidate",
+-  "baseline": "reviewed 0.4.8 source; user reports publishing 0.4.8 separately",
+-  "baseline_source_index_sha256": "c2441988ae9b3fc3feb7771946c9d9fb1fc8e276953df62360c75739b2dc7e95",
++  "candidate_version": "0.5.1",
++  "status": "private-windows-first-development-candidate",
++  "baseline": "delivered 0.5.0 GUI source; published/reviewed 0.4.8 unchanged",
++  "baseline_source_index_sha256": "467874d729a66f904234ae02ca16f63297b1014ff8b531f76f62a59e64af3caf",
+   "source_fingerprint_file": "SOURCE-FINGERPRINT.json",
+-  "source_fingerprint_sha256": "467874d729a66f904234ae02ca16f63297b1014ff8b531f76f62a59e64af3caf",
+-  "indexed_source_files": 137,
+   "release_assets_in_source_package": false,
+   "single_file_assets_built_separately": true,
+   "offline_development_signatures": true,
+@@ -21,20 +19,25 @@
+   "no_shortcut_mode": "per-process, preserved across helpers/restarts",
+   "optional_prsl_chat": "not installed or required",
+   "custom_scg_tournament_balance": "not selected",
+-  "native_acceptance_checklist": "docs/GUI-FIRST-ACCEPTANCE-0.5.0.md",
++  "native_acceptance_checklist": "docs/WINDOWS-FIRST-ACCEPTANCE-0.5.1.md",
++  "candidate_installation": "separate per-user private-gui-0.5.1; no automatic 0.5.0 migration",
++  "full_game_download": "not implemented; official store handoff and verified owned-folder/ZIP import only",
++  "source_fingerprint_sha256": "3d6f451426531cc4fc8ea380cd24a0f3731317c393cf029f9517e3f75eac338b",
++  "indexed_source_files": 142,
++  "windows_single_file": {
++    "filename": "MOO2-SGC-0.5.1-Windows.exe",
++    "bytes": 15236096,
++    "sha256": "908b784e9ec8733ba2f282b84c735c285110e7fee74f9325ae9175aa5c27cd7a"
++  },
+   "verification": {
+-    "independent_go_passed": 334,
++    "independent_go_passed": 351,
+     "independent_go_failed": 0,
+     "explicit_fixture_skips": 3,
+-    "independent_artifact_checks": 59,
+-    "compiled_linux_lifecycle_checks": 30,
+-    "summary": "docs/GUI-BUILD-RESULTS-0.5.0.md",
+-    "compiled_source_go_passed": 331,
+-    "reviewer_only_startup_assertions": 3
+-  },
+-  "windows_single_file": {
+-    "filename": "MOO2-SGC-windows-amd64.exe",
+-    "bytes": 15228416,
+-    "sha256": "6cd937f3963f8aed892e9cf78ef0f6fbd0fd6c6c286e6dd554f387a678402e40"
++    "node_vm_suites": 3,
++    "publishing_mock_tests": 10,
++    "real_manager_process_double_presentation": "passed; no actual runtime/game execution",
++    "summary": "docs/GUI-BUILD-RESULTS-0.5.1.md",
++    "independent_artifact_check_groups": 7,
++    "compiled_linux_lifecycle_checks": 30
+   }
+ }
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,3 +1,11 @@
++# 0.5.1 — Private Windows-first GUI candidate (2026-10-29)
++
++- Keep the delivered 0.5.0 and published 0.4.8 checkpoints unchanged. The new candidate uses a separate per-user test root and fresh setup.
++- Add official-store acquisition guidance and return-to-import controls; no game redistribution or unsupported installer execution.
++- Show bounded download progress and cancel blocked network requests safely, preserving verified caches and prepared games; retry does not inherit cancellation.
++- Add saved per-profile display, audio mute and background behavior settings without changing compatibility fingerprints, game rules, or emulator hardware.
++- Keep native Windows, rendered browser, actual gameplay/save, signing and publication gates explicit. Linux/API tests and cross-compiles do not certify Windows.
++
+ # 0.5.0 — Private GUI candidate (2026-10-28)
+ 
+ - App-style single-file entry point with offline signed launcher embedding, automatic graphical startup, isolated per-user data, repeated-click session reuse, and visible progress/retry/recovery/exit.
+--- /dev/null
++++ b/OPEN-FIRST-0.5.1.txt
+@@ -0,0 +1,53 @@
++MOO2-SGC 0.5.1 — private Windows x64 GUI test candidate
++
++OPEN ONE FILE
++Double-click MOO2-SGC-0.5.1-Windows.exe.
++No Go installation, terminal, CMD wrapper or config editing is needed.
++The local browser interface opens automatically.
++
++THIS IS A SEPARATE TEST INSTALLATION
++0.5.1 uses a new private-gui-0.5.1 folder. It leaves your 0.5.0 test setup and
++working launcher alone. Choose your owned game source again; old test profiles
++and saves are not migrated automatically. Later opens reuse this new setup.
++
++IN THE WINDOW
++1. Already have MOO2? Browse to your supported owned game folder or ZIP.
++   Otherwise use the official Steam/GOG links, install your owned copy through
++   that store/client, then return and choose I've installed it — find my game.
++   This candidate does not provide a full-game backup-site downloader or run
++   unknown installers. GOG-specific editions are not yet validated.
++2. Choose the version and mods. New setup suggests Community 1.50.26 standard;
++   legacy 1.40b23 remains available. No experimental balance is selected.
++3. Choose Prepare selected game. Required approved patches and DOSBox can be
++   downloaded with visible progress, or imported through the graphical controls.
++   Cancel interrupts downloads; verification and activation use safe boundaries.
++   Retry preserves your previously prepared game and verified cached packages.
++4. Review Ready. Optional Display, sound and background settings let you set
++   fullscreen, starting window size, audio mute and background behavior.
++   Save settings or choose Play MOO2. No re-prepare is needed for these settings.
++
++Finish by closing the game normally, then choose Exit launcher. Closing only
++its browser tab does NOT stop the launcher. Double-clicking the same EXE while
++it runs reopens its existing session.
++
++IF SOMETHING STOPS
++Read the graphical error. Setup offers Retry, Recover interrupted startup and
++Exit. Recovery never removes live or unknown game/process locks. Do not remove
++protective locks blindly. Missing-browser or folder-permission issues need
++correction through Windows settings, not a terminal command.
++
++TEST LIMITS
++This candidate is unsigned by Windows Authenticode. Native Windows dialogs,
++rendered browser UI, actual game-window visibility, audio, gameplay and saves
++have not been verified on a Windows laptop here. It is not production-ready.
++Do not disable security protection or bypass organizational policy.
++
++For a short review: open it, browse a source (try Cancel once), prepare, review
++Ready, change a display setting, and check Play opens a visible game. If time
++permits, create a disposable save and reload it. Send the exact first error or
++screenshots of Ready/the game. Crop personal paths and browser address bars;
++do not send the local private-session URL.
++
++No original game files are modified or uploaded. Game/runtime files are not
++bundled. PRSL and new Chat are not installed or required. No public publication
++was performed. The source ZIP is for maintainers; players need only the EXE.
+--- a/README.md
++++ b/README.md
+@@ -1,8 +1,10 @@
+-# MOO2-SGC Launcher — 0.5.0 GUI candidate
++# MOO2-SGC Launcher — 0.5.1 Windows-first GUI candidate
+ 
+-A friendlier app-style launcher for **Master of Orion II**: open one OS-appropriate launcher file, choose your owned game and community setup graphically, prepare, and play. No terminal, Go installation, CMD wrapper, or manual configuration editing is part of the intended player workflow.
++A friendlier app-style launcher for **Master of Orion II**: on Windows, open one launcher EXE, choose your owned game and community setup graphically, prepare, and play. No terminal, Go installation, CMD wrapper, or manual configuration editing is part of the intended player workflow.
+ 
+-**Start with [START-HERE.md](START-HERE.md).** This is an isolated private development candidate built from the reviewed 0.4.8 source. The user reports publishing 0.4.8 to GitHub; this work does not publish or replace that release.
++**Start with [START-HERE.md](START-HERE.md).** This is an isolated private development candidate continuing the delivered 0.5.0 GUI checkpoint. The user reports publishing 0.4.8 to GitHub; this work does not publish or replace that release.
++
++The 0.5.1 private candidate uses a **new isolated `private-gui-0.5.1` folder**. It does not migrate or modify the 0.5.0 test installation; choose your owned source again. Later opens of this same version reuse that installation.
+ 
+ ## What is implemented
+ 
+@@ -11,6 +13,9 @@
+ - Private per-user installation, no shortcut changes, preserved saves and generations, no changes to Steam/GOG originals.
+ - Graphical source/runtime selection and preparation; explicit version/core/mod choices. New GUI setup suggests Community 1.50.26 standard rules, while legacy 1.40b23 stays available and existing profiles are preserved.
+ - Windows GUI-subsystem builds and hidden console helpers; actual game windows are still intended to show normally.
++- Official Steam/GOG acquisition handoff with honest compatibility limits; store sign-in/install remains in the official client, then return to Browse/import. No unverified full-game downloader.
++- Download byte/percentage progress and responsive cancellation, with verified-cache preservation, partial-file cleanup, and retry.
++- Per-profile fullscreen, starting window size, mute and background behavior controls, saved without changing game rules or requiring a rebuild.
+ 
+ ## Boundaries
+ 
+--- a/SOURCE-FINGERPRINT.json
++++ b/SOURCE-FINGERPRINT.json
+@@ -1,7 +1,7 @@
+ {
+   ".github/workflows/release.yml": "5fe2889f2dbbb0c0caf14979ded67b0534712a882a76269c443764197cf970ac",
+   ".github/workflows/test.yml": "5b2ebd1ef981ad4ef52875418cc1822fefacd7d5c95e47cc286b28988eed378c",
+-  "VERSION": "a0ad50640139a524f86591157145bf1d4674ea9c065bfea21558f0f7b04430c8",
++  "VERSION": "aba951626c8690ce493cbc8f018205bb468003f61fbf00fd3d3c71cebabc0177",
+   "manager/apply_update.go": "a3cd6b7cf53181e6d66186aa20c1dc5adfaa6845fa2dd0ceca232a815b5656f3",
+   "manager/apply_update_test.go": "1acfaec2d962fb6c3e06aea7e0c0064b7f5026de296783fb330b0df8820d724d",
+   "manager/assets/base-files.json": "f8b8be9613204e8c219413e5504ec9fb8507bcdec2a891704bfbb73b9963e239",
+@@ -16,7 +16,7 @@
+   "manager/build.sh": "22765a12f6003b277c62b13b43715da2d2ebce2789a038960d5447acd36f572e",
+   "manager/build_catalog.py": "ba56dffc604a2036853b1830e153d20ae7ac1c2555d168f8673a2c5d2e995411",
+   "manager/build_patch_index.py": "b7839893afe96afa64078d9e7d938932f2f82866fdd28e3fc08e0ed86e09e186",
+-  "manager/cancellation.go": "4ab5471515396c190fbcc478eaf49fd30facd1e6fe0ca6ba2ffe112fb37e7f2f",
++  "manager/cancellation.go": "ca43734b1edbe8823de49f3e2dc4e15a88976b61aae48a7b3e20006a9b97780e",
+   "manager/cmd/bootstrapper/desktop_unix.go": "2e055e0e6df22b184dea2e2153181ae92e4db0333d16c671f514d14e68cba5b7",
+   "manager/cmd/bootstrapper/desktop_windows.go": "5b006592ec384de67c3158aefa71b61b872b1c85a11c7edd78c1c28600c80560",
+   "manager/cmd/bootstrapper/launch_policy.go": "ba986a27888d83efd73c0609864dc093fb0af76a5102abd531be74240c54a726",
+@@ -26,12 +26,12 @@
+   "manager/cmd/desktop/lock.go": "d430327c2e2873a2bd9f0cb53bbc839397fd24df9ceae08160d0aaa8b2be4b5e",
+   "manager/cmd/desktop/lock_unix.go": "53f0cb25ccc269b6e7b60387dff02f4abfc71e8d9ae2b7afed1771b0fa231482",
+   "manager/cmd/desktop/lock_windows.go": "df418685e8f2275426fdcb1bce16f4334cf60467e9e7327e114cd24404f6a222",
+-  "manager/cmd/desktop/main.go": "263c31b3949064a7b839adef75e17d81cc888417c104161495f367684f49be20",
+-  "manager/cmd/desktop/ownership.go": "b68f1b57a08d6b51d43e1eabf47ff0e601b502178b082c16ac5c2d6ca723a4b9",
++  "manager/cmd/desktop/main.go": "65257174220cd17bb1dc8a9bb1568f443187f898d200dc4b70655c86575a9046",
++  "manager/cmd/desktop/ownership.go": "2b60a74fa93f9858a49a84563e791b1f85a238a7a085849efc9b538f3adffbaf",
+   "manager/cmd/desktop/payload.go": "6737426e9f43bdf7b2e4dcf9bf72d33087eb8cae51afbfc6e16d0febff3e2584",
+   "manager/cmd/desktop/payload_test.go": "8a332463f040af9de0d3f676102883070cbf40f81ac1f85633318ce3b1a95b31",
+   "manager/cmd/desktop/recovery.go": "c1c618eee65a94a5dae94ba43f0bc0e299f78ae777981ed4b3d75179b5dda042",
+-  "manager/cmd/desktop/recovery_test.go": "23034988fe096ba47ee3402c56fe66ee33ee9a2699bfd344cf83cc918615f636",
++  "manager/cmd/desktop/recovery_test.go": "2dff353fbd1bc256ff9bacbf73cb6224b1e351dea500dd1eb4b69f76e7f0f932",
+   "manager/cmd/desktop/session.go": "feb37b3480134633a39d9bee1bc442af5cc7c1cbf65ee4b3d3513267e2a84be8",
+   "manager/cmd/desktop/session_test.go": "69b0503e73fb764f76092e287e25dd24618a862c3a84586fe0059f7a19d854c2",
+   "manager/cmd/desktop/web/app.js": "5bf4a9ee1329d27af446ffd25da8ce51cf73b0db2ac815d80e80d5c17181d390",
+@@ -43,6 +43,8 @@
+   "manager/config_dependencies_test.go": "f252eaaeffb039c6217b5763bebbb4c5ad89e3aae2ab1a82c62370bbcb11bdd8",
+   "manager/distribution.go": "8535b668bfc65d44f02499b25f80b47120e9113245b2e417e4d84c3c8d3946db",
+   "manager/distribution_test.go": "52421fa811dfcb0a8e6adb489ba20be1c5e1bd0d0a599661fb39f03fbba16675",
++  "manager/downloads.go": "ef7d4eb6546fe6b886a5205ff1529304e250173762e815130298c1f8141b83c7",
++  "manager/downloads_test.go": "50713d2d0012508fe902143b7e268ed5ee89d275c509ddd84b24461feb09be32",
+   "manager/editions.go": "df160c63a0c851ea42f7c46f9eabf3143d892d78d898932c4269e29847ceb2a4",
+   "manager/editions_test.go": "bfead3870007c9fde07ef16b79df8fc1b064b8b6569878fea42da97262390d82",
+   "manager/fs.go": "0fb400ac8be76f7d957bc5b81e41acbd7725259948922931d65c2dc1d1f49b04",
+@@ -56,8 +58,8 @@
+   "manager/integration_test.py": "5114a9aecae44b8f5c97d64311d4e97e2af3ace45f4d80f984a283ecd2977808",
+   "manager/integrity_regression_test.go": "c1eb740155dc6d39a3a7f56023e63dde217c1ba6f6e14754d405ca336135ef13",
+   "manager/main.go": "37747550398b1ce56bee64ad11461b348abc2abf0cb3ec550f342384e3abad0e",
+-  "manager/manager.go": "76c2d6ef90be1138d10c702b6b8375669a1640d3f0a5441273661fbbb5ee6a96",
+-  "manager/model.go": "848075f24d849ab187da81421dfc7910a2793458ee51a72c9298cab4b80bf91e",
++  "manager/manager.go": "d113b74483b98de03032b0334714ecf71a1956d5c59e4cbb03936d27c12a39a3",
++  "manager/model.go": "9447184d1c6e0aa6bf3e41da9914fbca4bb98ede65ed8bd90e35254bf8c5b75b",
+   "manager/model_test.go": "4ae3a88ceff64542830e113f25dbd90e4b65b4f85c28a2131009a91dcceaa9e7",
+   "manager/native_picker.go": "4e0a83c451861fa5d335fc0e319143b43f6e14054c0122aba1a46a410ec38465",
+   "manager/native_picker_unix.go": "a1f93e02037fb04e3a3e6fe7d4ed640e8805979069b2132f9345d4f29abe6727",
+@@ -67,19 +69,21 @@
+   "manager/network_kernel.go": "dfeb4bf2cde76fc74f1ba8f7311050a4ca57e08442ac4c1d3e4de9fa04fa1f9b",
+   "manager/network_kernel_test.go": "26dd8cf08b0f8cd60c9ed55d54cbf04defbc64c1543c60b6717bf59da0da2c34",
+   "manager/patch_integrity.go": "464770d8c3dcc205e67658819b0c36e7863d68b78b9e5d9e2dd8e398bce3850b",
+-  "manager/patch_lineage.go": "740e1de93d8cd13ebe68d612bc8e8404d4a5be00845dbe96155367a808912441",
++  "manager/patch_lineage.go": "a486cc9f6591b1fc5168d99111677712132ee746f67c3a23ef763e9c2dc912be",
+   "manager/portable.go": "7bdc2f45b501362f1efe8c583696194aa074089848adbe79ccc18cff351e6888",
++  "manager/presentation_settings.go": "0a8d40c761bcaa6876c88390774cd3f7e4c13ab9a3d2978c7496ef247bb204dd",
++  "manager/presentation_settings_test.go": "443d7479e088561b077a04f801e816bd30fdda9fb01c6f8035d6e95e66c5200c",
+   "manager/process_result.go": "aca8ff3028db90a1f2777a23d028eeda370e96e78671859655c244a5b137937f",
+   "manager/replace_unix.go": "7f5fe56cc6f07eb9eb4cea8598a8d17e842479abb4e97ec0e4293f07aaa93e01",
+   "manager/replace_windows.go": "0e4e869818fbbee007f11273e5117174983e73f6abfbf28626fe7540ed25601f",
+-  "manager/runtime.go": "30e80f554abb808f5946d27f6d95eb3871b25bda874104039b743471733edb83",
++  "manager/runtime.go": "d9c25bc9141af98fda2581f1b7d3e5cf37b8371f737f7cec8c05a02ce55cafd8",
+   "manager/runtime_setup.go": "6971c3879a0a4f2f4d0b339a42b4067a25fdd8f1eb51b7327a99f488f23f08fb",
+   "manager/runtime_setup_test.go": "33f8d2d40b9840c70b096ce85040db182ba8cb8a779418080e629d6b014611b3",
+   "manager/selection.go": "45690ffaa74404d43bde6969684a33c345c0a931d8416723956c55331ecd2877",
+   "manager/selection_test.go": "266d02c325cea9c4e182f432899637e43c64fba61a2a95f83b8d4d8a7f2ce6af",
+-  "manager/server.go": "a0f1512206f58c2017f896a9aee7e5b0011f32630b29f7a4706233de08c9948e",
++  "manager/server.go": "569d1ec9fdbb06cba0596b75ecdab6ceb612741e4beb8f2d7768ac326c191e28",
+   "manager/server_test.go": "41e7a0878b87e2203ce981e5e7f71e9c58dd3eb8f7493cb29ffd0c2a909d5d92",
+-  "manager/shared/buildconfig/config.go": "a22bdc95b02f619da42eca312abd734105b6da4a4d70fa06bc3590ad9797994b",
++  "manager/shared/buildconfig/config.go": "febf9a65fd235688130af15aece1dc5e15be97aa2946c38d82f2841c1bcbd729",
+   "manager/shared/desktop/desktop_unix.go": "bda693d76eeda8aed8d13a7c0b68c309e72b47a63ab5a4a6703290b433621c92",
+   "manager/shared/desktop/desktop_unix_test.go": "806e49940b5f654c99cdf5d67110d7d94294f61b6eb8e8969b19a2879827d399",
+   "manager/shared/desktop/desktop_windows.go": "84bf2627539b54a72c38d6a54fbf2ca84037bf492d9ea111bb533744b99bbee5",
+@@ -96,9 +100,9 @@
+   "manager/shared/layout/layout.go": "a50d1b3ccff2265c923d164654b94d35e2cf06b12af30272da61388f8c84887d",
+   "manager/shared/layout/layout_test.go": "b2edc920c5f6119e69d760f72396b25c22ed242350f6dd28dc214836898943b0",
+   "manager/startup_privacy_test.go": "3c28e77ea2b53400ee22570a2cc00d85ef935901efe167e1516d975c6eb2be49",
+-  "manager/web/app.js": "2e8ab58455aa4a801fcafaf4547717ac58fc8a7b4cd736e6bed4d9616125f01c",
+-  "manager/web/index.html": "aa4f0670e5cd3c8ca7c89f49e08790b8b2538d786e7b776780561763abd22d4c",
+-  "manager/web/style.css": "ca433f679f6d19853ea1f0656974438202f75ae7278be1de339ff91c40e244b9",
++  "manager/web/app.js": "f1272095c9a13e698da33ea6eda93ddec068fb4ae05e087ed4effcea8116b1d1",
++  "manager/web/index.html": "fb4988bd797486d2198b4f5cbcf41703c3be2e41f6117d539e47ecd93650b42e",
++  "manager/web/style.css": "483db9a473c4405b5082cb38f31e18001893d0a7624715656096bcdd2ce790ef",
+   "packaging/build_desktop.py": "a3bfce714ffdf7ea95e060a0668ff70e080d10428a916dcddf4de10a26f9b3f6",
+   "packaging/build_release.py": "0be57445e47df97c4f7404e433e3625628533f3a293d9288c25249a1d84e5977",
+   "packaging/make_portable_kit.py": "675438acf21875269dde52caff3c0fbc6cb910528cb068e105410e8705150e69",
+@@ -117,7 +121,7 @@
+   "project.json": "3bb19a1cce29189d40ef6c817b3579be3ebc306d20974515eb16d263c2a56d07",
+   "support/dopefish/dopefish-diagnostic.conf": "e485e318c6832c94580a9bc94c101d8fa0e6f175e1452d8691388929b7fe2996",
+   "tests/bootstrap_integration.py": "58fb0f192a814a54bf112db69796e012637e66732c13a203b59bf6dd49abc66c",
+-  "tests/desktop_acceptance.py": "a8f59c0fe7384014e1bbf6620198d7ba60926a449ad5980f541c2f7e981eb602",
++  "tests/desktop_acceptance.py": "59110190a090f708b654f6f7952ea8d1ba7601a52d99a4920db8b705c7197f62",
+   "tests/gui_onboarding_regression.js": "40ce93b5d54a73d4ebc67a1d0afbc571bb07dd5839e2131ed18853313d15ab71",
+   "tests/headless_handoff.py": "588eed37030a4714ff2231a2580e49e0f7e629df124a8774d34c351f6ab78ec6",
+   "tests/lineage_acceptance.py": "65b2668c61fa15b1d40b1f523c4502ab89b521bb17d36af120a37b84441e54b9",
+@@ -128,6 +132,7 @@
+   "tests/owned_game_acceptance.py": "2446c65535aac4b1e7f460b4fcbb29b8291b1c8e349741d0d5eb18fb5ee05bba",
+   "tests/portable_acceptance.py": "bc4d4c68172a849ef97abc6c4138fabb35c0cb2737d8acf46a3ac450b7180ce4",
+   "tests/portable_bootstrap.py": "35ecbfcdf3774845ad74b99aace1d6fa01c754af52f09eb2f7fc8ceba703abca",
++  "tests/presentation_regression.js": "3da66a448570248e22f5333aa3e6754ac19ea855f8ba458dce464ce5e7de62cb",
+   "tests/repository_roundtrip.py": "db6b8ca47c262448281f2fbe4704d05a9efb07dcf68ccd3ef5109d6dfd7d0edf",
+   "tests/shortcut_free_handoff.py": "980598bece57cf4c921f84a4abc7e60f844470c23e51032e4d9ac3a006a4ff2f",
+   "tests/stale_release_acceptance.py": "b092e1b69f93b4375cdb40410cf156cf4bdef38f1c45d807133028b19a5c4023",
+--- a/START-HERE.md
++++ b/START-HERE.md
+@@ -1,16 +1,20 @@
+-# Start here: MOO2-SGC 0.5.0 private GUI candidate
++# Start here: MOO2-SGC 0.5.1 private GUI candidate
+ 
+ **The goal is an app, not a terminal workflow.** This development candidate is based on the reviewed 0.4.8 launcher; it does not replace the user's published 0.4.8 release.
+ 
+-## For a player on Windows 11
++## For a player on Windows 11 (x64)
+ 
+-Use the matching **single-file `MOO2-SGC-windows-amd64.exe`** supplied with the private candidate. Double-click it. Do not install Go, run CMD wrappers, or edit configuration files.
++Use the matching **single-file `MOO2-SGC-0.5.1-Windows.exe`** supplied with the private candidate. Double-click it. Do not install Go, run CMD wrappers, or edit configuration files.
+ 
+ 1. A browser window shows verification and setup progress. The launcher installs only itself into a separate per-user private folder. It does not replace an existing launcher or shortcut.
+-2. In the graphical chooser, **Browse** to a supported owned game folder or ZIP. Source files are verified and copied; Steam/GOG originals and their saves are not modified or uploaded. Not every regional or GOG edition has a verified recognition recipe.
++2. If needed, follow the official Steam/GOG store links to obtain your owned game. Sign-in, purchase and installation stay with the official store/client; this candidate does not download a complete game from a third-party backup site. Then return to the launcher. In the graphical chooser, **Browse** to a supported owned game folder or ZIP. Source files are verified and copied; Steam/GOG originals and their saves are not modified or uploaded. Not every regional or GOG edition has a verified recognition recipe.
+ 3. Choose the game version and community ruleset you want. For a new GUI user, **Community 1.50.26 / standard rules** is suggested; **legacy 1.40b23** remains an independent option. Existing saved selections are retained. No experimental SCG/Tournament balance is selected automatically.
+ 4. Use **Prepare**. Missing supported community patch/runtime files can be obtained through the visible verified-download flow, or choose an existing supported runtime through the graphical controls. Launcher installation itself is offline; game preparation can need those additional files or internet access.
+-5. Review the readiness result, then choose **Play**. Preparation never starts a game automatically.
++5. Review the readiness result. Optional **Display, sound and background settings** provide fullscreen, starting window size, mute and single-player background pause. Save settings or choose **Play**; these presentation changes do not require preparing the game again. Preparation never starts a game automatically.
++
++Downloads show received bytes/percentage when total size is supplied. **Cancel preparation** interrupts downloads; verification and short activation steps stop only at safe boundaries. Failed or canceled downloads keep the previous verified cache and prepared game.
++
++**Separate test setup:** 0.5.1 uses the per-user `MOO2-SGC/private-gui-0.5.1` folder, distinct from 0.5.0. Choose the owned source again; no old test profiles or saves are migrated automatically. Keep the old EXE if you need to return to that old test installation.
+ 
+ Later, double-click the same file. It reuses the private installation; a second click reopens the current session rather than starting another manager. Use **Exit launcher** when finished. Closing a browser tab alone does not stop a running game or launcher.
+ 
+@@ -27,4 +31,4 @@
+ 
+ This source tree is not itself the single-file executable. `packaging/build_release.py --development` produces disposable offline-signed inner packages; `packaging/build_desktop.py` verifies and embeds a matching package in a separate outer executable. The builder refuses a package whose source fingerprint no longer matches the tree. Those scripts require the maintainer's existing Go toolchain; **players do not**.
+ 
+-Read `docs/GUI-FIRST-ACCEPTANCE-0.5.0.md` and the final build/test evidence before distributing a native test candidate. Historical 0.4.x documents describe their own artifacts and are not 0.5.0 acceptance evidence.
++Read `docs/WINDOWS-FIRST-ACCEPTANCE-0.5.1.md` and the final build/test evidence before distributing a native test candidate. Historical 0.4.x documents describe their own artifacts and are not 0.5.1 acceptance evidence.
+--- a/VERSION
++++ b/VERSION
+@@ -1 +1 @@
+-0.5.0
++0.5.1
+--- /dev/null
++++ b/docs/GUI-BUILD-RESULTS-0.5.1.md
+@@ -0,0 +1,42 @@
++# 0.5.1 private Windows-first candidate: build and review results
++
++The delivered 0.5.0 source and executable remain unchanged. This increment uses a separate `private-gui-0.5.1` per-user root: it is a fresh setup, not an automatic profile/save or development-signing-trust migration. No GitHub publication was performed.
++
++## Implemented changes
++
++- Fixed official Steam/GOG acquisition links and return-to-discovery action, followed by verified local import. The complete commercial game is **not** downloaded by the launcher; no third-party backup URL or legacy installer is run.
++- Throttled download byte/percentage progress, labeled unknown totals, genuine cancellation during blocked HTTP headers/body, partial-file cleanup and retry without inherited cancellation. Failed downloads do not replace verified caches or prepared games.
++- Per-profile fullscreen/window sizing, mute audio, background mute and single-player background pause, without changing game rules or compatibility fingerprints. Saved preferences feed the actual launch configuration and arguments.
++- Browser session-storage failure fallback, with authenticated reload retained; native and rendered behavior remain separately untested.
++
++## Final checks
++
++| Check | Result |
++|---|---|
++| Independent Go aggregate race run | **351 test/subtest passes, 0 failures, 3 explicit fixture skips**, seven tested packages |
++| Go vet | Pass |
++| JavaScript syntax and three Node/VM regression suites | Pass; not rendered-browser tests |
++| Publishing safety mocks | 10 pass; no publication attempted |
++| Real Linux manager presentation/config/argument/persistence check | Pass using an explicitly labeled process double; no DOSBox or game executed |
++| Offline development signatures, all four inner package inventories/hashes/source indexes, exact embedded outer payloads | Independently verified; seven grouped artifact checks |
++| Windows outer, manager and helper PE structures | GUI subsystem 2; no Authenticode certificate |
++| Compiled Linux outer lifecycle/API | 30 pass, with browser-opener recorder, not a rendered browser |
++
++The three skipped tests need genuine official DOS 1.31/legacy-derived fixture inputs: `TestRealBaselineMatchesSteam`, `TestRealOfficialDownloadContentAuthentication`, and `TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase`. No executable was synthesized and no verifier was weakened to satisfy them. Steam-to-Community, the supplied runtime inventory and the original pinned official runtime archive were available for the final tests. Private fixtures are excluded from source and release artifacts.
++
++## Build identity
++
++- Version: **0.5.1** (numeric, private development candidate).
++- Toolchain: existing `go1.27.3 linux/amd64`.
++- Indexed build inputs: **142**.
++- Source-index SHA-256: `3d6f451426531cc4fc8ea380cd24a0f3731317c393cf029f9517e3f75eac338b`.
++- Windows delivery: `MOO2-SGC-0.5.1-Windows.exe`, **15,236,096 bytes**.
++- Windows SHA-256: `908b784e9ec8733ba2f282b84c735c285110e7fee74f9325ae9175aa5c27cd7a`.
++
++`SOURCE-CHANGES.patch` is the text-source continuation from the delivered 0.5.0 source. Generated verification evidence and the patch itself are excluded from that diff; the complete source ZIP includes them. `SOURCE-FINGERPRINT.json` indexes code/build/test inputs, not documentation or generated evidence. The signed inner packages embed that exact index.
++
++## Still unverified
++
++Native Windows dialogs, visible game-window behavior, rendering/DPI, audio, real gameplay/save/load and multiplayer remain open. No production OS signing, macOS notarization or rendered-browser certification is claimed. Ubuntu and macOS binaries are internal build checks, not promised one-open consumer apps. See [the Windows acceptance checklist](WINDOWS-FIRST-ACCEPTANCE-0.5.1.md).
++
++Normal players open the EXE; Go, Python, build scripts and source tests are maintainer tooling, not player setup steps. Do not bypass Windows security protections or organizational policy.
+--- /dev/null
++++ b/docs/WINDOWS-FIRST-ACCEPTANCE-0.5.1.md
+@@ -0,0 +1,40 @@
++# Windows-first acquisition and settings — private candidate 0.5.1
++
++This increment preserves the delivered 0.5.0 checkpoint. The default 0.5.1 private application root is `MOO2-SGC/private-gui-0.5.1`, separate from 0.5.0. This is a fresh setup: select your owned game again. No automatic profile/save migration or signing-trust migration is claimed. Do not point the old 0.5.0 executable at profiles newly written by 0.5.1.
++
++## What the GUI now does
++
++- Provides fixed official Steam and GOG store/help links, followed by **I've installed it — find my game**, which runs actual local discovery. Browse folder/ZIP remains available. Original files are read-only inputs, never rearranged or uploaded.
++- Explains that the base game is commercial. Store sign-in, purchase and entitled game installation remain in the official store/client. The launcher neither collects store credentials nor grants ownership. This is a graphical store handoff, **not an integrated commercial-game downloader**.
++- Distinguishes automatic approved free patch/runtime downloads from commercial game acquisition. There is no unverified third-party full-game backup link.
++- Identifies the supported English DOS source and warns that GOG-specific editions remain unvalidated. GOG EXE/BIN installers are not parsed or executed. Matching known contents are required; recognition is not based on a store name alone.
++- Adds per-profile fullscreen, starting window size, mute audio, background mute and background pause. Fixed choices are mapped to DOSBox configuration, not raw user-provided config text. Pause on focus loss applies only to single-player, so switching to the launcher does not pause a network session.
++- Provides **Save settings**, **Cancel edits** and **Restore defaults**. Defaults change the form only until saved or played. Play also persists these presentation preferences before starting DOSBox. Saving preferences does not save unrelated unsaved engine/mod/network changes or alter game files/saves. Settings and last selected profile survive restart.
++- Retains old profiles' exact default runtime configuration and rules fingerprints. Changing presentation does not require a game rebuild.
++- Handles blocked browser session storage without crashing: the authenticated fragment remains available for reload when storage cannot retain it. External links use `noopener noreferrer`; the local server still enforces token, host and origin checks.
++
++## Automated evidence in source
++
++`manager/presentation_settings_test.go` covers old-profile defaults, actual runtime configuration/arguments, network pause suppression, rules fingerprint invariance, all supported size choices, rejected/injected values, scoped save/restart/selection, unrelated profile preservation, deterministic save failure/retry and HTTP authentication/schema checks.
++
++`tests/presentation_regression.js` uses deterministic JavaScript DOM/event doubles for defaults/Cancel, unsaved profile navigation, failed/stale saves, newer edits, profile reopen, store-to-discovery wiring, safe fixed links and blocked-storage authentication. Existing duplicate/readiness/onboarding suites must also pass. These are **not rendered-browser acceptance**.
++
++## Required native Windows 11 acceptance (still open)
++
++1. Open the single candidate EXE from a normal folder, without Go, a terminal, admin privileges or Python. Initial progress and authenticated manager appear; a second open reuses the same private installation.
++2. Follow Steam's official handoff, complete installation in Steam, return and discover/import. Select a supported owned portable ZIP/folder instead and confirm no original file changes. Verify wrong/unrecognized editions give an actionable error without replacing a prepared copy. Treat GOG as an explicit unvalidated-edition test, not a promised passing route.
++3. Prepare recommended Community 1.50.26; inspect actual patch/runtime download progress. Cancel a slow download; verify prompt safe interruption and retained previous generation/cache. Retry and verify success before Play becomes available. Cancellation during verification/activation respects transaction boundaries.
++4. Choose each display/audio setting; Save; close/reopen the launcher and verify persisted values/selected profile. Observe fullscreen/window sizing and sound in the actual game window. Windows DPI scaling can affect logical window sizes; native rendering/audio behavior is not established by unit tests.
++5. Change settings, then Cancel; restore defaults then Cancel; switch profiles and decline/accept discard. Verify each profile retains its own values. Simulate save failure and ensure visible error with retry, no silent success.
++6. Play with unsaved presentation changes, exit the game, reopen the launcher and confirm saved preferences. Ensure the game window is visible and no console appears. Test launch failure with a preference-write failure: no game process may start.
++7. Switch to host/join with background pause selected: the preference is retained but the session must continue when unfocused. Do not infer actual LAN/public-IPX success from a started process.
++8. Block browser session storage and reopen the authenticated page; setup should work without a script crash. Test an unauthenticated page for visible reopen guidance. Check keyboard focus, native picker focus/cancel/Unicode paths, 125–200% DPI, small screens and tab order.
++9. Exit the launcher; reopen; verify no stale process/root conflicts. Test explicit headless policy separately from normal GUI handoff/update. Keep the isolated 0.5.0 installation unchanged.
++
++Ubuntu and macOS runtime/rendering/install acceptance remain later work. PRSL, new Chat, SGC Online, replacement engines and automatic commercial-game account integration are not implemented by this increment.
++
++## Primary references checked 2026-10-29
++
++- [Official Steam MOO2 page](https://store.steampowered.com/app/410980/Master_of_Orion_2/) and [Steam installation help](https://help.steampowered.com/en/faqs/view/6F74-68BA-1B77-8727).
++- [Official GOG MOO1+2 page](https://www.gog.com/en/game/master_of_orion_1_2) and [GOG download help](https://support.gog.com/hc/en-us/articles/213148105-How-do-I-download-my-purchased-items). The help page body did not render in the research tool; the GUI does not depend on guessed account-menu instructions.
++- DOSBox Staging [display/window](https://www.dosbox-staging.org/0.83/manual/graphics/display-and-window/), [mixer](https://www.dosbox-staging.org/0.83/manual/sound/mixer/) and [system](https://www.dosbox-staging.org/0.83/manual/system/overview/) configuration references. These support the fixed configuration mapping; they do not substitute for native testing of the pinned runtime.
+--- a/manager/cancellation.go
++++ b/manager/cancellation.go
+@@ -11,7 +11,10 @@
+ 		return errors.New("this operation is finishing a safe commit and cannot be canceled; wait for it to finish")
+ 	}
+ 	m.job.CancelRequested = true
+-	m.job.Message = "Stopping after the current download or verification step; keeping your prepared game"
++	if m.cancelJob != nil {
++		m.cancelJob()
++	}
++	m.job.Message = "Stopping the download or finishing the current verification step; keeping your prepared game"
+ 	return nil
+ }
+ func (m *Manager) checkCancellation() error {
+--- a/manager/cmd/desktop/main.go
++++ b/manager/cmd/desktop/main.go
+@@ -80,7 +80,7 @@
+ 	if e != nil {
+ 		return "", e
+ 	}
+-	return filepath.Join(base, "MOO2-SGC", "private-gui"), nil
++	return filepath.Join(base, "MOO2-SGC", "private-gui-"+currentVersion), nil
+ }
+ func main() {
+ 	headless := flag.Bool("no-browser", false, "engineering acceptance only: do not open the graphical browser")
+--- a/manager/cmd/desktop/ownership.go
++++ b/manager/cmd/desktop/ownership.go
+@@ -24,7 +24,7 @@
+ 	if e := d.ReadJSON(filepath.Join(root, privateRootMarker), &c); e != nil {
+ 		return e
+ 	}
+-	if c.Schema != 1 || c.Kind != "moo2-private-gui" || c.CreatedVersion != "0.5.0" || c.RuntimeHistoryContract != 1 || c.LaunchAttempted == nil {
++	if c.Schema != 1 || c.Kind != "moo2-private-gui" || c.CreatedVersion != currentVersion || c.RuntimeHistoryContract != 1 || c.LaunchAttempted == nil {
+ 		return errors.New("private installation ownership/history contract is unknown")
+ 	}
+ 	return nil
+@@ -100,7 +100,7 @@
+ // An interrupted partial write is unknown and is not silently repaired.
+ func publishInitialContract(root string) error {
+ 	p := filepath.Join(root, privateRootMarker)
+-	c := rootContract{Schema: 1, Kind: "moo2-private-gui", CreatedVersion: "0.5.0", RuntimeHistoryContract: 1, LaunchAttempted: new(bool)}
++	c := rootContract{Schema: 1, Kind: "moo2-private-gui", CreatedVersion: currentVersion, RuntimeHistoryContract: 1, LaunchAttempted: new(bool)}
+ 	b, e := json.MarshalIndent(c, "", "  ")
+ 	if e != nil {
+ 		return e
+--- a/manager/cmd/desktop/recovery_test.go
++++ b/manager/cmd/desktop/recovery_test.go
+@@ -127,7 +127,7 @@
+ 
+ func TestMissingLaunchAttemptedIsUnknown(t *testing.T) {
+ 	root := t.TempDir()
+-	os.WriteFile(filepath.Join(root, privateRootMarker), []byte(`{"schema":1,"kind":"moo2-private-gui","created_version":"0.5.0","runtime_history_contract":1}`), 0600)
++	os.WriteFile(filepath.Join(root, privateRootMarker), []byte(`{"schema":1,"kind":"moo2-private-gui","created_version":"0.5.1","runtime_history_contract":1}`), 0600)
+ 	if e := checkPrivateRoot(root); e == nil {
+ 		t.Fatal("missing attempted flag treated as false")
+ 	}
+@@ -156,3 +156,26 @@
+ 		t.Fatal("delayed initial writer reverted durable true to false")
+ 	}
+ }
++
++func TestCandidateRootDoesNotAdoptPriorCandidate(t *testing.T) {
++	root := t.TempDir()
++	p := filepath.Join(root, privateRootMarker)
++	old := []byte(`{"schema":1,"kind":"moo2-private-gui","created_version":"0.5.0","runtime_history_contract":1,"manager_launch_attempted":true}`)
++	if e := os.WriteFile(p, old, 0600); e != nil {
++		t.Fatal(e)
++	}
++	if e := ensurePrivateRoot(root); e == nil {
++		t.Fatal("prior private candidate silently adopted")
++	}
++	after, e := os.ReadFile(p)
++	if e != nil || string(after) != string(old) {
++		t.Fatal("prior candidate marker changed", e)
++	}
++	got, e := defaultRoot()
++	if e != nil {
++		t.Fatal(e)
++	}
++	if filepath.Base(got) != "private-gui-"+currentVersion {
++		t.Fatal("candidate root not version isolated", got)
++	}
++}
+--- /dev/null
++++ b/manager/downloads.go
+@@ -0,0 +1,179 @@
++package main
++
++import (
++	"context"
++	"crypto/sha256"
++	"encoding/hex"
++	"errors"
++	"fmt"
++	"io"
++	"net/http"
++	"net/url"
++	"os"
++	"path/filepath"
++	"time"
++)
++
++type downloadedFile struct{ path, sha256 string }
++
++type downloadMeter struct {
++	report          func(int64, int64)
++	total, received int64
++	last            time.Time
++}
++
++func (p *downloadMeter) Write(b []byte) (int, error) {
++	p.received += int64(len(b))
++	if p.report != nil && time.Since(p.last) >= 250*time.Millisecond {
++		p.report(p.received, p.total)
++		p.last = time.Now()
++	}
++	return len(b), nil
++}
++
++// Downloads never replace a cached or active package until the caller verifies
++// the complete bytes. Canceling the request interrupts blocked headers/body as
++// well as an active transfer; failed partial files are removed on every return.
++func downloadTemporary(ctx context.Context, client *http.Client, src, dir string, max int64, report func(int64, int64)) (result downloadedFile, err error) {
++	if max <= 0 || max >= 1<<62 {
++		return result, errors.New("invalid download size limit")
++	}
++	req, e := http.NewRequestWithContext(ctx, http.MethodGet, src, nil)
++	if e != nil {
++		return result, e
++	}
++	resp, e := client.Do(req)
++	if e != nil {
++		return result, e
++	}
++	defer resp.Body.Close()
++	if resp.StatusCode != http.StatusOK {
++		return result, fmt.Errorf("download HTTP %d", resp.StatusCode)
++	}
++	if resp.ContentLength > max {
++		return result, errors.New("download exceeds size limit")
++	}
++	f, e := os.CreateTemp(dir, ".download-")
++	if e != nil {
++		return result, e
++	}
++	name := f.Name()
++	defer func() {
++		_ = f.Close()
++		if err != nil {
++			_ = os.Remove(name)
++		}
++	}()
++	h := sha256.New()
++	meter := &downloadMeter{report: report, total: resp.ContentLength, last: time.Now()}
++	if report != nil {
++		report(0, resp.ContentLength)
++	}
++	n, e := io.Copy(io.MultiWriter(f, h, meter), io.LimitReader(resp.Body, max+1))
++	if e != nil {
++		return result, e
++	}
++	if e = ctx.Err(); e != nil {
++		return result, e
++	}
++	if n > max {
++		return result, errors.New("download exceeded size limit")
++	}
++	if resp.ContentLength >= 0 && n != resp.ContentLength {
++		return result, errors.New("truncated download")
++	}
++	if e = f.Sync(); e != nil {
++		return result, e
++	}
++	if e = f.Close(); e != nil {
++		return result, e
++	}
++	if report != nil {
++		report(n, resp.ContentLength)
++	}
++	return downloadedFile{name, hex.EncodeToString(h.Sum(nil))}, nil
++}
++
++func downloadVerifiedWithContext(ctx context.Context, client *http.Client, src, dest, want string, max int64, report func(int64, int64)) error {
++	d, e := downloadTemporary(ctx, client, src, filepath.Dir(dest), max, report)
++	if e != nil {
++		return e
++	}
++	defer os.Remove(d.path)
++	if d.sha256 != want {
++		return errors.New("download checksum mismatch; cached package was not replaced")
++	}
++	if e = ctx.Err(); e != nil {
++		return e
++	}
++	return replaceFile(d.path, dest)
++}
++
++func downloadVerifiedWith(client *http.Client, src, dest, want string, max int64) error {
++	return downloadVerifiedWithContext(context.Background(), client, src, dest, want, max, nil)
++}
++
++func preparePackageDownload(src, dest string) error {
++	u, e := url.Parse(src)
++	if e != nil || u.Scheme != "https" || !trustedDownloadHost(u.Hostname()) {
++		return errors.New("only approved HTTPS distribution hosts may supply packages")
++	}
++	if e = noSymlinkAncestors(dest); e != nil {
++		return e
++	}
++	return os.MkdirAll(filepath.Dir(dest), 0700)
++}
++
++func downloadVerified(src, dest, want string, max int64) error {
++	if e := preparePackageDownload(src, dest); e != nil {
++		return e
++	}
++	return downloadVerifiedWith(downloadClient(), src, dest, want, max)
++}
++
++func (m *Manager) downloadContext() context.Context {
++	m.mu.Lock()
++	defer m.mu.Unlock()
++	if m.jobContext != nil {
++		return m.jobContext
++	}
++	return context.Background()
++}
++
++func (m *Manager) downloadProgress(label string) func(int64, int64) {
++	ctx := m.downloadContext()
++	return func(received, total int64) {
++		if ctx.Err() != nil {
++			return
++		}
++		const mib = 1024 * 1024
++		if total > 0 {
++			m.progress(fmt.Sprintf("Downloading %s: %.1f / %.1f MiB (%d%%). Verification follows before use.", label, float64(received)/mib, float64(total)/mib, received*100/total))
++		} else {
++			m.progress(fmt.Sprintf("Downloading %s: %.1f MiB received (total size not supplied). Verification follows before use.", label, float64(received)/mib))
++		}
++	}
++}
++
++func (m *Manager) downloadError(ctx context.Context, err error) error {
++	if errors.Is(ctx.Err(), context.Canceled) {
++		return errOperationCanceled
++	}
++	return fmt.Errorf("download stopped: %w. Your prepared game is unchanged. Check your connection and retry, or import a previously downloaded supported package", err)
++}
++
++func (m *Manager) downloadPackage(label, src, dest, want string, max int64) error {
++	if e := m.checkCancellation(); e != nil {
++		return e
++	}
++	if e := preparePackageDownload(src, dest); e != nil {
++		return e
++	}
++	ctx := m.downloadContext()
++	m.progress("Connecting to download " + label + "; your prepared game is unchanged…")
++	if e := downloadVerifiedWithContext(ctx, downloadClient(), src, dest, want, max, m.downloadProgress(label)); e != nil {
++		return m.downloadError(ctx, e)
++	}
++	m.progress("Download verified: " + label + ". Continuing preparation…")
++	return nil
++}
+--- /dev/null
++++ b/manager/downloads_test.go
+@@ -0,0 +1,268 @@
++package main
++
++import (
++	"bytes"
++	"context"
++	"crypto/sha256"
++	"encoding/hex"
++	"errors"
++	"io"
++	"net/http"
++	"net/http/httptest"
++	"os"
++	"path/filepath"
++	"strings"
++	"testing"
++	"time"
++)
++
++type downloadTransport func(*http.Request) (*http.Response, error)
++
++func (f downloadTransport) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
++
++type interruptedDownloadBody struct {
++	ctx     context.Context
++	started chan struct{}
++	first   bool
++}
++
++func (b *interruptedDownloadBody) Read(p []byte) (int, error) {
++	if !b.first {
++		b.first = true
++		n := copy(p, "partial")
++		return n, nil
++	}
++	close(b.started)
++	<-b.ctx.Done()
++	return 0, b.ctx.Err()
++}
++func (b *interruptedDownloadBody) Close() error { return nil }
++
++func expectUnchangedDownload(t *testing.T, path string) {
++	t.Helper()
++	b, e := os.ReadFile(path)
++	if e != nil || string(b) != "previous verified package" {
++		t.Fatalf("existing cache changed: %q %v", b, e)
++	}
++	entries, e := os.ReadDir(filepath.Dir(path))
++	if e != nil {
++		t.Fatal(e)
++	}
++	for _, entry := range entries {
++		if strings.HasPrefix(entry.Name(), ".download-") {
++			t.Fatalf("partial download retained: %s", entry.Name())
++		}
++	}
++}
++
++func TestCancelDownloadDuringHeadersAndBodyThenRetry(t *testing.T) {
++	for _, body := range []bool{false, true} {
++		t.Run(map[bool]string{false: "headers", true: "body"}[body], func(t *testing.T) {
++			m, e := newManager(t.TempDir(), t.TempDir())
++			if e != nil {
++				t.Fatal(e)
++			}
++			path := filepath.Join(m.Data, "cache", "package.zip")
++			if e = os.WriteFile(path, []byte("previous verified package"), 0600); e != nil {
++				t.Fatal(e)
++			}
++			started := make(chan struct{})
++			var oldProgress func(int64, int64)
++			client := &http.Client{Transport: downloadTransport(func(r *http.Request) (*http.Response, error) {
++				if body {
++					return &http.Response{StatusCode: 200, ContentLength: 100, Body: &interruptedDownloadBody{ctx: r.Context(), started: started}}, nil
++				}
++				close(started)
++				<-r.Context().Done()
++				return nil, r.Context().Err()
++			})}
++			if e = m.startJob("prepare-play", func() (any, error) {
++				ctx := m.downloadContext()
++				oldProgress = m.downloadProgress("old package")
++				e := downloadVerifiedWithContext(ctx, client, "https://github.com/test", path, strings.Repeat("0", 64), 1024, oldProgress)
++				if e != nil {
++					return nil, m.downloadError(ctx, e)
++				}
++				return map[string]bool{"ready_for_launch": true}, nil
++			}); e != nil {
++				t.Fatal(e)
++			}
++			select {
++			case <-started:
++			case <-time.After(3 * time.Second):
++				t.Fatal("request did not start")
++			}
++			if e = m.cancelOperation(); e != nil {
++				t.Fatal(e)
++			}
++			j := awaitGUIJob(t, m)
++			if j.Error != "" || j.Result != nil || !strings.Contains(j.Message, "Canceled safely") {
++				t.Fatalf("cancel became success/error: %+v", j)
++			}
++			expectUnchangedDownload(t, path)
++			m.mu.Lock()
++			oldMessage := m.job.Message
++			m.mu.Unlock()
++			m.downloadProgress("stale package")(99, 100)
++			m.mu.Lock()
++			unchanged := m.job.Message == oldMessage
++			m.mu.Unlock()
++			if !unchanged {
++				t.Fatal("late canceled progress replaced cancellation")
++			}
++			data := []byte("complete verified package")
++			h := sha256.Sum256(data)
++			client = &http.Client{Transport: downloadTransport(func(r *http.Request) (*http.Response, error) {
++				if r.Context().Err() != nil {
++					t.Error("retry inherited canceled context")
++				}
++				return &http.Response{StatusCode: 200, ContentLength: int64(len(data)), Body: io.NopCloser(bytes.NewReader(data))}, nil
++			})}
++			if e = m.startJob("runtime-install", func() (any, error) {
++				m.progress("Retry has its own progress")
++				oldProgress(99, 100)
++				m.mu.Lock()
++				stale := m.job.Message != "Retry has its own progress"
++				m.mu.Unlock()
++				if stale {
++					return nil, errors.New("old canceled progress replaced retry")
++				}
++				return nil, downloadVerifiedWithContext(m.downloadContext(), client, "https://github.com/test", path, hex.EncodeToString(h[:]), 1024, m.downloadProgress("retry package"))
++			}); e != nil {
++				t.Fatal(e)
++			}
++			j = awaitGUIJob(t, m)
++			if j.Error != "" || j.CancelRequested || j.Busy {
++				t.Fatalf("retry failed: %+v", j)
++			}
++			b, e := os.ReadFile(path)
++			if e != nil || !bytes.Equal(b, data) {
++				t.Fatal("retry did not install verified cache", e)
++			}
++		})
++	}
++}
++
++func TestDownloadFailureCleanupAndVerification(t *testing.T) {
++	for _, tc := range []struct {
++		name        string
++		length, max int64
++		data        string
++		status      int
++		hash        string
++	}{
++		{"checksum", 3, 10, "bad", 200, strings.Repeat("0", 64)},
++		{"truncated", 10, 20, "short", 200, ""},
++		{"unknown-size-overflow", -1, 3, "oversized", 200, ""},
++		{"declared-overflow", 50, 10, "", 200, ""},
++		{"HTTP-failure", 0, 10, "", 503, ""},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			path := filepath.Join(t.TempDir(), "cache.zip")
++			os.WriteFile(path, []byte("previous verified package"), 0600)
++			client := &http.Client{Transport: downloadTransport(func(*http.Request) (*http.Response, error) {
++				return &http.Response{StatusCode: tc.status, ContentLength: tc.length, Body: io.NopCloser(strings.NewReader(tc.data))}, nil
++			})}
++			if e := downloadVerifiedWithContext(context.Background(), client, "https://github.com/test", path, tc.hash, tc.max, nil); e == nil {
++				t.Fatal("invalid download accepted")
++			}
++			expectUnchangedDownload(t, path)
++		})
++	}
++}
++
++func TestDownloadProgressIsBoundedAndHonest(t *testing.T) {
++	m, _ := newManager(t.TempDir(), t.TempDir())
++	m.downloadProgress("DOSBox")(1<<20, 4<<20)
++	if !strings.Contains(m.job.Message, "25%") || !strings.Contains(m.job.Message, "Verification follows") {
++		t.Fatal(m.job.Message)
++	}
++	m.downloadProgress("DOSBox")(1<<20, -1)
++	if strings.Contains(m.job.Message, "%") || !strings.Contains(m.job.Message, "total size not supplied") {
++		t.Fatal(m.job.Message)
++	}
++	calls := 0
++	meter := downloadMeter{report: func(int64, int64) { calls++ }, last: time.Now()}
++	for i := 0; i < 100; i++ {
++		meter.Write([]byte("x"))
++	}
++	if calls != 0 {
++		t.Fatal("per-chunk progress not throttled", calls)
++	}
++	meter.last = time.Now().Add(-time.Second)
++	meter.Write([]byte("x"))
++	if calls != 1 || meter.received != 101 {
++		t.Fatal(calls, meter.received)
++	}
++}
++
++func TestOfficialPatchDownloadCanceledBeforeImport(t *testing.T) {
++	m, _ := newManager(t.TempDir(), t.TempDir())
++	started := make(chan struct{})
++	client := &http.Client{Transport: downloadTransport(func(r *http.Request) (*http.Response, error) {
++		close(started)
++		<-r.Context().Done()
++		return nil, r.Context().Err()
++	})}
++	if e := m.startJob("prepare-play", func() (any, error) { return nil, m.downloadOfficial131(client, "https://moo2mod.com/test") }); e != nil {
++		t.Fatal(e)
++	}
++	select {
++	case <-started:
++	case <-time.After(3 * time.Second):
++		t.Fatal("request did not start")
++	}
++	if e := m.cancelOperation(); e != nil {
++		t.Fatal(e)
++	}
++	j := awaitGUIJob(t, m)
++	if j.Error != "" || j.Result != nil || !strings.Contains(j.Message, "Canceled safely") {
++		t.Fatal(j)
++	}
++	if _, e := os.Stat(filepath.Join(m.Data, "cache", "official-1.31.zip")); !errors.Is(e, os.ErrNotExist) {
++		t.Fatal("canceled patch imported", e)
++	}
++}
++
++// Exercise the real Go HTTP transport too: a transfer that sends no more bytes
++// must be interruptible, not just a test body that cooperatively checks a flag.
++func TestDownloadRealTransportCancellation(t *testing.T) {
++	for _, headersSent := range []bool{false, true} {
++		t.Run(map[bool]string{false: "waiting-for-headers", true: "waiting-for-body"}[headersSent], func(t *testing.T) {
++			started := make(chan struct{})
++			srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++				if headersSent {
++					w.Header().Set("Content-Length", "100")
++					_, _ = w.Write([]byte("partial"))
++					w.(http.Flusher).Flush()
++				}
++				close(started)
++				<-r.Context().Done()
++			}))
++			defer srv.Close()
++			ctx, cancel := context.WithCancel(context.Background())
++			defer cancel()
++			path := filepath.Join(t.TempDir(), "cache.zip")
++			if e := os.WriteFile(path, []byte("previous verified package"), 0600); e != nil {
++				t.Fatal(e)
++			}
++			finished := make(chan error, 1)
++			go func() { finished <- downloadVerifiedWithContext(ctx, srv.Client(), srv.URL, path, "", 1024, nil) }()
++			select {
++			case <-started:
++			case <-time.After(3 * time.Second):
++				t.Fatal("HTTP request did not start")
++			}
++			cancel()
++			select {
++			case e := <-finished:
++				if !errors.Is(e, context.Canceled) {
++					t.Fatalf("request not canceled: %v", e)
++				}
++			case <-time.After(3 * time.Second):
++				t.Fatal("Cancel waited for the network to finish")
++			}
++			expectUnchangedDownload(t, path)
++		})
++	}
++}
+--- a/manager/manager.go
++++ b/manager/manager.go
+@@ -1,6 +1,7 @@
+ package main
+ 
+ import (
++	"context"
+ 	"crypto/sha256"
+ 	"encoding/hex"
+ 	"encoding/json"
+@@ -66,6 +67,8 @@
+ 	mu               sync.Mutex
+ 	op               sync.Mutex
+ 	job              Job
++	jobContext       context.Context
++	cancelJob        context.CancelFunc
+ 	running          *exec.Cmd
+ 	runningProfile   string
+ 	runningKind      string
+@@ -120,7 +123,8 @@
+ 		m.mu.Unlock()
+ 		return errors.New("another operation or game is running; finish it first")
+ 	}
+-	m.job = Job{Busy: true, Kind: kind, Message: "Starting " + kind, Cancelable: kind == "prepare-play" || kind == "prepare" || kind == "runtime-install" || kind == "runtime-import"}
++	m.jobContext, m.cancelJob = context.WithCancel(context.Background())
++	m.job = Job{Busy: true, Kind: kind, Message: "Starting " + kind, Cancelable: kind == "prepare-play" || kind == "prepare" || kind == "runtime-install" || kind == "runtime-import" || kind == "patch-refresh"}
+ 	m.mu.Unlock()
+ 	go func() {
+ 		m.op.Lock()
+@@ -128,6 +132,9 @@
+ 		r, e := fn()
+ 		m.mu.Lock()
+ 		defer m.mu.Unlock()
++		m.cancelJob()
++		m.cancelJob = nil
++		m.jobContext = nil
+ 		m.job.Busy = false
+ 		m.job.Cancelable = false
+ 		m.job.Result = r
+--- a/manager/model.go
++++ b/manager/model.go
+@@ -35,16 +35,17 @@
+ 	Source       string   `json:"source"`
+ }
+ type Profile struct {
+-	ID             string   `json:"id"`
+-	Name           string   `json:"name"`
+-	Engine         string   `json:"engine"`
+-	Core           string   `json:"core"`
+-	Mods           []string `json:"mods"`
+-	Fullscreen     bool     `json:"fullscreen"`
+-	Role           string   `json:"role"`
+-	NetworkService string   `json:"network_service,omitempty"`
+-	Host           string   `json:"host"`
+-	Port           int      `json:"port"`
++	ID             string               `json:"id"`
++	Name           string               `json:"name"`
++	Engine         string               `json:"engine"`
++	Core           string               `json:"core"`
++	Mods           []string             `json:"mods"`
++	Fullscreen     bool                 `json:"fullscreen"`
++	Presentation   PresentationSettings `json:"presentation,omitempty"`
++	Role           string               `json:"role"`
++	NetworkService string               `json:"network_service,omitempty"`
++	Host           string               `json:"host"`
++	Port           int                  `json:"port"`
+ }
+ type Resolution struct {
+ 	Requested   Profile     `json:"profile"`
+@@ -123,6 +124,9 @@
+ 	return out
+ }
+ func validateProfile(p Profile) error {
++	if e := validatePresentation(p.Presentation); e != nil {
++		return e
++	}
+ 	if !idPattern.MatchString(p.ID) {
+ 		return errors.New("profile ID must be 1–40 lowercase letters, digits, underscores or hyphens")
+ 	}
+--- a/manager/patch_lineage.go
++++ b/manager/patch_lineage.go
+@@ -8,7 +8,6 @@
+ 	"encoding/json"
+ 	"errors"
+ 	"fmt"
+-	"io"
+ 	"net/http"
+ 	"os"
+ 	"path/filepath"
+@@ -173,36 +172,17 @@
+ 	return m.downloadOfficial131(downloadClient(), Official131URL)
+ }
+ func (m *Manager) downloadOfficial131(client *http.Client, url string) error {
+-	resp, e := client.Get(url)
+-	if e != nil {
+-		return fmt.Errorf("download official 1.31: %w; alternatively import the original 1.31 patch ZIP in Packages", e)
+-	}
+-	defer resp.Body.Close()
+-	if resp.StatusCode != 200 {
+-		return fmt.Errorf("official 1.31 HTTP %d", resp.StatusCode)
+-	}
+-	const max = 16 << 20
+-	if resp.ContentLength > max {
+-		return errors.New("official update exceeds size limit")
+-	}
+-	f, e := os.CreateTemp(filepath.Join(m.Data, "cache"), ".official-download-")
+-	if e != nil {
++	ctx := m.downloadContext()
++	downloaded, e := downloadTemporary(ctx, client, url, filepath.Join(m.Data, "cache"), 16<<20, m.downloadProgress("Official DOS 1.31 patch"))
++	if e != nil {
++		return m.downloadError(ctx, e)
++	}
++	defer os.Remove(downloaded.path)
++	if e = m.checkCancellation(); e != nil {
+ 		return e
+ 	}
+-	name := f.Name()
+-	defer os.Remove(name)
+-	n, e := io.Copy(f, io.LimitReader(resp.Body, max+1))
+-	ce := f.Close()
+-	if e != nil {
+-		return e
+-	}
+-	if ce != nil {
+-		return ce
+-	}
+-	if n > max || resp.ContentLength >= 0 && n != resp.ContentLength {
+-		return errors.New("truncated/oversized official update")
+-	}
+-	_, e = m.importOfficial131(name)
++	m.progress("Verifying official DOS 1.31 patch files; the existing prepared game is unchanged…")
++	_, e = m.importOfficial131(downloaded.path)
+ 	return e
+ }
+ func engineRank(v string) int {
+--- /dev/null
++++ b/manager/presentation_settings.go
+@@ -0,0 +1,59 @@
++package main
++
++import (
++	"errors"
++	"strings"
++)
++
++// Presentation preferences never change game rules, emulated sound hardware,
++// CPU timing or compatibility fingerprints. Empty values preserve 0.5.0 defaults.
++type PresentationSettings struct {
++	WindowSize    string `json:"window_size,omitempty"`
++	MuteAudio     bool   `json:"mute_audio,omitempty"`
++	MuteInactive  bool   `json:"mute_inactive,omitempty"`
++	PauseInactive bool   `json:"pause_inactive,omitempty"`
++}
++
++func validatePresentation(s PresentationSettings) error {
++	switch s.WindowSize {
++	case "", "800x600", "1024x768", "1280x960", "small", "medium", "large":
++		return nil
++	default:
++		return errors.New("choose one of the supported starting window sizes")
++	}
++}
++
++func presentationBaseConfig(p Profile) string {
++	cfg := harnessBaseConfig()
++	if p.Presentation.WindowSize != "" && p.Presentation.WindowSize != "800x600" {
++		cfg = strings.Replace(cfg, "window_size = 800x600", "window_size = "+p.Presentation.WindowSize, 1)
++	}
++	if p.Presentation.MuteInactive {
++		cfg = strings.Replace(cfg, "mute_when_inactive = off", "mute_when_inactive = on", 1)
++	}
++	// Keep network sessions alive even when the player switches to the launcher.
++	if p.Presentation.PauseInactive && p.Role == "standalone" {
++		cfg = strings.Replace(cfg, "pause_when_inactive = off", "pause_when_inactive = on", 1)
++	}
++	if p.Presentation.MuteAudio {
++		cfg += "\n[mixer]\nnosound = on\n"
++	}
++	return cfg
++}
++
++// Save only presentation fields. Editing settings cannot accidentally save an
++// unsaved engine/mod/network change or alter prepared files and personal saves.
++func (m *Manager) savePresentation(id string, fullscreen bool, settings PresentationSettings) (Profile, error) {
++	if e := validatePresentation(settings); e != nil {
++		return Profile{}, e
++	}
++	p, e := m.loadProfile(id)
++	if e != nil {
++		return Profile{}, e
++	}
++	p.Fullscreen, p.Presentation = fullscreen, settings
++	if e = m.saveProfile(p); e != nil {
++		return Profile{}, e
++	}
++	return p, nil
++}
+--- /dev/null
++++ b/manager/presentation_settings_test.go
+@@ -0,0 +1,220 @@
++package main
++
++import (
++	"bytes"
++	"encoding/json"
++	"os"
++	"path/filepath"
++	"reflect"
++	"strings"
++	"testing"
++)
++
++func TestPresentationLegacyDefaultsAndRuntimeWiring(t *testing.T) {
++	p := validProfile()
++	b, e := json.Marshal(p)
++	if e != nil {
++		t.Fatal(e)
++	}
++	var old map[string]any
++	if e = json.Unmarshal(b, &old); e != nil {
++		t.Fatal(e)
++	}
++	delete(old, "presentation")
++	b, _ = json.Marshal(old)
++	var loaded Profile
++	if e = json.Unmarshal(b, &loaded); e != nil {
++		t.Fatal(e)
++	}
++	cfg, e := dosboxConfig(t.TempDir(), loaded)
++	if e != nil {
++		t.Fatal(e)
++	}
++	if cfg != harnessBaseConfig() {
++		t.Fatal("old profile defaults changed the certified harness configuration")
++	}
++	before, e := resolve(loaded)
++	if e != nil {
++		t.Fatal(e)
++	}
++	loaded.Fullscreen = true
++	loaded.Presentation = PresentationSettings{WindowSize: "1024x768", MuteAudio: true, MuteInactive: true, PauseInactive: true}
++	cfg, e = dosboxConfig(t.TempDir(), loaded)
++	if e != nil {
++		t.Fatal(e)
++	}
++	for _, line := range []string{"window_size = 1024x768", "mute_when_inactive = on", "pause_when_inactive = on", "[mixer]\nnosound = on"} {
++		if !strings.Contains(cfg, line) {
++			t.Fatalf("missing runtime setting %q", line)
++		}
++	}
++	after, e := resolve(loaded)
++	if e != nil {
++		t.Fatal(e)
++	}
++	if before.Fingerprint != after.Fingerprint || before.Config != after.Config {
++		t.Fatal("presentation settings changed game rules or compatibility")
++	}
++	args := dosboxArguments("run.conf", "game", loaded)
++	if !strings.Contains(strings.Join(args, " "), "--fullscreen") {
++		t.Fatal("fullscreen not passed to runtime")
++	}
++	for _, role := range []string{"host", "join"} {
++		loaded.Role = role
++		loaded.Host = "127.0.0.1"
++		loaded.Port = 21300
++		cfg, e = dosboxConfig(t.TempDir(), loaded)
++		if e != nil {
++			t.Fatal(e)
++		}
++		if !strings.Contains(cfg, "pause_when_inactive = off") || strings.Contains(cfg, "pause_when_inactive = on") {
++			t.Fatal("network game must not pause when launcher receives focus")
++		}
++		if !loaded.Presentation.PauseInactive {
++			t.Fatal("network role erased saved single-player preference")
++		}
++	}
++}
++
++func TestPresentationEnumValidation(t *testing.T) {
++	for _, size := range []string{"", "800x600", "1024x768", "1280x960", "small", "medium", "large"} {
++		p := validProfile()
++		p.Presentation.WindowSize = size
++		if _, e := resolve(p); e != nil {
++			t.Fatalf("%q: %v", size, e)
++		}
++	}
++	for _, size := range []string{"0x0", "999999x999999", "900x700", "800x600\n[autoexec]\nexit", "LARGE", " auto ", "../../x"} {
++		p := validProfile()
++		p.Presentation.WindowSize = size
++		if _, e := resolve(p); e == nil {
++			t.Fatalf("accepted %q", size)
++		}
++		if _, e := dosboxConfig(t.TempDir(), p); e == nil {
++			t.Fatalf("runtime accepted %q", size)
++		}
++	}
++}
++
++func TestPresentationPersistenceIsScopedAndSurvivesRestart(t *testing.T) {
++	s := testServer(t)
++	m := s.manager
++	p, e := m.loadProfile("community")
++	if e != nil {
++		t.Fatal(e)
++	}
++	otherPath := filepath.Join(m.Data, "profiles", "baseline.json")
++	otherBefore, e := os.ReadFile(otherPath)
++	if e != nil {
++		t.Fatal(e)
++	}
++	prefs := PresentationSettings{WindowSize: "large", MuteAudio: true, MuteInactive: true, PauseInactive: true}
++	saved, e := m.savePresentation(p.ID, true, prefs)
++	if e != nil {
++		t.Fatal(e)
++	}
++	expected := p
++	expected.Fullscreen = true
++	expected.Presentation = prefs
++	if !reflect.DeepEqual(saved, expected) {
++		t.Fatal("presentation save changed unrelated profile fields", saved, expected)
++	}
++	restarted, e := newManager(m.Root, m.Data)
++	if e != nil {
++		t.Fatal(e)
++	}
++	got, e := restarted.loadProfile(p.ID)
++	if e != nil {
++		t.Fatal(e)
++	}
++	if !reflect.DeepEqual(got, expected) {
++		t.Fatal("preferences did not survive reopen")
++	}
++	if restarted.selectedProfileID() != p.ID {
++		t.Fatal("saved profile selection did not survive reopen")
++	}
++	otherAfter, _ := os.ReadFile(otherPath)
++	if !bytes.Equal(otherBefore, otherAfter) {
++		t.Fatal("unrelated legacy profile changed")
++	}
++	entries, e := os.ReadDir(filepath.Join(m.Data, "environments"))
++	if e != nil || len(entries) != 0 {
++		t.Fatal("settings save prepared or touched game generations", e)
++	}
++	before, _ := os.ReadFile(filepath.Join(m.Data, "profiles", p.ID+".json"))
++	if _, e = m.savePresentation(p.ID, false, PresentationSettings{WindowSize: "invalid"}); e == nil {
++		t.Fatal("invalid setting accepted")
++	}
++	after, _ := os.ReadFile(filepath.Join(m.Data, "profiles", p.ID+".json"))
++	if !bytes.Equal(before, after) {
++		t.Fatal("invalid save changed profile")
++	}
++	if _, e = m.savePresentation("../escape", false, PresentationSettings{}); e == nil {
++		t.Fatal("path traversal accepted")
++	}
++	if _, e = m.savePresentation("missing", false, PresentationSettings{}); e == nil {
++		t.Fatal("missing profile created implicitly")
++	}
++}
++
++func TestPresentationSaveFailureReported(t *testing.T) {
++	s := testServer(t)
++	m := s.manager
++	if e := os.Mkdir(filepath.Join(m.Data, "ui-selection.json"), 0700); e != nil {
++		t.Fatal(e)
++	}
++	if _, e := m.savePresentation("community", true, PresentationSettings{WindowSize: "small"}); e == nil {
++		t.Fatal("selection persistence failure hidden")
++	}
++	if _, e := m.loadProfile("community"); e != nil {
++		t.Fatal(e)
++	}
++	if e := os.Remove(filepath.Join(m.Data, "ui-selection.json")); e != nil {
++		t.Fatal(e)
++	}
++	if _, e := m.savePresentation("community", true, PresentationSettings{WindowSize: "small"}); e != nil {
++		t.Fatal("retry failed", e)
++	}
++}
++
++func TestPresentationAPIValidationAndAuthentication(t *testing.T) {
++	s := testServer(t)
++	body := `{"action":"presentation-save","id":"community","fullscreen":true,"presentation":{"window_size":"medium","mute_audio":true}}`
++	for _, tc := range []struct {
++		auth, origin string
++		code         int
++	}{{"", "", 401}, {"Bearer testtoken", "https://evil.test", 403}} {
++		w := req(s, "POST", "/api/action", body, tc.auth, tc.origin, s.host)
++		if w.Code != tc.code {
++			t.Fatal(w.Code)
++		}
++	}
++	for _, bad := range []string{
++		`{"action":"presentation-save","id":"community","presentation":{"command":"exit"}}`,
++		`{"action":"presentation-save","id":"community","presentation":{"mute_audio":"yes"}}`,
++		`{"action":"presentation-save","id":"community","presentation":{"window_size":123}}`,
++	} {
++		w := req(s, "POST", "/api/action", bad, "Bearer testtoken", "", s.host)
++		if w.Code != 400 {
++			t.Fatal(w.Code, w.Body.String())
++		}
++	}
++	w := req(s, "POST", "/api/action", `{"action":"presentation-save","id":"community","presentation":{"window_size":"99999x1"}}`, "Bearer testtoken", "", s.host)
++	if w.Code != 202 {
++		t.Fatal(w.Code, w.Body.String())
++	}
++	if j := awaitGUIJob(t, s.manager); j.Error == "" {
++		t.Fatal("bad enum accepted")
++	}
++	w = req(s, "POST", "/api/action", body, "Bearer testtoken", "", s.host)
++	if w.Code != 202 {
++		t.Fatal(w.Code, w.Body.String())
++	}
++	if j := awaitGUIJob(t, s.manager); j.Error != "" {
++		t.Fatal(j.Error)
++	}
++	p, e := s.manager.loadProfile("community")
++	if e != nil || !p.Fullscreen || p.Presentation.WindowSize != "medium" || !p.Presentation.MuteAudio {
++		t.Fatal(p, e)
++	}
++}
+--- a/manager/runtime.go
++++ b/manager/runtime.go
+@@ -1,15 +1,12 @@
+ package main
+ 
+ import (
+-	"crypto/sha256"
+-	"encoding/hex"
+ 	"errors"
+ 	"fmt"
+ 	"io"
+ 	"moo2manager/shared/desktop"
+ 	"net"
+ 	"net/http"
+-	"net/url"
+ 	"os"
+ 	"os/exec"
+ 	"path/filepath"
+@@ -65,45 +62,6 @@
+ func trustedDownloadHost(h string) bool {
+ 	return h == "github.com" || h == "release-assets.githubusercontent.com" || h == "objects.githubusercontent.com" || h == "moo2mod.com" || h == "www.moo2mod.com"
+ }
+-func downloadVerifiedWith(client *http.Client, src, dest, want string, max int64) error {
+-	// Caller controls transport for tests; production restricts every HTTPS redirect.
+-	resp, e := client.Get(src)
+-	if e != nil {
+-		return e
+-	}
+-	defer resp.Body.Close()
+-	if resp.StatusCode != 200 {
+-		return fmt.Errorf("download HTTP %d", resp.StatusCode)
+-	}
+-	if resp.ContentLength > max {
+-		return errors.New("download exceeds size limit")
+-	}
+-	f, e := os.CreateTemp(filepath.Dir(dest), ".download-")
+-	if e != nil {
+-		return e
+-	}
+-	tmp := f.Name()
+-	defer os.Remove(tmp)
+-	h := sha256.New()
+-	n, e := io.Copy(io.MultiWriter(f, h), io.LimitReader(resp.Body, max+1))
+-	ce := f.Close()
+-	if e != nil {
+-		return e
+-	}
+-	if ce != nil {
+-		return ce
+-	}
+-	if n > max {
+-		return errors.New("download exceeded limit")
+-	}
+-	if resp.ContentLength >= 0 && n != resp.ContentLength {
+-		return errors.New("truncated download")
+-	}
+-	if hex.EncodeToString(h.Sum(nil)) != want {
+-		return errors.New("download checksum mismatch; cached package was not replaced")
+-	}
+-	return replaceFile(tmp, dest)
+-}
+ func downloadClient() *http.Client {
+ 	return &http.Client{Timeout: 5 * time.Minute, CheckRedirect: func(req *http.Request, via []*http.Request) error {
+ 		if len(via) > 8 {
+@@ -114,19 +72,6 @@
+ 		}
+ 		return nil
+ 	}}
+-}
+-func downloadVerified(src, dest, want string, max int64) error {
+-	u, e := url.Parse(src)
+-	if e != nil || u.Scheme != "https" || !trustedDownloadHost(u.Hostname()) {
+-		return errors.New("only approved HTTPS distribution hosts may supply packages")
+-	}
+-	if e = noSymlinkAncestors(dest); e != nil {
+-		return e
+-	}
+-	if e = os.MkdirAll(filepath.Dir(dest), 0700); e != nil {
+-		return e
+-	}
+-	return downloadVerifiedWith(downloadClient(), src, dest, want, max)
+ }
+ func (m *Manager) runtimeCandidates() []string {
+ 	out := []string{}
+@@ -211,7 +156,7 @@
+ 	archive := filepath.Join(m.Data, "cache", "dosbox-"+runtime.GOOS+"-"+r.Version+"."+r.Format)
+ 	if e := requireHash(archive, r.SHA256); e != nil {
+ 		m.progress("Downloading official DOSBox Staging; verifying the published SHA-256 before extraction…")
+-		if e = downloadVerified(r.URL, archive, r.SHA256, 512*1024*1024); e != nil {
++		if e = m.downloadPackage("DOSBox Staging", r.URL, archive, r.SHA256, 512*1024*1024); e != nil {
+ 			return nil, e
+ 		}
+ 	}
+@@ -289,9 +234,10 @@
+ 			return nil, e
+ 		}
+ 	}
+-	if e = m.checkCancellation(); e != nil {
+-		return nil, e
+-	}
++	if e = m.beginRuntimeCommit(); e != nil {
++		return nil, e
++	}
++	defer m.endRuntimeCommit()
+ 	rel, _ := filepath.Rel(extracted, exe)
+ 	dest := filepath.Join(parent, "staging-"+r.Version+"-"+fmt.Sprint(time.Now().UnixNano()))
+ 	if e = os.Rename(extracted, dest); e != nil {
+@@ -320,7 +266,7 @@
+ 	if strings.ContainsAny(game, "\"\r\n\x00") {
+ 		return "", errors.New("game path cannot be represented safely")
+ 	}
+-	base := harnessBaseConfig()
++	base := presentationBaseConfig(p)
+ 	if p.Role == "standalone" {
+ 		return base, nil
+ 	}
+@@ -426,7 +372,9 @@
+ 		logfile.Close()
+ 		return nil, e
+ 	}
+-	if e = m.rememberProfile(p.ID); e != nil {
++	// Play remembers display/audio preferences without changing the requested
++	// rules, existing generations or the original owned source.
++	if _, e = m.savePresentation(p.ID, p.Fullscreen, p.Presentation); e != nil {
+ 		logfile.Close()
+ 		return nil, e
+ 	}
+@@ -480,7 +428,7 @@
+ func (m *Manager) refreshPatch() (any, error) {
+ 	dst := filepath.Join(m.Data, "cache", "patch-1.50.26.zip")
+ 	m.progress("Refreshing the supported community patch; rejecting bytes that differ from the pinned build…")
+-	if e := downloadVerified("https://moo2mod.com/patch/MOO2-1.50.26.zip", dst, PatchHash, 64*1024*1024); e != nil {
++	if e := m.downloadPackage("Community patch 1.50.26", "https://moo2mod.com/patch/MOO2-1.50.26.zip", dst, PatchHash, 64*1024*1024); e != nil {
+ 		return nil, e
+ 	}
+ 	return map[string]string{"cached": "1.50.26", "sha256": PatchHash, "activation": "Existing environments unchanged. Use Prepare/Repair to reconstruct."}, nil
+--- a/manager/server.go
++++ b/manager/server.go
+@@ -20,15 +20,17 @@
+ )
+ 
+ type actionRequest struct {
+-	Action      string  `json:"action"`
+-	Profile     Profile `json:"profile"`
+-	ID          string  `json:"id"`
+-	Generation  string  `json:"generation"`
+-	RuntimePath string  `json:"runtime_path"`
+-	SourcePath  string  `json:"source_path"`
+-	PayloadKind string  `json:"payload_kind"`
+-	OfflinePath string  `json:"offline_path"`
+-	PickerKind  string  `json:"picker_kind"`
++	Action       string               `json:"action"`
++	Profile      Profile              `json:"profile"`
++	ID           string               `json:"id"`
++	Generation   string               `json:"generation"`
++	RuntimePath  string               `json:"runtime_path"`
++	SourcePath   string               `json:"source_path"`
++	PayloadKind  string               `json:"payload_kind"`
++	OfflinePath  string               `json:"offline_path"`
++	PickerKind   string               `json:"picker_kind"`
++	Fullscreen   bool                 `json:"fullscreen"`
++	Presentation PresentationSettings `json:"presentation"`
+ }
+ type localServer struct {
+ 	manager   *Manager
+@@ -236,6 +238,8 @@
+ 		work = s.manager.recoverPortableBaseline
+ 	case "prepare":
+ 		work = func() (any, error) { return s.manager.build(a.Profile) }
++	case "presentation-save":
++		work = func() (any, error) { return s.manager.savePresentation(a.ID, a.Fullscreen, a.Presentation) }
+ 	case "save":
+ 		work = func() (any, error) { e := s.manager.saveProfile(a.Profile); return a.Profile, e }
+ 	case "verify":
+--- a/manager/shared/buildconfig/config.go
++++ b/manager/shared/buildconfig/config.go
+@@ -9,7 +9,7 @@
+ // This default refuses all network updates until a maintainer provisions trust.
+ var Encoded string
+ 
+-const Version = "0.5.0"
++const Version = "0.5.1"
+ 
+ func Trust() (distribution.Trust, error) {
+ 	t := distribution.Trust{Schema: 1, Feed: "moo2-sgc", Channel: "stable", Keys: map[string]string{}, Endpoints: []distribution.Endpoint{}, AllowedHosts: []string{}}
+--- a/manager/web/app.js
++++ b/manager/web/app.js
+@@ -1,8 +1,10 @@
+ 'use strict';
+ const $=id=>document.getElementById(id);
+ const fragment=location.hash.slice(1);
+-if(fragment){sessionStorage.setItem('moo2-token',fragment);history.replaceState(null,'',location.pathname);}
+-const auth=sessionStorage.getItem('moo2-token')||'';
++let auth=fragment,tokenStored=false;
++if(fragment){try{sessionStorage.setItem('moo2-token',fragment);tokenStored=true;}catch(_){/* Keep the fragment for reload when storage is blocked. */}}
++else{try{auth=sessionStorage.getItem('moo2-token')||'';}catch(_){auth='';}}
++if(fragment&&tokenStored){try{history.replaceState(null,'',location.pathname);}catch(_){/* The authenticated page can still work without history access. */}}
+ for(const b of document.querySelectorAll('button'))b.disabled=true;
+ let state=null,currentID='baseline',lastResult='',lastJob='',first=true,offline=false;
+ let selectionQueue=Promise.resolve(),previewRevision=0,pendingDuplicate=null;
+@@ -10,7 +12,20 @@
+ function error(e){$('error').textContent=String(e.message||e);$('error').classList.remove('hidden');}
+ function clearError(){$('error').classList.add('hidden');}
+ async function api(path,body){const r=await fetch('/api/'+path,{method:body===undefined?'GET':'POST',headers:{Authorization:'Bearer '+auth,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body)});const v=await r.json();if(!r.ok)throw Error(v.error||r.statusText);return v;}
+-function selected(){return {id:currentID,name:$('name').value.trim(),engine:$('engine').value,core:$('engine').value!=='1.50.26'?'':$('core').value,mods:$('engine').value!=='1.50.26'?[]:[...document.querySelectorAll('#mods input:checked')].map(x=>x.dataset.mod),fullscreen:$('fullscreen').checked,role:$('role').value,network_service:$('role').value==='standalone'?'none':$('network-service').value,host:$('host').value.trim(),port:Number($('port').value)};}
++function selected(){return {id:currentID,name:$('name').value.trim(),engine:$('engine').value,core:$('engine').value!=='1.50.26'?'':$('core').value,mods:$('engine').value!=='1.50.26'?[]:[...document.querySelectorAll('#mods input:checked')].map(x=>x.dataset.mod),fullscreen:$('fullscreen').checked,presentation:presentationDraft(),role:$('role').value,network_service:$('role').value==='standalone'?'none':$('network-service').value,host:$('host').value.trim(),port:Number($('port').value)};}
++function presentationDraft(){return {window_size:$('window-size').value,mute_audio:$('mute-audio').checked,mute_inactive:$('mute-inactive').checked,pause_inactive:$('pause-inactive').checked};}
++function presentationKey(fullscreen,p={}){return JSON.stringify([!!fullscreen,p.window_size||'800x600',!!p.mute_audio,!!p.mute_inactive,!!p.pause_inactive]);}
++function presentationDirty(){const p=state?.profiles.find(x=>x.id===currentID);return !!p&&presentationKey($('fullscreen').checked,presentationDraft())!==presentationKey(p.fullscreen,p.presentation);}
++function loadPresentation(p){const v=p.presentation||{};$('fullscreen').checked=!!p.fullscreen;$('window-size').value=v.window_size||'800x600';$('mute-audio').checked=!!v.mute_audio;$('mute-inactive').checked=!!v.mute_inactive;$('pause-inactive').checked=!!v.pause_inactive;}
++function cancelPresentation(){const p=state?.profiles.find(x=>x.id===currentID);if(p){loadPresentation(p);preview();}}
++function resetPresentation(){loadPresentation({fullscreen:false,presentation:{}});preview();}
++function acceptPresentationResult(job){
++ if(job.busy||job.error||!['presentation-save','save'].includes(job.kind)||!job.result?.id)return;
++ const p=state.profiles.find(x=>x.id===job.result.id);if(!p)return;
++ // A completed save can race the server's earlier profile-list snapshot.
++ // Update saved metadata only; never overwrite newer form edits or navigation.
++ p.fullscreen=!!job.result.fullscreen;p.presentation=job.result.presentation||{};
++}
+ function option(value,text){const o=document.createElement('option');o.value=value;o.textContent=text;return o;}
+ function modUI(p){
+  const core=$('core');core.replaceChildren();if(p.engine==='1.50.26'){for(const m of state.catalog.filter(m=>m.group==='Core'))core.append(option(m.id,m.name+' · '+m.version));core.value=p.core||'150';}else{core.append(option('','Not applicable — original '+p.engine+' rules'));core.value='';}core.disabled=p.engine!=='1.50.26';
+@@ -21,7 +36,7 @@
+ }
+ function updateCoreDesc(){const m=state.catalog.find(x=>x.id===$('core').value);$('core-desc').textContent=$('engine').value!=='1.50.26'?'Original executable; community rulesets are unavailable.':m?.description||'';}
+ function networkUI(){const role=$('role').value,svc=$('network-service').value;const active=role!=='standalone';$('network-service').disabled=!active;$('direct-network-fields').classList.toggle('hidden',!active||svc!=='direct');const rec=(state?.network_services||[]).find(x=>x.id===svc);$('network-service-desc').textContent=!active?'No network tunnel is configured for local play.':(rec?.description||'');if(svc==='dopefish'){$('port').value=213;$('host').value='';}if(svc==='direct'&&Number($('port').value)<1024&&role==='host')$('port').value=21300;}
+-function loadProfile(id,persist=false){const p=state.profiles.find(x=>x.id===id);if(!p)return;currentID=id;$('profiles').value=id;$('name').value=p.name;$('engine').value=p.engine;$('role').value=p.role;$('network-service').value=(['direct','dopefish'].includes(p.network_service)?p.network_service:'direct');$('port').value=p.port||21300;$('host').value=p.host||'';$('fullscreen').checked=p.fullscreen;modUI(p);renderHistory();networkUI();preview();if(persist)selectionQueue=selectionQueue.then(()=>api('selection',{id})).catch(error);}
++function loadProfile(id,persist=false){const p=state.profiles.find(x=>x.id===id);if(!p)return;currentID=id;$('profiles').value=id;$('name').value=p.name;$('engine').value=p.engine;$('role').value=p.role;$('network-service').value=(['direct','dopefish'].includes(p.network_service)?p.network_service:'direct');$('port').value=p.port||21300;$('host').value=p.host||'';loadPresentation(p);modUI(p);renderHistory();networkUI();preview();if(persist)selectionQueue=selectionQueue.then(()=>api('selection',{id})).catch(error);}
+ function renderHistory(){const s=$('history');s.replaceChildren();const entries=state.history[currentID]||[];if(!entries.length)s.append(option('','No prepared environment'));for(const h of entries){s.append(option(h.generation,h.created.slice(0,19)+' · '+h.engine+' / '+(h.core||'original')+(state.active[currentID]===h.generation?' · ACTIVE':'')));}if(state.active[currentID])s.value=state.active[currentID];}
+ function sourceChoice(){const path=$('game-source').value.trim();$('source-choice').textContent=path?'Selected: '+path:'Using the verified imported copy when available.';$('clear-source').classList.toggle('hidden',!path);updateControls();}
+ function readiness(){
+@@ -41,7 +56,7 @@
+  if(!state)return;
+  const blocked=requestPending||state.job.busy||!!state.running||offline;
+  for(const b of document.querySelectorAll('button'))b.disabled=blocked;
+- for(const id of ['profiles','name','engine','core','role','network-service','host','port','fullscreen','game-folders','game-source','runtime-select','runtime-path','payload-kind','payload-path','offline-release','history'])$(id).disabled=blocked;
++ for(const id of ['profiles','name','engine','core','role','network-service','host','port','fullscreen','window-size','mute-audio','mute-inactive','pause-inactive','game-folders','game-source','runtime-select','runtime-path','payload-kind','payload-path','offline-release','history'])$(id).disabled=blocked;
+  $('engine').disabled=blocked||!!state.portable&&currentID==='baseline';$('core').disabled=blocked||$('engine').value!=='1.50.26';$('network-service').disabled=blocked||$('role').value==='standalone';
+  for(const cb of document.querySelectorAll('#mods input'))cb.disabled=blocked||$('engine').value!=='1.50.26';
+  const portableWindows=!!state.portable&&state.platform==='windows/amd64';
+@@ -50,6 +65,10 @@
+  $('import-runtime').disabled=blocked||!$('runtime-source').value.trim();
+  $('check-dopefish').disabled=blocked||!(state.runtime_status||{}).ready;
+  $('prepare-play').disabled=blocked||!previewValid;$('prepare').disabled=blocked||!previewValid;
++ const settingsDirty=presentationDirty();$('save-presentation').disabled=blocked||!settingsDirty;$('cancel-presentation').disabled=blocked||!settingsDirty;
++ $('reset-presentation').disabled=blocked||presentationKey($('fullscreen').checked,presentationDraft())===presentationKey(false,{});
++ $('pause-inactive').disabled=blocked||$('role').value!=='standalone';
++ $('presentation-status').textContent=settingsDirty?'Unsaved changes for this profile. Save settings or Play to remember them.':'Saved for this profile. Changes apply on the next launch.';
+  const result=readiness();$('ready-status').textContent=result.message;$('ready-status').classList.toggle('needs-action',!result.ready);$('launch').disabled=blocked||!result.ready;
+  const cancelable=state.job.busy&&state.job.cancelable&&!state.job.cancel_requested;
+  $('cancel-operation').classList.toggle('hidden',!state.job.busy||!state.job.cancelable);$('cancel-operation').disabled=requestPending||!cancelable;$('cancel-operation').textContent=state.job.cancel_requested?'Stopping safely…':'Cancel preparation';
+@@ -95,6 +114,7 @@
+  $('running').textContent=state.running?(state.running_kind==='network-check'?'Diagnostic running — read CONNECT / STATUS and close its DOSBox window. No game is running.':'MOO2 process running for '+state.running+'. Close the game normally before preparing or exiting.'):state.last_exit||'';
+  const job=state.job;$('progress').textContent=job.message+(job.busy?' …':'');
+  const fingerprint=JSON.stringify([job.kind,job.busy,job.error,job.result,job.cancel_requested]);
++ acceptPresentationResult(job);
+  if(fingerprint!==lastResult){lastResult=fingerprint;if(job.result){$('result').textContent=resultObject(job.result);
+   if(job.kind==='game-detect'){const g=$('game-folders');g.replaceChildren(option('','Choose an installation or Browse above'));for(const f of job.result.folders||[])g.append(option(f,f));if(job.result.folders?.length===1){g.value=job.result.folders[0];$('game-source').value=g.value;sourceChoice();}else if(!job.result.folders?.length){$('progress').textContent='No matching installation found automatically. Use Browse game folder or Browse game ZIP.';}}
+   if(job.kind==='browse'&&!job.busy)applyPicker(job.result);
+@@ -105,7 +125,7 @@
+  completeDuplicate(job);updateControls();
+  }catch(e){connectionFailed=true;error('The local launcher could not be reached. Open the launcher file again to return. '+e.message);if(state){previewValid=false;updateControls();}}
+ }
+-$('profiles').addEventListener('change',()=>loadProfile($('profiles').value,true));
++$('profiles').addEventListener('change',()=>{if(presentationDirty()&&!confirm('Discard the unsaved display and sound changes for this profile?')){$('profiles').value=currentID;return;}loadProfile($('profiles').value,true);});
+ $('engine').addEventListener('change',()=>{const p=selected();p.mods=[];if(p.engine==='1.50.26')p.core='150';modUI(p);preview();});
+ $('name').addEventListener('input',preview);$('core').addEventListener('change',preview);$('host').addEventListener('input',preview);$('port').addEventListener('input',preview);$('role').addEventListener('change',()=>{networkUI();preview();});$('network-service').addEventListener('change',()=>{networkUI();preview();});
+ $('game-source').addEventListener('input',sourceChoice);$('clear-source').onclick=()=>{$('game-source').value='';$('game-folders').value='';sourceChoice();};
+@@ -137,3 +157,9 @@
+ $('check-dopefish').onclick=()=>{if(confirm('Open an optional connection check to moo2.thedopefish.com UDP 213? No game is mounted or launched. Read CONNECT / STATUS, then close its DOSBox window.'))action('check-dopefish');};
+ for(const kind of ['game-folder','game-zip','runtime-folder','runtime-zip','runtime-executable','offline-release'])$('browse-'+kind).onclick=()=>action('browse',{picker_kind:kind});
+ $('browse-payload').onclick=()=>action('browse',{picker_kind:'payload-archive'});
++
++$('find-after-install').onclick=()=>action('game-detect');
++for(const id of ['fullscreen','window-size','mute-audio','mute-inactive','pause-inactive'])$(id).addEventListener('change',preview);
++$('save-presentation').onclick=()=>action('presentation-save',{id:currentID,fullscreen:$('fullscreen').checked,presentation:presentationDraft()});
++$('cancel-presentation').onclick=cancelPresentation;
++$('reset-presentation').onclick=resetPresentation;
+--- a/manager/web/index.html
++++ b/manager/web/index.html
+@@ -5,6 +5,12 @@
+ <main>
+ <div class="notice"><strong>Private development candidate.</strong> No game is bundled. Windows dialogs and real gameplay still need native acceptance. PRSL, new Chat and SGC Online are not available.</div>
+ <div id="error" class="error hidden" role="alert"></div>
++<section class="panel acquisition"><div class="section-heading"><span class="step">START</span><h2>Get the game, or use a copy you own</h2></div>
++<p><strong>Master of Orion II is a commercial game.</strong> Buy or download your owned copy through its official store. This launcher does not include the game, grant ownership, sign in for you, or take your store password. It downloads the supported free patches and DOSBox separately when you prepare.</p>
++<div class="grid"><div><h3>Steam · supported English DOS source</h3><p>Open the official store, then install <strong>Master of Orion 2</strong> from your signed-in Steam Library. Use the English game files for this candidate.</p><div class="actions"><a class="button-link primary" href="https://store.steampowered.com/app/410980/Master_of_Orion_2/" target="_blank" rel="noopener noreferrer">Get MOO2 on Steam ↗</a><a class="button-link" href="https://help.steampowered.com/en/faqs/view/6F74-68BA-1B77-8727" target="_blank" rel="noopener noreferrer">Steam install help ↗</a></div></div>
++<div><h3>Already own it on GOG?</h3><p>Use GOG's official Windows download/install route, then choose the installed game folder below. This launcher does not run or unpack GOG <code>.exe</code>/<code>.bin</code> installers. GOG-specific editions are not yet validated; do not buy a new copy solely for this candidate until compatibility is confirmed.</p><div class="actions"><a class="button-link" href="https://www.gog.com/en/game/master_of_orion_1_2" target="_blank" rel="noopener noreferrer">Official GOG page ↗</a><a class="button-link" href="https://support.gog.com/hc/en-us/articles/213148105-How-do-I-download-my-purchased-items" target="_blank" rel="noopener noreferrer">GOG download help ↗</a></div></div></div>
++<div class="actions"><button id="find-after-install" class="primary">I've installed it — find my game</button></div><p class="hint">Store sign-in, purchase and installation happen in the official store/client. Return here when installation finishes. Already have a supported folder or ZIP? Skip the store and Browse below. No copying or rearranging files is required.</p>
++</section>
+ <section class="panel"><div class="section-heading"><span class="step">1</span><h2>Choose your owned game</h2></div>
+ <p>Choose an installed DOS game folder or an owned ZIP. We make a separate verified copy: no upload, renaming, moving or changes to your original Steam, GOG or portable files.</p>
+ <div class="actions"><button id="browse-game-folder" class="primary">Browse game folder…</button><button id="browse-game-zip">Browse game ZIP…</button><button id="detect-game" class="quiet">Find installed MOO2</button></div>
+@@ -21,9 +27,15 @@
+ <p id="core-desc" class="hint"></p>
+ <details id="addons"><summary>Optional community maps and add-ons <span id="mod-count" class="badge"></span></summary><p class="hint">These choices come from the verified 1.50.26 package. Required add-ons are resolved automatically; conflicts are rejected. Start a new game to test changed rules: loaded saves restore saved gameplay configuration.</p><div id="mods"></div></details>
+ <div class="actions"><button id="prepare-play" class="primary large">Prepare selected game</button><button id="cancel-operation" class="quiet hidden">Cancel preparation</button></div>
+-<p class="hint">Prepare verifies your source, obtains the approved patch and DOSBox if needed, and builds a separate game copy. Required downloads use approved publishers. Preparation does not launch the game. Cancel stops at a safe boundary after the current download or verification step.</p>
++<p class="hint">Prepare verifies your source, obtains the approved patch and DOSBox if needed, and builds a separate game copy. Required downloads use approved publishers. Preparation does not launch the game. Cancel interrupts an active download promptly. Verification stops at a safe boundary; final activation finishes safely before cancellation is available again.</p>
+ <div id="ready-status" class="ready-card" role="status" aria-live="polite">Checking the selected profile…</div>
+-<div class="actions"><button id="launch" class="primary large" disabled>Play MOO2</button><button id="verify" class="quiet">Verify prepared files</button><label class="inline"><input id="fullscreen" type="checkbox"> Fullscreen</label></div>
++<details id="presentation-panel"><summary>Display, sound and background settings</summary>
++<p class="hint">Saved separately for each profile. Applies next time you play; no game repair, configuration editing or changes to game rules are needed. Save here, or choose Play to remember these settings.</p>
++<div class="grid"><div><label class="inline"><input id="fullscreen" type="checkbox"> Start in fullscreen</label><label for="window-size">Starting window size</label><select id="window-size"><option value="800x600">800 × 600 · original launcher default</option><option value="1024x768">1024 × 768</option><option value="1280x960">1280 × 960</option><option value="small">Small · relative to your desktop</option><option value="medium">Medium · relative to your desktop</option><option value="large">Large · relative to your desktop</option></select><p class="hint">Windows display scaling still applies. The window can also be resized after launch. Fullscreen ignores the starting window size.</p></div>
++<div><label class="inline"><input id="mute-audio" type="checkbox"> Mute game audio</label><label class="inline"><input id="mute-inactive" type="checkbox"> Mute when another window is active</label><label class="inline"><input id="pause-inactive" type="checkbox"> Pause when another window is active</label><p id="pause-inactive-note" class="hint">Background pause applies to single-player only. Multiplayer keeps running when you switch windows.</p></div></div>
++<div class="actions"><button id="save-presentation" class="primary">Save settings</button><button id="cancel-presentation">Cancel edits</button><button id="reset-presentation" class="quiet">Restore defaults</button></div><p id="presentation-status" class="status" aria-live="polite">Loading saved settings…</p>
++</details>
++<div class="actions"><button id="launch" class="primary large" disabled>Play MOO2</button><button id="verify" class="quiet">Verify prepared files</button></div>
+ <div id="running" class="status" aria-live="polite"></div>
+ <details><summary>Profile details and verification</summary><label for="name">Profile name</label><input id="name" maxlength="100"><div class="actions"><button id="resolve" class="quiet">Check selection</button><button id="save" class="quiet">Save profile</button><button id="prepare" class="quiet">Prepare / repair selected profile</button></div><div id="resolution" class="resolution">Choose a profile to inspect dependencies.</div></details>
+ <details><summary>Multiplayer and future features</summary>
+@@ -37,7 +49,7 @@
+ </section>
+ <section class="panel activity"><div class="section-heading"><span class="step">↳</span><h2>Progress</h2></div><div id="progress" role="status" aria-live="polite">Connecting to your local manager…</div><details><summary>Technical details</summary><pre id="result">No operation has run in this session.</pre><p id="application-identity" class="path"></p><p id="data-path" class="path"></p></details></section>
+ <details class="panel"><summary>Runtime, packages and recovery</summary>
+-<div class="layout advanced-layout"><section><h2>DOSBox runtime</h2><div id="runtime-status" class="status">Checking…</div><p class="hint">Preparation can download the checksum-pinned official DOSBox Staging package into this installation. No private harness ownership, Python or Steam client is required. Existing supported runtime files can also be copied and verified below; the source stays untouched.</p>
++<div class="layout advanced-layout"><section><h2>DOSBox runtime</h2><div id="runtime-status" class="status">Checking…</div><p class="hint">Preparation can download the checksum-pinned official DOSBox Staging package into this installation. No private harness ownership or Python is required. Steam is not needed by the launcher after your supported files are installed/imported. Existing supported runtime files can also be copied and verified below; the source stays untouched.</p>
+ <div class="actions"><button id="install-runtime" class="primary">Download / repair verified DOSBox</button><button id="browse-runtime-folder">Browse existing runtime folder…</button><button id="browse-runtime-zip">Browse runtime ZIP…</button></div><label for="runtime-source">Optional existing runtime folder or ZIP</label><input id="runtime-source" readonly placeholder="Use Browse above"><button id="import-runtime">Copy and verify selected runtime</button><p id="runtime-requirement" class="hint"></p>
+ <details><summary>Advanced executable selection (non-portable platforms)</summary><label for="runtime-select">Detected DOSBox executables — detection is not verification</label><select id="runtime-select"><option value="">None detected</option></select><label for="runtime-path">Selected executable</label><input id="runtime-path"><div class="actions"><button id="browse-runtime-executable">Browse executable…</button><button id="use-runtime">Use selected executable</button></div><p class="hint">Portable Windows uses only the verified managed runtime, not an arbitrary global executable. Other platforms need separate runtime acceptance.</p></details>
+ <h2>Local package import</h2><label for="payload-kind">Package type</label><select id="payload-kind"><option value="base">Owned game ZIP</option><option value="patch">Community patch · 1.50.26</option><option value="kernel">Owned network kernel · RKERNEL.COM or ZIP</option><option value="official131">Official prerequisite · English 1.31 ZIP</option></select><div class="actions"><button id="browse-payload">Browse local file…</button><button id="import-payload">Verify and import</button></div><label for="payload-path">Selected local file</label><input id="payload-path"><p class="hint">Files are never uploaded. Importing does not modify your active game; Prepare applies verified contents to a fresh copy.</p>
+@@ -45,5 +57,5 @@
+ <section><h2>Recovery</h2><label for="history">Retained game generations</label><select id="history"><option value="">No prepared environment</option></select><div class="actions"><button id="activate">Activate generation</button><button id="remove" class="danger">Deactivate game copy</button><button id="portable-recover">Recover interrupted baseline</button><button id="diagnostics">Export diagnostics</button></div><p class="hint">Deactivation retains files and saves. Rollback does not merge newer saves into older generations. Repair retains this profile's saves when the engine stays the same.</p>
+ <h2>Launcher updates</h2><div id="distribution-status" class="hint"></div><label for="offline-release">Signed offline release folder (optional)</label><input id="offline-release"><button id="browse-offline-release">Browse signed release…</button><div class="actions"><button id="launcher-check">Check signed release</button><button id="launcher-stage">Stage update</button><button id="launcher-apply">Apply update and restart</button></div><p class="hint">Only releases matching this build's embedded signing trust are accepted. No replacement occurs during gameplay. An unconfigured feed is not an available update.</p></section></div>
+ </details>
+-<footer>Local-only interface · No telemetry · No accounts · No automatic game launch · Original game files stay local<br>Use Exit launcher when finished. Closing the browser tab alone leaves the launcher running; open the same launcher file to return.</footer>
++<footer>Local-only interface · No telemetry · No launcher account · No automatic game launch · Original game files stay local<br>Use Exit launcher when finished. Closing the browser tab alone leaves the launcher running; open the same launcher file to return.</footer>
+ </main></body></html>
+--- a/manager/web/style.css
++++ b/manager/web/style.css
+@@ -5,3 +5,5 @@
+ 
+ /* GUI-first flow: keep the first-run decisions compact and recovery secondary. */
+ main{max-width:1120px}.ready-card{border:1px solid #355e59;background:#102b2a;border-radius:9px;padding:18px;font-weight:600;margin-top:20px;white-space:pre-line}.ready-card.needs-action{border-color:#6b593a;background:#29261e;color:#ffe1a7}.advanced-layout{margin-top:24px}.advanced-layout h2{margin-top:18px}details.panel>summary{font-size:18px}.row select{flex:1}.row button{flex:none}#running:empty{display:none}#source-choice{overflow-wrap:anywhere}#cancel-operation{border-color:#997c4e}.inline{margin:0}button:disabled{cursor:not-allowed}#launch{min-width:180px}.panel p{max-width:85ch}details .actions{margin-bottom:14px}
++
++.button-link{display:inline-flex;align-items:center;text-decoration:none;border:1px solid #486076;border-radius:7px;padding:10px 15px;font-size:13px;font-weight:650;background:#213147;color:var(--text)}.button-link.primary{background:var(--accent);color:#07251e;border-color:var(--accent)}.button-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.acquisition h3{font-size:16px;margin:10px 0}.acquisition p{font-size:13px}#presentation-panel .inline{margin:12px 0}#presentation-panel .grid{margin-top:16px}#presentation-status{min-height:22px}
+--- a/tests/desktop_acceptance.py
++++ b/tests/desktop_acceptance.py
+@@ -4,6 +4,7 @@
+ """
+ import argparse, json, os, pathlib, signal, subprocess, tempfile, time, urllib.request, urllib.error
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--binary',type=pathlib.Path,required=True);p.add_argument('--release',type=pathlib.Path,required=True);p.add_argument('--evidence',type=pathlib.Path,required=True);a=p.parse_args();binary=a.binary.resolve();release=a.release.resolve();checks=[]
++version=json.loads((release/'manifest.json').read_text())['release']; candidate_root='MOO2-SGC/private-gui-'+version
+ def check(name,ok):
+     if not ok:raise AssertionError(name)
+     checks.append(name);print('PASS',name,flush=True)
+@@ -32,14 +33,14 @@
+     env=dict(os.environ,PATH=str(binpath)+os.pathsep+os.environ['PATH'],OPENER_COUNT=str(counter))
+     processes=[]
+     def owned(root):
+-        root.mkdir(parents=True,exist_ok=True);(root/'desktop-installation.json').write_text(json.dumps({'schema':1,'kind':'moo2-private-gui','created_version':'0.5.0','runtime_history_contract':1,'manager_launch_attempted':False}))
++        root.mkdir(parents=True,exist_ok=True);(root/'desktop-installation.json').write_text(json.dumps({'schema':1,'kind':'moo2-private-gui','created_version':version,'runtime_history_contract':1,'manager_launch_attempted':False}))
+     def launch(label,exe=binary):
+-        config=temp/label;root=config/'MOO2-SGC/private-gui';log=temp/(label+'.log');f=log.open('wb');proc=subprocess.Popen([str(exe)],env=dict(env,XDG_CONFIG_HOME=str(config)),stdout=f,stderr=f,start_new_session=True);f.close();processes.append(proc);marker=root/'desktop-session/open.txt';until(marker.exists);return proc,root,marker,log
++        config=temp/label;root=config/candidate_root;log=temp/(label+'.log');f=log.open('wb');proc=subprocess.Popen([str(exe)],env=dict(env,XDG_CONFIG_HOME=str(config)),stdout=f,stderr=f,start_new_session=True);f.close();processes.append(proc);marker=root/'desktop-session/open.txt';until(marker.exists);return proc,root,marker,log
+     def quit_boot(proc,marker):api(marker,'exit',{},'POST');proc.wait(timeout=10);check('startup exits cleanly',proc.returncode==0)
+     try:
+         proc,root,boot,log=launch('fresh');ready=until(lambda:(s if s.get('target') else None) if (s:=api(boot,'status')) else None)
+         manager=root/'userdata/open-launcher.txt';identity=api(manager,'identity');pid=identity['pid'];initial_url=manager.read_text();pointer=(root/'components/launcher/current.json').read_bytes()
+-        check('no-argument executable installs and opens local GUI automatically',identity['version']=='0.5.0' and counter.read_text().count('call')==1)
++        check('no-argument executable installs and opens local GUI automatically',identity['version']==version and counter.read_text().count('call')==1)
+         check('isolated per-user root used',identity['root']==str(root))
+         check('private child policy hidden-output/no-shortcut/desktop mode',all(x in args(pid) for x in ['--desktop-gui','--defer-browser-once','--no-shortcut','--private-url-file-only']))
+         sentinel=root/'userdata/synthetic-save.GAM';sentinel.write_bytes(b'SYNTHETIC SAVE ONLY')
+@@ -59,7 +60,7 @@
+         # Explicit headless is not the same as one-time initial GUI deferral.
+         headless_config=temp/'headless';before=counter.read_text().count('call')
+         hp=subprocess.Popen([str(binary),'--no-browser'],env=dict(env,XDG_CONFIG_HOME=str(headless_config)),stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True);processes.append(hp)
+-        hr=headless_config/'MOO2-SGC/private-gui';hb=hr/'desktop-session/open.txt';until(hb.exists);until(lambda:api(hb,'status').get('target'));hm=hr/'userdata/open-launcher.txt';old=hm.read_text()
++        hr=headless_config/candidate_root;hb=hr/'desktop-session/open.txt';until(hb.exists);until(lambda:api(hb,'status').get('target'));hm=hr/'userdata/open-launcher.txt';old=hm.read_text()
+         check('explicit headless initial launch opens no browser',counter.read_text().count('call')==before and '--no-browser' in args(api(hm,'identity')['pid']))
+         api(hm,'action',{'action':'launcher-stage','offline_path':str(release)});until(lambda:not api(hm,'state')['job']['busy']);api(hm,'action',{'action':'launcher-apply'});until(lambda:hm.read_text()!=old);hi=until(lambda:api(hm,'identity'));hp.wait(timeout=15);time.sleep(.2)
+         check('explicit headless update stays headless and shortcut-free',counter.read_text().count('call')==before and all(x in args(hi['pid']) for x in ['--no-browser','--no-shortcut','--desktop-gui']))
+@@ -82,31 +83,31 @@
+         concurrent_config=temp/'concurrent';concurrent=[]
+         for _ in range(2):
+             x=subprocess.Popen([str(binary)],env=dict(env,XDG_CONFIG_HOME=str(concurrent_config)),stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True);concurrent.append(x);processes.append(x)
+-        rr=concurrent_config/'MOO2-SGC/private-gui';bb=rr/'desktop-session/open.txt';until(bb.exists);until(lambda:api(bb,'status').get('target'));until(lambda:any(x.poll()==0 for x in concurrent));owner=json.loads((rr/'desktop-installation.json').read_text())
++        rr=concurrent_config/candidate_root;bb=rr/'desktop-session/open.txt';until(bb.exists);until(lambda:api(bb,'status').get('target'));until(lambda:any(x.poll()==0 for x in concurrent));owner=json.loads((rr/'desktop-installation.json').read_text())
+         check('concurrent first clicks reuse one session without resetting ownership',owner['manager_launch_attempted'] is True and all(x.poll() in (None,0) for x in concurrent))
+         api(rr/'userdata/open-launcher.txt','action',{'action':'quit'})
+         for x in concurrent:x.wait(timeout=10)
+         # Live lock: recovery must not remove it, and startup remains actionable.
+-        live_root=temp/'live/MOO2-SGC/private-gui';owned(live_root);live_lock=live_root/'installation.lock';live_lock.write_text(str(os.getpid())+'\n')
++        live_root=temp/('live/'+candidate_root);owned(live_root);live_lock=live_root/'installation.lock';live_lock.write_text(str(os.getpid())+'\n')
+         live,_,boot_live,_=launch('live');until(lambda:api(boot_live,'status').get('error'))
+         try:api(boot_live,'recover',{},'POST');raise AssertionError('live lock recovered')
+         except urllib.error.HTTPError as e:check('live owner refuses graphical recovery',e.code==409 and live_lock.read_text()==str(os.getpid())+'\n')
+         quit_boot(live,boot_live)
+         # Dead startup with no possible surviving runtime: explicit GUI recovery.
+         dead=subprocess.Popen(['/bin/true']);dead.wait();dead_pid=dead.pid
+-        stale_root=temp/'stale/MOO2-SGC/private-gui';owned(stale_root);(stale_root/'userdata').mkdir(parents=True)
++        stale_root=temp/('stale/'+candidate_root);owned(stale_root);(stale_root/'userdata').mkdir(parents=True)
+         for f in (stale_root/'installation.lock',stale_root/'userdata/manager.lock'):f.write_text(str(dead_pid)+'\n')
+         stale,_,boot_stale,_=launch('stale');until(lambda:api(boot_stale,'status').get('error'));api(boot_stale,'recover',{},'POST');until(lambda:api(boot_stale,'status').get('target'))
+         check('recovery continues automatically without a hidden Retry button',bool(list(stale_root.glob('installation.lock.recovered-*'))) and bool(list((stale_root/'userdata').glob('manager.lock.recovered-*'))))
+         api(stale_root/'userdata/open-launcher.txt','action',{'action':'quit'});stale.wait(timeout=10)
+-        unknown_root=temp/'unknown/MOO2-SGC/private-gui';owned(unknown_root);(unknown_root/'userdata/logs').mkdir(parents=True);(unknown_root/'installation.lock').write_text(str(dead_pid)+'\n');(unknown_root/'userdata/logs/last-launch.json').write_text('{}')
++        unknown_root=temp/('unknown/'+candidate_root);owned(unknown_root);(unknown_root/'userdata/logs').mkdir(parents=True);(unknown_root/'installation.lock').write_text(str(dead_pid)+'\n');(unknown_root/'userdata/logs/last-launch.json').write_text('{}')
+         unknown,_,boot_unknown,_=launch('unknown');until(lambda:api(boot_unknown,'status').get('error'))
+         try:api(boot_unknown,'recover',{},'POST');raise AssertionError('unknown game state recovered')
+         except urllib.error.HTTPError as e:check('possible orphan game retains protective lock',e.code==409 and (unknown_root/'installation.lock').exists())
+         quit_boot(unknown,boot_unknown)
+         # Mutate only a copy of the embedded signed manifest; ELF remains intact.
+         content=binary.read_bytes();manifest=(release/'manifest.json').read_bytes();check('embedded manifest locatable exactly once',content.count(manifest)==1)
+-        mutated=manifest.replace(b'"release": "0.5.0"',b'"release": "0.4.8"',1);check('tamper fixture changes signed bytes only',mutated!=manifest and len(mutated)==len(manifest))
++        mutated=manifest.replace(('\"release\": \"'+version+'\"').encode(), ('\"release\": \"'+('9' if version[0]!='9' else '8')+version[1:]+'\"').encode(),1);check('tamper fixture changes signed bytes only',mutated!=manifest and len(mutated)==len(manifest))
+         damaged=temp/'damaged-desktop';damaged.write_bytes(content.replace(manifest,mutated,1));damaged.chmod(0o755)
+         broken,broken_root,broken_boot,_=launch('invalid-payload',damaged);error=until(lambda:api(broken_boot,'status').get('error'));check('invalid signed payload is visible and never activated','verification failed' in error and not (broken_root/'components/launcher/current.json').exists());quit_boot(broken,broken_boot)
+         check('normal console logs contain no private session URL','http://127.0.0.1:' not in log.read_text())
+--- /dev/null
++++ b/tests/presentation_regression.js
+@@ -0,0 +1,44 @@
++'use strict';
++// Deterministic DOM/event doubles, not native Windows or rendered-browser acceptance.
++const fs=require('fs'),vm=require('vm'),assert=require('assert');
++const source=fs.readFileSync(__dirname+'/../manager/web/app.js','utf8');
++const html=fs.readFileSync(__dirname+'/../manager/web/index.html','utf8');
++const tokenPrefix=source.slice(0,source.indexOf("for(const b of document.querySelectorAll('button'))"));
++function authCase(fragment,options={}){
++ let stripped=false,stored='';
++ const c={location:{hash:fragment,pathname:'/'},document:{},sessionStorage:{setItem(k,v){if(options.blockSet)throw Error('SecurityError');stored=v;},getItem(){if(options.blockGet)throw Error('SecurityError');return options.saved||'';}},history:{replaceState(){if(options.blockHistory)throw Error('SecurityError');stripped=true;}}};
++ vm.createContext(c);vm.runInContext(tokenPrefix+'\nglobalThis.token=auth;',c);return {token:c.token,stripped,stored};
++}
++assert.deepEqual(authCase('#secret'),{token:'secret',stripped:true,stored:'secret'});
++assert.deepEqual(authCase('#secret',{blockSet:true}),{token:'secret',stripped:false,stored:''},'blocked storage must retain usable token and refresh fragment');
++assert.equal(authCase('',{saved:'prior'}).token,'prior');
++assert.equal(authCase('',{blockGet:true}).token,'','no token uses visible reopen guidance, not a script exception');
++assert.equal(authCase('#secret',{blockHistory:true}).token,'secret');
++const ids=[...html.matchAll(/id="([^"]+)"/g)].map(x=>x[1]);assert.equal(new Set(ids).size,ids.length,'duplicate DOM id');
++const elements={};for(const id of ids)elements[id]={value:'',checked:false,disabled:false,textContent:'',events:{},addEventListener(n,fn){this.events[n]=fn;},classList:{add(){},remove(){},toggle(){}},replaceChildren(){},append(){}};
++let confirmations=[],allowDiscard=false,previews=0,actions=[];
++const c={document:{getElementById:id=>{assert(elements[id],'missing '+id);return elements[id]},querySelectorAll:()=>[]},location:{hash:'',pathname:'/'},sessionStorage:{getItem:()=>''},history:{},confirm:message=>{confirmations.push(message);return allowDiscard},setInterval(){throw Error('unauthenticated page must not poll')},fetch(){throw Error('unexpected network')}};
++vm.createContext(c);vm.runInContext(source+`\npreview=()=>{globalThis.onPreview()};modUI=()=>{};renderHistory=()=>{};networkUI=()=>{};
++globalThis.test={presentationDraft,presentationKey,presentationDirty,loadPresentation,cancelPresentation,resetPresentation,acceptPresentationResult,loadProfile,setState(s){state=s;},setID(id){currentID=id;},getID(){return currentID;},setAction(fn){action=fn;},setAPI(fn){api=fn;}};`,c);
++c.onPreview=()=>previews++;
++const api=c.test;api.setAction((kind,payload)=>actions.push({kind,payload}));api.setAPI(async()=>({}));
++const profiles=[{id:'community',name:'Community',engine:'1.50.26',role:'standalone',fullscreen:true,presentation:{window_size:'large',mute_audio:true,mute_inactive:true,pause_inactive:true}},{id:'baseline',name:'Legacy',engine:'1.40b23',role:'standalone',fullscreen:false}];
++api.setState({profiles,history:{}});api.setID('community');api.loadPresentation(profiles[0]);
++assert.equal(api.presentationDirty(),false);
++api.resetPresentation();assert.equal(elements.fullscreen.checked,false);assert.equal(elements['window-size'].value,'800x600');assert.equal(api.presentationDirty(),true);assert.equal(profiles[0].presentation.window_size,'large','Defaults must not write saved state');
++api.cancelPresentation();assert.equal(elements.fullscreen.checked,true);assert.equal(elements['window-size'].value,'large');assert.equal(api.presentationDirty(),false,'Cancel returns to saved settings');
++elements['window-size'].value='small';assert.equal(elements['window-size'].events.change.name,'preview');elements.profiles.value='baseline';elements.profiles.events.change();assert.equal(api.getID(),'community');assert.equal(elements.profiles.value,'community');assert.equal(elements['window-size'].value,'small','declining navigation preserves draft');
++allowDiscard=true;elements.profiles.value='baseline';elements.profiles.events.change();assert.equal(api.getID(),'baseline');assert.equal(elements['window-size'].value,'800x600','legacy absent preference reads original defaults');assert.equal(elements['mute-audio'].checked,false);
++api.setID('community');api.loadPresentation(profiles[0]);elements['window-size'].value='medium';elements['save-presentation'].onclick();assert.equal(actions.at(-1).kind,'presentation-save');assert.equal(actions.at(-1).payload.id,'community');assert.equal(actions.at(-1).payload.presentation.window_size,'medium');assert.equal(actions.at(-1).payload.profile,undefined,'scoped settings save must not submit engine/mod draft');
++api.acceptPresentationResult({kind:'presentation-save',error:'disk full',result:{id:'community',fullscreen:false,presentation:{window_size:'medium'}}});assert.equal(profiles[0].presentation.window_size,'large');assert.equal(api.presentationDirty(),true,'save failure keeps draft and dirty status');
++// Completion can arrive with stale profile list. Retain response as saved metadata,
++// but do not overwrite newer draft edits or navigate back to the saved profile.
++elements['window-size'].value='1024x768';api.acceptPresentationResult({kind:'presentation-save',result:{id:'community',fullscreen:true,presentation:{window_size:'medium'}}});assert.equal(profiles[0].presentation.window_size,'medium');assert.equal(elements['window-size'].value,'1024x768');assert.equal(api.presentationDirty(),true);
++api.setID('baseline');api.loadPresentation(profiles[1]);api.acceptPresentationResult({kind:'presentation-save',result:{id:'community',fullscreen:true,presentation:{window_size:'large'}}});assert.equal(api.getID(),'baseline');assert.equal(elements['window-size'].value,'800x600');assert.equal(api.presentationDirty(),false);
++api.setID('community');api.loadPresentation(profiles[0]);assert.equal(elements['window-size'].value,'large','reopening saved profile restores latest confirmed preferences');
++elements['find-after-install'].onclick();assert.equal(actions.at(-1).kind,'game-detect','store handoff returns to actual discovery');
++for(const match of html.matchAll(/<a\s+[^>]*href="(https:[^"]+)"[^>]*>/g)){assert(/rel="noopener noreferrer"/.test(match[0]),'external anchor lacks privacy protection');assert(/target="_blank"/.test(match[0]));assert(!match[1].includes('#'));}
++for(const expected of ['https://store.steampowered.com/app/410980/Master_of_Orion_2/','https://www.gog.com/en/game/master_of_orion_1_2'])assert(html.includes(expected));
++assert(html.includes('GOG-specific editions are not yet validated'),'GOG edition caveat missing');
++assert.equal(previews,3);assert.equal(confirmations.length,2);
++console.log('PASS: token storage fallback; defaults/Cancel; unsaved navigation; legacy preferences; scoped Save; failed/stale save; profile reopen; actual discovery handoff; safe official links');

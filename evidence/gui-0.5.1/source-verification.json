@@ -1,0 +1,36 @@
+{
+  "source_version": "0.5.1",
+  "race_test_and_subtest_counts": {
+    "run": 354,
+    "output": 712,
+    "pass": 351,
+    "skip": 3
+  },
+  "passed_packages": [
+    "moo2manager/shared/layout",
+    "moo2manager/cmd/bootstrapper",
+    "moo2manager/cmd/releasectl",
+    "moo2manager/shared/desktop",
+    "moo2manager/cmd/desktop",
+    "moo2manager/shared/distribution",
+    "moo2manager"
+  ],
+  "skipped_tests": [
+    "TestRealBaselineMatchesSteam",
+    "TestRealOfficialDownloadContentAuthentication",
+    "TestLegacyReceiptKeepsValidFilesAndRejectsForgedBase"
+  ],
+  "go_vet": "PASS",
+  "node_syntax": "PASS",
+  "node_regression_scripts": 3,
+  "mock_publishing_tests": 10,
+  "real_manager_process_double_presentation_launch": "PASS - no native runtime or game execution",
+  "source_fingerprint_sha256": "3d6f451426531cc4fc8ea380cd24a0f3731317c393cf029f9517e3f75eac338b",
+  "limits": [
+    "No native Windows execution",
+    "No rendered browser execution",
+    "No actual DOSBox/game/audio/background behavior acceptance",
+    "No account-linked game download",
+    "Three genuine official1.31/legacy fixture tests skipped"
+  ]
+}

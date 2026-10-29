@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"moo2manager/shared/buildconfig"
+	"moo2manager/shared/desktop"
 	d "moo2manager/shared/distribution"
 	"os"
 	"os/exec"
@@ -46,12 +47,11 @@ func (m *Manager) launchStagedUpdater(noBrowser bool) error {
 		return e
 	}
 	defer log.Close()
-	args := []string{"--install-root", root, "--command", "apply-staged", "--wait-lock", "30"}
-	// Preserve this server's browser policy through the helper and restarted launcher.
-	if noBrowser {
-		args = append(args, "--no-browser")
-	}
+	args := m.updaterArgs(root, noBrowser)
 	cmd := exec.Command(filepath.Join(filepath.Dir(entry), name), args...)
+	if m.DesktopGUI {
+		desktop.HideConsole(cmd)
+	}
 	cmd.Stdout = log
 	cmd.Stderr = log
 	if e = cmd.Start(); e != nil {
@@ -59,4 +59,26 @@ func (m *Manager) launchStagedUpdater(noBrowser bool) error {
 	}
 	go func() { _ = cmd.Wait() }()
 	return nil
+}
+
+func stagedUpdaterArgs(root string, noBrowser, noShortcut bool) []string {
+	args := []string{"--install-root", root, "--command", "apply-staged", "--wait-lock", "30"}
+	// Preserve both independent policies through every helper/restarted launcher.
+	if noBrowser {
+		args = append(args, "--no-browser")
+	}
+	if noShortcut {
+		args = append(args, "--no-shortcut")
+	}
+	return args
+}
+
+// Desktop presentation, explicit browser suppression and shortcut policy are
+// independent. The one-time parent redirect does not survive this handoff.
+func (m *Manager) updaterArgs(root string, noBrowser bool) []string {
+	args := stagedUpdaterArgs(root, noBrowser, m.NoShortcut)
+	if m.DesktopGUI {
+		args = append(args, "--desktop-gui")
+	}
+	return args
 }

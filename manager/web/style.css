@@ -2,3 +2,8 @@
 
 /* Printed acceptance reports must not overlap fixed/scrolling panels. */
 @media print { .layout { display:block; } .panel, aside, .activity { position:static!important; height:auto!important; overflow:visible!important; break-inside:avoid; } pre { white-space:pre-wrap; overflow-wrap:anywhere; } }
+
+/* GUI-first flow: keep the first-run decisions compact and recovery secondary. */
+main{max-width:1120px}.ready-card{border:1px solid #355e59;background:#102b2a;border-radius:9px;padding:18px;font-weight:600;margin-top:20px;white-space:pre-line}.ready-card.needs-action{border-color:#6b593a;background:#29261e;color:#ffe1a7}.advanced-layout{margin-top:24px}.advanced-layout h2{margin-top:18px}details.panel>summary{font-size:18px}.row select{flex:1}.row button{flex:none}#running:empty{display:none}#source-choice{overflow-wrap:anywhere}#cancel-operation{border-color:#997c4e}.inline{margin:0}button:disabled{cursor:not-allowed}#launch{min-width:180px}.panel p{max-width:85ch}details .actions{margin-bottom:14px}
+
+.button-link{display:inline-flex;align-items:center;text-decoration:none;border:1px solid #486076;border-radius:7px;padding:10px 15px;font-size:13px;font-weight:650;background:#213147;color:var(--text)}.button-link.primary{background:var(--accent);color:#07251e;border-color:var(--accent)}.button-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.acquisition h3{font-size:16px;margin:10px 0}.acquisition p{font-size:13px}#presentation-panel .inline{margin:12px 0}#presentation-panel .grid{margin-top:16px}#presentation-status{min-height:22px}

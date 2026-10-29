@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"moo2manager/shared/buildconfig"
+	"moo2manager/shared/desktop"
 	d "moo2manager/shared/distribution"
 	"moo2manager/shared/layout"
 	"os"
@@ -19,20 +20,28 @@ import (
 	"time"
 )
 
+var desktopGUIMode bool
+
 func main() {
 	if e := run(); e != nil {
 		fmt.Fprintln(os.Stderr, "Setup stopped:", e)
-		showSetupError(e)
+		if desktopGUIMode {
+			desktop.ShowError("MOO2-SGC Setup", e.Error())
+		} else {
+			showSetupError(e)
+		}
 		os.Exit(1)
 	}
 }
 func run() error {
+	flag.BoolVar(&desktopGUIMode, "desktop-gui", false, "native errors and terminal-free launcher handoff")
 	waitLock := flag.Int("wait-lock", 0, "wait up to 60 seconds for an exiting launcher; never remove its lock")
 	root := flag.String("install-root", "", "installation root (Windows default: C:\\Games\\MOO2-SGC; other platforms: user config)")
 	offline := flag.String("offline", "", "directory with manifest.json, manifest.sig and signed launcher package")
 	command := flag.String("command", "install", "install, ensure-installed, repair, verify, rollback or launch-installed")
 	noLaunch := flag.Bool("no-launch", false, "install/verify only; do not open launcher")
 	noBrowser := flag.Bool("no-browser", false, "pass --no-browser to the launcher")
+	noShortcut := flag.Bool("no-shortcut", false, "do not create or replace shortcuts; preserve this mode through launcher updates")
 	version := flag.Bool("version", false, "print setup version")
 	status := flag.Bool("trust-status", false, "print embedded non-secret trust configuration")
 	portable := flag.Bool("portable", false, "use the portable ROOT/game and ROOT/runtime layout")
@@ -247,7 +256,7 @@ func run() error {
 	fmt.Fprintln(log, "verified launcher", rec.Package.Version, "entry", entry, "root", *root)
 	fmt.Fprintln(log, time.Now().UTC().Format(time.RFC3339), "success", *command)
 	if !*noLaunch && *command != "verify" && entry != "" && *launcherCommand == "serve" {
-		if err := installShortcut(*root, entry); err != nil {
+		if err := installShortcutIfEnabled(*noShortcut, *root, entry, installShortcut); err != nil {
 			fmt.Fprintln(log, "shortcut not created:", err)
 			fmt.Println("Shortcut not created:", err)
 		}
@@ -266,16 +275,14 @@ func run() error {
 	if *fullscreen {
 		args = append(args, "--fullscreen")
 	}
-	if *noBrowser {
-		args = append(args, "--no-browser")
-	}
-	if *command == "apply-staged" {
-		// The updater captures our inherited stdout/stderr in update-handoff.log.
-		// Keep ordinary diagnostics, but leave the session credential only in the
-		// launcher's private recovery file (and browser, unless --no-browser).
-		args = append(args, "--private-url-file-only")
+	args = appendLauncherModeArgs(args, *noBrowser, *noShortcut, *command == "apply-staged")
+	if desktopGUIMode {
+		args = append(args, "--desktop-gui")
 	}
 	cmd := exec.Command(entry, args...)
+	if desktopGUIMode {
+		desktop.HideConsole(cmd)
+	}
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin
@@ -287,6 +294,7 @@ func health(ctx context.Context, p, version string) error {
 	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 	c := exec.CommandContext(ctx, p, "--version")
+	desktop.HideConsole(c)
 	var out limitedWriter
 	c.Stdout = &out
 	c.Stderr = &out
