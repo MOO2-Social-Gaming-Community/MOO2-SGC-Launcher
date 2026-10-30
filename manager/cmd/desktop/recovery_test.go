@@ -6,6 +6,7 @@ import (
 	d "moo2manager/shared/distribution"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -80,7 +81,7 @@ func TestPrivateRootNeverClaimsExistingFiles(t *testing.T) {
 	root := t.TempDir()
 	sentinel := filepath.Join(root, "owned-save.GAM")
 	os.WriteFile(sentinel, []byte("PRIVATE SENTINEL"), 0600)
-	if e := ensurePrivateRoot(root); e == nil {
+	if e := ensurePrivateRoot(root, d.Trust{}); e == nil {
 		t.Fatal("claimed nonempty unknown root")
 	}
 	if _, e := os.Stat(filepath.Join(root, privateRootMarker)); !os.IsNotExist(e) {
@@ -96,7 +97,7 @@ func TestPrivateRootRecoveryContract(t *testing.T) {
 	if e := checkRecoveryContract(root, d.Trust{}); e == nil {
 		t.Fatal("unknown root recovery allowed")
 	}
-	if e := ensurePrivateRoot(root); e != nil {
+	if e := ensurePrivateRoot(root, d.Trust{}); e != nil {
 		t.Fatal(e)
 	}
 	if e := checkRecoveryContract(root, d.Trust{}); e != nil {
@@ -106,7 +107,7 @@ func TestPrivateRootRecoveryContract(t *testing.T) {
 	if e := checkRecoveryContract(root, d.Trust{}); e != nil {
 		t.Fatal("interrupted never-started setup should recover", e)
 	}
-	if e := recordManagerLaunchAttempt(root); e != nil {
+	if e := recordManagerLaunchAttempt(root, d.Trust{}); e != nil {
 		t.Fatal(e)
 	}
 	if e := checkRecoveryContract(root, d.Trust{}); e == nil {
@@ -127,8 +128,9 @@ func TestOutOfRangePIDIsUnknown(t *testing.T) {
 
 func TestMissingLaunchAttemptedIsUnknown(t *testing.T) {
 	root := t.TempDir()
-	os.WriteFile(filepath.Join(root, privateRootMarker), []byte(`{"schema":1,"kind":"moo2-private-gui","created_version":"0.5.1","runtime_history_contract":1}`), 0600)
-	if e := checkPrivateRoot(root); e == nil {
+	raw, _ := json.Marshal(map[string]any{"schema": 2, "kind": "moo2-private-gui", "created_version": currentVersion, "runtime_history_contract": 1, "trust_fingerprint": trustFingerprint(d.Trust{})})
+	os.WriteFile(filepath.Join(root, privateRootMarker), raw, 0600)
+	if e := checkPrivateRoot(root, d.Trust{}); e == nil {
 		t.Fatal("missing attempted flag treated as false")
 	}
 	if e := checkRecoveryContract(root, d.Trust{}); e == nil {
@@ -138,17 +140,17 @@ func TestMissingLaunchAttemptedIsUnknown(t *testing.T) {
 
 func TestInitialMarkerCannotOverwriteDurableLaunchAttempt(t *testing.T) {
 	root := t.TempDir()
-	if e := publishInitialContract(root); e != nil {
+	if e := publishInitialContract(root, d.Trust{}); e != nil {
 		t.Fatal(e)
 	}
-	if e := recordManagerLaunchAttempt(root); e != nil {
+	if e := recordManagerLaunchAttempt(root, d.Trust{}); e != nil {
 		t.Fatal(e)
 	}
 	before, e := os.ReadFile(filepath.Join(root, privateRootMarker))
 	if e != nil {
 		t.Fatal(e)
 	}
-	if e := publishInitialContract(root); e != nil {
+	if e := publishInitialContract(root, d.Trust{}); e != nil {
 		t.Fatal(e)
 	}
 	after, _ := os.ReadFile(filepath.Join(root, privateRootMarker))
@@ -164,7 +166,7 @@ func TestCandidateRootDoesNotAdoptPriorCandidate(t *testing.T) {
 	if e := os.WriteFile(p, old, 0600); e != nil {
 		t.Fatal(e)
 	}
-	if e := ensurePrivateRoot(root); e == nil {
+	if e := ensurePrivateRoot(root, d.Trust{}); e == nil {
 		t.Fatal("prior private candidate silently adopted")
 	}
 	after, e := os.ReadFile(p)
@@ -175,7 +177,7 @@ func TestCandidateRootDoesNotAdoptPriorCandidate(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	if filepath.Base(got) != "private-gui-"+currentVersion {
+	if !strings.HasPrefix(filepath.Base(got), "private-gui-"+currentVersion+"-") {
 		t.Fatal("candidate root not version isolated", got)
 	}
 }

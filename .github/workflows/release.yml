@@ -1,41 +1,50 @@
-name: Publish prepared release
+name: Windows review build (no publication)
 on:
   push:
-    paths:
-      - 'VERSION'
-      - 'release/**'
-      - '.github/workflows/release.yml'
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: moo2-sgc-release-publication
-  cancel-in-progress: false
+  group: windows-review-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  publish:
-    if: >-
-      github.repository == 'MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer' &&
-      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+  verify:
+    uses: ./.github/workflows/test.yml
+  windows-review:
+    needs: verify
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-go@v7
+      - uses: actions/setup-go@v7.0.0
         with:
-          go-version: stable
+          go-version: '1.27.3'
           cache: false
-      - name: Test the source before publishing
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+      - name: Native Windows Go tests
         working-directory: manager
-        run: go test -race -count=1 ./... && go vet ./...
-      - name: Test the publishing safeguards
-        run: python3 -m unittest discover -s tests -p 'test_publish*.py' -v
-      - name: Verify signatures and source-to-artifact correspondence
-        run: python3 packaging/publish_prebuilt.py
-      - name: Publish signed components and verify downloaded copies
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_COMMIT: ${{ github.sha }}
-        run: python3 packaging/publish_prebuilt.py --execute --commit "$RELEASE_COMMIT"
+        run: go test -count=1 ./...
+      - name: Build exact one-file GUI executable and run native process/API smoke
+        run: python packaging/build_review.py --revision ${{ github.run_number }} --out release-assets/windows-review --run-native-smoke
+      - name: Upload review download (Actions artifact, NOT a GitHub Release)
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: MOO2-SGC-Windows-review-${{ github.run_id }}-${{ github.run_attempt }}
+          path: release-assets/windows-review/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Explain download and remaining release gate
+        shell: pwsh
+        run: |
+          @'
+          ## Windows review executable
+          Download **MOO2-SGC-Windows-review** from this run's Artifacts section and extract it.
+          The player opens **MOO2-SGC-Windows.exe**, not the source ZIP or inner Setup helper.
+          This run created **no GitHub Release, public stable link, tag, or latest promotion**.
+          The automated Windows check is headless process/API only; visible GUI/game/audio/save testing remains required.
+          See GITHUB-UPLOAD.md and docs/STABLE-RELEASE-GATE.md before any manual draft or publication.
+          '@ >> $env:GITHUB_STEP_SUMMARY

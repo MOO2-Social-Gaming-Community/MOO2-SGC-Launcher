@@ -73,6 +73,13 @@ func (w *limitedOutput) Write(p []byte) (int, error) {
 }
 func (w *limitedOutput) String() string { w.mu.Lock(); defer w.mu.Unlock(); return string(w.b) }
 func defaultRoot() (string, error) {
+	trust, err := buildconfig.Trust()
+	if err != nil {
+		return "", err
+	}
+	return defaultRootForTrust(trust)
+}
+func defaultRootForTrust(trust d.Trust) (string, error) {
 	base, e := os.UserConfigDir()
 	if runtime.GOOS == "windows" {
 		base, e = os.UserCacheDir()
@@ -80,7 +87,7 @@ func defaultRoot() (string, error) {
 	if e != nil {
 		return "", e
 	}
-	return filepath.Join(base, "MOO2-SGC", "private-gui-"+currentVersion), nil
+	return filepath.Join(base, "MOO2-SGC", "private-gui-"+currentVersion+"-"+trustFingerprint(trust)[:16]), nil
 }
 func main() {
 	headless := flag.Bool("no-browser", false, "engineering acceptance only: do not open the graphical browser")
@@ -118,7 +125,7 @@ func run(root string, headless bool) error {
 	if e = trust.Validate(); e != nil {
 		return e
 	}
-	if e = ensurePrivateRoot(root); e != nil {
+	if e = ensurePrivateRoot(root, trust); e != nil {
 		return e
 	}
 	if u, err := bootSession(root); err == nil {
@@ -250,7 +257,7 @@ func (s *startup) launch() error {
 	if e = s.ctx.Err(); e != nil {
 		return e
 	}
-	if e = recordManagerLaunchAttempt(root); e != nil {
+	if e = recordManagerLaunchAttempt(root, s.trust); e != nil {
 		return e
 	}
 	s.progress("Starting the graphical game chooser…")

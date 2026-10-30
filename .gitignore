@@ -42,32 +42,12 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Explicitly track the reviewed, signed public release inputs for push-to-release.
-!/release/
-!/release/*/
-!/release/*/**
+# Generated release inputs are local/Actions artifacts, never source commits.
+/release/
 # Private maintainer material is never a release input.
 **/*PRIVATE*
 **/*private-key*
 **/*signing*.key
-
-# Keep secrets ignored even under the explicit release allowlist.
-**/*.key
-**/*.pem
-**/*.p12
-**/*.pfx
-
-# Keep owned game content out even under the public release allowlist.
-**/*.LBX
-**/*.lbx
-**/*.GAM
-**/*.gam
-**/*.RAC
-**/*.rac
-**/ORION2.EXE
-**/ORION150.EXE
-**/base.zip
-**/Master of Orion 2.zip
 
 # Portable working-root content is never repository/release input.
 /game/

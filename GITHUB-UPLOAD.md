@@ -1,14 +1,56 @@
-> Historical release guidance. This unreleased 0.4.8 source candidate has no new signed artifacts and has not been published. Do not execute these old release/upgrade instructions for this package. See START-HERE.md and docs/TEST-REPORT.md.
+# Why the EXE is not in a source push
 
-# GitHub Desktop upload — 0.4.7
+This repository deliberately ignores compiled EXEs and ZIPs. That protects the
+source tree from generated files, owned game files, caches and signing keys.
+GitHub's automatically generated **Source code (zip)** is source, not an app.
+Do not remove those ignore rules or commit game/runtime data to fix the download.
 
-Extract the complete repository ZIP contents into the cloned launcher repository, preserve `.git`, commit and push the default branch. `release/0.4.7` contains ready-signed release files. Wait for **Publish prepared release** and confirm a published **v0.4.7**.
+The configured repository is
+`MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer` (project.json).
+This document does not claim that a particular commit or release is published.
 
-Do not rename/repack signed packages or edit manifest.json. Same signing identity as 0.4.1/0.4.2; no new signing secret required to publish the supplied artifacts. The publishing workflow checks source fingerprints, signatures and exact uploaded bytes. It does not certify MOO2 gameplay.
+## New review build — GitHub website, no local developer tools
 
-The portable integration ZIP is for C:\Games\MOO2-SGC, NOT for the repository. Keep the game ZIP/runtime/saves/private key outside your clone. Git ignore patterns defend against accidental inclusion, but review GitHub Desktop changes before committing.
+1. Upload/commit the complete source tree, including `.github/workflows`, to your
+   repository. Keep your clone's `.git` folder. Do not copy private fixtures.
+2. Open **Actions → Windows review build (no publication)**. A push or pull
+   request starts it; **Run workflow** can also start a fresh review build.
+3. Wait for both source verification and Windows review build jobs to pass.
+   A failed job produces no approved download; open its failed step for details.
+4. In that run's **Artifacts** section, download `MOO2-SGC-Windows-review-…`.
+   Extract it. The player file inside is **MOO2-SGC-Windows.exe**. The other
+   files record hashes, build identity and test limitations.
 
-Older release folders already present in your clone can remain; VERSION selects 0.4.7 for publication. The standalone setup retrieves the published release. The separate offline integration kit can be tested before publication and retains online update support afterward.
+**Actions artifacts are not Releases and are not a permanent public download
+link.** They expire after 14 days under this workflow. Download and retain the
+exact reviewed bundle. A new run creates new offline development trust and a
+separate private installation; it does not migrate saves from earlier builds.
 
+The workflow has read-only repository permission. It does not create a release,
+change tags/latest, use publishing secrets, or publish a stable download. The
+historical publishing scripts are not called by either current workflow.
 
-0.4.7 verifies the latest-release pointer after publication and repairs it when it still refers to an older release. It never deliberately moves latest backward. The installer also checks its own version floor and retries its pinned endpoint, so stale latest no longer selects 0.4.2. The offline kit is the recommended recovery test when publication is uncertain.
+## Draft release assets — only after review
+
+Before a release, choose a new numeric version for changed player code. Never
+replace a delivered version's EXE with different bytes. Follow
+[the release gate](docs/STABLE-RELEASE-GATE.md), including native visual/gameplay
+acceptance and the production trust/update decision.
+
+Then, using **Releases → Draft a new release**, target the exact reviewed commit
+and attach the exact `MOO2-SGC-Windows.exe`, `SHA256SUMS.txt`, `BUILD-RESULTS.json`
+and `READ-ME-FIRST.txt` from the same successful build. Save as **Draft**. The
+EXE must be an attached binary asset: GitHub does not compile the source ZIP for
+you. Verify its hash after downloading the draft asset. Do not click Publish or
+mark Latest until the release gate and explicit publication approval are met.
+
+This private-review builder is **not a production updater/signing solution**.
+Its embedded offline manifest expires, and each build has disposable trust.
+Do not advertise its EXE as an enduring stable installer or use it to replace
+an older production setup. No production key was provisioned by this work.
+
+Players only download/open the approved Windows EXE. The source archive,
+Python/Go commands and internal Setup helper are for maintainers, not players.
+
+Official references: [GitHub release assets and drafts](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository),
+[Actions artifacts and retention](https://docs.github.com/en/actions/tutorials/store-and-share-data).

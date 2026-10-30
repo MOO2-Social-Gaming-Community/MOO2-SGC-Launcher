@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "same-version fresh trust uses separate live manager/root",
+    "new build leaves previous ownership/generation/session/save untouched",
+    "full trust identity recorded in each ownership contract",
+    "explicit mismatched root refused before live-session reuse",
+    "explicit refusal preserves old files",
+    "same executable still reuses its live root",
+    "original executable reopens original save after other build exits",
+    "all owned processes exit cleanly"
+  ],
+  "count": 8,
+  "version": "0.5.2",
+  "browser_rendered": false,
+  "game_executed": false
+}

@@ -41,6 +41,7 @@ function renderHistory(){const s=$('history');s.replaceChildren();const entries=
 function sourceChoice(){const path=$('game-source').value.trim();$('source-choice').textContent=path?'Selected: '+path:'Using the verified imported copy when available.';$('clear-source').classList.toggle('hidden',!path);updateControls();}
 function readiness(){
  if(!state)return {ready:false,message:'Connecting to the local launcher…'};
+ if(connectionFailed)return {ready:false,message:'Connection lost. Waiting for a fresh response from the local launcher…'};
  if(!previewValid||previewProfile!==currentID)return {ready:false,message:'Check your selected game version and ruleset before preparing or playing.'};
  if($('game-source').value.trim())return {ready:false,message:'New source selected. Choose Prepare selected game to verify and use it.'};
  const prepared=(state.prepared||{})[currentID];
@@ -54,7 +55,7 @@ function readiness(){
 }
 function updateControls(){
  if(!state)return;
- const blocked=requestPending||state.job.busy||!!state.running||offline;
+ const blocked=requestPending||state.job.busy||!!state.running||offline||connectionFailed;
  for(const b of document.querySelectorAll('button'))b.disabled=blocked;
  for(const id of ['profiles','name','engine','core','role','network-service','host','port','fullscreen','window-size','mute-audio','mute-inactive','pause-inactive','game-folders','game-source','runtime-select','runtime-path','payload-kind','payload-path','offline-release','history'])$(id).disabled=blocked;
  $('engine').disabled=blocked||!!state.portable&&currentID==='baseline';$('core').disabled=blocked||$('engine').value!=='1.50.26';$('network-service').disabled=blocked||$('role').value==='standalone';
@@ -71,19 +72,20 @@ function updateControls(){
  $('presentation-status').textContent=settingsDirty?'Unsaved changes for this profile. Save settings or Play to remember them.':'Saved for this profile. Changes apply on the next launch.';
  const result=readiness();$('ready-status').textContent=result.message;$('ready-status').classList.toggle('needs-action',!result.ready);$('launch').disabled=blocked||!result.ready;
  const cancelable=state.job.busy&&state.job.cancelable&&!state.job.cancel_requested;
- $('cancel-operation').classList.toggle('hidden',!state.job.busy||!state.job.cancelable);$('cancel-operation').disabled=requestPending||!cancelable;$('cancel-operation').textContent=state.job.cancel_requested?'Stopping safely…':'Cancel preparation';
+ $('cancel-operation').classList.toggle('hidden',!state.job.busy||!state.job.cancelable);$('cancel-operation').disabled=requestPending||offline||connectionFailed||!cancelable;$('cancel-operation').textContent=state.job.cancel_requested?'Stopping safely…':'Cancel preparation';
 }
 async function preview(){
  const revision=++previewRevision;previewValid=false;previewFingerprint='';previewProfile='';updateControls();
+ if(connectionFailed)return;
  try{updateCoreDesc();const p=selected();const r=await api('resolve',p);if(revision!==previewRevision||p.id!==currentID)return;previewFingerprint=r.fingerprint;previewProfile=p.id;previewValid=true;
  $('resolution').textContent='Resolved: '+(r.mods.map(m=>m.name).join(' + ')||('DOS '+p.engine))+'\nRequired by other selections: '+(r.automatic.join(', ')||'none')+'\nSelection fingerprint: '+r.fingerprint+'\n'+(r.warnings||[]).join('\n');
  const n=r.network||{};$('network-plan').textContent='Selected game: '+p.engine+' / '+(p.engine==='1.50.26'?'ORION150.EXE':'ORION2.EXE')+'\n'+(n.enabled?(n.endpoint+'\n'+n.command):'LOCAL PLAY — no IPX tunnel')+'\n'+(n.instructions||'');
  }catch(e){if(revision!==previewRevision)return;$('resolution').textContent=e.message;$('network-plan').textContent='Selection needs attention: '+e.message;}finally{if(revision===previewRevision)updateControls();}
 }
 async function action(kind,extra={}){
- if(requestPending||offline)return;
+ if(requestPending||offline||connectionFailed)return;
  requestPending=true;clearError();updateControls();
- try{await selectionQueue;const v=await api('action',{action:kind,...extra});if(kind==='quit'||kind==='launcher-apply'){offline=true;$('progress').textContent=kind==='launcher-apply'?'Applying staged update; a new launcher page will open.':'Launcher exited. You may close this tab.';return v;}
+ try{await selectionQueue;if(connectionFailed||offline)return;const v=await api('action',{action:kind,...extra});if(kind==='quit'||kind==='launcher-apply'){offline=true;$('progress').textContent=kind==='launcher-apply'?'Applying staged update; a new launcher page will open.':'Launcher exited. You may close this tab.';return v;}
  // A poll started before this POST may describe the old job. Drain it first,
  // then request fresh state; no overlapping polls or stale completion enables Play.
  if(pollPromise)await pollPromise;await poll();return v;
@@ -113,7 +115,7 @@ async function readState(){try{
  const kp=(state.network_preflight||{})[currentID];$('kernel-status').textContent=kp?(kp.required?(kp.ok?'Network kernel verified — ':'Network kernel needs repair — ')+kp.kernel_path:'No baseline network-kernel check for this engine.'):'Prepare this profile to verify its files.';
  $('running').textContent=state.running?(state.running_kind==='network-check'?'Diagnostic running — read CONNECT / STATUS and close its DOSBox window. No game is running.':'MOO2 process running for '+state.running+'. Close the game normally before preparing or exiting.'):state.last_exit||'';
  const job=state.job;$('progress').textContent=job.message+(job.busy?' …':'');
- const fingerprint=JSON.stringify([job.kind,job.busy,job.error,job.result,job.cancel_requested]);
+ const fingerprint=JSON.stringify([job.id,job.kind,job.busy,job.error,job.result,job.cancel_requested]);
  acceptPresentationResult(job);
  if(fingerprint!==lastResult){lastResult=fingerprint;if(job.result){$('result').textContent=resultObject(job.result);
   if(job.kind==='game-detect'){const g=$('game-folders');g.replaceChildren(option('','Choose an installation or Browse above'));for(const f of job.result.folders||[])g.append(option(f,f));if(job.result.folders?.length===1){g.value=job.result.folders[0];$('game-source').value=g.value;sourceChoice();}else if(!job.result.folders?.length){$('progress').textContent='No matching installation found automatically. Use Browse game folder or Browse game ZIP.';}}
@@ -123,7 +125,7 @@ async function readState(){try{
  if(first){first=false;loadProfile(currentID);const addresses=await api('addresses');$('addresses').textContent='This computer’s IPv4 addresses: '+(addresses.join(' · ')||'none detected')+'. Share a reachable LAN address with joining players.';}
  if(!job.busy&&lastJob!==fingerprint){renderHistory();if(job.kind==='activate'&&!job.error)loadProfile(currentID);lastJob=fingerprint;}
  completeDuplicate(job);updateControls();
- }catch(e){connectionFailed=true;error('The local launcher could not be reached. Open the launcher file again to return. '+e.message);if(state){previewValid=false;updateControls();}}
+ }catch(e){connectionFailed=true;++previewRevision;previewValid=false;previewFingerprint='';previewProfile='';error('The local launcher could not be reached. Waiting to reconnect; open the launcher file again if it has stopped. '+e.message);if(state)updateControls();}
 }
 $('profiles').addEventListener('change',()=>{if(presentationDirty()&&!confirm('Discard the unsaved display and sound changes for this profile?')){$('profiles').value=currentID;return;}loadProfile($('profiles').value,true);});
 $('engine').addEventListener('change',()=>{const p=selected();p.mods=[];if(p.engine==='1.50.26')p.core='150';modUI(p);preview();});

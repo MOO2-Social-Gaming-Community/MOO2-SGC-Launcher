@@ -1,32 +1,35 @@
-name: Launcher tests
-on: [push, pull_request, workflow_dispatch]
+name: Launcher verification
+on:
+  workflow_call:
 permissions:
   contents: read
 jobs:
-  test:
+  source:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-go@v7
+      - uses: actions/setup-go@v7.0.0
         with:
-          go-version: stable
+          go-version: '1.27.3'
           cache: false
-      - run: go test -race -count=1 ./... && go vet ./...
-        working-directory: manager
-      - run: node --check manager/web/app.js
-      - run: python3 -m unittest discover -s tests -p 'test_publish*.py' -v
-      - run: python3 packaging/publish_prebuilt.py
-  native:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7.1.0
         with:
-          persist-credentials: false
-      - name: Run the prepared setup and launcher on this operating system
-        run: python tests/native_smoke.py
+          node-version: '24'
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+      - name: Go race tests and vet (private fixtures not in repository)
+        working-directory: manager
+        run: go test -race -count=1 ./... && go vet ./...
+      - name: Browser logic regressions (not rendered GUI)
+        run: |
+          node --check manager/web/app.js
+          node --check manager/cmd/desktop/web/app.js
+          node tests/ui_regression.js
+          node tests/gui_onboarding_regression.js
+          node tests/presentation_regression.js
+          node tests/stability_regression.js
+      - name: Packaging and publishing safeguards (mocked, no remote writes)
+        run: python -m unittest discover -s tests -p 'test_*.py' -v

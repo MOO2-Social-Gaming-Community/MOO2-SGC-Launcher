@@ -46,6 +46,7 @@ type VerifyResult struct {
 	Generation  string   `json:"generation"`
 }
 type Job struct {
+	ID              uint64 `json:"id"` // Monotonic in this manager session; never a session credential.
 	Busy            bool   `json:"busy"`
 	Kind            string `json:"kind"`
 	Message         string `json:"message"`
@@ -124,7 +125,7 @@ func (m *Manager) startJob(kind string, fn func() (any, error)) error {
 		return errors.New("another operation or game is running; finish it first")
 	}
 	m.jobContext, m.cancelJob = context.WithCancel(context.Background())
-	m.job = Job{Busy: true, Kind: kind, Message: "Starting " + kind, Cancelable: kind == "prepare-play" || kind == "prepare" || kind == "runtime-install" || kind == "runtime-import" || kind == "patch-refresh"}
+	m.job = Job{ID: m.job.ID + 1, Busy: true, Kind: kind, Message: "Starting " + kind, Cancelable: kind == "prepare-play" || kind == "prepare" || kind == "runtime-install" || kind == "runtime-import" || kind == "patch-refresh"}
 	m.mu.Unlock()
 	go func() {
 		m.op.Lock()

@@ -27,6 +27,7 @@ def zip_files(dest: pathlib.Path, files: dict[str, pathlib.Path]) -> None:
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--out", type=pathlib.Path, required=True)
+    p.add_argument("--targets", nargs="+", choices=TARGETS, default=list(TARGETS))
     p.add_argument("--trust", type=pathlib.Path)
     p.add_argument("--key", type=pathlib.Path)
     p.add_argument("--key-id", default="maintainer-1")
@@ -70,7 +71,7 @@ def main() -> None:
         source_file.write_text(json.dumps(source_index(ROOT),indent=2)+"\n")
         packages = []
         artifacts = []
-        for target in TARGETS:
+        for target in dict.fromkeys(a.targets):
             system, arch = target.split("-")
             env = dict(os.environ, CGO_ENABLED="0", GOOS=system, GOARCH=arch)
             native_dir = out / "binaries" / target

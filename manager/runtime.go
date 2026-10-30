@@ -376,7 +376,9 @@ func (m *Manager) launch(p Profile) (any, error) {
 	// rules, existing generations or the original owned source.
 	if _, e = m.savePresentation(p.ID, p.Fullscreen, p.Presentation); e != nil {
 		logfile.Close()
-		return nil, e
+		// No process start has been attempted. Preserve that proven fact so a
+		// later unrelated manager crash cannot mistake this for a live game.
+		return nil, recordKnownLaunchAbort(filepath.Join(m.Data, "logs", "last-launch.json"), launchRecord, e)
 	}
 	cmd := exec.Command(exe, args...)
 	if m.DesktopGUI {

@@ -1,10 +1,10 @@
-# Start here: MOO2-SGC 0.5.1 private GUI candidate
+# Start here: MOO2-SGC 0.5.2 private GUI candidate
 
-**The goal is an app, not a terminal workflow.** This development candidate is based on the reviewed 0.4.8 launcher; it does not replace the user's published 0.4.8 release.
+**The goal is an app, not a terminal workflow.** This development candidate continues the delivered 0.5.1 launcher; it does not overwrite that checkpoint or older releases.
 
 ## For a player on Windows 11 (x64)
 
-Use the matching **single-file `MOO2-SGC-0.5.1-Windows.exe`** supplied with the private candidate. Double-click it. Do not install Go, run CMD wrappers, or edit configuration files.
+Use the matching **single-file `MOO2-SGC-0.5.2-Windows.exe`** supplied with the private candidate. Double-click it. Do not install Go, run CMD wrappers, or edit configuration files.
 
 1. A browser window shows verification and setup progress. The launcher installs only itself into a separate per-user private folder. It does not replace an existing launcher or shortcut.
 2. If needed, follow the official Steam/GOG store links to obtain your owned game. Sign-in, purchase and installation stay with the official store/client; this candidate does not download a complete game from a third-party backup site. Then return to the launcher. In the graphical chooser, **Browse** to a supported owned game folder or ZIP. Source files are verified and copied; Steam/GOG originals and their saves are not modified or uploaded. Not every regional or GOG edition has a verified recognition recipe.
@@ -14,7 +14,7 @@ Use the matching **single-file `MOO2-SGC-0.5.1-Windows.exe`** supplied with the 
 
 Downloads show received bytes/percentage when total size is supplied. **Cancel preparation** interrupts downloads; verification and short activation steps stop only at safe boundaries. Failed or canceled downloads keep the previous verified cache and prepared game.
 
-**Separate test setup:** 0.5.1 uses the per-user `MOO2-SGC/private-gui-0.5.1` folder, distinct from 0.5.0. Choose the owned source again; no old test profiles or saves are migrated automatically. Keep the old EXE if you need to return to that old test installation.
+**Separate test setup:** 0.5.2 uses the per-user `MOO2-SGC/private-gui-0.5.2-<public-trust-fingerprint>` folder, distinct from 0.5.0/0.5.1 and independently rebuilt development keys. Choose the owned source again; no old test profiles or saves are migrated automatically. Keep the old EXE if you need to return to that old test installation.
 
 Later, double-click the same file. It reuses the private installation; a second click reopens the current session rather than starting another manager. Use **Exit launcher** when finished. Closing a browser tab alone does not stop a running game or launcher.
 
@@ -31,4 +31,6 @@ If setup stops, its page provides **Retry**, **Recover interrupted startup**, an
 
 This source tree is not itself the single-file executable. `packaging/build_release.py --development` produces disposable offline-signed inner packages; `packaging/build_desktop.py` verifies and embeds a matching package in a separate outer executable. The builder refuses a package whose source fingerprint no longer matches the tree. Those scripts require the maintainer's existing Go toolchain; **players do not**.
 
-Read `docs/WINDOWS-FIRST-ACCEPTANCE-0.5.1.md` and the final build/test evidence before distributing a native test candidate. Historical 0.4.x documents describe their own artifacts and are not 0.5.1 acceptance evidence.
+Read `docs/STABLE-RELEASE-GATE.md` and the final build/test evidence before distributing a native test candidate. Historical 0.4.x documents describe their own artifacts and are not 0.5.2 acceptance evidence.
+
+For the source-push/EXE distinction and Actions download steps, read [GITHUB-UPLOAD.md](GITHUB-UPLOAD.md). Nothing is automatically published.

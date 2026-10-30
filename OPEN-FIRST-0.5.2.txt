@@ -1,0 +1,33 @@
+MOO2-SGC 0.5.2 — Windows stability candidate
+
+PLAYER: open MOO2-SGC-0.5.2-Windows.exe.
+No Go, terminal, CMD wrapper or configuration editing is needed.
+This is a private test candidate, not a stable/public release.
+
+1. Double-click the EXE. A browser opens with startup progress, then the game chooser.
+2. Browse to your supported owned game folder/ZIP (the verified 1.40b23 source is the best starting point). Official store links are available; store sign-in/install remains in the store. No third-party full-game downloader is included.
+3. Choose Community 1.50.26 / standard rules, or explicitly choose legacy 1.40b23. No experimental balance is automatically enabled.
+4. Prepare. Missing supported patch/runtime files use verified downloads or graphical import. Check visible progress; Cancel/retry is available. Preparation does not start a game.
+5. Review Ready, choose display/sound/background settings, then Play. Keep a disposable game/save for this native acceptance test.
+
+Later opens of this SAME file reuse its private installation. Another independently rebuilt development EXE has a separate public-trust identity and separate folder. No 0.5.0/0.5.1 profiles or saves are migrated or deleted. Keep the earlier EXE for its earlier installation. Closing the browser tab alone does not stop the launcher/game; use Exit launcher when finished.
+
+What's hardened in 0.5.2
+- Repeated quick failures/picker results are no longer silently skipped.
+- Lost connection invalidates stale readiness and blocks actions until fresh state/selection resolve.
+- Same-version rebuilt private EXEs cannot adopt an installation signed by a different development key.
+- Proven failures before game start record that no game started, without weakening unknown/live-process locks.
+- The source repository can now build the actual one-file Windows EXE into a review artifact.
+
+IF YOU PUSH SOURCE TO GITHUB
+An EXE does not belong in the source ZIP and is deliberately ignored by Git.
+After pushing this complete source tree, open Actions -> Windows review build (no publication). Wait for both jobs, then download its MOO2-SGC-Windows-review artifact. Extract it; the EXE inside is named MOO2-SGC-Windows.exe. This is an Actions artifact (14-day retention), NOT a GitHub Release or permanent stable link. GITHUB-UPLOAD.md explains the manual Draft Release asset path. Nothing publishes automatically.
+
+Remaining acceptance
+Windows binaries were cross-compiled here, not run on Windows. The new Windows CI job runs only after an actual repository workflow; it is not evidence of an already completed run. Linux process/API and browser-logic checks do not prove rendered GUI, visible DOSBox, audio, gameplay or real saves. This EXE is not Authenticode signed. Do not disable security protections to run it.
+
+If startup cannot recover unknown game history after a crash, retain that test installation and report the exact error. Do not delete locks or saves. A dead launcher does not prove its game stopped; this conservative limitation remains a stable-release blocker. The source includes docs/STABLE-RELEASE-GATE.md.
+
+No game/runtime payloads, production signing keys, new PRSL/Chat service or new balance selection are bundled. No GitHub publication or permanent stable link was made. Development manifest expiry and production update/signing/migration need resolution before a stable public release.
+
+Useful feedback: screenshot startup/chooser or any error; Windows/browser version; whether the game window actually appears; sound/fullscreen behavior; and save/load/reopen result. Keep private session URLs/tokens out of screenshots.

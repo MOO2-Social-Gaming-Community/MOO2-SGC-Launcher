@@ -9,6 +9,15 @@ from source_fingerprint import source_index
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 TARGETS=('windows-amd64','linux-amd64','darwin-amd64','darwin-arm64')
 
+def trust_fingerprint(trust):
+    # Match Go distribution.Trust JSON field order; only offline trust is accepted.
+    if trust.get('development') is not True or trust.get('endpoints') != [] or trust.get('allowed_hosts') != []:
+        raise ValueError('Expected offline development trust')
+    ordered = {k: trust[k] for k in ('schema', 'feed', 'channel', 'development')}
+    ordered.update(keys=dict(sorted(trust['keys'].items())), endpoints=[], allowed_hosts=[])
+    return hashlib.sha256(json.dumps(ordered, separators=(',', ':'), ensure_ascii=False).encode()).hexdigest()
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--release',type=pathlib.Path,required=True)
@@ -44,7 +53,7 @@ def main():
             subprocess.run(['go','build','-trimpath','-buildvcs=false','-ldflags='+flags,'-o',str(binary),'./cmd/desktop'],cwd=module,env=env,check=True)
             binary.chmod(0o755)
             results.append({'target':target,'file':name,'version':version,'bytes':binary.stat().st_size,'sha256':hashlib.sha256(binary.read_bytes()).hexdigest(),'embedded_package_sha256':pkg['sha256'],'gui_subsystem':system=='windows','cross_compiled':target!=({'Linux':'linux','Darwin':'darwin','Windows':'windows'}.get(platform.system(),'unknown')+'-'+{'x86_64':'amd64','AMD64':'amd64','aarch64':'arm64','arm64':'arm64'}.get(platform.machine(),'unknown')),'native_os_tested':False,'os_signed':False})
-    (out/'BUILD-RESULTS.json').write_text(json.dumps({'development':True,'offline_launcher_install':True,'game_data_included':False,'source_index_sha256':hashlib.sha256((json.dumps(current,indent=2)+'\n').encode()).hexdigest(),'artifacts':results},indent=2)+'\n')
+    (out/'BUILD-RESULTS.json').write_text(json.dumps({'development':True,'offline_launcher_install':True,'game_data_included':False,'trust_fingerprint':trust_fingerprint(trust),'source_index_sha256':hashlib.sha256((json.dumps(current,indent=2)+'\n').encode()).hexdigest(),'artifacts':results},indent=2)+'\n')
     (out/'SHA256SUMS.txt').write_text(''.join(r['sha256']+'  '+r['file']+'\n' for r in results))
     print(json.dumps(results,indent=2))
 if __name__=='__main__':main()

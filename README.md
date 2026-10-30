@@ -1,10 +1,10 @@
-# MOO2-SGC Launcher — 0.5.1 Windows-first GUI candidate
+# MOO2-SGC Launcher — 0.5.2 Windows stability candidate
 
 A friendlier app-style launcher for **Master of Orion II**: on Windows, open one launcher EXE, choose your owned game and community setup graphically, prepare, and play. No terminal, Go installation, CMD wrapper, or manual configuration editing is part of the intended player workflow.
 
-**Start with [START-HERE.md](START-HERE.md).** This is an isolated private development candidate continuing the delivered 0.5.0 GUI checkpoint. The user reports publishing 0.4.8 to GitHub; this work does not publish or replace that release.
+**Start with [START-HERE.md](START-HERE.md).** This is an isolated private development candidate continuing the delivered 0.5.1 GUI checkpoint. The user reports publishing 0.4.8 to GitHub; this work does not publish or replace that release.
 
-The 0.5.1 private candidate uses a **new isolated `private-gui-0.5.1` folder**. It does not migrate or modify the 0.5.0 test installation; choose your owned source again. Later opens of this same version reuse that installation.
+The 0.5.2 private candidate uses a **new isolated `private-gui-0.5.2-<public-trust-fingerprint>` folder**. It does not migrate or modify earlier test installations; choose your owned source again. Later opens of this same executable reuse that installation. An independently rebuilt development identity uses a different folder.
 
 ## What is implemented
 
@@ -28,3 +28,13 @@ This source/build candidate is **not production-ready**. Linux API/process tests
 The existing Go toolchain builds `manager`, the signed helper `manager/cmd/bootstrapper`, and the outer `manager/cmd/desktop`. `packaging/build_release.py` creates the signed inner release; `packaging/build_desktop.py` accepts offline development trust only and refuses changed source fingerprints. The public-key trust is embedded at build time; private development keys are temporary and are not included in artifacts.
 
 Relevant tests include Go race tests, `tests/ui_regression.js`, GUI-specific event regressions, and `tests/desktop_acceptance.py`. The desktop acceptance script uses disposable directories and a browser recorder, not native visual/gameplay proof. See the candidate-specific acceptance document and evidence rather than historical release claims.
+
+## Executable downloads and current hardening
+
+Source pushes do not contain the EXE. The current **Windows review build (no
+publication)** workflow builds the outer one-file app and stores a review bundle
+under that Actions run's **Artifacts**, not GitHub Releases. See
+[GITHUB-UPLOAD.md](GITHUB-UPLOAD.md) for the website-only maintainer path and
+[the stable-release gate](docs/STABLE-RELEASE-GATE.md) for unresolved native,
+crash-recovery and production-signing requirements. New review builds isolate
+same-version disposable signing identities; they never adopt earlier data.

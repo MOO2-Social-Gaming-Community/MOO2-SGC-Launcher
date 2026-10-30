@@ -1,0 +1,36 @@
+{
+  "version": "0.5.2",
+  "decision": "PASS for private review candidate, NOT stable publication approval",
+  "go_race": {
+    "passed_tests_and_subtests": 367,
+    "failed": 0,
+    "skipped": 0,
+    "tested_packages": 7
+  },
+  "vet": "PASS",
+  "windows_test_packages_crosscompiled": 7,
+  "windows_test_packages_executed": 0,
+  "node_regression_suites": 4,
+  "javascript_syntax_checks": 2,
+  "python_mocked_packaging_publishing_tests": 22,
+  "independent_final_linux_process_checks": {
+    "native_headless_smoke": 11,
+    "desktop_lifecycle_with_opener_recorder": 30,
+    "same_version_fresh_trust_rebuild_isolation": 8
+  },
+  "source_index_sha256": "8e7602eafd62f8a6c67eef9443d1aaba7f51a1e13b6d07cf8bd34e5565692033",
+  "indexed_files": 150,
+  "windows_exe_sha256": "e37a4a6d17d41f98daf974c27d38de13127052b15fe30e62b85ba5d106069315",
+  "independent_manifest_package_signatures": "PASS for final Windows and Linux artifacts",
+  "windows_pe": "x64 GUI subsystem2; Authenticode absent",
+  "final_index_change_after_go_compile": "Only packaging/build_review.py evidence-retention option changed; Python suite and real final artifact verification rerun afterward. No Go or JS source changed.",
+  "limits": [
+    "GitHub workflow not executed or published here",
+    "Native Windows test binaries compiled but not executed",
+    "No rendered browser/Windows picker/game-window acceptance",
+    "No actual DOSBox/gameplay/audio/save-loadability/multiplayer certification",
+    "Development trust expires; not production update signing",
+    "Conservative unknown live-game crash recovery remains a release gate"
+  ],
+  "fixtures": "Owned sources and660runtime/27official131pins restored and validated; genuine Steam and manual legacy Community fixtures prepared via manager API; all original archive hashes unchanged; no commercial/runtime bytes in deliverable."
+}

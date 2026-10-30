@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	d "moo2manager/shared/distribution"
@@ -16,24 +18,31 @@ type rootContract struct {
 	Kind                   string `json:"kind"`
 	CreatedVersion         string `json:"created_version"`
 	RuntimeHistoryContract int    `json:"runtime_history_contract"`
+	TrustFingerprint       string `json:"trust_fingerprint"`
 	LaunchAttempted        *bool  `json:"manager_launch_attempted"`
 }
 
-func checkPrivateRoot(root string) error {
+func trustFingerprint(trust d.Trust) string {
+	b, _ := json.Marshal(trust) // public configuration only; struct/map serialization is canonical
+	sum := sha256.Sum256(b)
+	return hex.EncodeToString(sum[:])
+}
+
+func checkPrivateRoot(root string, trust d.Trust) error {
 	var c rootContract
 	if e := d.ReadJSON(filepath.Join(root, privateRootMarker), &c); e != nil {
 		return e
 	}
-	if c.Schema != 1 || c.Kind != "moo2-private-gui" || c.CreatedVersion != currentVersion || c.RuntimeHistoryContract != 1 || c.LaunchAttempted == nil {
-		return errors.New("private installation ownership/history contract is unknown")
+	if c.Schema != 2 || c.TrustFingerprint != trustFingerprint(trust) || c.Kind != "moo2-private-gui" || c.CreatedVersion != currentVersion || c.RuntimeHistoryContract != 1 || c.LaunchAttempted == nil {
+		return errors.New("This private installation belongs to a different or unknown build identity. Open its original launcher, or open this executable normally for a separate private installation. Existing files were not changed")
 	}
 	return nil
 }
-func ensurePrivateRoot(root string) error {
+func ensurePrivateRoot(root string, trust d.Trust) error {
 	if e := d.NoLinks(root); e != nil {
 		return e
 	}
-	if e := checkPrivateRootAfterWriter(root); e == nil {
+	if e := checkPrivateRootAfterWriter(root, trust); e == nil {
 		return nil
 	} else if !os.IsNotExist(e) {
 		return e
@@ -43,7 +52,7 @@ func ensurePrivateRoot(root string) error {
 		return e
 	}
 	if len(entries) > 0 {
-		if e := checkPrivateRootAfterWriter(root); e == nil {
+		if e := checkPrivateRootAfterWriter(root, trust); e == nil {
 			return nil
 		}
 		return errors.New("This is not a fresh private launcher folder. It has existing files but no recognized ownership marker. They were not changed; the single-file candidate must use its separate per-user private installation")
@@ -52,10 +61,10 @@ func ensurePrivateRoot(root string) error {
 		return e
 	}
 	// This marker is never retroactively attached to nonempty/legacy installations.
-	return publishInitialContract(root)
+	return publishInitialContract(root, trust)
 }
 func checkRecoveryContract(root string, trust d.Trust) error {
-	if e := checkPrivateRoot(root); e != nil {
+	if e := checkPrivateRoot(root, trust); e != nil {
 		return errors.New("Interrupted recovery is unavailable: this folder has no recognized private ownership/history contract")
 	}
 	installer := d.Installer{Root: root, Trust: trust}
@@ -82,12 +91,12 @@ func checkRecoveryContract(root string, trust d.Trust) error {
 
 // Durable before manager Start: an interrupted first install can prove that it
 // never started a manager, even when a staged components directory exists.
-func recordManagerLaunchAttempt(root string) error {
+func recordManagerLaunchAttempt(root string, trust d.Trust) error {
 	var c rootContract
 	if e := d.ReadJSON(filepath.Join(root, privateRootMarker), &c); e != nil {
 		return e
 	}
-	if e := checkPrivateRoot(root); e != nil {
+	if e := checkPrivateRoot(root, trust); e != nil {
 		return e
 	}
 	attempted := true
@@ -98,9 +107,9 @@ func recordManagerLaunchAttempt(root string) error {
 // Initial false must NEVER replace a marker written by another fresh launch.
 // O_EXCL closes the empty-directory observation race with concurrent startup.
 // An interrupted partial write is unknown and is not silently repaired.
-func publishInitialContract(root string) error {
+func publishInitialContract(root string, trust d.Trust) error {
 	p := filepath.Join(root, privateRootMarker)
-	c := rootContract{Schema: 1, Kind: "moo2-private-gui", CreatedVersion: currentVersion, RuntimeHistoryContract: 1, LaunchAttempted: new(bool)}
+	c := rootContract{Schema: 2, TrustFingerprint: trustFingerprint(trust), Kind: "moo2-private-gui", CreatedVersion: currentVersion, RuntimeHistoryContract: 1, LaunchAttempted: new(bool)}
 	b, e := json.MarshalIndent(c, "", "  ")
 	if e != nil {
 		return e
@@ -108,7 +117,7 @@ func publishInitialContract(root string) error {
 	b = append(b, '\n')
 	f, e := os.OpenFile(p, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
 	if os.IsExist(e) {
-		return checkPrivateRootAfterWriter(root)
+		return checkPrivateRootAfterWriter(root, trust)
 	}
 	if e != nil {
 		return e
@@ -127,11 +136,11 @@ func publishInitialContract(root string) error {
 
 // A simultaneous first click can observe the exclusive marker between create
 // and write. Wait only for that publication; never repair or replace its bytes.
-func checkPrivateRootAfterWriter(root string) error {
-	e := checkPrivateRoot(root)
+func checkPrivateRootAfterWriter(root string, trust d.Trust) error {
+	e := checkPrivateRoot(root, trust)
 	for until := time.Now().Add(250 * time.Millisecond); e != nil && !os.IsNotExist(e) && time.Now().Before(until); {
 		time.Sleep(10 * time.Millisecond)
-		e = checkPrivateRoot(root)
+		e = checkPrivateRoot(root, trust)
 	}
 	return e
 }

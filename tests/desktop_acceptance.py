@@ -2,9 +2,11 @@
 """Real Linux desktop-container/API lifecycle; browser is a recorder, never rendered.
 Runs only fresh isolated roots and synthetic saves. No game or runtime is launched.
 """
-import argparse, json, os, pathlib, signal, subprocess, tempfile, time, urllib.request, urllib.error
+import argparse, json, os, pathlib, signal, subprocess, sys, tempfile, time, urllib.request, urllib.error
+sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/"packaging"))
+from build_desktop import trust_fingerprint
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--binary',type=pathlib.Path,required=True);p.add_argument('--release',type=pathlib.Path,required=True);p.add_argument('--evidence',type=pathlib.Path,required=True);a=p.parse_args();binary=a.binary.resolve();release=a.release.resolve();checks=[]
-version=json.loads((release/'manifest.json').read_text())['release']; candidate_root='MOO2-SGC/private-gui-'+version
+version=json.loads((release/'manifest.json').read_text())['release']; build_identity=trust_fingerprint(json.loads((release/'trust-public.json').read_text())); candidate_root='MOO2-SGC/private-gui-'+version+'-'+build_identity[:16]
 def check(name,ok):
     if not ok:raise AssertionError(name)
     checks.append(name);print('PASS',name,flush=True)
@@ -33,7 +35,7 @@ with tempfile.TemporaryDirectory(prefix='moo2-desktop-acceptance-') as td:
     env=dict(os.environ,PATH=str(binpath)+os.pathsep+os.environ['PATH'],OPENER_COUNT=str(counter))
     processes=[]
     def owned(root):
-        root.mkdir(parents=True,exist_ok=True);(root/'desktop-installation.json').write_text(json.dumps({'schema':1,'kind':'moo2-private-gui','created_version':version,'runtime_history_contract':1,'manager_launch_attempted':False}))
+        root.mkdir(parents=True,exist_ok=True);(root/'desktop-installation.json').write_text(json.dumps({'schema':2,'trust_fingerprint':build_identity,'kind':'moo2-private-gui','created_version':version,'runtime_history_contract':1,'manager_launch_attempted':False}))
     def launch(label,exe=binary):
         config=temp/label;root=config/candidate_root;log=temp/(label+'.log');f=log.open('wb');proc=subprocess.Popen([str(exe)],env=dict(env,XDG_CONFIG_HOME=str(config)),stdout=f,stderr=f,start_new_session=True);f.close();processes.append(proc);marker=root/'desktop-session/open.txt';until(marker.exists);return proc,root,marker,log
     def quit_boot(proc,marker):api(marker,'exit',{},'POST');proc.wait(timeout=10);check('startup exits cleanly',proc.returncode==0)

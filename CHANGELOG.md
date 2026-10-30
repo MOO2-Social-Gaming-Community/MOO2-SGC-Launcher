@@ -1,3 +1,12 @@
+# 0.5.2 — private Windows stability candidate
+
+- Build the one-file outer Windows GUI executable in read-only Actions CI; upload a review artifact, never auto-publish a Release or promote latest.
+- Add clean review bundle/checksum/source/payload/PE checks and native headless outer/API smoke. Actions artifacts and GitHub Release assets are documented separately.
+- Isolate independently rebuilt offline development identities with a full public-trust ownership contract; same executable reuses its root, conflicting explicit root is refused unchanged.
+- Identify repeated completed jobs reliably and invalidate stale readiness/actions on connection loss.
+- Journal proven pre-start preference failures without treating unknown runtime history as safe.
+- Native rendered Windows/gameplay/signing/update/migration and manager-crash-surviving-game recovery remain explicit stable-release gates.
+
 # 0.5.1 — Private Windows-first GUI candidate (2026-10-29)
 
 - Keep the delivered 0.5.0 and published 0.4.8 checkpoints unchanged. The new candidate uses a separate per-user test root and fresh setup.

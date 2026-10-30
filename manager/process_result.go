@@ -54,3 +54,12 @@ func recordProcessStartFailure(path string, initial map[string]any, processError
 	result["status"] = "Runtime process could not start; no diagnostic/game process ran"
 	return atomicJSON(path, result)
 }
+
+// Use only before cmd.Start has been attempted. Failure to save this fact keeps
+// the journal conservative and the launch failed; it never permits execution.
+func recordKnownLaunchAbort(path string, initial map[string]any, cause error) error {
+	if e := recordProcessStartFailure(path, initial, cause); e != nil {
+		return fmt.Errorf("%w; no runtime started, but its safe-start history could not be written: %w", cause, e)
+	}
+	return cause
+}
